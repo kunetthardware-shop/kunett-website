@@ -1,0 +1,2016 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUNETT | Your new home decorator</title>
+    <meta name="description" content="KUNETT by Harikrushna Enterprise. Your new home decorator. Premium architectural aluminium hardware, cabinet handles, profiles, and knobs engineered for modern spaces.">
+    <meta name="keywords" content="premium aluminium handles, cabinet handles, cabinet profiles, counsil handles, sliding counsils, cabinet knobs, wardrobe handles, modular kitchen hardware, architectural hardware, KUNETT hardware, Harikrushna Enterprise, Rajkot hardware manufacturer, luxury home decorator, custom hardware India">
+    <meta name="author" content="Harikrushna Enterprise">
+    <meta property="og:title" content="KUNETT | Your new home decorator">
+    <meta property="og:description" content="Premium architectural aluminium hardware, cabinet handles, profiles, and knobs engineered for modern spaces.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { pink: '#f4d4d4', black: '#1a1a1a', white: '#ffffff', offwhite: '#f9f9f9', gray: '#757575', lightgray: '#e5e5e5' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: theme('colors.brand.white'); color: theme('colors.brand.black'); -webkit-font-smoothing: antialiased; }
+        
+        .product-card { transition: transform 0.3s ease; }
+        @media (min-width: 768px) { .product-card:hover .product-img { transform: translateY(-5px); } }
+        
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .product-img { transition: transform 0.4s ease; mix-blend-mode: multiply; }
+        
+        .btn-primary { background-color: theme('colors.brand.black'); color: theme('colors.brand.white'); transition: opacity 0.2s ease; }
+        .btn-primary:hover { opacity: 0.8; }
+        
+        .drawer-overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+        .drawer-overlay.active { opacity: 1; visibility: visible; }
+        .drawer-content { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .drawer-overlay.active .drawer-content { transform: translateX(0); }
+
+        .catalogue-active { opacity: 1 !important; visibility: visible !important; }
+        .catalogue-active #catalogue-modal-content { transform: scale(1) !important; opacity: 1 !important; }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .nav-link { border-bottom: 2px solid transparent; }
+        .nav-link.active { color: theme('colors.brand.black'); border-bottom: 2px solid theme('colors.brand.black'); }
+    
+        /* Dark Mode Overrides */
+        html.dark body { background-color: #0a0a0a !important; color: #ffffff !important; }
+        html.dark .bg-brand-offwhite { background-color: #141414 !important; }
+        html.dark .bg-white { background-color: #0a0a0a !important; border-color: #2a2a2a !important; }
+        html.dark .text-brand-black { color: #ffffff !important; }
+        html.dark .text-brand-gray { color: #a0a0a0 !important; }
+        html.dark .border-brand-lightgray { border-color: #2a2a2a !important; }
+        
+        
+        /* FIX FOR IMAGES IN DARK MODE: 
+           Remove multiply (which makes them vanish) and give them a clean white card background 
+           so the handles are perfectly visible. */
+        html.dark .product-img { mix-blend-mode: normal !important; }
+        html.dark img.mix-blend-multiply { mix-blend-mode: normal !important; }
+        html.dark video.mix-blend-multiply { mix-blend-mode: screen !important; opacity: 0.4 !important; filter: grayscale(100%); }
+        /* Alternative: just normal mode, but screen looks cooler for dark mode */
+        html.dark header video { mix-blend-mode: normal !important; opacity: 0.3 !important; }
+        
+        /* Product Grid Containers */
+        html.dark .bg-brand-offwhite.aspect-square { background-color: #ffffff !important; padding: 10px !important; }
+        html.dark .bg-brand-offwhite.aspect-square img { filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
+        
+        /* Product Detail Page Container */
+        html.dark .bg-brand-offwhite.rounded-3xl.min-h-\[50vh\] { background-color: #ffffff !important; }
+        
+        /* Finish Studio Mask/Overlay fix */
+        html.dark #studio-color-overlay { mix-blend-mode: normal !important; opacity: 0.8 !important; }
+        html.dark #studio-handle-img { filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)) !important; }
+</style>
+
+    <!-- SEO: JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Harikrushna Enterprise",
+      "alternateName": "KUNETT Hardware",
+      "image": "https://kunett.in/assets/logo.png",
+      "description": "Premier manufacturer and supplier of luxury architectural aluminium hardware, cabinet handles, and profiles.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Rajkot",
+        "addressRegion": "Gujarat",
+        "addressCountry": "IN"
+      },
+      "telephone": "+91 99246 37640",
+      "email": "kunetthardware@gmail.com",
+      "url": "https://kunett.in"
+    }
+    </script>
+
+    <script>
+        // Auto-detect OS Dark Mode preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col overflow-x-hidden w-full max-w-[100vw]">
+
+    <!-- Sticky Navigation - Perfectly In-Line -->
+    <nav class="sticky top-0 z-[100] bg-white border-b border-brand-lightgray shadow-sm">
+        <div class="max-w-[90rem] mx-auto px-4 md:px-8 py-3 flex items-center justify-between gap-6 bg-white relative z-50">
+            
+            <!-- Logo (Left Aligned) -->
+            <a href="#" onclick="closeMobileMenu(); navigate('home')" class="flex-shrink-0 flex items-center z-50">
+                <img src="assets/logo.png" alt="KUNETT Logo" class="h-16 md:h-24 w-auto object-contain">
+            </a>
+
+            <!-- Mobile: Quick Icons (Right Aligned) -->
+            <div class="flex md:hidden items-center gap-5 z-50 bg-white">
+                <button onclick="closeMobileMenu(); navigate('inquiry')" class="relative text-brand-black p-1 focus:outline-none">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                    <span id="mobile-inquiry-badge" class="absolute -top-1 -right-1 bg-brand-black text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
+                </button>
+                <button onclick="toggleMobileMenu()" class="text-brand-black p-1 focus:outline-none">
+                    <svg id="hamburger-icon" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    <svg id="close-icon" class="hidden" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <!-- Desktop: Navigation Links (Hidden on Mobile) -->
+            <div class="hidden md:flex gap-6 items-center flex-nowrap whitespace-nowrap justify-end w-full pl-6">
+                <button onclick="navigate('home')" id="nav-home" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">Home</button>
+                <button onclick="navigate('process')" id="nav-process" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">Our Process</button>
+                <button onclick="navigate('blog')" id="nav-blog" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">Blog</button>
+                <button onclick="navigate('contact')" id="nav-contact" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">Contact</button>
+                
+                <div class="w-px h-5 bg-brand-lightgray mx-1"></div>
+
+                <button onclick="navigate('calculator')" id="nav-calculator" class="nav-link text-sm font-medium text-brand-black font-bold hover:text-brand-gray transition-colors flex items-center gap-1.5">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg> Calculator
+                </button>
+                
+                <button onclick="navigate('inquiry')" id="nav-inquiry" class="nav-link text-sm font-bold hover:text-brand-gray transition-colors flex items-center gap-1.5">
+                    Inquiry List <span id="inquiry-badge" class="bg-brand-black text-white text-[10px] rounded-full w-5 h-5 flex items-center justify-center hidden shadow-sm">0</span>
+                </button>
+                
+                <a href="#" onclick="openCatalogueModal(event)" class="text-sm font-bold bg-brand-black text-white px-6 py-2.5 rounded-full hover:opacity-80 transition-opacity ml-2 shadow-sm">
+                    Catalogue
+                </a>
+
+                <button onclick="toggleDarkMode()" class="text-brand-gray hover:text-brand-black transition-colors p-2 rounded-full border border-brand-lightgray ml-1 bg-brand-offwhite" aria-label="Toggle Dark Mode">
+                    <svg id="moon-icon" class="w-4 h-4 block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
+                    <svg id="sun-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Secondary Product Categories Navbar -->
+        <div class="hidden md:flex justify-center gap-12 bg-brand-offwhite border-t border-brand-lightgray py-3 shadow-sm relative z-40">
+            <button onclick="navigate('200')" id="nav-200" class="nav-link text-xs font-bold uppercase tracking-widest text-brand-gray hover:text-brand-black transition-colors">Cabinet Handles</button>
+            <button onclick="navigate('300')" id="nav-300" class="nav-link text-xs font-bold uppercase tracking-widest text-brand-gray hover:text-brand-black transition-colors">Cabinet Profiles</button>
+            <button onclick="navigate('400')" id="nav-400" class="nav-link text-xs font-bold uppercase tracking-widest text-brand-gray hover:text-brand-black transition-colors">Counsil Handles</button>
+            <button onclick="navigate('450')" id="nav-450" class="nav-link text-xs font-bold uppercase tracking-widest text-brand-gray hover:text-brand-black transition-colors">Sliding Counsils</button>
+            <button onclick="navigate('500')" id="nav-500" class="nav-link text-xs font-bold uppercase tracking-widest text-brand-gray hover:text-brand-black transition-colors">Cabinet Knobs</button>
+        </div>
+
+    </nav>
+    
+    <!-- Mobile Menu Drawer Backdrop -->
+    <div id="mobile-backdrop" onclick="closeMobileMenu()" class="md:hidden fixed inset-0 bg-black/60 z-[90] transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+
+    <!-- Mobile Menu Drawer (Slide from Right) -->
+    <div id="mobile-menu" class="md:hidden fixed top-0 right-0 w-[85vw] max-w-sm h-full bg-white shadow-2xl transition-transform duration-300 transform translate-x-full z-[100] flex flex-col">
+        
+        <div class="p-6 border-b border-brand-lightgray flex justify-between items-center bg-brand-offwhite">
+            <span class="font-serif text-2xl text-brand-black font-bold">Menu</span>
+            <button onclick="closeMobileMenu()" class="p-2 text-brand-black hover:text-brand-gray transition-colors bg-white rounded-full shadow-sm border border-brand-lightgray">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+
+        <div class="flex flex-col p-6 gap-2 text-base font-bold text-brand-black overflow-y-auto flex-grow pb-24">
+            <button onclick="closeMobileMenu(); navigate('home')" class="text-left py-3 border-b border-brand-lightgray/50 hover:text-brand-gray">Home</button>
+            <button onclick="closeMobileMenu(); navigate('process')" class="text-left py-3 border-b border-brand-lightgray/50 hover:text-brand-gray">Our Process</button>
+            <button onclick="closeMobileMenu(); navigate('blog')" class="text-left py-3 border-b border-brand-lightgray/50 hover:text-brand-gray">Blog</button>
+            <button onclick="closeMobileMenu(); navigate('calculator')" class="text-left py-3 border-b border-brand-lightgray/50 text-brand-black flex items-center justify-between font-bold">
+                Project Calculator <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+            </button>
+            <button onclick="toggleDarkMode(); closeMobileMenu()" class="text-left py-3 border-b border-brand-lightgray/50 flex items-center justify-between hover:text-brand-gray">
+                <span id="mobile-dark-text">Toggle Dark Mode</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
+            </button>
+            <button onclick="closeMobileMenu(); navigate('200')" class="text-left py-3 border-b border-brand-lightgray/50 hover:text-brand-gray">Cabinet Handles</button>
+            <button onclick="closeMobileMenu(); navigate('300')" class="text-left py-3 border-b border-brand-lightgray/50 hover:text-brand-gray">Cabinet Profiles</button>
+            <button onclick="closeMobileMenu(); navigate('400')" class="text-left py-3 border-b border-brand-lightgray/50 hover:text-brand-gray">Counsil Handles</button>
+            <button onclick="closeMobileMenu(); navigate('450')" class="text-left py-3 border-b border-brand-lightgray/50 hover:text-brand-gray">Sliding Counsils</button>
+            <button onclick="closeMobileMenu(); navigate('500')" class="text-left py-3 border-b border-brand-lightgray/50 hover:text-brand-gray">Cabinet Knobs</button>
+            <button onclick="closeMobileMenu(); navigate('contact')" class="text-left py-3 border-b border-brand-lightgray/50 text-brand-black font-bold">Contact Us</button>
+            <button onclick="closeMobileMenu(); navigate('inquiry')" class="text-left py-3 border-b border-brand-lightgray/50">My Inquiry List</button>
+            <a href="#" onclick="closeMobileMenu(); openCatalogueModal(event)" class="mt-8 text-center text-sm bg-brand-black text-white px-5 py-4 rounded-full shadow-lg">Download Catalogue</a>
+        </div>
+    </div>
+
+    <!-- Dynamic Main Content -->
+    <main id="main-content" class="flex-grow w-full">
+        <!-- Injected via JavaScript -->
+    </main>
+
+    <!-- Enhanced Footer -->
+    <footer class="border-t border-brand-lightgray pt-16 pb-8 px-6 bg-brand-offwhite">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12 border-b border-brand-lightgray pb-12">
+            <div>
+                <!-- Replace text with actual Logo image in footer -->
+                <img src="assets/logo.png" alt="KUNETT Logo" class="h-32 md:h-40 w-auto object-contain mb-6">
+                <p class="text-sm text-brand-gray max-w-xs leading-relaxed"><strong class="text-brand-black block mb-1">Your new home decorator.</strong>Premium aluminium hardware engineered for modern spaces and designed to endure.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-brand-black mb-4">Connect</h4>
+                <ul class="space-y-3 text-sm text-brand-gray">
+                    <!-- WhatsApp Link -->
+                    <li><a href="https://wa.me/919924637640" target="_blank" class="hover:text-[#25D366] transition-colors flex items-center gap-2"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg> WhatsApp Sanjay</a></li>
+                    <li><a href="#" onclick="navigate('contact')" class="hover:text-brand-black transition-colors flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg> Email Us</a></li>
+                    <li><a href="https://share.google/ph0nAicuxlc4C8bdU" target="_blank" class="hover:text-brand-black transition-colors flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Google Business Profile ↗</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-brand-black mb-4">Resources</h4>
+                <ul class="space-y-3 text-sm text-brand-gray">
+                    <li><a href="#" onclick="navigate('blog')" class="hover:text-brand-black transition-colors flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Architecture Blog</a></li>
+                    <li><a href="#" onclick="openCatalogueModal(event)" class="hover:text-brand-black transition-colors flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Digital Catalogue</a></li>
+                    <li><a href="#" onclick="navigate('legal')" class="hover:text-brand-gray font-medium transition-colors flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg> Wholesale Terms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-brand-gray">
+            <p>© 2026 KUNETT Hardware by Harikrushna Enterprise. All rights reserved.</p>
+            <div class="flex gap-4 mt-4 md:mt-0">
+                <a href="#" onclick="navigate('legal')" class="hover:text-brand-black transition-colors">Wholesale Terms</a>
+                <a href="#" onclick="navigate('legal')" class="hover:text-brand-black transition-colors">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- Catalogue Download Lead Gen Modal -->
+    <div id="catalogue-modal" class="drawer-overlay fixed inset-0 z-[60] bg-black/60 flex justify-center items-center p-4">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-8 relative transform scale-95 opacity-0 transition-all duration-300" id="catalogue-modal-content">
+            <button onclick="closeCatalogueModal()" class="absolute top-4 right-4 p-2 text-brand-gray hover:text-brand-black transition-colors">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <div class="text-center mb-6 mt-2">
+                <h3 class="font-serif text-2xl md:text-3xl text-brand-black mb-2">Get the Catalogue</h3>
+                <p class="text-sm text-brand-gray">Please enter your details to instantly download our full architectural catalogue.</p>
+            </div>
+            <form id="catalogueForm" class="space-y-4">
+                <!-- Hidden fields for Google Sheets routing -->
+                <input type="hidden" name="Subject" value="Catalogue Download Lead">
+                <input type="hidden" name="Message" value="This user requested to download the digital catalogue.">
+                
+                <div>
+                    <input type="text" name="Name" required class="w-full border border-brand-lightgray p-3.5 rounded bg-brand-offwhite focus:outline-none focus:border-brand-black transition-colors text-sm" placeholder="Full Name *">
+                </div>
+                <div>
+                    <input type="email" name="Email" required class="w-full border border-brand-lightgray p-3.5 rounded bg-brand-offwhite focus:outline-none focus:border-brand-black transition-colors text-sm" placeholder="Email Address *">
+                </div>
+                <div>
+                    <input type="tel" name="Phone" required class="w-full border border-brand-lightgray p-3.5 rounded bg-brand-offwhite focus:outline-none focus:border-brand-black transition-colors text-sm" placeholder="Phone Number *">
+                </div>
+                <button type="submit" id="catSubmitBtn" class="btn-primary w-full py-4 rounded-full font-bold text-sm tracking-wide shadow-lg hover:opacity-90 transition-opacity mt-2">
+                    Submit & Download
+                </button>
+                <div id="catFormStatus" class="hidden text-center text-xs font-bold mt-3"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // Set actual Whatsapp Number Here! (e.g. 919876543210)
+        const WHATSAPP_NUMBER = "919924637640"; 
+        
+        // Google Sheet Apps Script URL
+        const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyvUFgtLDK0WuTfcrIjQxU82dEAUTCKXEdTArcK1TVjrES9sDJSxkVrtfIMtUis8fa9/exec";
+
+        let inquiryList = [];
+        const blogs = [
+{
+                slug: 'aluminium-profile-handles-modern-modular-furniture',
+                title: 'Aluminium Profile Handles: A Modern Solution for Modular Furniture',
+                date: '28 Sep 2026',
+                author: 'Rishabh Virani',
+                excerpt: 'Discover how aluminium profile handles can improve the look and functionality of modular furniture. Learn about their benefits, finishes and applications.',
+                content: `
+                    <p class="mb-4">Aluminium profile handles</p>
+                    <p class="mb-4">Aluminium Handles / Furniture Hardware</p>
+                    <p class="mb-4">Furniture design has changed a lot over the years.</p>
+                    <p class="mb-4">Today, people are not only looking for furniture that is useful. They also want it to look clean, modern and well-finished. This is especially true when it comes to modular kitchens, wardrobes, cabinets and other modern furniture.</p>
+                    <p class="mb-4">In this type of furniture, even small details can make a difference.</p>
+                    <p class="mb-4">One such detail is the handle.</p>
+                    <p class="mb-4">Aluminium profile handles have become a popular choice for modern furniture because they can combine functionality with a clean and minimal appearance.</p>
+                    <p class="mb-4">But what exactly is an aluminium profile handle, and why is it becoming so common in modern furniture?</p>
+                    <p class="mb-4">Let's take a closer look.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">What Is an Aluminium Profile Handle?</h2>
+                    <p class="mb-4">An aluminium profile handle is a type of furniture handle made using an aluminium profile designed to provide a convenient grip while also becoming part of the furniture's overall design.</p>
+                    <p class="mb-4">Instead of looking like a separate handle attached to a cabinet or wardrobe, a profile handle can be integrated more naturally into the furniture.</p>
+                    <p class="mb-4">This gives the furniture a cleaner appearance and works particularly well with modern and minimal interior designs.</p>
+                    <p class="mb-4">Depending on the design, aluminium profile handles can be used for:</p>
+                    <p class="mb-4">Wardrobes</p>
+                    <p class="mb-4">Modular kitchens</p>
+                    <p class="mb-4">Cabinets</p>
+                    <p class="mb-4">Drawers</p>
+                    <p class="mb-4">Dressing units</p>
+                    <p class="mb-4">Storage units</p>
+                    <p class="mb-4">Office furniture</p>
+                    <p class="mb-4">Other modular furniture</p>
+                    <p class="mb-4">The exact application depends on the profile design, dimensions and installation method.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Why Are Aluminium Profile Handles Becoming Popular?</h2>
+                    <p class="mb-4">There is a reason aluminium profile handles are increasingly seen in modern furniture projects.</p>
+                    <p class="mb-4">They offer a combination of design and practical functionality.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Clean and Minimal Appearance</h3>
+                    <p class="mb-4">Modern furniture often focuses on straight lines, simple shapes and uncluttered surfaces.</p>
+                    <p class="mb-4">A profile handle fits naturally into this style.</p>
+                    <p class="mb-4">Instead of adding a large decorative element to the front of a cabinet or wardrobe, it can provide a more subtle and integrated appearance.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Lightweight Material</h3>
+                    <p class="mb-4">Aluminium is a relatively lightweight material, which makes it suitable for many furniture hardware applications.</p>
+                    <p class="mb-4">For furniture manufacturers and installers, weight can be an important consideration when selecting hardware.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Different Finish Options</h3>
+                    <p class="mb-4">One of the advantages of aluminium furniture handles is the variety of finishes available.</p>
+                    <p class="mb-4">Depending on the furniture design, you can choose finishes such as:</p>
+                    <p class="mb-4">Black</p>
+                    <p class="mb-4">Gold</p>
+                    <p class="mb-4">Rose gold</p>
+                    <p class="mb-4">Silver or natural aluminium</p>
+                    <p class="mb-4">Other custom finishes</p>
+                    <p class="mb-4">The finish can completely change the visual character of the same profile.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Suitable for Modern Furniture</h3>
+                    <p class="mb-4">Aluminium profile handles work particularly well with contemporary furniture.</p>
+                    <p class="mb-4">Their simple lines and metallic appearance can complement materials such as wood, laminate, glass and other commonly used furniture surfaces.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Aluminium Profile Handles vs Traditional Handles</h2>
+                    <p class="mb-4">So, what makes a profile handle different from a conventional furniture handle?</p>
+                    <p class="mb-4">Traditional handles are usually separate components fixed onto the surface of a cabinet or door.</p>
+                    <p class="mb-4">They can be decorative and are available in many different shapes.</p>
+                    <p class="mb-4">Profile handles, on the alternative hand, are designed to work more closely with the furniture itself.</p>
+                    <p class="mb-4">This creates a different visual effect.</p>
+                    <p class="mb-4">A traditional handle can become a noticeable feature of the furniture, while an aluminium profile handle can create a more integrated and minimal look.</p>
+                    <p class="mb-4">Neither option is necessarily better for every application.</p>
+                    <p class="mb-4">The right choice depends on the furniture design, functionality, installation requirements and personal preference.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Where Can Aluminium Profile Handles Be Used?</h2>
+                    <p class="mb-4">One of the reasons these handles are popular is their versatility.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Modular Kitchens</h3>
+                    <p class="mb-4">Modern kitchens often use clean cabinet fronts and simple hardware.</p>
+                    <p class="mb-4">An aluminium profile handle can maintain that clean appearance while providing an easy way to open drawers and cabinets.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Wardrobes</h3>
+                    <p class="mb-4">Wardrobes are another common application.</p>
+                    <p class="mb-4">Profile handles can work especially well with modern wardrobes and sliding-door furniture where maintaining a clean front is important.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Cabinets and Storage Units</h3>
+                    <p class="mb-4">From living room cabinets to office storage, aluminium profile handles can be used wherever the furniture design calls for a simple and functional opening solution.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Drawers and Dressing Units</h3>
+                    <p class="mb-4">Smaller furniture pieces can also use aluminium handles to maintain a consistent design across the room.</p>
+                    <p class="mb-4">Using similar finishes across wardrobes, drawers and cabinets can help create a more coordinated interior.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Choosing the Right Aluminium Profile Handle</h2>
+                    <p class="mb-4">Choosing a profile handle is not only about picking a colour.</p>
+                    <p class="mb-4">There are several things worth considering before making the final decision.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">1. Check the Furniture Design</h3>
+                    <p class="mb-4">Start by looking at the furniture itself.</p>
+                    <p class="mb-4">Is it modern, minimal, premium, industrial or more traditional?</p>
+                    <p class="mb-4">The handle should match the overall style.</p>
+                    <p class="mb-4">A simple black profile may work well with a modern minimal cabinet, while a gold or rose gold finish could be more suitable for a premium interior.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">2. Consider the Profile Size</h3>
+                    <p class="mb-4">The size of the profile should be suitable for the furniture.</p>
+                    <p class="mb-4">A large wardrobe may require a different profile size compared with a small drawer or cabinet.</p>
+                    <p class="mb-4">Proportion matters.</p>
+                    <p class="mb-4">A handle that looks good on one piece of furniture may not have the same visual effect on another.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">3. Think About Daily Use</h3>
+                    <p class="mb-4">Furniture hardware is used regularly.</p>
+                    <p class="mb-4">So, don't select a profile only because it looks attractive.</p>
+                    <p class="mb-4">Consider how easy it is to grip, how the door or drawer opens and whether the handle feels comfortable during everyday use.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">4. Select the Right Finish</h3>
+                    <p class="mb-4">The finish should work with the rest of the interior.</p>
+                    <p class="mb-4">For example:</p>
+                    <p class="mb-4">Black can create a bold, modern appearance.</p>
+                    <p class="mb-4">Gold can add a more premium and luxurious touch.</p>
+                    <p class="mb-4">Rose gold can provide a softer and contemporary metallic look.</p>
+                    <p class="mb-4">The best finish is ultimately the one that complements the furniture.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">5. Look at Quality and Consistency</h3>
+                    <p class="mb-4">If you're purchasing handles for multiple furniture pieces, consistency becomes very important.</p>
+                    <p class="mb-4">The aluminium profile should have a consistent shape, finish and overall appearance.</p>
+                    <p class="mb-4">This is especially important for furniture manufacturers, interior designers, retailers and wholesalers.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Why Aluminium Is a Good Choice for Furniture Hardware</h2>
+                    <p class="mb-4">Aluminium has become an important material in modern furniture hardware because it provides a useful balance between appearance and functionality.</p>
+                    <p class="mb-4">It can be shaped into different profile designs and finished in different ways to suit changing furniture trends.</p>
+                    <p class="mb-4">It also has a modern metallic appearance that works well with contemporary interiors.</p>
+                    <p class="mb-4">For furniture manufacturers, another important advantage is the flexibility of aluminium profile designs.</p>
+                    <p class="mb-4">Different profiles can be developed for different applications, allowing manufacturers to create furniture with its own visual identity.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">How the Right Handle Can Change Furniture Design</h2>
+                    <p class="mb-4">Sometimes, furniture doesn't need a major design change.</p>
+                    <p class="mb-4">A small hardware change can make a noticeable difference.</p>
+                    <p class="mb-4">Imagine the same wardrobe with a basic handle, then imagine it with a slim black aluminium profile handle.</p>
+                    <p class="mb-4">The overall structure of the wardrobe hasn't changed.</p>
+                    <p class="mb-4">But the visual appearance can feel completely different.</p>
+                    <p class="mb-4">This is why furniture hardware should not be treated as an afterthought.</p>
+                    <p class="mb-4">Handles, profiles and other hardware are part of the overall furniture design.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Aluminium Profile Handles for Furniture Manufacturers and Wholesalers</h2>
+                    <p class="mb-4">For furniture manufacturers and wholesalers, choosing the right hardware is about more than appearance.</p>
+                    <p class="mb-4">The product needs to be practical, consistent and suitable for regular production and installation.</p>
+                    <p class="mb-4">When sourcing aluminium profile handles, businesses should consider:</p>
+                    <p class="mb-4">Product quality</p>
+                    <p class="mb-4">Consistency between batches</p>
+                    <p class="mb-4">Finish quality</p>
+                    <p class="mb-4">Available designs</p>
+                    <p class="mb-4">Product dimensions</p>
+                    <p class="mb-4">Packaging</p>
+                    <p class="mb-4">Supply availability</p>
+                    <p class="mb-4">Supplier reliability</p>
+                    <p class="mb-4">For wholesalers and retailers, having different finishes and designs can also make it easier to serve different customer preferences.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">KUNETT Aluminium Profile Handles</h2>
+                    <p class="mb-4">At KUNETT Hardware, our focus is on modern aluminium handle and profile designs for today's furniture requirements.</p>
+                    <p class="mb-4">Our products are designed with a focus on clean aesthetics, practical application and modern finishes.</p>
+                    <p class="mb-4">Whether the application is a wardrobe, cabinet, modular kitchen or another furniture project, the right aluminium profile handle can add both functionality and visual character.</p>
+                    <p class="mb-4">With finishes such as black, gold and rose gold, designers, furniture manufacturers, retailers and wholesalers can select options according to their project requirements.</p>
+                    <p class="mb-4">For KUNETT, the goal is simple: make furniture hardware look as considered as the furniture itself.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Common Mistakes to Avoid When Choosing Profile Handles</h2>
+                    <p class="mb-4">Even a good-looking profile handle may not be the right choice if it doesn't suit the furniture.</p>
+                    <p class="mb-4">Here are a few common mistakes to avoid.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Choosing Only Based on Colour</h3>
+                    <p class="mb-4">Colour is important, but it shouldn't be the only deciding factor.</p>
+                    <p class="mb-4">Consider the profile design, size, grip and application as well.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Ignoring Proportion</h3>
+                    <p class="mb-4">A profile that is too large or too small can make the furniture look unbalanced.</p>
+                    <p class="mb-4">Always consider the size of the door or drawer.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Forgetting About Practical Use</h3>
+                    <p class="mb-4">The handle should look good but also be comfortable and easy to use.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Mixing Too Many Finishes</h3>
+                    <p class="mb-4">Using too many different metallic finishes in one space can make the interior feel disconnected.</p>
+                    <p class="mb-4">Try to maintain some consistency between the furniture hardware.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Frequently Asked Questions</h2>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">What is an aluminium profile handle?</h3>
+                    <p class="mb-4">An aluminium profile handle is a furniture handle made from an aluminium profile designed to provide a functional grip while maintaining a clean and integrated appearance.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Are aluminium profile handles suitable for wardrobes?</h3>
+                    <p class="mb-4">Yes. Aluminium profile handles can be used for many wardrobe designs, including modern wardrobes and certain sliding-door applications, depending on the profile and installation method.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Can aluminium profile handles be used in modular kitchens?</h3>
+                    <p class="mb-4">Yes. They can be used for kitchen cabinets and drawers where the selected profile is suitable for the application.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Are aluminium handles good for modern furniture?</h3>
+                    <p class="mb-4">Aluminium handles are a popular choice for modern furniture because they offer clean designs, different finish options and a contemporary appearance.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Which finish is best for aluminium profile handles?</h3>
+                    <p class="mb-4">There is no single best finish. Black, gold, rose gold and other finishes can work well depending on the furniture, surrounding colours and overall interior style.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Can aluminium profile handles be used for cabinets and drawers?</h3>
+                    <p class="mb-4">Yes. Depending on the design and dimensions, aluminium profile handles can be used on cabinets, drawers, wardrobes, dressing units and other furniture.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Final Thoughts</h2>
+                    <p class="mb-4">Modern furniture is all about the details.</p>
+                    <p class="mb-4">The right aluminium profile handle may look like a small part of a wardrobe, kitchen or cabinet, but it can have a strong influence on the overall appearance and usability of the furniture.</p>
+                    <p class="mb-4">A good profile handle should match the furniture design, feel comfortable to use and provide the finish and quality required for the application.</p>
+                    <p class="mb-4">Whether you are designing a modular kitchen, manufacturing wardrobes, working on an interior project or sourcing furniture hardware for your business, aluminium profile handles are worth considering.</p>
+                    <p class="mb-4">At KUNETT Hardware, we continue to focus on modern aluminium handle designs that bring together function, finish and contemporary design.</p>
+                    <div class="bg-brand-lightgray/20 p-6 rounded-xl border border-brand-lightgray my-8">
+                        <h4 class="font-bold text-brand-black mb-2">📚 Related Reading</h4>
+                        <p class="text-sm text-brand-gray mb-1">Choosing handles for your doors? Read our guide on <a href="#" onclick="navigate('blog-post', 'aluminium-vs-steel-handles-for-new-home'); return false;" class="text-brand-black underline hover:text-brand-gray font-bold">Aluminium vs Steel Handles</a>.</p>
+                        <p class="text-sm text-brand-gray">Want to upgrade your bedroom? See <a href="#" onclick="navigate('blog-post', 'how-to-choose-aluminium-handle-for-wardrobe'); return false;" class="text-brand-black underline hover:text-brand-gray font-bold">How to Choose the Right Aluminium Handle for Your Wardrobe</a>.</p>
+                    </div>
+                    <p class="mt-8">Explore our <strong><a href="#" onclick="navigate('300')" class="text-brand-black underline hover:text-brand-gray">Aluminium Profile Handles Collection</a></strong> to find the perfect modern hardware for your modular furniture.</p>
+                    <p class="mt-10 pt-6 border-t border-brand-lightgray text-sm font-bold text-brand-gray uppercase tracking-widest">Written by Rishabh Virani</p>
+                `,
+                image: 'assets/blog_profile.jpg'
+            },
+
+            {
+                slug: 'aluminium-vs-steel-handles-for-new-home',
+                title: 'Why We Choose Aluminium Handles Over Steel Handles for a New Home',
+                date: '15 Sep 2026',
+                author: 'Ronak Vekariya',
+                excerpt: 'Discover why aluminium handles are better than steel for a lightweight design, durability, modern look, easy maintenance, and versatility.',
+                content: `
+                    <p class="mb-4">When selecting aluminium handles for our new home decoration with doors, windows, cabinets, furniture, and other uses, the handle material matters more than you might think. A quality handle not only looks good but also needs to be sturdy, comfortable, and durable enough to be used for extended periods of time. Two metals that are commonly used include aluminium and steel, among others.</p>
+                    <p class="mb-4">Another reason we prefer aluminium is the design and finishing freedom it offers. It can be shaped into different profiles and finished in different styles to match the look of modern furniture. With proper surface treatment, aluminium can also resist everyday wear and corrosion.</p>
+                    <p class="mb-4">Steel has its own strengths and can be an excellent material for many applications. However, when you want a handle that feels light, looks modern, and offers design flexibility, aluminium becomes a natural choice. Ultimately, the right material depends on the application, quality, and finish—but for modern furniture, aluminium offers a combination that is hard to ignore.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Reasons for choosing Aluminium Handles over Steel Handles.</h2>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">1. Lightweight  :</h3>
+                    <p class="mb-4">One of the greatest strengths of aluminium is that it is lightweight. An aluminium handle is lighter than an iron handle, which makes it easier to fit in new houses. The great thing about aluminium is that it is not only light but also durable enough.</p>
+                    <p class="mb-4">This makes it perfect for doors, windows, cabinets, furniture, and other hardware.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">2. Better Resistance to Corrosion :</h3>
+                    <p class="mb-4">However, handles can be exposed to moisture and humidity and the changing environment. The rusting process will occur on steel when its protective coating gets damaged and when it gets exposed to moisture for a prolonged period.</p>
+                    <p class="mb-4">The surface of aluminium forms a natural oxide coating which acts as a protective measure against corrosion. Aluminium handles can be made more resistant to the environment through an appropriate finishing method like anodising and powder coating.</p>
+                    <p class="mb-4">Thus, aluminium can be considered a good choice for such places.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">3. Modern and Attractive Appearance:</h3>
+                    <p class="mb-4">The appearance of a handle can make a noticeable difference to the overall look of a product. Aluminium provides a clean, modern appearance, which can be finished in all types of colours, designs, and surface treatments.</p>
+                    <p class="mb-4">From raw material to finish colours like black, silver, rose gold, gold or other custom colours, aluminium provides manufacturers with new modern design possibilities. This flexibility allows aluminium handles to complement both traditional and contemporary designs.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">4. Easy to Manufacture and Customise:</h3>
+                    <p class="mb-4">This metal is quite easy to process and can be moulded into any shape depending on the need. Different handle shapes can thus be manufactured based on their size, profile, shape, and finish</p>
+                    <p class="mb-4">For manufacturers and companies, this feature is very important as handles can be designed according to the requirements of the product rather than following standard designs.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">5. Easier Handling and Installation :</h3>
+                    <p class="mb-4">Due to the light nature of aluminium handles, it is easy to carry them around, position them, and fix them in place. It becomes especially helpful when a lot of handles are involved in building and manufacturing processes.</p>
+                    <p class="mb-4">Being lighter helps to lower the weight of the final product.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">6. Good Strength-to-Weight Ratio:</h3>
+                    <p class="mb-4">One of the myths is that aluminium gives up on strength.</p>
+                    <p class="mb-4">Although steel is generally stronger in most of its basic mechanical properties than aluminium, strength is not the only characteristic that matters when making a decision about which handle to choose.</p>
+                    <p class="mb-4">The aluminium metal offers a reasonable strength-to-weight ratio and can provide adequate strength for various furniture, architectural, and hardware applications at low weight of the finished item. Of course, it depends on the alloy, shape, dimensions, wall thickness, process, and usage of the handle.</p>
+                    <p class="mb-4">Therefore, a properly designed aluminium handle can offer the required performance at low weight.</p>
+                    <p class="mb-4">This is especially valuable for furniture and architectural hardware.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">7. Comfortable to Handle :</h3>
+                    <p class="mb-4">Handles are used multiple times during their lifetime; thus, user comfort becomes very important in the design of handles.</p>
+                    <p class="mb-4">Aluminium can be produced with smooth, round, ergonomic, or special-shaped surfaces. Therefore, it allows the making of comfortable handles to use.</p>
+                    <p class="mb-4">The finish of a surface also affects the feel of a handle.</p>
+                    <p class="mb-4">For instance, a brushed or matte finish may have a different tactile feeling compared to a highly polished finish.</p>
+                    <p class="mb-4">However, the form of a handle still plays a very important role. Even the best material does not help if the design is wrong.</p>
+                    <p class="mb-4">In this way, aluminum gives the possibility for producers to combine the characteristics of the material and its ergonomic design.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">8. Suitable for Modern Furniture :</h3>
+                    <p class="mb-4">Use of aluminium handles is highly valuable in the furniture sector.</p>
+                    <p class="mb-4">Furniture nowadays emphasizes simplicity in design with straight lines, minimalistic designs, and function-oriented hardware. Aluminium naturally suits this approach to furniture design.</p>
+                    <p class="mb-4">Its light weight and variety of finishes suit residential and commercial furniture use.</p>
+                    <p class="mb-4">For furniture producers, the possibility of purchasing aluminium profiles cut to desired lengths and processing them as per their needs is also an advantage.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">9. Aluminium Performs Well in Humid Environments :</h3>
+                    <p class="mb-4">Moisture could also be a significant problem with regard to metal handles.</p>
+                    <p class="mb-4">In the kitchen and bathroom, for instance, there could be relatively high levels of moisture. Handles that have been exposed outdoors could come into contact with rain and different weather elements.</p>
+                    <p class="mb-4">Aluminium, being a material that naturally forms an oxide film, could be effective in providing resistance against corrosion in most of these environments.</p>
+                    <p class="mb-4">This, however, does not mean that all aluminium handles could be suitable in all environments where there is corrosion.</p>
+                    <p class="mb-4">For harsh environments, the right aluminium grade and surface coating should be selected.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">10. Aluminium Offers Design Flexibility:</h3>
+                    <p class="mb-4">One of the major benefits of using aluminium in manufacturing includes the freedom in design.</p>
+                    <p class="mb-4">This means that handles could be made using various lengths, profiles, sizes, and finish options.</p>
+                    <p class="mb-4">Such versatility becomes especially useful in those cases when companies strive to develop their own product range.</p>
+                    <p class="mb-4">Moreover, aluminium could be used together with various other materials to achieve different visual effects.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Aluminium vs Steel Handles: A Simple Comparison:</h2>
+                    <p class="mb-4">Both aluminium handles and steel handles have their own strengths and should be chosen based on the purpose of use. The main benefits of steel are high strength and good weight, while the main benefits of aluminium are lightweight design, anti-corrosion properties, stylish design, and versatility.</p>
+                    <p class="mb-4">There are several key distinctions between aluminium and steel handles. First, aluminium handles weigh significantly less than steel handles because of the nature of the material. This can be extremely helpful for many types of furniture, such as cabinet drawers, sliding doors, wardrobes, and many other items where the unnecessary weight needs to be reduced. Second, one of the most important distinguishing features is its anti-corrosion ability. The thing is that aluminium develops a natural oxide film on its surface, which protects it from corrosion. Meanwhile, steel does not have this feature and may start to rust if there are oxygen and moisture around it. There are special coatings that can make steel resistant to corrosion, but if they are damaged and removed, the steel will start to rust. Therefore, aluminium handles are preferable for kitchens, bathrooms, windows, etc.</p>
+                    <p class="mb-4">In what concerns strength, steel is better. The main application area of steel is those places where there is a need for strong and robust performance. However, not all furniture and architectural handles require the maximum possible strength of steel. A well-made aluminium handle will ensure necessary strength and will be much lighter than steel.</p>
+                    <p class="mb-4">Apart from strength, the appearance and ability to make various shapes also matter in choosing a handle. One more benefit of aluminium handles is their modern design that can be made sleek and slim. Aluminium handles can be finished in several ways: anodized, brushed, polished, matte, powder coating, etc. There are also good finishing options for steel handles. At the same time, aluminium is especially suitable for modern designs based on specific profiles.</p>
+                    <p class="mb-4">Finally, manufacturing flexibility should also be considered. Aluminium can be easily extruded in certain shapes and profiles and then be cut, drilled, machined and finished. Thus, aluminium is a good option for manufacturers with different requirements concerning the size and shape of handles. Steel is also very versatile. However, aluminium extrusion is especially good for long handle profiles.</p>
+                    <p class="mb-4">Another aspect where the use of aluminium can prove to be advantageous is that of maintenance. Well-finished aluminium handles normally do not need much in terms of maintenance in the process of their use and they cannot form rust as easily as steel. The life of steel handles can also prove to be long if well-coated and maintained, but corrosion protection becomes more important.</p>
+                    <p class="mb-4">In general, steel proves to be the most suitable material when strength is the main requirement, and aluminium is highly preferable in cases when weight, anti-corrosive properties, aesthetic value, ease of manipulation, and design are essential criteria.</p>
+                    <p class="mb-4">In cases of furniture, kitchenware, wardrobes, cabinetry, doors, and windows, aluminium handles provide the best combination of all these characteristics, which makes aluminium a good choice for handle manufacturing.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Aluminium vs Steel Handles: Which One Is Better for Your Application?</h2>
+                    <p class="mb-4">Selecting the right handle involves more than just aesthetics. The material used to make the handle might influence the weight, strength, longevity, corrosion resistance, maintenance requirements, and general performance of the handle. Aluminium and steel are among the popular materials that can be used to manufacture handles. And they all have different strengths.</p>
+                    <p class="mb-4">Which material should you go for?</p>
+                    <p class="mb-4">It all depends on your needs. In case you require a handle that is light in weight, corrosion resistant, and attractive, the aluminium option will serve you well. But in case you are looking for maximum strength, rigidity, or weight, the steel alternative might be the best for your application.</p>
+                    <p class="mb-4">Knowing the difference between the two materials will enable you to select the right handle for your needs.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Aluminium vs Steel: Understanding the Basic Difference.</h2>
+                    <p class="mb-4">Both aluminium and steel are strong and useful engineering materials, yet their characteristics are rather dissimilar.</p>
+                    <p class="mb-4">First of all, the difference lies in weight. Aluminium has the density of 2.7 g/cm³, whereas that of steel equals 7.8–8.0 g/cm³. In simple words, a certain aluminium part weighs about one third of the same steel part.</p>
+                    <p class="mb-4">This makes aluminium the perfect choice in case weight reduction is important.</p>
+                    <p class="mb-4">Steel, on the other hand, usually offers greater strength and stiffness. This material is a good choice for those situations when the handles are likely to carry large loads, to receive heavy impact or be used in harsh working conditions.</p>
+                    <p class="mb-4">In conclusion, there is no clear winner. It all depends on the requirements imposed on the handle.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Aluminium vs Steel Handle: Other Important Factors to Consider.</h2>
+                    <p class="mb-4">There is more to the comparison between the two metals' handles than their strength and weight alone. In addition to these aspects, there are other things that may need to be taken into account by manufacturers, furniture dealers, builders, interior decorators, and hardware merchants when choosing which type of handle to use.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">1. Temperature and Heat Performance:</h3>
+                    <p class="mb-4">Temperature could have an impact on the handling of metal handles.</p>
+                    <p class="mb-4">Aluminum is very good at conducting heat as compared to steel. Therefore, the aluminum handle is likely to change temperature according to the ambient surroundings faster. Steel takes time to change its temperature.</p>
+                    <p class="mb-4">In regular indoor use in furniture, it does not make a big difference, but in outdoor conditions, in machinery surroundings, or where there is a likelihood of high temperatures, the environment should be taken into consideration.</p>
+                    <p class="mb-4">It should always be based on the actual application and not just the material alone.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">2. Handle Comfort:</h3>
+                    <p class="mb-4">The handle must be comfortable, since it might be used several times daily.</p>
+                    <p class="mb-4">Aluminum is very light and can be produced in a variety of shapes and comfortable ergonomic designs, enabling manufacturers to produce handles that will be comfortable for the users.</p>
+                    <p class="mb-4">Steel, similarly, can be made in comfortable shapes and finishes, while its increased density can provide a sense of solidity of the handle.</p>
+                    <p class="mb-4">So, the comfort of use depends both on the material and the design of the handle.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">3. Noise During Use:</h3>
+                    <p class="mb-4">Furthermore, the material as well as the design used to manufacture the handle also plays an important role in determining the noise produced.</p>
+                    <p class="mb-4">A light handle made of aluminium will make different noises or produce a different feeling when it comes in contact with another metal than a heavy handle made of steel.</p>
+                    <p class="mb-4">In case of furniture, cabinets, and drawers, it is important that they are installed properly rather than just using the right material.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">4. Custom Handle Designs:</h3>
+                    <p class="mb-4">Some organizations may even have the need for handles that are not available in the commercial marketplace.</p>
+                    <p class="mb-4">Aluminum is particularly suited for designing custom profile handles since it can be easily made in various profiles. These profiles can be designed based on the size requirement and cut to various sizes.</p>
+                    <p class="mb-4">This will come in handy for organizations that need:</p>
+                    <p class="mb-4">Custom sizes</p>
+                    <p class="mb-4">Custom profiles</p>
+                    <p class="mb-4">Large cabinet handles</p>
+                    <p class="mb-4">Wardrobe profiles</p>
+                    <p class="mb-4">Edge handles</p>
+                    <p class="mb-4">Inset handles</p>
+                    <p class="mb-4">Special mounting</p>
+                    <p class="mb-4">Branding or customized design</p>
+                    <p class="mb-4">Steel is another material that can be customized based on various requirements.</p>
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">5. Large-Volume Production:</h3>
+                    <p class="mb-4">It becomes even more vital in case when a company needs hundreds or even thousands of handles.</p>
+                    <p class="mb-4">In addition to the lightweight of aluminium, its ability to be extruded could also be beneficial for mass production of the same profile.</p>
+                    <p class="mb-4">Consistency is very important for the manufacturer of handles. Each one must have the right size, surface finish, holes for mounting, and look great.</p>
+                    <p class="mb-4">This is why choosing an experienced handle manufacturer becomes as vital as choosing a material.</p>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Conclusion:</h2>
+                    <p class="mb-4">It may not seem a big thing when selecting handles for your future house construction, but it really matters how comfortable you will be when using the furniture. Aluminium handles have the benefits of being <strong>lightweight, anti-corrosive, durable, modern-looking, and easy to shape into different designs</strong> that make them great for many parts of a house. When compared to steel handles, those made from aluminium are easier because they are lighter and resistant to rusting, thus suitable to be used in rooms like kitchens, bathrooms, wardrobes, and windows that tend to be moist and humid. Moreover, aluminium handles are available in many forms, so you may choose those that fit your modern furniture and room designs.</p>
+                    <p class="mt-8">Explore our <strong><a href="#" onclick="navigate('200')" class="text-brand-black underline hover:text-brand-gray">Cabinet Handles Collection</a></strong> to find the perfect modern aluminium hardware for your next project.</p>
+                    <p class="mt-10 pt-6 border-t border-brand-lightgray text-sm font-bold text-brand-gray uppercase tracking-widest">Written by Ronak Vekariya</p>
+                `,
+                image: 'assets/blog_kitchen.jpg'
+            },
+
+
+            {
+                slug: 'how-to-choose-aluminium-handle-for-wardrobe',
+                title: 'How to Choose the Right Aluminium Handle for Your Wardrobe | KUNETT',
+                date: '5 Oct 2026',
+                author: 'RISHABH VIRANI',
+                excerpt: 'Learn how to choose the right aluminium handle for your wardrobe based on design, size, finish, comfort and quality. Explore modern aluminium handles by KUNETT.',
+                content: `
+                    <p class="mb-4">A wardrobe is one of those things we use every day, but we usually don't think much about its small details. One of those details is the handle.</p>
+                    <p class="mb-4">A good wardrobe handle should not only help you open and close the door comfortably, but it should also match the overall look of the furniture. A simple change in handle design or finish can make a wardrobe look more modern, premium or minimal.</p>
+                    <p class="mb-4">This is one of the reasons aluminium handles are becoming a popular choice for modern wardrobes and furniture.</p>
+                    <p class="mb-4">But with so many designs, sizes and finishes available today, how do you choose the right aluminium handle for your wardrobe?</p>
+                    <p class="mb-4">Let's look at the important things you should consider before making your choice.</p>
+
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Why Choose an Aluminium Handle for a Wardrobe?</h2>
+                    <p class="mb-4">Aluminium is widely used in modern furniture hardware because it offers a good combination of appearance, strength and practicality.</p>
+                    <p class="mb-4">Unlike a handle that is selected only for its appearance, an aluminium handle can be designed to work as both a functional part and a design element of the wardrobe.</p>
+                    <p class="mb-4">Some common reasons people choose aluminium wardrobe handles include:</p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2 text-brand-gray">
+                        <li>Clean and modern appearance</li>
+                        <li>Lightweight construction</li>
+                        <li>Good durability for regular use</li>
+                        <li>Different designs and finishes</li>
+                        <li>Easy to maintain</li>
+                        <li>Suitable for modern furniture and interior designs</li>
+                    </ul>
+                    <p class="mb-4">The right aluminium handle can also give a wardrobe a more finished and professional appearance.</p>
+
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">1. Start With the Design of Your Wardrobe</h2>
+                    <p class="mb-4">Before choosing a handle, look at the wardrobe itself.</p>
+                    <p class="mb-4">Is it a simple and minimal wardrobe? Is it a large modern wardrobe with multiple doors? Does it have a wooden finish, laminate finish, glass panels or a combination of materials?</p>
+                    <p class="mb-4">The handle should work with the existing design instead of looking like a separate element.</p>
+                    <p class="mb-4">For example, a simple profile handle can work very well with a minimal wardrobe. If the wardrobe has a more premium appearance, a handle with a refined metallic finish can add another level of detail.</p>
+                    <p class="mb-4">The goal is simple: the handle should complete the wardrobe, not distract from it.</p>
+
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">2. Choose the Right Handle Size</h2>
+                    <p class="mb-4">Size is another important factor.</p>
+                    <p class="mb-4">A handle that is too small may look out of proportion on a large wardrobe door. On the other hand, a very large handle may look unnecessary on a smaller cabinet or wardrobe.</p>
+                    <p class="mb-4">Before selecting an aluminium wardrobe handle, consider:</p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2 text-brand-gray">
+                        <li>Wardrobe door size</li>
+                        <li>Door height and width</li>
+                        <li>Number of doors</li>
+                        <li>Distance between handles</li>
+                        <li>Overall furniture design</li>
+                    </ul>
+                    <p class="mb-4">For larger wardrobes, longer aluminium handles or profile-style handles can create a clean and balanced appearance.</p>
+                    <p class="mb-4">For smaller wardrobes and cabinets, a compact handle may be more appropriate.</p>
+                    <p class="mb-4">There is no single handle size that works for every wardrobe. The proportions of the furniture should always be considered.</p>
+
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">3. Pay Attention to the Handle Finish</h2>
+                    <p class="mb-4">This is where you can really change the character of a wardrobe.</p>
+                    <p class="mb-4">Aluminium handles are available in different finishes, and each one creates a different visual effect.</p>
+
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Black Aluminium Handles</h3>
+                    <p class="mb-4">Black is a popular choice for modern and minimalist interiors. It creates a strong contrast, especially when used with lighter-coloured wardrobes. It can also work well with darker furniture when you want a subtle and sophisticated appearance.</p>
+
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Gold Aluminium Handles</h3>
+                    <p class="mb-4">Gold finishes can give furniture a more premium and luxurious feel. They can work especially well with neutral shades, warm wood finishes and elegant interiors.</p>
+
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Rose Gold Aluminium Handles</h3>
+                    <p class="mb-4">Rose gold offers something between modern and elegant. It can add a softer metallic touch without being as bold as traditional gold.</p>
+                    <p class="mb-4">The important thing is to choose a finish that works with the wardrobe and the rest of the room.</p>
+
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">4. Don't Forget Comfort and Grip</h2>
+                    <p class="mb-4">A wardrobe handle is something you will use regularly. So, appearance should not be the only consideration.</p>
+                    <p class="mb-4">Think about how the handle feels when you actually use it.</p>
+                    <p class="mb-4">A good handle should provide a comfortable grip and allow the wardrobe door to be opened without unnecessary effort. This is particularly important for wardrobes that are used several times a day.</p>
+                    <p class="mb-4">When selecting an aluminium profile handle, pay attention to its shape, edges and gripping area. A good design should look clean while remaining practical in everyday use.</p>
+
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">5. Check the Quality of the Aluminium Handle</h2>
+                    <p class="mb-4">Not every handle that looks good will necessarily have the same level of quality.</p>
+                    <p class="mb-4">When buying aluminium handles, look at the overall construction and finish.</p>
+                    <p class="mb-4">Things worth checking include:</p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2 text-brand-gray">
+                        <li>Quality and consistency of the aluminium</li>
+                        <li>Surface finish</li>
+                        <li>Smoothness of edges</li>
+                        <li>Overall shape and dimensions</li>
+                        <li>Strength of the handle</li>
+                        <li>Quality of mounting and fixing</li>
+                        <li>Consistency across multiple pieces</li>
+                    </ul>
+                    <p class="mb-4">This becomes even more important when buying handles for multiple wardrobes or furniture projects.</p>
+                    <p class="mb-4">For furniture manufacturers, retailers and wholesalers, consistent quality is particularly important because the same product may be used across many different installations.</p>
+
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">6. Match the Handle With Other Furniture</h2>
+                    <p class="mb-4">A wardrobe is rarely the only piece of furniture in a room.</p>
+                    <p class="mb-4">You may also have a dressing unit, bedside table, cabinet, drawers or modular kitchen nearby.</p>
+                    <p class="mb-4">Using complementary hardware across different furniture pieces can make the entire interior feel more connected.</p>
+                    <p class="mb-4">For example, if your wardrobe uses a black aluminium handle, similar black hardware on drawers or cabinets can create a consistent visual appearance.</p>
+                    <p class="mb-4">You don't necessarily need every handle to be exactly the same. But keeping the finishes and overall design style compatible can make a noticeable difference.</p>
+
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">7. Consider the Type of Wardrobe</h2>
+                    <p class="mb-4">Different wardrobes can require different handle styles.</p>
+
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Sliding Wardrobes</h3>
+                    <p class="mb-4">Sliding wardrobes often work well with profile or recessed-style handles because they maintain a clean appearance and don't interfere with the movement of the doors.</p>
+
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Hinged Wardrobes</h3>
+                    <p class="mb-4">Hinged wardrobes provide more flexibility. You can choose from profile handles, longer handles and other modern aluminium designs depending on the furniture style.</p>
+
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Modern Modular Wardrobes</h3>
+                    <p class="mb-4">Modern modular wardrobes often benefit from simple, minimal handles that keep the overall appearance clean.</p>
+                    <p class="mb-4">So before choosing a handle, consider not just how it looks, but also how the wardrobe doors actually operate.</p>
+
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Aluminium Profile Handles for Modern Wardrobes</h2>
+                    <p class="mb-4">Aluminium profile handles have become particularly popular in modern furniture because they can blend into the design instead of appearing as an added decoration.</p>
+                    <p class="mb-4">Their clean lines and metallic finishes work well with contemporary wardrobes, modular kitchens, cabinets and other furniture.</p>
+                    <p class="mb-4">For designers and furniture manufacturers, this type of handle can also provide more freedom when creating a consistent furniture design across different rooms.</p>
+                    <p class="mb-4">A well-designed aluminium profile handle can become part of the furniture itself rather than simply being an accessory attached to it.</p>
+
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">How KUNETT Aluminium Handles Fit Into Modern Furniture</h2>
+                    <p class="mb-4">At KUNETT Hardware, we focus on aluminium handle designs that combine a modern appearance with everyday functionality.</p>
+                    <p class="mb-4">Our collection includes aluminium profiles and handle designs suitable for wardrobes, cabinets and other furniture applications.</p>
+                    <p class="mb-4">From clean black finishes to premium gold and rose gold options, the right finish can be selected according to the style of the furniture and the interior.</p>
+                    <p class="mb-4">For retailers, wholesalers and furniture professionals, consistency in design, finish and quality is equally important. That's why choosing the right hardware supplier is an important part of creating a reliable furniture product.</p>
+                    <p class="mb-4">Whether you are selecting hardware for a single wardrobe or sourcing products for multiple furniture projects, the handle should offer the right balance between design and practical use.</p>
+
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">What Should You Look For Before Buying an Aluminium Wardrobe Handle?</h2>
+                    <p class="mb-4">Before finalizing an aluminium wardrobe handle, take a few minutes to check these points:</p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2 text-brand-gray">
+                        <li><strong>Design:</strong> Does it match your wardrobe?</li>
+                        <li><strong>Size:</strong> Is it properly proportioned to the door?</li>
+                        <li><strong>Finish:</strong> Does the colour work with the furniture and interior?</li>
+                        <li><strong>Grip:</strong> Is it comfortable for regular use?</li>
+                        <li><strong>Quality:</strong> Is the aluminium and surface finish consistent?</li>
+                        <li><strong>Application:</strong> Is the handle suitable for your type of wardrobe?</li>
+                        <li><strong>Supplier:</strong> Can you get consistent quality when you need multiple pieces?</li>
+                    </ul>
+                    <p class="mb-4">Considering these points can help you avoid choosing a handle based only on its appearance.</p>
+                    <p class="mb-4">A handle may look attractive in a product photograph, but the real test is how well it fits the furniture, how comfortable it is to use and how consistently it performs over time.</p>
+
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Frequently Asked Questions</h2>
+                    
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Are aluminium handles good for wardrobes?</h3>
+                    <p class="mb-4">Yes. Aluminium handles are a practical choice for wardrobes because they offer a combination of modern appearance, light weight and durability. They are available in different designs and finishes, making them suitable for many furniture styles.</p>
+
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Which handle is best for a modern wardrobe?</h3>
+                    <p class="mb-4">There is no single best handle for every wardrobe. Profile handles, concealed-style handles and clean modern aluminium designs are popular choices for contemporary wardrobes. The right option depends on the wardrobe design, door size, usage and interior style.</p>
+
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Are aluminium wardrobe handles durable?</h3>
+                    <p class="mb-4">A good-quality aluminium handle can provide reliable performance for regular furniture use. However, the actual performance depends on the quality of the material, manufacturing and surface finish.</p>
+
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Which colour is best for a wardrobe handle?</h3>
+                    <p class="mb-4">It depends on the wardrobe and interior. Black works well for strong contrast and modern interiors, while gold and rose gold can create a more premium and decorative appearance.</p>
+
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-brand-black">Can aluminium profile handles be used for other furniture?</h3>
+                    <p class="mb-4">Yes. Depending on the design, aluminium profile handles can be used for wardrobes, cabinets, drawers, modular kitchens, dressing units and other furniture applications.</p>
+
+                    
+                    <div class="bg-brand-lightgray/20 p-6 rounded-xl border border-brand-lightgray my-8">
+                        <h4 class="font-bold text-brand-black mb-2">📚 Related Reading</h4>
+                        <p class="text-sm text-brand-gray mb-1">Still deciding between materials? Read our comprehensive comparison on <a href="#" onclick="navigate('blog-post', 'aluminium-vs-steel-handles-for-new-home'); return false;" class="text-brand-black underline hover:text-brand-gray font-bold">Why We Choose Aluminium Over Steel Handles</a>.</p>
+                        <p class="text-sm text-brand-gray">Want to learn more about the science of anodization? Check out this <a href="https://en.wikipedia.org/wiki/Anodizing" target="_blank" rel="noopener noreferrer" class="text-brand-black underline hover:text-brand-gray font-bold">detailed guide on Aluminium Anodization</a>.</p>
+                    </div>
+                    <h2 class="text-2xl font-bold mt-10 mb-4 text-brand-black">Final Thoughts</h2>
+                    <p class="mb-4">Choosing a wardrobe handle may seem like a small decision, but it can have a surprisingly big effect on the final appearance of the furniture.</p>
+                    <p class="mb-4">The best choice is not always the most decorative or expensive handle. It is the one that fits the furniture properly, feels comfortable to use, has a finish that suits the interior and provides the quality needed for everyday use.</p>
+                    <p class="mb-4">Whether you are designing a new wardrobe, manufacturing furniture or selecting hardware for your next project, taking a little time to choose the right handle can make the final result much better.</p>
+                    <p class="mb-4">If you're looking for modern aluminium handles for wardrobes, cabinets or other furniture, explore the <a href="#" onclick="navigate('home')" class="text-brand-black underline hover:text-brand-gray font-bold">KUNETT Hardware collection</a> and choose a design that fits your furniture's style and purpose.</p>
+                    <p class="mt-10 pt-6 border-t border-brand-lightgray text-sm font-bold text-brand-gray uppercase tracking-widest">Written by RISHABH VIRANI</p>
+                `,
+                image: 'assets/blog_wardrobe.jpg'
+            },
+
+            
+            
+        ];
+
+        const products = [];
+        const jpgModels = ['210', '211', '212', '222', '223', '224', '234', '235', '236', '418'];
+
+        function updateInquiryBadge() {
+            const badge = document.getElementById('inquiry-badge');
+            const mobileBadge = document.getElementById('mobile-inquiry-badge');
+            
+            if (inquiryList.length > 0) {
+                badge.textContent = inquiryList.length;
+                badge.classList.remove('hidden');
+                
+                if (mobileBadge) {
+                    mobileBadge.textContent = inquiryList.length;
+                    mobileBadge.classList.remove('hidden');
+                }
+            } else {
+                badge.classList.add('hidden');
+                if (mobileBadge) mobileBadge.classList.add('hidden');
+            }
+        }
+
+        // --- Mobile Menu Logic ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('mobile-backdrop');
+            
+            if (menu.classList.contains('translate-x-full')) {
+                menu.classList.remove('translate-x-full');
+                if(backdrop) backdrop.classList.remove('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'hidden'; // prevent scrolling
+            } else {
+                closeMobileMenu();
+            }
+        }
+
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('mobile-backdrop');
+            
+            if (menu && !menu.classList.contains('translate-x-full')) {
+                menu.classList.add('translate-x-full');
+                if(backdrop) backdrop.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = ''; // restore scrolling
+            }
+        }
+
+        function addToInquiry() {
+            const btn = document.getElementById('add-to-list-btn');
+
+            if (selectedFinishes.length === 0 || selectedSizes.length === 0) {
+                btn.textContent = "Please select Finish & Size";
+                btn.classList.remove('bg-brand-black');
+                btn.classList.add('bg-red-500');
+                
+                setTimeout(() => {
+                    btn.textContent = "Add to Inquiry List";
+                    btn.classList.remove('bg-red-500');
+                    btn.classList.add('bg-brand-black');
+                }, 2000);
+                return;
+            }
+
+            inquiryList.push({
+                product: currentProduct,
+                finishes: [...selectedFinishes],
+                sizes: [...selectedSizes]
+            });
+            updateInquiryBadge();
+            
+            btn.textContent = "Added to List ✓";
+            btn.classList.remove('bg-brand-black');
+            btn.classList.add('bg-[#25D366]');
+            setTimeout(() => {
+                btn.textContent = "Add to Inquiry List";
+                btn.classList.remove('bg-[#25D366]');
+                btn.classList.add('bg-brand-black');
+            }, 1500);
+        }
+
+        function removeFromInquiry(index) {
+            inquiryList.splice(index, 1);
+            updateInquiryBadge();
+            navigate('inquiry'); // Refresh the view
+        }
+
+        const descData = {
+            'Cabinet Handle': {
+                adjs: ['sleek', 'bold', 'sophisticated', 'refined', 'heavy-duty', 'sculptural', 'precision-milled', 'striking'],
+                feats: ['an ergonomic inner sweep', 'a subtle chamfered edge', 'perfectly spaced mounting points', 'a highly tactile grip', 'clean architectural lines', 'a gentle outward curve', 'a minimalist straight bar profile'],
+                bens: ['effortless pulling power', 'a reassuringly solid feel in hand', 'a seamless transition from wood to metal', 'flawless daily utility', 'an immediate sense of quality'],
+                concs: ['An essential upgrade for contemporary kitchen and wardrobe doors.', 'Engineered to withstand decades of heavy daily use.', 'Instantly elevates the look of any premium cabinetry.', 'A masterclass in modern metalwork.', 'The perfect finishing touch for a high-end interior.']
+            },
+            'Cabinet Profile': {
+                adjs: ['minimalist', 'ultra-modern', 'discreet', 'seamless', 'flush-fitting', 'linear', 'unobtrusive'],
+                feats: ['an edge-mounted architecture', 'a continuous linear grip', 'a hidden mounting channel', 'a razor-thin visible edge', 'a perfectly angled finger-pull'],
+                bens: ['a stunning handle-less aesthetic', 'uninterrupted flow across your drawers', 'effortless usability without breaking the visual line', 'a streamlined silhouette', 'a perfectly clean façade'],
+                concs: ['The definitive choice for modern, flat-panel cabinetry.', 'A beautiful marriage of hidden form and daily utility.', 'Redefines the edges of your furniture.', 'Subtle, yet incredibly effective.', 'Brings a showroom-quality finish to your home.']
+            },
+            'Counsil Handle': {
+                adjs: ['commanding', 'substantive', 'elegant', 'geometric', 'imposing', 'luxurious', 'architectural'],
+                feats: ['a deep finger recess', 'a robust backplate', 'distinctive angular cuts', 'a flawlessly smooth face', 'a wide, comfortable stance'],
+                bens: ['superior leverage for heavier doors', 'a striking focal point for the room', 'an opulent touch to your woodwork', 'a highly comfortable grip', 'a distinct visual anchor'],
+                concs: ['Perfectly suited for tall wardrobes and heavy pantry doors.', 'Makes a grand statement in any setting.', 'Built to impress and engineered to last.', 'A true centerpiece for premium furniture.', 'Combines heavy-duty function with high-end luxury.']
+            },
+            'Sliding Counsil': {
+                adjs: ['flush-mounted', 'streamlined', 'integrated', 'low-profile', 'sleek', 'embedded', 'practical'],
+                feats: ['a perfectly recessed grip cavity', 'smooth inner chamfers', 'a zero-clearance profile', 'a seamless inset design', 'an optimized sliding track angle'],
+                bens: ['effortless side-to-side gliding', 'zero interference with overlapping doors', 'a completely flush aesthetic', 'a comfortable, pinch-free grip', 'smooth operation for heavy panels'],
+                concs: ['The ultimate hardware solution for modern sliding wardrobes.', 'Precision machined to fit flawlessly into your doors.', 'Uncompromising quality for space-saving designs.', 'Where advanced engineering meets subtle design.', 'Glides as beautifully as it looks.']
+            },
+            'Cabinet Knob': {
+                adjs: ['subtle', 'charming', 'geometric', 'petite', 'classic', 'modern', 'delicate', 'sturdy'],
+                feats: ['a perfectly proportioned head', 'a deeply satisfying tactile shape', 'a seamlessly machined stem', 'a clean circular profile', 'a slightly textured grip'],
+                bens: ['a pinch-perfect grip', 'a minimalist accent that doesn\'t overpower', 'a quick, effortless pull', 'a jewel-like detail for your cabinetry', 'a playful yet sophisticated touch'],
+                concs: ['Ideal for smaller drawers, nightstands, and bathroom vanities.', 'A small detail that makes a massive impact.', 'The perfect compliment to our larger handle ranges.', 'Simple, effective, and beautifully crafted.', 'A timeless classic reimagined in aerospace-grade aluminium.']
+            }
+        };
+
+        function generateUniqueDescription(code, category) {
+            let hash = 0;
+            for (let i = 0; i < code.length; i++) {
+                hash = code.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            hash = Math.abs(hash);
+
+            const data = descData[category] || descData['Cabinet Handle']; 
+
+            const adj = data.adjs[hash % data.adjs.length];
+            const feat = data.feats[(hash >> 1) % data.feats.length];
+            const ben = data.bens[(hash >> 2) % data.bens.length];
+            const conc = data.concs[(hash >> 3) % data.concs.length];
+
+            return `Model ${code} is a ${adj} ${category.toLowerCase()} that instantly upgrades your space. Designed with ${feat}, it provides ${ben}. ${conc}`;
+        }
+
+        function addSeries(start, end, seriesName, category, finishes, sizes) {
+            for(let i = start; i <= end; i++) {
+                let code = String(i);
+                let ext = jpgModels.includes(code) ? '.jpg' : '.png';
+                products.push({
+                    code: code,
+                    image: 'assets/' + code + ext,
+                    series: seriesName,
+                    category: category,
+                    finishes: finishes,
+                    sizes: sizes,
+                    description: generateUniqueDescription(code, category)
+                });
+            }
+        }
+
+        addSeries(201, 246, '200', 'Cabinet Handle', ['Black', 'R Gold', 'Gold', 'SS Matt', 'Antique', 'Grey'], ['6"', '8"', '12"', '18"', '24"', '30"', '36"', '48"']);
+        addSeries(301, 324, '300', 'Cabinet Profile', ['Black', 'R Gold', 'Gold', 'SS Matt', 'CP', 'Grey'], ['6" To 36"']);
+        addSeries(401, 418, '400', 'Counsil Handle', ['CP', 'Black', 'R Gold', 'Gold', 'SS Matt'], ['4"', '6"', '8"', '10"', '12"']);
+        addSeries(451, 455, '450', 'Sliding Counsil', ['Black', 'R Gold', 'Gold', 'SS Matt', 'Grey'], ['4"', '6"', '8"', '10"', '12"', '18"', '24"', '36"']);
+        addSeries(501, 508, '500', 'Cabinet Knob', ['Black', 'R Gold', 'Gold', 'SS Matt', 'Grey'], ['2"']);
+
+        const mainContent = document.getElementById('main-content');
+
+        
+        function getColorStyle(color) {
+            const map = {
+                'Black': 'background-color: #1a1a1a;',
+                'Rose Gold': 'background: linear-gradient(135deg, #b76e79 0%, #e0bfb8 100%);',
+                'Matte Gold': 'background: linear-gradient(135deg, #d4af37 0%, #f3e5ab 100%);',
+                'Gold': 'background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%);',
+                'Silver': 'background: linear-gradient(135deg, #C0C0C0 0%, #E8E8E8 100%);',
+                'Champagne': 'background: linear-gradient(135deg, #F7E7CE 0%, #FFE4C4 100%);'
+            };
+            return map[color] || 'background-color: #cccccc;';
+        }
+
+        
+        
+        // Sync dark mode icons on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const isDark = document.documentElement.classList.contains('dark');
+            const moon = document.getElementById('moon-icon');
+            const sun = document.getElementById('sun-icon');
+            if (moon) moon.classList.toggle('hidden', isDark);
+            if (sun) sun.classList.toggle('hidden', !isDark);
+            
+            const mobText = document.getElementById('mobile-dark-text');
+            if (mobText) mobText.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+        });
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            const moon = document.getElementById('moon-icon');
+            const sun = document.getElementById('sun-icon');
+            if (moon) moon.classList.toggle('hidden', isDark);
+            if (sun) sun.classList.toggle('hidden', !isDark);
+            
+            const mobText = document.getElementById('mobile-dark-text');
+            if (mobText) mobText.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+        }
+
+        
+        function changeStudioColor(color) {
+            const img = document.getElementById('studio-handle-img');
+            if(!img) return;
+            
+            let filterStr = "grayscale(1) brightness(1.2)"; // default silver
+            
+            if(color === 'Black') {
+                filterStr = "grayscale(1) brightness(0.25) contrast(1.5)";
+            } else if (color === 'Rose Gold') {
+                filterStr = "sepia(0.8) hue-rotate(-30deg) saturate(1.8) brightness(1.0) contrast(1.2)";
+            } else if (color === 'Matte Gold') {
+                filterStr = "sepia(1) hue-rotate(10deg) saturate(2.5) brightness(1.1) contrast(1.1)";
+            } else if (color === 'Champagne') {
+                filterStr = "sepia(0.4) hue-rotate(10deg) saturate(1.5) brightness(1.2)";
+            }
+            
+            img.style.filter = filterStr;
+        }
+
+        function calculateROI() {
+            const kitchens = Math.max(0, parseInt(document.getElementById('calc-kitchens')?.value || 0));
+            const wardrobes = Math.max(0, parseInt(document.getElementById('calc-wardrobes')?.value || 0));
+            const rooms = Math.max(0, parseInt(document.getElementById('calc-rooms')?.value || 0));
+            
+            // Estimates per unit
+            const kitchenHandles = kitchens * 12;
+            const kitchenProfiles = kitchens * 15; // meters
+            const kitchenCounsil = kitchens * 4;
+            
+            const wardrobeHandles = wardrobes * 4;
+            const wardrobeProfiles = wardrobes * 5; // meters
+            const wardrobeSliding = wardrobes * 2;
+            const wardrobeCounsil = wardrobes * 4;
+            
+            const roomHandles = rooms * 4;
+            const roomKnobs = rooms * 6;
+            
+            // Totals
+            const totalHandles = kitchenHandles + wardrobeHandles + roomHandles;
+            const totalProfiles = kitchenProfiles + wardrobeProfiles;
+            const totalCounsil = kitchenCounsil + wardrobeCounsil;
+            const totalSliding = wardrobeSliding;
+            const totalKnobs = roomKnobs;
+            
+            const totalItems = totalHandles + totalCounsil + totalSliding + totalKnobs;
+            const weightSavings = (totalItems * 0.17) + (totalProfiles * 0.5); // kg
+            
+            const resHandles = document.getElementById('res-handles');
+            const resProfiles = document.getElementById('res-profiles');
+            const resCounsil = document.getElementById('res-counsil');
+            const resSliding = document.getElementById('res-sliding');
+            const resKnobs = document.getElementById('res-knobs');
+            const resWeight = document.getElementById('res-weight');
+            
+            if(resHandles) resHandles.textContent = totalHandles.toLocaleString();
+            if(resProfiles) resProfiles.textContent = Math.round(totalProfiles).toLocaleString() + " m";
+            if(resCounsil) resCounsil.textContent = totalCounsil.toLocaleString();
+            if(resSliding) resSliding.textContent = totalSliding.toLocaleString();
+            if(resKnobs) resKnobs.textContent = totalKnobs.toLocaleString();
+            if(resWeight) resWeight.innerHTML = `<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" class="mr-1"><path d="M12 19V5M5 12l7-7 7 7"/></svg> ${weightSavings.toFixed(1)} kg lighter`;
+        }
+        
+        function renderProductGrid(productArray) {
+            if (productArray.length === 0) return '<p class="text-brand-gray text-center py-10">No products found.</p>';
+            let html = '<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-16">';
+            productArray.forEach(p => {
+                html += `
+                    <div class="product-card flex flex-col group cursor-pointer" onclick='navigate("product", "${p.code}")'>
+                        <div class="bg-brand-offwhite aspect-square flex items-center justify-center rounded-xl p-4 md:p-6 mb-3 md:mb-4 relative overflow-hidden">
+                            <img src="${p.image}" alt="KUNETT Premium Aluminium Architectural Hardware - Model ${p.code} Manufacturer Rajkot" loading="lazy" class="product-img object-contain h-full w-full">
+                            <div class="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-white rounded-full p-2 shadow-sm md:shadow-md opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-0 md:translate-y-2 group-hover:translate-y-0">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" class="md:w-5 md:h-5"><path d="M12 5v14M5 12h14"/></svg>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-between items-start">
+                            <h4 class="font-bold text-sm md:text-lg leading-tight mb-0.5">Model ${p.code}</h4>
+                            <p class="text-[10px] md:text-sm text-brand-gray mb-2">${p.category}</p>
+                            <div class="flex gap-1.5 mt-auto">
+                                ${p.finishes.map(f => `<div class="w-3.5 h-3.5 rounded-full shadow-sm border border-gray-300" style="${getColorStyle(f)}" title="${f}"></div>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            return html;
+        }
+
+        function navigate(page, productId = null) {
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active', 'border-b-2', 'border-brand-black'));
+            const activeLink = document.getElementById('nav-' + page);
+            if (activeLink) activeLink.classList.add('active', 'border-b-2', 'border-brand-black');
+            
+            window.scrollTo(0, 0);
+
+            if (page === 'calculator') {
+                let html = `
+                    <div class="bg-brand-offwhite py-16 md:py-24 px-4 md:px-6 border-b border-brand-lightgray">
+                        <div class="max-w-4xl mx-auto text-center">
+                            <h1 class="font-serif text-4xl md:text-5xl text-brand-black mb-6 leading-tight">B2B Project Calculator</h1>
+                            <p class="text-brand-gray text-base md:text-xl leading-relaxed max-w-2xl mx-auto">Instantly estimate total hardware requirements across your entire architectural project.</p>
+                        </div>
+                    </div>
+                    <section class="py-12 md:py-20 px-4 md:px-6 max-w-5xl mx-auto min-h-[50vh]">
+                        <div class="bg-white border border-brand-lightgray rounded-3xl p-8 md:p-12 shadow-sm">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                <div>
+                                    <h3 class="font-serif text-2xl font-bold mb-6 text-brand-black">Project Scope</h3>
+                                    <div class="space-y-6">
+                                        <div>
+                                            <label class="block text-xs font-bold uppercase tracking-widest text-brand-gray mb-2">Number of Modular Kitchens</label>
+                                            <input type="number" min="0" id="calc-kitchens" value="2" class="w-full bg-brand-offwhite border border-brand-lightgray rounded-xl px-4 py-3 text-brand-black focus:outline-none focus:border-brand-black transition-colors" oninput="this.value = Math.abs(this.value); calculateROI()">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-bold uppercase tracking-widest text-brand-gray mb-2">Number of Wardrobes</label>
+                                            <input type="number" min="0" id="calc-wardrobes" value="4" class="w-full bg-brand-offwhite border border-brand-lightgray rounded-xl px-4 py-3 text-brand-black focus:outline-none focus:border-brand-black transition-colors" oninput="this.value = Math.abs(this.value); calculateROI()">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-bold uppercase tracking-widest text-brand-gray mb-2">Other Rooms (Bedrooms, Living)</label>
+                                            <input type="number" min="0" id="calc-rooms" value="3" class="w-full bg-brand-offwhite border border-brand-lightgray rounded-xl px-4 py-3 text-brand-black focus:outline-none focus:border-brand-black transition-colors" oninput="this.value = Math.abs(this.value); calculateROI()">
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-brand-gray mt-6 italic">* Estimates assume standard luxury modular layouts.</p>
+                                </div>
+                                <div class="bg-[#111111] text-white p-8 rounded-2xl flex flex-col justify-center border border-[#333333]">
+                                    <h3 class="font-serif text-2xl font-bold mb-8 text-brand-offwhite">Estimated Hardware</h3>
+                                    
+                                    <div class="grid grid-cols-2 gap-y-6 gap-x-4 mb-6">
+                                        <div>
+                                            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Cabinet Handles</p>
+                                            <p class="text-2xl font-serif text-[#d4af37]" id="res-handles">0</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Aluminium Profiles</p>
+                                            <p class="text-2xl font-serif text-[#d4af37]" id="res-profiles">0 m</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Counsil Handles</p>
+                                            <p class="text-2xl font-serif text-[#d4af37]" id="res-counsil">0</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Sliding Counsils</p>
+                                            <p class="text-2xl font-serif text-[#d4af37]" id="res-sliding">0</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Cabinet Knobs</p>
+                                            <p class="text-2xl font-serif text-[#d4af37]" id="res-knobs">0</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="pt-6 border-t border-[#333333]">
+                                        <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">Weight Savings vs Steel</p>
+                                        <p class="text-2xl font-serif text-[#25D366] flex items-center gap-2" id="res-weight">
+                                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+                                            0 kg lighter
+                                        </p>
+                                        <p class="text-[10px] text-gray-500 mt-2">Aluminium puts significantly less stress on hinges, increasing furniture lifespan.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                `;
+                mainContent.innerHTML = html;
+                setTimeout(calculateROI, 100);
+            } else if (page === 'legal') {
+                mainContent.innerHTML = `
+                                        <div class="bg-brand-offwhite py-16 md:py-24 px-4 md:px-6 border-b border-brand-lightgray">
+                        <div class="max-w-4xl mx-auto text-center">
+                            <h1 class="font-serif text-4xl md:text-5xl text-brand-black mb-6 leading-tight">Legal & Policies</h1>
+                            <p class="text-brand-gray text-base md:text-xl leading-relaxed max-w-2xl mx-auto">Official terms, conditions, and privacy policies for KUNETT Hardware wholesalers and dealers.</p>
+                        </div>
+                    </div>
+                    <section class="py-12 md:py-20 px-4 md:px-6 max-w-4xl mx-auto min-h-[50vh]">
+                        
+                        <div class="mb-16">
+                            <h2 class="font-serif text-3xl font-bold mb-6 text-brand-black border-b border-brand-lightgray pb-4">Wholesale Terms</h2>
+                            <p class="text-brand-gray leading-relaxed text-sm">We respect your privacy and are committed to protecting your personal data. Any information collected through our inquiry system or catalogue downloads is used strictly for fulfilling your architectural hardware requests. We do not sell your data to third parties. If you have any questions regarding these policies, you may contact our legal team at kunetthardware@gmail.com.</p>
+                        </div>
+
+                        <div class="mb-16">
+                            <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-brand-lightgray pb-4 mb-6">
+                                <div>
+                                    <h2 class="font-serif text-3xl font-bold text-brand-black">Wholesale Terms & Conditions</h2>
+                                    <p class="text-brand-gray text-sm mt-1 uppercase tracking-widest font-bold">KUNETT HARDWARE</p>
+                                </div>
+                                <button onclick="window.print()" class="mt-4 md:mt-0 flex items-center gap-2 text-sm font-bold text-brand-black hover:text-brand-gray transition-colors print:hidden">
+                                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+                                    Print Document
+                                </button>
+                            </div>
+                            
+                            <p class="text-brand-black font-medium mb-6"><strong>Applicable To:</strong> All Wholesalers, Dealers & Authorized Business Customers</p>
+                            
+                            <ol class="list-decimal pl-5 space-y-4 text-brand-gray text-sm leading-relaxed">
+                                <li>All orders placed with KUNETT Hardware shall be considered confirmed only after approval by the company or its authorized representative.</li>
+                                <li>The customer shall verify the product code, quantity, colour/finish, and other order details before confirming the order.</li>
+                                <li>Once an order has been confirmed, any cancellation, modification or change shall require prior approval from KUNETT Hardware.</li>
+                                <li>All wholesale prices shall be as per the latest price list or quotation issued by KUNETT Hardware and may be revised from time to time based on market conditions, raw-material costs, manufacturing costs, transportation or applicable taxes.</li>
+                                <li>The price applicable to an order shall be the price confirmed by KUNETT Hardware at the time of order acceptance.</li>
+                                <li>Payment shall be made according to the payment terms mutually agreed between KUNETT Hardware and the customer.</li>
+                                <li>Orders requiring advance payment shall be processed for dispatch only after the payment has been received and confirmed.</li>
+                                <li>Credit facilities, wherever applicable, shall be provided only to approved customers and shall remain subject to the agreed credit limit and payment period.</li>
+                                <li>Any outstanding payment beyond the agreed due date may cause the temporary suspension of further dispatches or credit facilities until the outstanding amount is cleared.</li>
+                                <li>Certain products may be subject to minimum order quantity, carton quantity or packing requirements, which shall be communicated at the time of quotation or order confirmation.</li>
+                                <li>Dispatch shall be processed after the applicable order is completed and payment requirements are met. Delivery timelines provided by KUNETT Hardware are estimated and may vary depending on production, availability, transportation and other circumstances.</li>
+                                <li>The customer shall check the number of packages and visible condition of the goods upon delivery and report any shortage, incorrect quantity, or visible damage to KUNETT Hardware promptly.</li>
+                                <li>Any shortage or damage claim must be supported by the relevant invoice/order details and photographs or videos wherever required. Transit-related claims may be subject to verification with the transporter.</li>
+                                <li>KUNETT Hardware products are supplied subject to standard quality inspection procedures. Genuine manufacturing defects reported within the applicable claim period may be inspected and considered for replacement or other suitable resolution.</li>
+                                <li>Replacement of any product shall be subject to inspection and approval by KUNETT Hardware. Damage caused by improper storage, handling, installation, modification, misuse, or normal wear and tear shall not be considered a manufacturing defect.</li>
+                                <li>Products shall not be returned or exchanged without prior approval from KUNETT Hardware. Returns due to change of preference, incorrect ordering, slow-moving stock or customer preference shall not normally be accepted.</li>
+                                <li>Any approved return must be unused, undamaged, and in acceptable original packaging. Customized, modified, used or damaged products may not be eligible for return or exchange.</li>
+                                <li>Product specifications, dimensions, finishes, packaging and availability may be changed from time to time as part of product development or manufacturing improvements.</li>
+                                <li>Minor variations in colour, finish, texture or appearance may occur due to manufacturing processes, photography, lighting or display conditions.</li>
+                                <li>Wholesalers may use official KUNETT Hardware product images, catalogues, logos, and marketing materials to genuinely promote KUNETT Hardware products.</li>
+                                <li>The KUNETT Hardware name, logo, product specifications, and marketing materials shall not be altered or used misleadingly. No wholesaler or dealer shall represent themselves as an employee, manufacturer, or official spokesperson of KUNETT Hardware without written authorization.</li>
+                                <li>All wholesalers and dealers are expected to maintain professional business conduct and timely payment practices. Continued supply and commercial facilities may be reviewed based on payment history and outstanding balances.</li>
+                                <li>KUNETT Hardware reserves the right to modify, update, or revise these terms from time to time. The latest approved terms shall apply to future transactions.</li>
+                                <li>Any exception or special commercial arrangement shall be valid only when approved by KUNETT Hardware in writing.</li>
+                                <li>Placement of an order with KUNETT Hardware shall constitute acceptance of these Wholesale Terms & Conditions.</li>
+                            </ol>
+                            
+                            <!-- Customer Acknowledgement Form for Printing -->
+                            <div class="mt-16 bg-white border-2 border-brand-lightgray p-8 md:p-10 rounded-xl shadow-sm break-inside-avoid">
+                                <h3 class="font-serif text-2xl font-bold mb-8 text-brand-black">CUSTOMER ACKNOWLEDGEMENT</h3>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 text-brand-black text-sm mb-12 font-medium">
+                                    <div class="flex items-end"><span class="whitespace-nowrap mr-3">Firm / Business Name:</span> <div class="flex-grow border-b border-gray-400"></div></div>
+                                    <div class="flex items-end"><span class="whitespace-nowrap mr-3">Wholesaler / Dealer Name:</span> <div class="flex-grow border-b border-gray-400"></div></div>
+                                    <div class="flex items-end"><span class="whitespace-nowrap mr-3">GST No.:</span> <div class="flex-grow border-b border-gray-400"></div></div>
+                                    <div class="flex items-end"><span class="whitespace-nowrap mr-3">Mobile No.:</span> <div class="flex-grow border-b border-gray-400"></div></div>
+                                    <div class="flex items-end"><span class="whitespace-nowrap mr-3">Signature & Stamp:</span> <div class="flex-grow border-b border-gray-400"></div></div>
+                                    <div class="flex items-end"><span class="whitespace-nowrap mr-3">Date:</span> <div class="flex-grow border-b border-gray-400"></div></div>
+                                </div>
+                                
+                                <div class="border-t border-brand-lightgray pt-8 flex flex-col md:flex-row justify-between items-start gap-12">
+                                    <div>
+                                        <h4 class="font-bold text-lg text-brand-black mb-2 tracking-wide uppercase">KUNETT HARDWARE</h4>
+                                        <p class="text-sm text-brand-gray mb-1">Harikrushna Enterprise</p>
+                                        <p class="text-sm text-brand-gray mb-1">Founder: Sanjay Patel</p>
+                                        <p class="text-sm text-brand-gray mb-1">Mobile: +91 9924637640</p>
+                                        <p class="text-sm text-brand-gray">Location: Rajkot, Gujarat</p>
+                                    </div>
+                                    <div class="flex flex-col gap-8 text-sm font-medium text-brand-black w-full md:w-auto md:min-w-[300px]">
+                                        <div class="flex items-end"><span class="whitespace-nowrap mr-3">Authorized Signature:</span> <div class="flex-grow border-b border-gray-400"></div></div>
+                                        <div class="flex items-end"><span class="whitespace-nowrap mr-3">Company Seal:</span> <div class="flex-grow border-b border-gray-400"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                `;
+            } else if (page === 'blog') {
+                let html = `
+                    <div class="bg-brand-offwhite py-16 md:py-24 px-4 md:px-6 border-b border-brand-lightgray">
+                        <div class="max-w-4xl mx-auto text-center">
+                            <h1 class="font-serif text-4xl md:text-6xl text-brand-black mb-6 leading-tight">Design & Architecture Blog</h1>
+                            <p class="text-brand-gray text-base md:text-xl leading-relaxed max-w-2xl mx-auto">Expert insights, interior design trends, and guides on premium architectural hardware.</p>
+                        </div>
+                    </div>
+                    <section class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto min-h-[50vh]">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
+                `;
+                
+                
+                let sortedBlogs = [...blogs].sort((a, b) => new Date(b.date) - new Date(a.date));
+                sortedBlogs.forEach(blog => {
+                    html += `
+                            <div class="group cursor-pointer flex flex-col" onclick="navigate('blog-post', '${blog.slug}')">
+                                <div class="overflow-hidden rounded-2xl mb-6 aspect-[4/3] bg-brand-lightgray">
+                                    <img src="${blog.image}" alt="${blog.title}" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                </div>
+                                <p class="text-xs font-bold uppercase tracking-widest text-brand-gray mb-3">${blog.date}</p>
+                                <h3 class="font-serif text-2xl md:text-3xl text-brand-black mb-4 group-hover:text-brand-gray transition-colors">${blog.title}</h3>
+                                <p class="text-brand-gray leading-relaxed line-clamp-3">${blog.excerpt}</p>
+                            </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </section>
+                `;
+                mainContent.innerHTML = html;
+            } else if (page === 'blog-post') {
+                const blog = blogs.find(b => b.slug === productId); // Reusing productId param for slug
+                if (!blog) return;
+                
+                mainContent.innerHTML = `
+                    <article class="min-h-screen">
+                        <!-- Hero Image -->
+                        <div class="w-full h-[50vh] md:h-[70vh] relative">
+                            <img src="${blog.image}" alt="${blog.title}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/40"></div>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+                                <p class="text-xs font-bold uppercase tracking-widest text-white/80 mb-4">${blog.date} &bull; By ${blog.author}</p>
+                                <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl text-white max-w-4xl leading-tight drop-shadow-md">${blog.title}</h1>
+                            </div>
+                        </div>
+                        
+                        <!-- Content -->
+                        <div class="max-w-3xl mx-auto px-4 md:px-6 py-16 md:py-24 text-brand-black text-lg leading-relaxed">
+                            ${blog.content}
+                            
+                            <hr class="border-brand-lightgray my-12">
+                            <div class="text-center">
+                                <p class="text-sm text-brand-gray mb-6">Ready to elevate your next project with premium aluminium hardware?</p>
+                                <button onclick="navigate('200')" class="bg-brand-black text-white px-8 py-3.5 rounded-full font-bold text-sm tracking-wide shadow-md hover:opacity-90 transition-opacity">
+                                    Explore Hardware
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            } else if (page === 'process') {
+                mainContent.innerHTML = `
+                    <div class="bg-brand-offwhite py-16 md:py-24 px-4 md:px-6 border-b border-brand-lightgray">
+                        <div class="max-w-4xl mx-auto text-center">
+                            <p class="text-xs font-bold uppercase tracking-widest text-brand-gray mb-4">Harikrushna Enterprise</p>
+                            <h1 class="font-serif text-4xl md:text-6xl text-brand-black mb-6 leading-tight">Precision Manufacturing in Rajkot</h1>
+                            <p class="text-brand-gray text-base md:text-xl leading-relaxed max-w-2xl mx-auto">Discover the engineering, materials, and craftsmanship behind every KUNETT handle.</p>
+                        </div>
+                    </div>
+                    
+                    <section class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center mb-24">
+                            <div class="bg-brand-lightgray/30 aspect-square rounded-2xl flex items-center justify-center overflow-hidden drop-shadow-xl border border-brand-lightgray">
+                                <img src="assets/process_aluminium.jpg" alt="Aerospace-Grade Aluminium Extrusions" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                            </div>
+                            <div>
+                                <h3 class="font-serif text-3xl md:text-4xl text-brand-black mb-6">Aerospace-Grade Aluminium</h3>
+                                <p class="text-brand-gray leading-relaxed mb-6">At our Rajkot facility, we source only the highest quality solid aluminium alloys. This ensures that every KUNETT profile and handle not only feels substantial and ergonomic in the hand but possesses the structural integrity required for heavy architectural use.</p>
+                                <p class="text-brand-gray leading-relaxed">Unlike hollow or zinc-alloy alternatives, our solid extrusion process guarantees a lifetime of durability.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center mb-24 md:flex-row-reverse">
+                            <div class="order-1 md:order-2 bg-brand-pink/30 aspect-square rounded-2xl flex items-center justify-center overflow-hidden drop-shadow-xl border border-brand-lightgray">
+                                <img src="assets/process_vmc.jpg" alt="VMC Machining Center" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                            </div>
+                            <div class="order-2 md:order-1">
+                                <h3 class="font-serif text-3xl md:text-4xl text-brand-black mb-6">VMC Machining & Finishing</h3>
+                                <p class="text-brand-gray leading-relaxed mb-6">Our manufacturing floor utilizes state-of-the-art <a href="https://en.wikipedia.org/wiki/Milling_(machining)#Computer_numerical_control" target="_blank" rel="noopener noreferrer" class="text-brand-black underline hover:text-brand-gray font-bold">VMC (Vertical Machining Centers)</a> to shape every aluminium profile with absolute precision. Once milled, every piece goes through a meticulous buffing process to ensure a flawless, smooth texture before coloring.</p>
+                                <p class="text-brand-gray leading-relaxed mb-6">Discover exactly why precision-milled aluminium is replacing steel in luxury homes by reading our <a href="#" onclick="navigate('blog-post', 'aluminium-vs-steel-handles-for-new-home')" class="text-brand-black underline hover:text-brand-gray font-bold">Aluminium vs Steel Design Guide</a>.</p>
+                                <p class="text-brand-gray leading-relaxed">Finally, we apply our premium color finishes—like Rose Gold and Matte Black—ensuring they penetrate the metal to resist scratching and fading. The hardware is then carefully packed and supplied directly to our network of premium wholesalers and B2B partners.</p>
+                            </div>
+                        </div>
+                    </section>
+                `;
+            } else if (page === 'product') {
+                const product = products.find(p => p.code === productId);
+                if (!product) return;
+                
+                currentProduct = product;
+                selectedFinishes = [];
+                selectedSizes = [];
+                
+                let html = `
+                    <div class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20 flex flex-col md:flex-row gap-12">
+                        <div class="w-full md:w-1/2 bg-brand-offwhite rounded-3xl p-8 md:p-16 flex justify-center items-center relative group min-h-[50vh]">
+                            <img src="${product.image}" loading="lazy" class="w-full h-full object-contain mix-blend-multiply drop-shadow-2xl transition-transform duration-700 group-hover:scale-105" alt="High-Resolution View of KUNETT Aluminium Profile Model ${product.code} - Luxury Furniture Hardware">
+                        </div>
+                        <div class="w-full md:w-1/2 flex flex-col justify-center">
+                            <button onclick="navigate('${product.series}')" class="w-max text-xs font-bold uppercase tracking-widest text-brand-gray hover:text-brand-black transition-colors mb-6 flex items-center gap-2">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                                Back to ${product.series} Series
+                            </button>
+                            <h1 class="font-serif text-4xl md:text-6xl text-brand-black mb-2">Model ${product.code}</h1>
+                            <p class="text-sm md:text-base font-bold uppercase tracking-widest text-brand-gray mb-6">${product.category}</p>
+                            
+                            <p class="text-brand-black/80 text-sm md:text-base leading-relaxed mb-10">
+                                ${product.description}
+                            </p>
+                            
+                            <div class="mb-8">
+                                <h4 class="text-xs font-bold uppercase tracking-widest mb-4 text-brand-black">Available Finishes</h4>
+                                <div id="drawer-finishes" class="flex flex-wrap gap-3"></div>
+                            </div>
+                            
+                            <div class="mb-10">
+                                <h4 class="text-xs font-bold uppercase tracking-widest mb-4 text-brand-black">Available Sizes</h4>
+                                <div id="drawer-sizes" class="flex flex-wrap gap-3"></div>
+                            </div>
+                            
+                            <div class="flex flex-col sm:flex-row gap-4 mt-auto">
+                                <button type="button" id="add-to-list-btn" onclick="addToInquiry()" class="bg-brand-black text-white px-8 py-4 rounded-full font-bold text-sm tracking-wide shadow-lg hover:opacity-90 transition-all w-full sm:w-auto flex-grow text-center">
+                                    Add to Inquiry List
+                                </button>
+                                <a href="#" id="whatsapp-btn" target="_blank" class="bg-[#25D366] text-white px-8 py-4 rounded-full font-bold text-sm tracking-wide shadow-lg hover:opacity-90 transition-opacity flex justify-center items-center gap-2 w-full sm:w-auto">
+                                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg>
+                                    WhatsApp
+                                </a>
+                            </div>
+                            
+                            <!-- Technical Specs Notice -->
+                            <div class="mt-6 flex items-start gap-3 bg-white border border-brand-lightgray p-4 rounded-xl">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" class="text-brand-gray flex-shrink-0 mt-0.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                <p class="text-xs text-brand-gray leading-relaxed"><strong class="text-brand-black block mb-1">Architectural Precision</strong>Technical CAD drawings, installation guides, and custom bulk finishing specifications are available upon request for Model ${product.code}.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                mainContent.innerHTML = html;
+                renderOptions();
+                updateWhatsappLink();
+            } else if (page === 'inquiry') {
+                let html = `
+                    <div class="bg-brand-offwhite py-12 md:py-16 px-4 md:px-6 border-b border-brand-lightgray">
+                        <div class="max-w-3xl mx-auto text-center">
+                            <h1 class="font-serif text-4xl md:text-5xl text-brand-black mb-4">Your Inquiry List</h1>
+                            <p class="text-brand-gray text-sm md:text-base">Review your selected models and send them all at once via WhatsApp.</p>
+                        </div>
+                    </div>
+                    <section class="py-12 md:py-16 px-4 md:px-6 max-w-4xl mx-auto min-h-[50vh]">
+                `;
+                
+                if (inquiryList.length === 0) {
+                    html += `
+                        <div class="text-center py-10 md:py-20">
+                            <p class="text-brand-gray mb-6">Your list is currently empty.</p>
+                            <button onclick="navigate('200')" class="btn-primary px-8 py-3.5 rounded-full font-bold text-sm shadow-md">Explore Collection</button>
+                        </div>
+                    `;
+                } else {
+                    html += `<div class="space-y-4 md:space-y-6 mb-10">`;
+                    inquiryList.forEach((item, index) => {
+                        html += `
+                            <div class="flex items-center gap-4 md:gap-6 p-4 md:p-6 bg-white border border-brand-lightgray rounded-xl shadow-sm relative">
+                                <button onclick="removeFromInquiry(${index})" class="absolute top-3 right-3 md:top-4 md:right-4 text-brand-gray hover:text-red-500 transition-colors bg-brand-offwhite rounded-full p-1.5 md:p-2">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                                </button>
+                                <div class="w-20 h-20 md:w-28 md:h-28 flex-shrink-0 bg-brand-offwhite rounded flex justify-center items-center p-2">
+                                    <img src="${item.product.image}" loading="lazy" class="max-w-full max-h-full object-contain mix-blend-multiply">
+                                </div>
+                                <div class="flex-grow">
+                                    <h4 class="font-bold text-base md:text-lg mb-1">Model ${item.product.code}</h4>
+                                    <p class="text-[10px] md:text-xs text-brand-gray uppercase tracking-wider mb-2 md:mb-3">${item.product.category}</p>
+                                    <div class="text-xs md:text-sm text-brand-black space-y-1">
+                                        <p><strong class="font-medium text-brand-gray">Finishes:</strong> ${item.finishes.length > 0 ? item.finishes.join(', ') : 'Any'}</p>
+                                        <p><strong class="font-medium text-brand-gray">Sizes:</strong> ${item.sizes.length > 0 ? item.sizes.join(', ') : 'Any'}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+                    
+                    let waText = `Hello Sanjay, I would like to inquire about the following items:\n\n`;
+                    inquiryList.forEach((item, i) => {
+                        waText += `${i+1}. KUNETT Model ${item.product.code} (${item.product.category})\n`;
+                        if (item.finishes.length) waText += `   - Finishes: ${item.finishes.join(', ')}\n`;
+                        if (item.sizes.length) waText += `   - Sizes: ${item.sizes.join(', ')}\n`;
+                        waText += `\n`;
+                    });
+                    
+                    html += `
+                        <div class="flex flex-col sm:flex-row justify-end items-center gap-4">
+                            <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}" target="_blank" class="bg-[#25D366] text-white w-full sm:w-auto px-8 py-4 rounded-full font-bold text-sm tracking-wide shadow-lg flex justify-center items-center gap-2 hover:opacity-90 transition-opacity">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg>
+                                Send Inquiry to WhatsApp
+                            </a>
+                        </div>
+                    `;
+                }
+                html += `</section>`;
+                mainContent.innerHTML = html;
+            } else if (page === 'contact') {
+                mainContent.innerHTML = `
+                    <div class="bg-brand-offwhite py-12 md:py-20 px-4 md:px-6 border-b border-brand-lightgray">
+                        <div class="max-w-3xl mx-auto text-center">
+                            <p class="text-xs font-bold uppercase tracking-widest text-brand-gray mb-2">Get in Touch</p>
+                            <h1 class="font-serif text-4xl md:text-6xl text-brand-black mb-6">Contact Us</h1>
+                            <p class="text-brand-gray text-sm md:text-base max-w-xl mx-auto">We'd love to hear from you. Fill out the form below to inquire about our hardware, request custom specifications, or visit our showroom.</p>
+                        </div>
+                    </div>
+                    <section class="py-12 md:py-20 px-4 md:px-6 max-w-7xl mx-auto">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+                            
+                            <!-- Left: Form -->
+                            <div>
+                                <h3 class="font-serif text-2xl md:text-3xl text-brand-black mb-6">Send an Inquiry</h3>
+                                <form id="contactForm" class="space-y-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label class="block text-xs font-bold text-brand-black uppercase tracking-widest mb-2">Full Name *</label>
+                                            <input type="text" name="Name" required class="w-full border border-brand-lightgray p-4 rounded bg-brand-offwhite focus:outline-none focus:border-brand-black transition-colors" placeholder="John Doe">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-bold text-brand-black uppercase tracking-widest mb-2">Email Address *</label>
+                                            <input type="email" name="Email" required class="w-full border border-brand-lightgray p-4 rounded bg-brand-offwhite focus:outline-none focus:border-brand-black transition-colors" placeholder="john@example.com">
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label class="block text-xs font-bold text-brand-black uppercase tracking-widest mb-2">Phone Number</label>
+                                            <input type="tel" name="Phone" class="w-full border border-brand-lightgray p-4 rounded bg-brand-offwhite focus:outline-none focus:border-brand-black transition-colors" placeholder="+91 00000 00000">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-bold text-brand-black uppercase tracking-widest mb-2">Subject</label>
+                                            <select name="Subject" class="w-full border border-brand-lightgray p-4 rounded bg-brand-offwhite focus:outline-none focus:border-brand-black transition-colors appearance-none">
+                                                <option>General Inquiry</option>
+                                                <option>Bulk / Wholesale Order</option>
+                                                <option>Custom Architecture Project</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-brand-black uppercase tracking-widest mb-2">Message *</label>
+                                        <textarea name="Message" rows="5" required class="w-full border border-brand-lightgray p-4 rounded bg-brand-offwhite focus:outline-none focus:border-brand-black transition-colors" placeholder="How can we help you?"></textarea>
+                                    </div>
+                                    <button type="submit" id="submitBtn" class="btn-primary w-full py-4 rounded-full font-bold text-sm tracking-wide shadow-lg hover:opacity-90 transition-opacity">
+                                        Send Message
+                                    </button>
+                                    <div id="formStatus" class="hidden text-center text-sm font-bold mt-4 p-4 rounded bg-brand-offwhite border border-brand-lightgray"></div>
+                                </form>
+                            </div>
+                            
+                            <!-- Right: Location Details & Map -->
+                            <div class="flex flex-col">
+                                <h3 class="font-serif text-2xl md:text-3xl text-brand-black mb-6">Visit Our Showroom</h3>
+                                
+                                <div class="bg-brand-offwhite p-6 md:p-8 rounded-xl border border-brand-lightgray mb-8">
+                                    <h4 class="font-bold text-sm md:text-base uppercase tracking-widest text-brand-black mb-2">Harikrushna Enterprise</h4>
+                                    <p class="text-brand-gray text-sm leading-relaxed mb-6">
+                                        Official Manufacturers of KUNETT Hardware<br>
+                                        <a href="https://maps.app.goo.gl/EMsseMvKHpNqxPVh9" target="_blank" rel="noopener noreferrer" class="hover:text-brand-gray transition-colors font-bold">Rajkot, Gujarat, India</a>
+                                    </p>
+                                    <div class="flex flex-col gap-4 text-sm">
+                                        <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" class="flex items-center gap-3 text-brand-black hover:text-[#25D366] transition-colors font-medium">
+                                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg>
+                                            Message on WhatsApp
+                                        </a>
+                                        <a href="mailto:kunetthardware@gmail.com" class="flex items-center gap-3 text-brand-black hover:text-brand-gray transition-colors font-medium">
+                                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                                            kunetthardware@gmail.com
+                                        </a>
+                                        <a href="https://maps.app.goo.gl/EMsseMvKHpNqxPVh9" target="_blank" class="flex items-center gap-3 text-brand-black hover:text-blue-600 transition-colors font-medium">
+                                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                            View on Google Maps ↗
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="w-full flex-grow min-h-[300px] rounded-xl overflow-hidden border border-brand-lightgray shadow-sm">
+                                    <iframe src="https://maps.google.com/maps?q=22.2392638,70.8036592&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                `;
+
+                // Attach form submission logic for Google Sheets
+                const form = document.getElementById('contactForm');
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const btn = document.getElementById('submitBtn');
+                    const status = document.getElementById('formStatus');
+                    
+                    btn.textContent = 'Sending securely...';
+                    btn.disabled = true;
+                    
+                    const formData = new FormData(form);
+
+                    fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        status.textContent = "✅ Success! Your inquiry has been sent to our team. We will contact you shortly.";
+                        status.classList.remove('hidden', 'text-red-600', 'border-red-200', 'bg-red-50');
+                        status.classList.add('text-[#25D366]', 'border-green-200', 'bg-green-50');
+                        form.reset();
+                        btn.textContent = 'Send Message';
+                        btn.disabled = false;
+                    })
+                    .catch(error => {
+                        status.textContent = "❌ Oops! There was a problem submitting your form.";
+                        status.classList.remove('hidden', 'text-[#25D366]', 'border-green-200', 'bg-green-50');
+                        status.classList.add('text-red-600', 'border-red-200', 'bg-red-50');
+                        btn.textContent = 'Send Message';
+                        btn.disabled = false;
+                    });
+                });
+
+            } else if (page === 'home') {
+                mainContent.innerHTML = `
+                    <header class="relative w-full h-[90vh] md:h-[80vh] bg-brand-offwhite flex items-center justify-center overflow-hidden">
+                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-multiply">
+                            <source src="assets/Code_204_Compressed.mp4" type="video/mp4">
+                        </video>
+                        <div class="relative z-10 text-center px-4 flex flex-col items-center">
+                            <h1 class="font-serif text-4xl md:text-7xl lg:text-8xl text-brand-black drop-shadow-sm mb-4 md:mb-6 leading-tight capitalize">Your new home<br>decorator.</h1>
+                            <p class="text-brand-black text-sm md:text-xl font-medium drop-shadow-sm mb-6 md:mb-10 max-w-md">Premium aluminium hardware engineered for modern spaces and designed to endure.</p>
+                            <button onclick="navigate('200')" class="bg-brand-black text-white px-8 md:px-10 py-3 md:py-4 font-bold text-xs md:text-sm tracking-wide rounded-full hover:opacity-80 transition-opacity">Explore the Collection</button>
+                        </div>
+                    </header>
+
+                    <div class="border-b border-brand-lightgray py-12 md:py-16 px-6 text-center bg-white">
+                        <h2 class="font-serif text-2xl md:text-4xl text-brand-black max-w-4xl mx-auto leading-snug">
+                            KUNETT is your new home decorator. We engineer the premium hardware you reach for every single day.
+                        </h2>
+                    </div>
+
+                    <!-- New Arrivals -->
+                    <section class="py-12 md:py-20 px-4 md:px-6 max-w-7xl mx-auto">
+                        <h3 class="text-xl md:text-2xl font-bold mb-6 md:mb-10 border-b border-brand-lightgray pb-4 flex justify-between items-end">
+                            <span>New Arrivals</span>
+                            <button onclick="navigate('200')" class="text-xs md:text-sm font-medium text-brand-gray hover:text-brand-black transition-colors">View All</button>
+                        </h3>
+                        ${renderProductGrid([
+                            products.find(p => p.code === '201'),
+                            products.find(p => p.code === '202'),
+                            products.find(p => p.code === '206'),
+                            products.find(p => p.code === '208'),
+                            products.find(p => p.code === '210'),
+                            products.find(p => p.code === '211'),
+                            products.find(p => p.code === '214'),
+                            products.find(p => p.code === '217')
+                        ].filter(Boolean))}
+                    </section>
+
+
+                    <!-- Interactive Finish Studio -->
+                    <section class="py-16 md:py-24 px-4 md:px-6 bg-brand-offwhite border-t border-brand-lightgray mt-12">
+                        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                            <div class="w-full lg:w-1/2 flex flex-col items-start">
+                                <p class="text-xs font-bold uppercase tracking-widest text-brand-black mb-3 flex items-center gap-2">
+                                    <svg class="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"></path></svg>
+                                    Interactive Configurator
+                                </p>
+                                <h3 class="font-serif text-4xl md:text-6xl text-brand-black mb-6 leading-tight">The Finish Studio</h3>
+                                <p class="text-brand-gray text-base md:text-lg mb-10 leading-relaxed max-w-lg">Instantly visualize our premium architectural finishes. Select a material below to watch the hardware transform in real-time.</p>
+                                
+                                <div class="flex flex-wrap gap-3" id="studio-buttons">
+                                    <button onclick="changeStudioColor('Black')" class="flex items-center gap-2.5 px-5 py-3 border border-brand-lightgray rounded-full bg-white hover:border-brand-black hover:shadow-md transition-all">
+                                        <div class="w-5 h-5 rounded-full shadow-sm" style="background-color: #1a1a1a;"></div> <span class="text-sm font-bold text-brand-black">Matte Black</span>
+                                    </button>
+                                    <button onclick="changeStudioColor('Rose Gold')" class="flex items-center gap-2.5 px-5 py-3 border border-brand-lightgray rounded-full bg-white hover:border-brand-black hover:shadow-md transition-all">
+                                        <div class="w-5 h-5 rounded-full shadow-sm" style="background: linear-gradient(135deg, #b76e79 0%, #e0bfb8 100%);"></div> <span class="text-sm font-bold text-brand-black">Rose Gold</span>
+                                    </button>
+                                    <button onclick="changeStudioColor('Matte Gold')" class="flex items-center gap-2.5 px-5 py-3 border border-brand-lightgray rounded-full bg-white hover:border-brand-black hover:shadow-md transition-all">
+                                        <div class="w-5 h-5 rounded-full shadow-sm" style="background: linear-gradient(135deg, #d4af37 0%, #f3e5ab 100%);"></div> <span class="text-sm font-bold text-brand-black">Matte Gold</span>
+                                    </button>
+                                    <button onclick="changeStudioColor('Champagne')" class="flex items-center gap-2.5 px-5 py-3 border border-brand-lightgray rounded-full bg-white hover:border-brand-black hover:shadow-md transition-all">
+                                        <div class="w-5 h-5 rounded-full shadow-sm" style="background: linear-gradient(135deg, #F7E7CE 0%, #FFE4C4 100%);"></div> <span class="text-sm font-bold text-brand-black">Champagne</span>
+                                    </button>
+                                    <button onclick="changeStudioColor('Silver')" class="flex items-center gap-2.5 px-5 py-3 border border-brand-lightgray rounded-full bg-white hover:border-brand-black hover:shadow-md transition-all">
+                                        <div class="w-5 h-5 rounded-full shadow-sm border border-gray-300" style="background: linear-gradient(135deg, #C0C0C0 0%, #E8E8E8 100%);"></div> <span class="text-sm font-bold text-brand-black">Silver</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="w-full lg:w-1/2 flex justify-center items-center bg-white rounded-[2.5rem] p-12 shadow-2xl min-h-[400px] border border-brand-lightgray relative overflow-hidden group">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-brand-offwhite to-white opacity-50"></div>
+                                <img id="studio-handle-img" src="assets/201.png" alt="Hardware Finish Visualizer" class="relative z-10 w-full h-[300px] object-contain drop-shadow-2xl transition-all duration-700 ease-in-out group-hover:scale-110" style="filter: sepia(0.8) hue-rotate(-30deg) saturate(1.8) brightness(1.0) contrast(1.2);">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- How to Inquire Section -->
+                    <section class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto border-t border-brand-lightgray mt-10 md:mt-16">
+                        <div class="text-center mb-12 md:mb-16">
+                            <p class="text-xs font-bold uppercase tracking-widest text-brand-gray mb-2">Simple Process</p>
+                            <h3 class="font-serif text-3xl md:text-4xl text-brand-black mb-4">How to Request a Quote</h3>
+                            <p class="text-brand-gray text-sm md:text-base max-w-2xl mx-auto">Because every architectural project is unique, we process all orders directly. Build your custom hardware list and send it to us for an instant quote.</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 relative">
+                            <!-- Connecting Line (Desktop Only) -->
+                            <div class="hidden md:block absolute top-12 left-[16%] right-[16%] h-px bg-brand-lightgray -z-10"></div>
+                            
+                            <!-- Step 1 -->
+                            <div class="flex flex-col items-center text-center group">
+                                <div class="w-24 h-24 bg-white border-2 border-brand-black rounded-full flex justify-center items-center font-serif text-3xl mb-6 group-hover:bg-brand-black group-hover:text-white transition-colors duration-300 shadow-sm">
+                                    1
+                                </div>
+                                <h4 class="font-bold text-lg mb-3">Explore & Select</h4>
+                                <p class="text-sm text-brand-gray leading-relaxed max-w-xs">Tap on any model you love, then select your preferred finishes and exact sizes.</p>
+                            </div>
+                            
+                            <!-- Step 2 -->
+                            <div class="flex flex-col items-center text-center group">
+                                <div class="w-24 h-24 bg-white border-2 border-brand-black rounded-full flex justify-center items-center font-serif text-3xl mb-6 group-hover:bg-brand-black group-hover:text-white transition-colors duration-300 shadow-sm">
+                                    2
+                                </div>
+                                <h4 class="font-bold text-lg mb-3">Build Your List</h4>
+                                <p class="text-sm text-brand-gray leading-relaxed max-w-xs">Click <strong class="text-brand-black">"Add to Inquiry List"</strong> to save multiple items to your custom hardware board.</p>
+                            </div>
+                            
+                            <!-- Step 3 -->
+                            <div class="flex flex-col items-center text-center group">
+                                <div class="w-24 h-24 bg-white border-2 border-[#25D366] text-[#25D366] rounded-full flex justify-center items-center font-serif text-3xl mb-6 group-hover:bg-[#25D366] group-hover:text-white transition-colors duration-300 shadow-sm">
+                                    3
+                                </div>
+                                <h4 class="font-bold text-lg mb-3">Send via WhatsApp</h4>
+                                <p class="text-sm text-brand-gray leading-relaxed max-w-xs">Open <strong class="text-brand-black">"My List"</strong> in the menu and send your entire selection directly to our team.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Founder / Brand Story -->
+                    <section class="w-full flex flex-col md:flex-row bg-brand-offwhite border-y border-brand-lightgray">
+                        <div class="w-full md:w-1/2 h-64 md:h-auto overflow-hidden">
+                            <!-- Using founder image natively or fallback -->
+                            <img src="assets/founder.jpg" class="w-full h-full object-cover grayscale opacity-90 transition-transform duration-1000 hover:scale-105" alt="Sanjay Patel" onerror="this.src='assets/blog1_header.jpg'">
+                        </div>
+                        <div class="w-full md:w-1/2 p-10 md:p-24 flex flex-col justify-center">
+                            <p class="text-xs font-bold uppercase tracking-widest text-brand-gray mb-4">Founder's Vision</p>
+                            <h3 class="font-serif text-4xl md:text-5xl mb-6 text-brand-black">Engineered to endure.</h3>
+                            <p class="text-sm md:text-base leading-relaxed text-brand-black/80 mb-6 max-w-md italic">
+                                "Every handle is forged from aerospace-grade aluminium and finished by hand. The anodized coating protects against daily wear, ensuring your spaces look pristine for decades. Precision isn't just an option—it's our standard."
+                            </p>
+                            <p class="font-bold text-lg text-brand-black mb-8">— Sanjay Patel, Founder</p>
+                            <div class="flex flex-col md:flex-row gap-4">
+                                <a href="https://wa.me/${WHATSAPP_NUMBER}?text=Hello%20Sanjay,%20I%20am%20interested%20in%20KUNETT%20hardware." target="_blank" class="bg-[#25D366] text-white px-8 py-3.5 rounded-full font-bold text-xs md:text-sm tracking-wide shadow-md flex justify-center items-center gap-2 hover:opacity-90 transition-opacity">
+                                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg>
+                                    WhatsApp Sanjay
+                                </a>
+                                <button onclick="navigate('300')" class="btn-primary px-8 py-3.5 rounded-full font-bold text-xs md:text-sm tracking-wide shadow-md flex justify-center items-center">Discover Profiles</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Profiles -->
+                    <section class="py-12 md:py-20 px-4 md:px-6 max-w-7xl mx-auto">
+                        <h3 class="text-xl md:text-2xl font-bold mb-6 md:mb-10 border-b border-brand-lightgray pb-4 flex justify-between items-end">
+                            <span>Architectural Profiles</span>
+                            <button onclick="navigate('300')" class="text-xs md:text-sm font-medium text-brand-gray hover:text-brand-black transition-colors">View All</button>
+                        </h3>
+                        ${renderProductGrid([
+                            products.find(p => p.code === '301'),
+                            products.find(p => p.code === '303'),
+                            products.find(p => p.code === '306'),
+                            products.find(p => p.code === '312')
+                        ].filter(Boolean))}
+                    </section>
+                    
+                    <!-- Google Reviews Section -->
+                    <section class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto border-t border-brand-lightgray">
+                        <div class="text-center mb-12">
+                            <h3 class="font-serif text-3xl md:text-4xl text-brand-black mb-4">Loved by designers.</h3>
+                            <div class="flex justify-center items-center gap-1 text-[#d4af37]">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            </div>
+                            <p class="text-xs text-brand-gray mt-3"><a href="https://share.google/ph0nAicuxlc4C8bdU" target="_blank" class="hover:text-brand-black hover:underline transition-colors">Read all reviews on our Google Business Profile</a></p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                            <div class="bg-brand-offwhite p-8 rounded-2xl shadow-sm border border-brand-lightgray">
+                                <p class="text-sm md:text-base leading-relaxed text-brand-black mb-6">"Excellent quality aluminium profiles and handles. We have been sourcing from Harikrushna Enterprise for our modular kitchen projects, and the finishing is top-class. Highly recommended."</p>
+                                <p class="font-bold text-xs uppercase tracking-widest text-brand-gray">— Rajesh Patel</p>
+                            </div>
+                            <div class="bg-brand-offwhite p-8 rounded-2xl shadow-sm border border-brand-lightgray">
+                                <p class="text-sm md:text-base leading-relaxed text-brand-black mb-6">"Sanjaybhai and his team provide premium architectural hardware. The KUNETT cabinet handles have a perfect ergonomic weight and the anodizing doesn't fade. Best manufacturer in Rajkot."</p>
+                                <p class="font-bold text-xs uppercase tracking-widest text-brand-gray">— Amit Shah, Architect</p>
+                            </div>
+                            <div class="bg-brand-offwhite p-8 rounded-2xl shadow-sm border border-brand-lightgray">
+                                <p class="text-sm md:text-base leading-relaxed text-brand-black mb-6">"Very wide range of sliding counsils and wardrobe knobs. Delivery is always on time and the pricing is perfect for wholesale. The Rose Gold finish looks absolutely amazing."</p>
+                                <p class="font-bold text-xs uppercase tracking-widest text-brand-gray">— Neha Desai, Interior Designer</p>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- SEO Optimized Content Block -->
+                    <section class="bg-white py-12 md:py-20 px-4 md:px-6 max-w-7xl mx-auto border-t border-brand-lightgray">
+                        <div class="flex flex-col md:flex-row gap-8 items-start">
+                            <div class="w-full md:w-1/3">
+                                <h3 class="font-serif text-2xl md:text-3xl text-brand-black mb-4 leading-tight">Leading Manufacturer of Premium Aluminium Hardware</h3>
+                            </div>
+                            <div class="w-full md:w-2/3">
+                                <p class="text-sm md:text-base text-brand-gray leading-relaxed mb-6">
+                                    Based in Rajkot, India, <strong>Harikrushna Enterprise</strong> is a premier manufacturer and supplier of luxury architectural hardware under the brand name <strong>KUNETT</strong>. As your new home decorator, we specialize in engineering high-quality <a href="#" onclick="navigate('200')" class="text-brand-black hover:underline font-medium">cabinet handles</a>, <a href="#" onclick="navigate('300')" class="text-brand-black hover:underline font-medium">cabinet profiles</a>, <a href="#" onclick="navigate('400')" class="text-brand-black hover:underline font-medium">counsil handles</a>, and <a href="#" onclick="navigate('500')" class="text-brand-black hover:underline font-medium">wardrobe knobs</a>. 
+                                </p>
+                                <p class="text-sm md:text-base text-brand-gray leading-relaxed">
+                                    Our solid, aerospace-grade aluminium handles are meticulously crafted to endure daily wear while elevating modern interior spaces. Whether you are outfitting a luxury residential project, a modular kitchen, or sourcing bulk custom hardware for commercial architecture, KUNETT delivers precision, ergonomic design, and striking aesthetic finishes. For more insights on architectural hardware, read our <a href="#" onclick="navigate('blog')" class="text-brand-black hover:underline font-bold">Design & Architecture Blog</a> or learn about the industrial properties of <a href="https://en.wikipedia.org/wiki/Aluminium_alloy" target="_blank" rel="noopener noreferrer" class="text-brand-black hover:underline font-bold">Aerospace-Grade Aluminium Alloys</a> used in our manufacturing process.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Bottom Call to Action -->
+                    <section class="w-full bg-brand-pink text-center py-24 px-6 border-t border-brand-lightgray">
+                        <h3 class="font-serif text-4xl md:text-6xl mb-6 text-brand-black">See it in your space.</h3>
+                        <p class="text-sm md:text-base mb-10 max-w-lg mx-auto text-brand-black/80">
+                            Download our complete digital catalogue to see scale, dimensions, and styling inspiration for your next architectural project.
+                        </p>
+                        <a href="#" onclick="openCatalogueModal(event)" class="inline-block bg-white text-brand-black px-12 py-4 font-bold text-sm tracking-wide rounded-full hover:shadow-lg transition-all transform hover:-translate-y-1">
+                            Download Catalogue
+                        </a>
+                    </section>
+                `;
+            } else {
+                const filteredProducts = products.filter(p => p.series === page);
+                const seriesTitle = filteredProducts.length > 0 ? filteredProducts[0].category : page + ' Collection';
+                
+                mainContent.innerHTML = `
+                    <div class="bg-brand-offwhite py-10 md:py-16 px-4 md:px-6 border-b border-brand-lightgray">
+                        <div class="max-w-7xl mx-auto text-center md:text-left">
+                            <p class="text-xs font-bold uppercase tracking-widest text-brand-gray mb-1 md:mb-2">The Collection</p>
+                            <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl text-brand-black">${seriesTitle}s</h1>
+                        </div>
+                    </div>
+                    <section class="py-10 md:py-16 px-4 md:px-6 max-w-7xl mx-auto">
+                        <div class="flex justify-between items-center mb-6 md:mb-8 border-b border-brand-lightgray pb-4">
+                            <p class="text-xs md:text-sm font-medium text-brand-gray">${filteredProducts.length} items</p>
+                        </div>
+                        ${renderProductGrid(filteredProducts)}
+                    </section>
+                `;
+            }
+        }
+
+        let currentProduct = null;
+        let selectedFinishes = [];
+        let selectedSizes = [];
+
+        function renderOptions() {
+            const finishContainer = document.getElementById('drawer-finishes');
+            finishContainer.innerHTML = '';
+            currentProduct.finishes.forEach(f => {
+                const isSelected = selectedFinishes.includes(f);
+                const baseClasses = "px-3 md:px-4 py-1.5 md:py-2 rounded border text-xs md:text-sm cursor-pointer transition-colors outline-none font-medium";
+                const stateClasses = isSelected ? "border-brand-black bg-brand-black text-white" : "border-brand-lightgray text-brand-gray bg-white hover:border-brand-black hover:text-brand-black";
+                
+                const btn = document.createElement('button');
+                btn.className = `${baseClasses} ${stateClasses} flex items-center gap-2`;
+                btn.innerHTML = `<div class="w-3.5 h-3.5 rounded-full shadow-sm border border-white/50" style="${getColorStyle(f)}"></div> <span>${f}</span>`;
+                btn.type = 'button';
+                btn.onclick = () => {
+                    if (isSelected) {
+                        selectedFinishes = selectedFinishes.filter(item => item !== f);
+                    } else {
+                        selectedFinishes.push(f);
+                    }
+                    renderOptions();
+                    updateWhatsappLink();
+                };
+                finishContainer.appendChild(btn);
+            });
+            
+            const sizeContainer = document.getElementById('drawer-sizes');
+            sizeContainer.innerHTML = '';
+            currentProduct.sizes.forEach(s => {
+                const isSelected = selectedSizes.includes(s);
+                const baseClasses = "px-3 md:px-4 py-1.5 md:py-2 rounded border text-xs md:text-sm cursor-pointer transition-colors outline-none font-medium";
+                const stateClasses = isSelected ? "border-brand-black bg-brand-black text-white" : "border-brand-lightgray text-brand-gray bg-white hover:border-brand-black hover:text-brand-black";
+                
+                const btn = document.createElement('button');
+                btn.className = `${baseClasses} ${stateClasses}`;
+                btn.textContent = s;
+                btn.type = 'button';
+                btn.onclick = () => {
+                    if (isSelected) {
+                        selectedSizes = selectedSizes.filter(item => item !== s);
+                    } else {
+                        selectedSizes.push(s);
+                    }
+                    renderOptions();
+                    updateWhatsappLink();
+                };
+                sizeContainer.appendChild(btn);
+            });
+        }
+
+        function updateWhatsappLink() {
+            let text = `Hello Sanjay, I am interested in KUNETT Model ${currentProduct.code}.`;
+            if (selectedFinishes.length > 0 || selectedSizes.length > 0) {
+                text += `\n\nMy preferences:\n`;
+                if (selectedFinishes.length > 0) text += `- Finishes: ${selectedFinishes.join(', ')}\n`;
+                if (selectedSizes.length > 0) text += `- Sizes: ${selectedSizes.join(', ')}\n`;
+            }
+            const whatsappBtn = document.getElementById('whatsapp-btn');
+            whatsappBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+        }
+
+
+        
+        // --- Catalogue Lead Gen Modal Logic ---
+        const catalogueModal = document.getElementById('catalogue-modal');
+        function openCatalogueModal(e) {
+            if (e) e.preventDefault();
+            catalogueModal.classList.add('catalogue-active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeCatalogueModal() {
+            catalogueModal.classList.remove('catalogue-active');
+            document.body.style.overflow = '';
+        }
+        catalogueModal.addEventListener('click', (e) => {
+            if (e.target === catalogueModal) closeCatalogueModal();
+        });
+
+        const catForm = document.getElementById('catalogueForm');
+        catForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('catSubmitBtn');
+            const status = document.getElementById('catFormStatus');
+            
+            btn.textContent = 'Processing...';
+            btn.disabled = true;
+            
+            const formData = new FormData(catForm);
+
+            fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                status.textContent = "Success! Downloading your catalogue...";
+                status.classList.remove('hidden', 'text-red-600');
+                status.classList.add('text-[#25D366]');
+                
+                // Trigger file download automatically
+                setTimeout(() => {
+                    window.open('assets/KUNETT_Catalogue.pdf', '_blank');
+                    closeCatalogueModal();
+                    catForm.reset();
+                    btn.textContent = 'Submit & Download';
+                    btn.disabled = false;
+                    status.classList.add('hidden');
+                }, 1000);
+            })
+            .catch(error => {
+                status.textContent = "Oops! There was a problem. Please try again.";
+                status.classList.remove('hidden', 'text-[#25D366]');
+                status.classList.add('text-red-600');
+                btn.textContent = 'Submit & Download';
+                btn.disabled = false;
+            });
+        });
+
+        // --- Custom Chatbot Logic ---
+        function toggleChat() {
+            const chatWindow = document.getElementById('kunett-chat-window');
+            chatWindow.classList.toggle('hidden');
+        }
+
+        function handleBotOption(type) {
+            const messagesDiv = document.getElementById('chat-messages');
+            const optionsDiv = document.getElementById('chat-options');
+            
+            optionsDiv.style.opacity = '0.5';
+            optionsDiv.style.pointerEvents = 'none';
+
+            let userText = "";
+            let botResponse = "";
+
+            if (type === 'finishes') {
+                userText = "🎨 What finishes are available?";
+                botResponse = "We offer premium aerospace-grade finishes including Rose Gold, Matte Black, CP (Chrome), and custom anodized colors for bulk wholesale orders. You can select these when adding a product to your Inquiry List!";
+            } else if (type === 'wholesale') {
+                userText = "📦 How do wholesale inquiries work?";
+                botResponse = "It's easy! Browse our catalogue, select your models, finishes, and sizes, and click 'Add to Inquiry List'. Once you've added everything, click 'My List' to send the exact manifest directly to our WhatsApp for wholesale pricing.";
+            } else if (type === 'catalogue') {
+                userText = "📖 I want to download the catalogue.";
+                botResponse = "I can help with that! Please click the 'Catalogue' button in the top menu to enter your phone number and download the full PDF instantly.";
+            } else if (type === 'human') {
+                userText = "💬 I want to speak to Sanjay.";
+                botResponse = "Connecting you to Sanjay via WhatsApp... Redirecting now!";
+                setTimeout(() => {
+                    window.open('https://wa.me/919924637640', '_blank');
+                }, 1500);
+            }
+
+            messagesDiv.innerHTML += `
+                <div class="bg-brand-black text-white p-3 rounded-tl-xl rounded-bl-xl rounded-br-xl max-w-[85%] shadow-sm self-end mt-2 text-[13px]">
+                    ${userText}
+                </div>
+            `;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            const typingId = 'typing-' + Date.now();
+            setTimeout(() => {
+                messagesDiv.innerHTML += `
+                    <div id="${typingId}" class="bg-white border border-brand-lightgray text-brand-gray p-3 rounded-tr-xl rounded-bl-xl rounded-br-xl shadow-sm self-start mt-2 text-[13px]">
+                        <span class="animate-pulse font-medium">Typing...</span>
+                    </div>
+                `;
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }, 300);
+
+            setTimeout(() => {
+                const typingEl = document.getElementById(typingId);
+                if (typingEl) typingEl.remove();
+                messagesDiv.innerHTML += `
+                    <div class="bg-white border border-brand-lightgray text-brand-black p-3 rounded-tr-xl rounded-bl-xl rounded-br-xl max-w-[85%] shadow-sm self-start mt-2 text-[13px] leading-relaxed">
+                        ${botResponse}
+                    </div>
+                `;
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                
+                optionsDiv.style.opacity = '1';
+                optionsDiv.style.pointerEvents = 'auto';
+            }, 1200);
+        }
+
+        // Initialize Home Page
+        navigate('home');
+    </script>
+
+    <!-- Custom Chatbot UI -->
+    <div id="kunett-bot-container" class="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none">
+        
+        <div id="kunett-chat-window" class="hidden w-[90vw] sm:w-80 bg-white rounded-2xl shadow-2xl border border-brand-lightgray overflow-hidden mb-4 transform transition-all origin-bottom-right pointer-events-auto">
+            <div class="bg-brand-black text-white p-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center p-1.5">
+                        <img src="assets/logo.png" class="filter invert brightness-0 object-contain w-full h-full">
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm tracking-wide">KUNETT Assistant</h4>
+                        <p class="text-[10px] text-green-400 flex items-center gap-1.5 uppercase font-bold tracking-wider"><span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> Online</p>
+                    </div>
+                </div>
+                <button onclick="toggleChat()" class="text-white/70 hover:text-white transition-colors focus:outline-none">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            
+            <div id="chat-messages" class="p-4 h-64 overflow-y-auto bg-[#F8F9FA] flex flex-col gap-2">
+                <div class="bg-white border border-brand-lightgray text-brand-black p-3 rounded-tr-xl rounded-bl-xl rounded-br-xl max-w-[85%] shadow-sm self-start text-[13px] leading-relaxed">
+                    Hello! I'm the KUNETT virtual assistant. I can help you with finishes, wholesale inquiries, or connecting you to Sanjay. How can I help?
+                </div>
+            </div>
+            
+            <div class="p-3 bg-white border-t border-brand-lightgray">
+                <div id="chat-options" class="flex flex-wrap gap-1.5 transition-opacity">
+                    <button onclick="handleBotOption('finishes')" class="text-[11px] font-medium bg-brand-offwhite border border-brand-lightgray hover:border-brand-gray px-3 py-1.5 rounded-full transition-colors text-left text-brand-black">🎨 Available Finishes?</button>
+                    <button onclick="handleBotOption('wholesale')" class="text-[11px] font-medium bg-brand-offwhite border border-brand-lightgray hover:border-brand-gray px-3 py-1.5 rounded-full transition-colors text-left text-brand-black">📦 Wholesale Orders</button>
+                    <button onclick="handleBotOption('catalogue')" class="text-[11px] font-medium bg-brand-offwhite border border-brand-lightgray hover:border-brand-gray px-3 py-1.5 rounded-full transition-colors text-left text-brand-black">📖 Get Catalogue</button>
+                    <button onclick="handleBotOption('human')" class="text-[11px] font-bold bg-[#25D366] text-white hover:opacity-90 px-3 py-1.5 rounded-full transition-opacity text-left shadow-sm">💬 Chat on WhatsApp</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Trigger -->
+        <button onclick="toggleChat()" id="chat-bubble" class="bg-brand-black text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center hover:scale-105 transition-transform relative pointer-events-auto focus:outline-none">
+            <span class="absolute -top-1 -right-1 flex h-4 w-4">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-4 w-4 bg-red-500 border-2 border-white"></span>
+            </span>
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </button>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919924637640?text=Hello%20KUNETT%20Hardware,%20I%20have%20an%20inquiry%20about%20your%20products." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 left-6 md:bottom-8 md:left-8 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:bg-[#1ebe57] hover:scale-110 transition-all duration-300 z-50 flex items-center justify-center group" aria-label="Chat with us on WhatsApp">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.88-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+        </svg>
+    </a>
+</body>
+</html>
