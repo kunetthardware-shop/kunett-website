@@ -1057,7 +1057,12 @@
             const activeLink = document.getElementById('nav-' + page);
             if (activeLink) activeLink.classList.add('active', 'border-b-2', 'border-brand-black');
             
-            window.scrollTo(0, 0);
+            const mainContent = document.getElementById('main-content');
+            mainContent.style.opacity = '0';
+            mainContent.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                window.scrollTo(0, 0);
 
             if (page === 'calculator') {
                 let html = `
@@ -1965,6 +1970,14 @@ ${message}`;
                 optionsDiv.style.opacity = '1';
                 optionsDiv.style.pointerEvents = 'auto';
             }, 1200);
+        }
+                
+                setTimeout(() => {
+                    mainContent.style.opacity = '1';
+                    mainContent.style.transform = 'translateY(0)';
+                }, 50);
+                
+            }, 250); // wait for fade out
         }
 
         // Initialize App State (Mobile Back Button Support)
