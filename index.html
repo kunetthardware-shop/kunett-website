@@ -1518,27 +1518,31 @@
                     btn.textContent = 'Sending securely...';
                     btn.disabled = true;
                     
-                    const formData = new FormData(form);
+                    const name = form.querySelector('[name="Name"]')?.value || '';
+                    const email = form.querySelector('[name="Email"]')?.value || '';
+                    const phone = form.querySelector('[name="Phone"]')?.value || '';
+                    const subject = form.querySelector('[name="Subject"]')?.value || '';
+                    const message = form.querySelector('[name="Message"]')?.value || '';
 
-                    fetch(GOOGLE_SHEETS_WEB_APP_URL, {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => {
-                        status.textContent = "✅ Success! Your inquiry has been sent to our team. We will contact you shortly.";
-                        status.classList.remove('hidden', 'text-red-600', 'border-red-200', 'bg-red-50');
-                        status.classList.add('text-[#25D366]', 'border-green-200', 'bg-green-50');
-                        form.reset();
-                        btn.textContent = 'Send Message';
-                        btn.disabled = false;
-                    })
-                    .catch(error => {
-                        status.textContent = "❌ Oops! There was a problem submitting your form.";
-                        status.classList.remove('hidden', 'text-[#25D366]', 'border-green-200', 'bg-green-50');
-                        status.classList.add('text-red-600', 'border-red-200', 'bg-red-50');
-                        btn.textContent = 'Send Message';
-                        btn.disabled = false;
-                    });
+                    let waText = `*New Website Inquiry*
+
+*Name:* ${name}
+*Email:* ${email}
+*Phone:* ${phone}
+*Subject:* ${subject}
+
+*Message:*
+${message}`;
+                    
+                    window.open(`https://wa.me/919924637640?text=${encodeURIComponent(waText)}`, '_blank');
+                    
+                    status.textContent = "✅ Redirecting you to WhatsApp...";
+                    status.classList.remove('hidden', 'text-red-600', 'border-red-200', 'bg-red-50');
+                    status.classList.add('text-[#25D366]', 'border-green-200', 'bg-green-50');
+                    form.reset();
+                    btn.textContent = 'Send Message';
+                    btn.disabled = false;
+                });
                 });
 
             } else if (page === 'home') {
