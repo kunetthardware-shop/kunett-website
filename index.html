@@ -1964,19 +1964,23 @@ ${message}`;
         // Initialize Home Page
         navigate('home');
 
-        // Preloader Logic
-        window.addEventListener('load', function() {
+        // Preloader Logic (Failsafe)
+        function hidePreloader() {
             const preloader = document.getElementById('preloader');
-            if (preloader) {
-                // Keep it visible for 1.2 seconds for a premium feel
+            if (preloader && preloader.style.display !== 'none') {
+                preloader.style.opacity = '0';
                 setTimeout(() => {
-                    preloader.style.opacity = '0';
-                    setTimeout(() => {
-                        preloader.style.display = 'none';
-                    }, 700); // Wait for transition
-                }, 1200);
+                    preloader.style.display = 'none';
+                }, 700);
             }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(hidePreloader, 800);
         });
+        
+        // Absolute failsafe: Hide after 2 seconds no matter what
+        setTimeout(hidePreloader, 2000);
     </script>
 
     <!-- Custom Chatbot UI -->
