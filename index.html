@@ -1786,6 +1786,7 @@ ${message}`;
             setTimeout(() => {
                 mainContent.style.opacity = '1';
                 mainContent.style.transform = 'translateY(0)';
+                if (page === 'home' && typeof initCounters === 'function') initCounters();
             }, 50);
             
         }, 250); // wait for fade out
