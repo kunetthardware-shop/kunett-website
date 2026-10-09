@@ -202,7 +202,7 @@
             <div>
                 <!-- Replace text with actual Logo image in footer -->
                 <img src="assets/logo.png" alt="KUNETT Logo" class="h-32 md:h-40 w-auto object-contain mb-6">
-                <p class="text-sm text-brand-gray max-w-xs leading-relaxed"><strong class="text-brand-black block mb-1">Your new home decorator.</strong>Premium aluminium hardware engineered for modern spaces and designed to endure.</p>
+                <p class="text-sm text-brand-gray max-w-xs leading-relaxed"><strong class="text-brand-black block mb-1">Your new home decorator.</strong>Premium aluminium hardware engineered for modern spaces. Exporting globally to the US, Europe, and worldwide.</p>
             </div>
             <div>
                 <h4 class="font-bold text-brand-black mb-4">Connect</h4>
@@ -1446,6 +1446,7 @@
                                             <select name="Subject" class="w-full border border-brand-lightgray p-4 rounded bg-brand-offwhite focus:outline-none focus:border-brand-black transition-colors appearance-none">
                                                 <option>General Inquiry</option>
                                                 <option>Bulk / Wholesale Order</option>
+                                                <option>International Export & Shipping</option>
                                                 <option>Custom Architecture Project</option>
                                             </select>
                                         </div>
@@ -1539,7 +1540,7 @@ ${message}`;
                         </video>
                         <div class="relative z-10 text-center px-4 flex flex-col items-center">
                             <h1 class="font-serif text-4xl md:text-7xl lg:text-8xl text-brand-black drop-shadow-sm mb-4 md:mb-6 leading-tight capitalize">Your new home<br>decorator.</h1>
-                            <p class="text-brand-black text-sm md:text-xl font-medium drop-shadow-sm mb-6 md:mb-10 max-w-md">Premium aluminium hardware engineered for modern spaces and designed to endure.</p>
+                            <p class="text-brand-black text-sm md:text-xl font-medium drop-shadow-sm mb-6 md:mb-10 max-w-md">Premium aluminium hardware engineered for modern spaces. Exporting globally to the US, Europe, and worldwide.</p>
                             <button onclick="navigate('200')" class="bg-brand-black text-white px-8 md:px-10 py-3 md:py-4 font-bold text-xs md:text-sm tracking-wide rounded-full hover:opacity-80 transition-opacity">Explore the Collection</button>
                         </div>
                     </header>
@@ -1722,7 +1723,7 @@ ${message}`;
                             </div>
                             <div class="w-full md:w-2/3">
                                 <p class="text-sm md:text-base text-brand-gray leading-relaxed mb-6">
-                                    Based in Rajkot, India, <strong>Harikrushna Enterprise</strong> is a premier manufacturer and supplier of luxury architectural hardware under the brand name <strong>KUNETT</strong>. As your new home decorator, we specialize in engineering high-quality <a href="#" onclick="navigate('200')" class="text-brand-black hover:underline font-medium">cabinet handles</a>, <a href="#" onclick="navigate('300')" class="text-brand-black hover:underline font-medium">cabinet profiles</a>, <a href="#" onclick="navigate('400')" class="text-brand-black hover:underline font-medium">counsil handles</a>, and <a href="#" onclick="navigate('500')" class="text-brand-black hover:underline font-medium">wardrobe knobs</a>. 
+                                    Based in Rajkot, India, <strong>Harikrushna Enterprise</strong> is a premier manufacturer and global exporter of luxury architectural hardware under the brand name <strong>KUNETT</strong>. As your new home decorator, we specialize in engineering high-quality <a href="#" onclick="navigate('200')" class="text-brand-black hover:underline font-medium">cabinet handles</a>, <a href="#" onclick="navigate('300')" class="text-brand-black hover:underline font-medium">cabinet profiles</a>, <a href="#" onclick="navigate('400')" class="text-brand-black hover:underline font-medium">counsil handles</a>, and <a href="#" onclick="navigate('500')" class="text-brand-black hover:underline font-medium">wardrobe knobs</a>. 
                                 </p>
                                 <p class="text-sm md:text-base text-brand-gray leading-relaxed">
                                     Our solid, aerospace-grade aluminium handles are meticulously crafted to endure daily wear while elevating modern interior spaces. Whether you are outfitting a luxury residential project, a modular kitchen, or sourcing bulk custom hardware for commercial architecture, KUNETT delivers precision, ergonomic design, and striking aesthetic finishes. For more insights on architectural hardware, read our <a href="#" onclick="navigate('blog')" class="text-brand-black hover:underline font-bold">Design & Architecture Blog</a> or learn about the industrial properties of <a href="https://en.wikipedia.org/wiki/Aluminium_alloy" target="_blank" rel="noopener noreferrer" class="text-brand-black hover:underline font-bold">Aerospace-Grade Aluminium Alloys</a> used in our manufacturing process.
@@ -1910,8 +1911,8 @@ ${message}`;
                 userText = "🎨 What finishes are available?";
                 botResponse = "We offer premium aerospace-grade finishes including Rose Gold, Matte Black, CP (Chrome), and custom anodized colors for bulk wholesale orders. You can select these when adding a product to your Inquiry List!";
             } else if (type === 'wholesale') {
-                userText = "📦 How do wholesale inquiries work?";
-                botResponse = "It's easy! Browse our catalogue, select your models, finishes, and sizes, and click 'Add to Inquiry List'. Once you've added everything, click 'My List' to send the exact manifest directly to our WhatsApp for wholesale pricing.";
+                userText = "📦 Do you export internationally?";
+                botResponse = "Yes, we export globally to the US, Germany, and worldwide! Browse our catalogue, select your models, and click 'Add to Inquiry List'. Send the manifest to our WhatsApp for international B2B pricing and shipping details.";
             } else if (type === 'catalogue') {
                 userText = "📖 I want to download the catalogue.";
                 botResponse = "I can help with that! Please click the 'Catalogue' button in the top menu to enter your phone number and download the full PDF instantly.";
@@ -2021,7 +2022,7 @@ ${message}`;
             <div class="p-3 bg-white border-t border-brand-lightgray">
                 <div id="chat-options" class="flex flex-wrap gap-1.5 transition-opacity">
                     <button onclick="handleBotOption('finishes')" class="text-[11px] font-medium bg-brand-offwhite border border-brand-lightgray hover:border-brand-gray px-3 py-1.5 rounded-full transition-colors text-left text-brand-black">🎨 Available Finishes?</button>
-                    <button onclick="handleBotOption('wholesale')" class="text-[11px] font-medium bg-brand-offwhite border border-brand-lightgray hover:border-brand-gray px-3 py-1.5 rounded-full transition-colors text-left text-brand-black">📦 Wholesale Orders</button>
+                    <button onclick="handleBotOption('wholesale')" class="text-[11px] font-medium bg-brand-offwhite border border-brand-lightgray hover:border-brand-gray px-3 py-1.5 rounded-full transition-colors text-left text-brand-black">📦 Wholesale & Export</button>
                     <button onclick="handleBotOption('catalogue')" class="text-[11px] font-medium bg-brand-offwhite border border-brand-lightgray hover:border-brand-gray px-3 py-1.5 rounded-full transition-colors text-left text-brand-black">📖 Get Catalogue</button>
                     <button onclick="handleBotOption('human')" class="text-[11px] font-bold bg-[#25D366] text-white hover:opacity-90 px-3 py-1.5 rounded-full transition-opacity text-left shadow-sm">💬 Chat on WhatsApp</button>
                 </div>
