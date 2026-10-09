@@ -1786,7 +1786,15 @@ ${message}`;
                     </section>
                 `;
             }
-        }
+            
+            // Fade back in after DOM is updated
+            setTimeout(() => {
+                mainContent.style.opacity = '1';
+                mainContent.style.transform = 'translateY(0)';
+            }, 50);
+            
+        }, 250); // wait for fade out
+    }
 
         let currentProduct = null;
         let selectedFinishes = [];
@@ -1970,14 +1978,6 @@ ${message}`;
                 optionsDiv.style.opacity = '1';
                 optionsDiv.style.pointerEvents = 'auto';
             }, 1200);
-        }
-                
-                setTimeout(() => {
-                    mainContent.style.opacity = '1';
-                    mainContent.style.transform = 'translateY(0)';
-                }, 50);
-                
-            }, 250); // wait for fade out
         }
 
         // Initialize App State (Mobile Back Button Support)
