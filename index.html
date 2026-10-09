@@ -26,6 +26,12 @@
         }
     </script>
     <style>
+        @keyframes loading {
+            0% { width: 0%; transform: translateX(-100%); }
+            50% { width: 100%; transform: translateX(0); }
+            100% { width: 0%; transform: translateX(200%); }
+        }
+
         body { background-color: theme('colors.brand.white'); color: theme('colors.brand.black'); -webkit-font-smoothing: antialiased; }
         
         .product-card { transition: transform 0.3s ease; }
@@ -111,6 +117,16 @@
     </script>
 </head>
 <body class="min-h-screen flex flex-col overflow-x-hidden w-full max-w-[100vw]">
+    <!-- Premium Preloader -->
+    <div id="preloader" class="fixed inset-0 z-[9999] bg-white flex justify-center items-center transition-opacity duration-700">
+        <div class="flex flex-col items-center gap-4">
+            <img src="assets/logo.png" alt="KUNETT Hardware" class="h-16 md:h-24 animate-pulse object-contain">
+            <div class="w-48 h-1 bg-brand-lightgray rounded-full overflow-hidden">
+                <div class="h-full bg-brand-black rounded-full animate-[loading_1.5s_ease-in-out_infinite]"></div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Sticky Navigation - Perfectly In-Line -->
     <nav class="sticky top-0 z-[100] bg-white border-b border-brand-lightgray shadow-sm">
@@ -1943,6 +1959,20 @@
 
         // Initialize Home Page
         navigate('home');
+
+        // Preloader Logic
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                // Keep it visible for 1.2 seconds for a premium feel
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 700); // Wait for transition
+                }, 1200);
+            }
+        });
     </script>
 
     <!-- Custom Chatbot UI -->
