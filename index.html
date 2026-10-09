@@ -1045,7 +1045,14 @@
             return html;
         }
 
-        function navigate(page, productId = null) {
+        function navigate(page, productId = null, isPopState = false) {
+            
+            if (!isPopState) {
+                let url = `#${page}`;
+                if (productId) url += `?id=${productId}`;
+                window.history.pushState({ page, productId }, "", url);
+            }
+
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active', 'border-b-2', 'border-brand-black'));
             const activeLink = document.getElementById('nav-' + page);
             if (activeLink) activeLink.classList.add('active', 'border-b-2', 'border-brand-black');
@@ -1960,8 +1967,24 @@ ${message}`;
             }, 1200);
         }
 
-        // Initialize Home Page
-        navigate('home');
+        // Initialize App State (Mobile Back Button Support)
+        window.addEventListener('popstate', (e) => {
+            if (e.state && e.state.page) {
+                navigate(e.state.page, e.state.productId, true);
+            } else {
+                navigate('home', null, true);
+            }
+        });
+
+        // Initialize Home Page based on URL or default
+        if (window.location.hash) {
+            let hash = window.location.hash.replace('#', '').split('?');
+            let page = hash[0];
+            let pid = hash.length > 1 ? hash[1].replace('id=', '') : null;
+            navigate(page, pid, true);
+        } else {
+            navigate('home');
+        }
 
         // Preloader Logic (Failsafe)
         function hidePreloader() {
