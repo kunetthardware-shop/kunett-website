@@ -240,8 +240,8 @@
                 <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
             <div class="text-center mb-6 mt-2">
-                <h3 class="font-serif text-2xl md:text-3xl text-brand-black mb-2">Get the Catalogue</h3>
-                <p class="text-sm text-brand-gray">Please enter your details to instantly download our full architectural catalogue.</p>
+                <h3 id="cat-modal-title" class="font-serif text-2xl md:text-3xl text-brand-black mb-2">Get the Catalogue</h3>
+                <p id="cat-modal-sub" class="text-sm text-brand-gray">Please enter your details to instantly download our full architectural catalogue.</p>
             </div>
             <form id="catalogueForm" class="space-y-4">
                 <!-- Hidden fields for Google Sheets routing -->
@@ -1055,6 +1055,15 @@
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active', 'border-b-2', 'border-brand-black'));
             const activeLink = document.getElementById('nav-' + page);
             if (activeLink) activeLink.classList.add('active', 'border-b-2', 'border-brand-black');
+            
+            // --- Interstitial Lead Capture Trigger ---
+            const productCategories = ['200', '300', '400', '450', '500'];
+            if (productCategories.includes(page) && !sessionStorage.getItem('leadCaptured')) {
+                sessionStorage.setItem('leadCaptured', 'true'); // Only ask once per session
+                setTimeout(() => {
+                    openCatalogueModal(null, "Unlock Full Pricing", "Enter your details to view our complete architectural range and get wholesale pricing.");
+                }, 800); // Slight delay so the page loads behind it first
+            }
             
             const mainContent = document.getElementById('main-content');
             mainContent.style.opacity = '0';
@@ -1918,8 +1927,13 @@ ${message}`;
         
         // --- Catalogue Lead Gen Modal Logic ---
         const catalogueModal = document.getElementById('catalogue-modal');
-        function openCatalogueModal(e) {
+        function openCatalogueModal(e, title = "Get the Catalogue", subtitle = "Please enter your details to instantly download our full architectural catalogue.") {
             if (e) e.preventDefault();
+            const titleEl = document.getElementById('cat-modal-title');
+            const subEl = document.getElementById('cat-modal-sub');
+            if (titleEl) titleEl.innerText = title;
+            if (subEl) subEl.innerText = subtitle;
+            
             catalogueModal.classList.add('catalogue-active');
             document.body.style.overflow = 'hidden';
         }
