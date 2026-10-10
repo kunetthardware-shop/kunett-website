@@ -93,7 +93,7 @@
 <body class="bg-brand-offwhite text-brand-black font-sans antialiased overflow-x-hidden pt-20 selection:bg-brand-black selection:text-white">
 
     <!-- Flying Robot Cursor Companion -->
-    <div id="cursor-robot" class="hidden md:block fixed pointer-events-none z-[9999] will-change-transform" style="top: 0; left: 0; transform: translate(-100px, -100px);">
+    <div id="cursor-robot" class="fixed pointer-events-none z-[9999] will-change-transform transition-opacity duration-500 opacity-0" style="top: 0; left: 0; transform: translate(-100px, -100px);">
         <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-lg">
             <!-- Antenna Base & Stick -->
             <line x1="50" y1="20" x2="50" y2="5" stroke="#111" stroke-width="4" stroke-linecap="round"/>
@@ -2185,7 +2185,61 @@ ${message}`;
         
         // Absolute failsafe: Hide after 2 seconds no matter what
         setTimeout(hidePreloader, 2000);
-    </script>
+            
+        // --- Flying Robot Logic ---
+        let robotInitialized = false;
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let robotX = mouseX;
+        let robotY = mouseY;
+        
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Only initialize and show robot if a real mouse is moved (solves mobile issue)
+            if (!robotInitialized) {
+                robotInitialized = true;
+                const robot = document.getElementById('cursor-robot');
+                if (robot) robot.classList.remove('opacity-0');
+                animateRobot();
+            }
+        });
+        
+        function animateRobot() {
+            const robot = document.getElementById('cursor-robot');
+            const eyeL = document.getElementById('robot-eye-l');
+            const eyeR = document.getElementById('robot-eye-r');
+            
+            robotX += (mouseX - robotX) * 0.08;
+            robotY += (mouseY - robotY) * 0.08;
+            
+            if (robot) {
+                robot.style.transform = `translate(${robotX + 20}px, ${robotY + 20}px)`;
+                
+                const dx = mouseX - robotX;
+                const dy = mouseY - robotY;
+                const tilt = Math.max(-20, Math.min(20, dx * 0.15));
+                
+                if (robot.firstElementChild) {
+                    robot.firstElementChild.style.transform = `rotate(${tilt}deg)`;
+                    robot.firstElementChild.style.transition = 'transform 0.1s linear';
+                }
+                
+                const angle = Math.atan2(dy, dx);
+                const eyeOffsetX = Math.cos(angle) * 3;
+                const eyeOffsetY = Math.sin(angle) * 3;
+                
+                if (eyeL && eyeR) {
+                    eyeL.setAttribute('cx', 35 + eyeOffsetX);
+                    eyeL.setAttribute('cy', 40 + eyeOffsetY);
+                    eyeR.setAttribute('cx', 65 + eyeOffsetX);
+                    eyeR.setAttribute('cy', 40 + eyeOffsetY);
+                }
+            }
+            requestAnimationFrame(animateRobot);
+        }
+</script>
 
     <!-- Custom Chatbot UI -->
     <div id="kunett-bot-container" class="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none">
