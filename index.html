@@ -92,8 +92,8 @@
 </head>
 <body class="bg-brand-offwhite text-brand-black font-sans antialiased overflow-x-hidden selection:bg-brand-black selection:text-white">
 
-    <!-- Flying Robot Cursor Companion -->
-    <div id="cursor-robot" class="fixed pointer-events-none z-[9999] will-change-transform transition-opacity duration-500 opacity-0" style="top: 0; left: 0; transform: translate(-100px, -100px);">
+    <!-- Flying Robot Cursor Companion (Desktop Only) -->
+    <div id="cursor-robot" class="hidden md:block fixed pointer-events-none z-[9999] will-change-transform transition-opacity duration-500 opacity-0" style="top: 0; left: 0; transform: translate(-100px, -100px);">
         <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-lg">
             <!-- Antenna Base & Stick -->
             <line x1="50" y1="20" x2="50" y2="5" stroke="#111" stroke-width="4" stroke-linecap="round"/>
@@ -2140,10 +2140,13 @@ ${message}`;
         let robotY = mouseY;
         
         window.addEventListener('mousemove', (e) => {
+            // Strictly desktop only - disable completely on phones & touch devices
+            if (window.innerWidth < 768 || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches)) return;
+
             mouseX = e.clientX;
             mouseY = e.clientY;
             
-            // Only initialize and show robot if a real mouse is moved (solves mobile issue)
+            // Only initialize and show robot on desktop
             if (!robotInitialized) {
                 robotInitialized = true;
                 const robot = document.getElementById('cursor-robot');
