@@ -1,10 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://kunetthardware.com/</loc>
     <lastmod>2026-10-11</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/201.png</image:loc>
+      <image:title>KUNETT Model 201 Aluminium Cabinet Handle</image:title>
+      <image:caption>Solid aerospace-grade aluminium handle for modular kitchen drawers and wardrobe shutters</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/301.png</image:loc>
+      <image:title>KUNETT Model 301 Aluminium Handle Profile</image:title>
+      <image:caption>Edge-mounted architectural aluminium profile handle for seamless modular kitchen cabinets</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/401.png</image:loc>
+      <image:title>KUNETT Model 401 Aluminium Counsil Handle</image:title>
+      <image:caption>Deep-recess concealed solid aluminium handle for heavy wardrobe doors and architectural pantry cabinets</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/451.png</image:loc>
+      <image:title>KUNETT Model 451 Aluminium Sliding Counsil Handle</image:title>
+      <image:caption>Zero-clearance flush-mount sliding handle designed for modern sliding wardrobes and pocket doors</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/501.png</image:loc>
+      <image:title>KUNETT Model 501 Aluminium Cabinet Knob</image:title>
+      <image:caption>Minimalist solid aluminium geometric cabinet knob for luxury vanities, dressers, and bedside tables</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/blog_kitchen.jpg</image:loc>
+      <image:title>Modern Modular Kitchen Aluminium Handles Design</image:title>
+      <image:caption>Architectural aluminium handles styling guide for modern modular kitchen drawers</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/blog_profile.jpg</image:loc>
+      <image:title>J-Profile and G-Profile Aluminium Handle Systems</image:title>
+      <image:caption>Comparison guide between J-pull and G-profile aluminium handles for modular shutters</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/blog_wardrobe.jpg</image:loc>
+      <image:title>Luxury Wardrobe Sliding Door Aluminium Handles</image:title>
+      <image:caption>Flush concealed aluminium counsil handles for luxury wardrobe shutters</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/process_aluminium.jpg</image:loc>
+      <image:title>Precision Aluminium Extrusion &amp; Billet Manufacturing</image:title>
+      <image:caption>Aerospace-grade 6063-T6 solid aluminium alloy extrusion process in Rajkot factory</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/process_vmc.jpg</image:loc>
+      <image:title>5-Axis CNC &amp; VMC Precision Machining for Handles</image:title>
+      <image:caption>High-precision VMC machining for chamfered edges and flawless handle contours</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/process_anodizing.jpg</image:loc>
+      <image:title>Multi-Tank Micron Anodizing &amp; Surface Treatment</image:title>
+      <image:caption>Matte Black, Rose Gold, SS Matt, and Champagne Gold anodizing finish</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/process_packaging.jpg</image:loc>
+      <image:title>Factory Packaging &amp; Global Shipping</image:title>
+      <image:caption>Scratch-proof export packaging and doorstep delivery across India and worldwide</image:caption>
+    </image:image>
   </url>
-  <!-- Note: Since the site is a JavaScript Single Page Application (SPA), all content is rendered on the root URL. -->
 </urlset>
