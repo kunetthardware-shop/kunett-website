@@ -101,15 +101,12 @@
           "inLanguage": "en-US"
         },
         {
-          "@type": ["LocalBusiness", "Manufacturer"],
+          "@type": ["LocalBusiness", "HomeGoodsStore"],
           "@id": "https://kunetthardware.com/#organization",
           "name": "Harikrushna Enterprise",
           "alternateName": ["KUNETT Hardware", "KUNETT"],
-          "image": "https://kunetthardware.com/assets/logo.png",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://kunetthardware.com/assets/logo.png"
-          },
+          "image": "https://kunetthardware.com/assets/favicon-512x512.png",
+          "logo": "https://kunetthardware.com/assets/favicon-512x512.png",
           "description": "Premier manufacturer and global exporter of solid aluminium handles, aluminium handle profile systems, wardrobe profiles, concealed counsil handles, and cabinet knobs in Rajkot, Gujarat.",
           "address": {
             "@type": "PostalAddress",
@@ -124,11 +121,23 @@
             "latitude": 22.239264,
             "longitude": 70.803659
           },
-          "telephone": "+91 99246 37640",
+          "telephone": "+919924637640",
           "email": "support@kunetthardware.com",
           "url": "https://kunetthardware.com",
-          "priceRange": "$$",
-          "openingHours": "Mo,Tu,We,Th,Fr,Sa 09:00-19:00",
+          "priceRange": "₹₹",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+              "opens": "09:00",
+              "closes": "19:00"
+            }
+          ],
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "48"
+          },
           "sameAs": [
             "https://www.facebook.com/profile.php?id=61594388126613",
             "https://www.instagram.com/harikrushna.enterprise/",
@@ -152,59 +161,63 @@
           }
         },
         {
+          "@type": "BreadcrumbList",
+          "@id": "https://kunetthardware.com/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://kunetthardware.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Aluminium Handles",
+              "item": "https://kunetthardware.com/#200"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Aluminium Handle Profile",
+              "item": "https://kunetthardware.com/#300"
+            }
+          ]
+        },
+        {
           "@type": "ItemList",
           "@id": "https://kunetthardware.com/#products",
           "name": "Featured KUNETT Architectural Hardware",
           "itemListElement": [
             {
-              "@type": "Product",
+              "@type": "ListItem",
               "position": 1,
               "name": "KUNETT Model 201 Aluminium Cabinet Handle",
-              "image": "https://kunetthardware.com/assets/201.png",
-              "description": "Solid aerospace-grade aluminium handle for modular kitchen drawers and wardrobe shutters. Available in Matte Black, Rose Gold, Gold, and SS Matt.",
-              "brand": { "@type": "Brand", "name": "KUNETT" },
-              "material": "Aerospace-Grade Solid Aluminium",
-              "category": "Cabinet Handle"
+              "url": "https://kunetthardware.com/#product?id=201"
             },
             {
-              "@type": "Product",
+              "@type": "ListItem",
               "position": 2,
               "name": "KUNETT Model 301 Aluminium Cabinet Profile",
-              "image": "https://kunetthardware.com/assets/301.png",
-              "description": "Edge-mounted architectural aluminium profile handle for seamless, handle-less modular kitchen cabinets and wardrobe doors.",
-              "brand": { "@type": "Brand", "name": "KUNETT" },
-              "material": "Aerospace-Grade Solid Aluminium",
-              "category": "Cabinet Profile"
+              "url": "https://kunetthardware.com/#product?id=301"
             },
             {
-              "@type": "Product",
+              "@type": "ListItem",
               "position": 3,
               "name": "KUNETT Model 401 Aluminium Counsil Handle",
-              "image": "https://kunetthardware.com/assets/401.png",
-              "description": "Deep-recess concealed solid aluminium handle engineered for heavy wardrobe doors and architectural pantry cabinets.",
-              "brand": { "@type": "Brand", "name": "KUNETT" },
-              "material": "Aerospace-Grade Solid Aluminium",
-              "category": "Counsil Handle"
+              "url": "https://kunetthardware.com/#product?id=401"
             },
             {
-              "@type": "Product",
+              "@type": "ListItem",
               "position": 4,
               "name": "KUNETT Model 451 Aluminium Sliding Counsil Handle",
-              "image": "https://kunetthardware.com/assets/451.png",
-              "description": "Zero-clearance flush-mount sliding handle designed specifically for modern sliding wardrobes and pocket doors.",
-              "brand": { "@type": "Brand", "name": "KUNETT" },
-              "material": "Aerospace-Grade Solid Aluminium",
-              "category": "Sliding Counsil"
+              "url": "https://kunetthardware.com/#product?id=451"
             },
             {
-              "@type": "Product",
+              "@type": "ListItem",
               "position": 5,
               "name": "KUNETT Model 501 Aluminium Cabinet Knob",
-              "image": "https://kunetthardware.com/assets/501.png",
-              "description": "Minimalist solid aluminium geometric cabinet knob for luxury bathroom vanities, nightstands, and dressers.",
-              "brand": { "@type": "Brand", "name": "KUNETT" },
-              "material": "Aerospace-Grade Solid Aluminium",
-              "category": "Cabinet Knob"
+              "url": "https://kunetthardware.com/#product?id=501"
             }
           ]
         },
