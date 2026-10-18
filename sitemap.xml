@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://kunetthardware.com/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -31,40 +31,82 @@
       <image:title>KUNETT Model 501 Aluminium Cabinet Knob</image:title>
       <image:caption>Minimalist solid aluminium geometric cabinet knob for luxury vanities, dressers, and bedside tables</image:caption>
     </image:image>
+  </url>
+  <url>
+    <loc>https://kunetthardware.com/aluminium-handle-profile.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
     <image:image>
-      <image:loc>https://kunetthardware.com/assets/blog_kitchen.jpg</image:loc>
-      <image:title>Modern Modular Kitchen Aluminium Handles Design</image:title>
-      <image:caption>Architectural aluminium handles styling guide for modern modular kitchen drawers</image:caption>
+      <image:loc>https://kunetthardware.com/assets/301.png</image:loc>
+      <image:title>Aluminium Handle Profile Model 301</image:title>
+      <image:caption>J-Pull and G-Profile edge-mounted continuous aluminium handle profile</image:caption>
     </image:image>
+  </url>
+  <url>
+    <loc>https://kunetthardware.com/aluminium-handles.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
     <image:image>
-      <image:loc>https://kunetthardware.com/assets/blog_profile.jpg</image:loc>
-      <image:title>J-Profile and G-Profile Aluminium Handle Systems</image:title>
-      <image:caption>Comparison guide between J-pull and G-profile aluminium handles for modular shutters</image:caption>
+      <image:loc>https://kunetthardware.com/assets/201.png</image:loc>
+      <image:title>Solid Aluminium Handle Model 201</image:title>
+      <image:caption>Aerospace-grade solid aluminium pull handle for kitchen and wardrobe</image:caption>
     </image:image>
+  </url>
+  <url>
+    <loc>https://kunetthardware.com/wardrobe-counsil-handles.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
     <image:image>
-      <image:loc>https://kunetthardware.com/assets/blog_wardrobe.jpg</image:loc>
-      <image:title>Luxury Wardrobe Sliding Door Aluminium Handles</image:title>
-      <image:caption>Flush concealed aluminium counsil handles for luxury wardrobe shutters</image:caption>
+      <image:loc>https://kunetthardware.com/assets/401.png</image:loc>
+      <image:title>Concealed Counsil Handle Model 401</image:title>
+      <image:caption>Concealed solid aluminium counsil handle for heavy wardrobe shutters</image:caption>
     </image:image>
+  </url>
+  <url>
+    <loc>https://kunetthardware.com/sliding-wardrobe-handles.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
     <image:image>
-      <image:loc>https://kunetthardware.com/assets/process_aluminium.jpg</image:loc>
-      <image:title>Precision Aluminium Extrusion &amp; Billet Manufacturing</image:title>
-      <image:caption>Aerospace-grade 6063-T6 solid aluminium alloy extrusion process in Rajkot factory</image:caption>
+      <image:loc>https://kunetthardware.com/assets/451.png</image:loc>
+      <image:title>Sliding Wardrobe Handle Model 451</image:title>
+      <image:caption>Flush recessed zero-clearance handle for sliding wardrobes</image:caption>
     </image:image>
+  </url>
+  <url>
+    <loc>https://kunetthardware.com/cabinet-knobs.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/501.png</image:loc>
+      <image:title>Solid Aluminium Knob Model 501</image:title>
+      <image:caption>Geometric minimalist solid aluminium cabinet knob</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kunetthardware.com/our-process.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
     <image:image>
       <image:loc>https://kunetthardware.com/assets/process_vmc.jpg</image:loc>
-      <image:title>5-Axis CNC &amp; VMC Precision Machining for Handles</image:title>
-      <image:caption>High-precision VMC machining for chamfered edges and flawless handle contours</image:caption>
+      <image:title>5-Axis VMC Machining in Rajkot Factory</image:title>
+      <image:caption>Precision VMC milling of architectural aluminium handles</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://kunetthardware.com/assets/process_anodizing.jpg</image:loc>
-      <image:title>Multi-Tank Micron Anodizing &amp; Surface Treatment</image:title>
-      <image:caption>Matte Black, Rose Gold, SS Matt, and Champagne Gold anodizing finish</image:caption>
+      <image:title>Electrochemical Anodizing Baths</image:title>
+      <image:caption>Scratch-proof micron anodizing for hardware finishes</image:caption>
     </image:image>
-    <image:image>
-      <image:loc>https://kunetthardware.com/assets/process_packaging.jpg</image:loc>
-      <image:title>Factory Packaging &amp; Global Shipping</image:title>
-      <image:caption>Scratch-proof export packaging and doorstep delivery across India and worldwide</image:caption>
-    </image:image>
+  </url>
+  <url>
+    <loc>https://kunetthardware.com/contact.html</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
 </urlset>
