@@ -9,6 +9,10 @@
   # Redirect www to non-www
   RewriteCond %{HTTP_HOST} ^www\.kunetthardware\.com [NC]
   RewriteRule ^(.*)$ https://kunetthardware.com/$1 [L,R=301]
+
+  # 301 Redirect /index.html to canonical root /
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
+  RewriteRule ^index\.html$ https://kunetthardware.com/ [R=301,L]
 </IfModule>
 
 # GZIP / Brotli Compression
