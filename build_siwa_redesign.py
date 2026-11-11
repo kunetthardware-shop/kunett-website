@@ -1,0 +1,1212 @@
+#!/usr/bin/env python3
+"""
+build_siwa_redesign.py
+Generates preview-siwa.html - a complete redesign of KUNETT Hardware
+in the aesthetic of Siwa Capital (https://www.siwacap.com/).
+Featuring:
+- Floating frosted-glass pill navbar
+- Fullscreen video hero with dark atmospheric overlay
+- High-impact Swiss grotesque typography (Plus Jakarta Sans)
+- Refined color palette (Dark espresso #141312, Warm Sand #C29E77, Cream #F7F4EE)
+- Editorial metric statistics, numbered principles (01-04), factory process
+- Filterable product grid (Handles, Profiles, Counsils, Sliding, Knobs)
+- Interactive spec modals, inquiry list drawer, and catalogue modal
+"""
+
+import os
+import json
+
+jpg_models = ['210', '211', '212', '222', '223', '224', '234', '235', '236', '418']
+
+desc_data = {
+    'Cabinet Handle': {
+        'adjs': ['sleek', 'bold', 'sophisticated', 'refined', 'heavy-duty', 'sculptural', 'precision-milled', 'striking'],
+        'feats': ['an ergonomic inner sweep', 'a subtle chamfered edge', 'perfectly spaced mounting points', 'a highly tactile grip', 'clean architectural lines', 'a gentle outward curve', 'a minimalist straight bar profile'],
+        'bens': ['effortless pulling power', 'a reassuringly solid feel in hand', 'a seamless transition from wood to metal', 'flawless daily utility', 'an immediate sense of quality'],
+        'concs': ['An essential upgrade for contemporary kitchen and wardrobe doors.', 'Engineered to withstand decades of heavy daily use.', 'Instantly elevates the look of any premium cabinetry.', 'A masterclass in modern metalwork.', 'The perfect finishing touch for a high-end interior.']
+    },
+    'Cabinet Profile': {
+        'adjs': ['minimalist', 'ultra-modern', 'discreet', 'seamless', 'flush-fitting', 'linear', 'unobtrusive'],
+        'feats': ['an edge-mounted architecture', 'a continuous linear grip', 'a hidden mounting channel', 'a razor-thin visible edge', 'a perfectly angled finger-pull'],
+        'bens': ['a stunning handle-less aesthetic', 'uninterrupted flow across your drawers', 'effortless usability without breaking the visual line', 'a streamlined silhouette', 'a perfectly clean façade'],
+        'concs': ['The definitive choice for modern, flat-panel cabinetry.', 'A beautiful marriage of hidden form and daily utility.', 'Redefines the edges of your furniture.', 'Subtle, yet incredibly effective.', 'Brings a showroom-quality finish to your home.']
+    },
+    'Counsil Handle': {
+        'adjs': ['commanding', 'substantive', 'elegant', 'geometric', 'imposing', 'luxurious', 'architectural'],
+        'feats': ['a deep finger recess', 'a robust backplate', 'distinctive angular cuts', 'a flawlessly smooth face', 'a wide, comfortable stance'],
+        'bens': ['superior leverage for heavier doors', 'a striking focal point for the room', 'an opulent touch to your woodwork', 'a highly comfortable grip', 'a distinct visual anchor'],
+        'concs': ['Perfectly suited for tall wardrobes and heavy pantry doors.', 'Makes a grand statement in any setting.', 'Built to impress and engineered to last.', 'A true centerpiece for premium furniture.', 'Combines heavy-duty function with high-end luxury.']
+    },
+    'Sliding Counsil': {
+        'adjs': ['flush-mounted', 'streamlined', 'integrated', 'low-profile', 'sleek', 'embedded', 'practical'],
+        'feats': ['a perfectly recessed grip cavity', 'smooth inner chamfers', 'a zero-clearance profile', 'a seamless inset design', 'an optimized sliding track angle'],
+        'bens': ['effortless side-to-side gliding', 'zero interference with overlapping doors', 'a completely flush aesthetic', 'a comfortable, pinch-free grip', 'smooth operation for heavy panels'],
+        'concs': ['The ultimate hardware solution for modern sliding wardrobes.', 'Precision machined to fit flawlessly into your doors.', 'Uncompromising quality for space-saving designs.', 'Where advanced engineering meets subtle design.', 'Glides as beautifully as it looks.']
+    },
+    'Cabinet Knob': {
+        'adjs': ['tactile', 'minimalist', 'refined', 'sculpted', 'geometric', 'petite', 'understated'],
+        'feats': ['a knurled perimeter', 'a subtly concave top', 'flawlessly machined bevels', 'a substantial solid-brass feel', 'an architectural profile'],
+        'bens': ['an exquisite touch point', 'effortless micro-adjustments to your decor', 'a discrete pop of luxury metal', 'a satisfying tactile experience', 'visual harmony across smaller drawers'],
+        'concs': ['The ultimate accent piece for bedside tables and custom vanities.', 'Elevates standard cabinetry into bespoke furniture.', 'Small in stature, monumental in design impact.', 'Designed for those who appreciate microscopic perfection.', 'Subtle luxury at your fingertips.']
+    }
+}
+
+def generate_desc(code, category):
+    data = desc_data.get(category, desc_data['Cabinet Handle'])
+    code_num = int(code)
+    h = code_num * 31 + len(category) * 17
+    adj = data['adjs'][h % len(data['adjs'])]
+    feat = data['feats'][(h >> 1) % len(data['feats'])]
+    ben = data['bens'][(h >> 2) % len(data['bens'])]
+    conc = data['concs'][(h >> 3) % len(data['concs'])]
+    return f"Model {code} is a {adj} {category.lower()} designed with {feat}, providing {ben}. {conc}"
+
+def get_color_style(color):
+    cmap = {
+        'Black': 'background-color: #1a1a1a;',
+        'R Gold': 'background: linear-gradient(135deg, #b76e79 0%, #e0bfb8 100%);',
+        'Gold': 'background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%);',
+        'SS Matt': 'background: linear-gradient(135deg, #E0E0E0 0%, #9E9E9E 100%);',
+        'Antique': 'background: linear-gradient(135deg, #8B7355 0%, #D2B48C 100%);',
+        'Grey': 'background-color: #757575;',
+        'CP': 'background: linear-gradient(135deg, #FFFFFF 0%, #E0E0E0 100%);'
+    }
+    return cmap.get(color, 'background-color: #cccccc;')
+
+def build_products(start, end, series, category, finishes, sizes):
+    prods = []
+    for i in range(start, end + 1):
+        code = str(i)
+        ext = '.jpg' if code in jpg_models else '.png'
+        prods.append({
+            'code': code,
+            'image': f'assets/{code}{ext}',
+            'series': series,
+            'category': category,
+            'finishes': finishes,
+            'sizes': sizes,
+            'description': generate_desc(code, category)
+        })
+    return prods
+
+# Build all products
+products_200 = build_products(201, 246, '200', 'Cabinet Handle', ['Black', 'R Gold', 'Gold', 'SS Matt', 'Antique', 'Grey'], ['6"', '8"', '12"', '18"', '24"', '30"', '36"', '48"'])
+products_300 = build_products(301, 324, '300', 'Cabinet Profile', ['Black', 'R Gold', 'Gold', 'SS Matt', 'CP', 'Grey'], ['6" To 36" (Continuous up to 3m)'])
+products_400 = build_products(401, 418, '400', 'Counsil Handle', ['CP', 'Black', 'R Gold', 'Gold', 'SS Matt'], ['4"', '6"', '8"', '10"', '12"'])
+products_450 = build_products(451, 455, '450', 'Sliding Counsil', ['Black', 'R Gold', 'Gold', 'SS Matt', 'Grey'], ['4"', '6"', '8"', '10"', '12"', '18"', '24"', '36"'])
+products_500 = build_products(501, 508, '500', 'Cabinet Knob', ['Black', 'R Gold', 'Gold', 'SS Matt', 'Grey'], ['2" Diameter'])
+
+all_products = products_200 + products_300 + products_400 + products_450 + products_500
+all_products_json = json.dumps(all_products)
+
+# Build featured showcase cards for the grid
+featured_codes = ['201', '301', '401', '451', '501', '204', '306', '406', '214', '312', '410', '504']
+featured_prods = [p for p in all_products if p['code'] in featured_codes]
+
+print(f"Generated {len(all_products)} total products, {len(featured_prods)} featured cards.")
+
+def generate_html():
+    html = f"""<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUNETT Hardware | Solid Aluminium Handles & Profiles Manufacturer</title>
+    <meta name="description" content="Premier manufacturer of solid aerospace-grade aluminium handles, continuous J-pull and G-profiles, and luxury concealed hardware in Rajkot, Gujarat. Direct factory supply.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- Google Fonts: Plus Jakarta Sans (Modern Swiss Grotesque like Siwa Capital) & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {{
+            theme: {{
+                extend: {{
+                    colors: {{
+                        siwa: {{
+                            espresso: '#141312',
+                            darkcard: '#1c1a18',
+                            brown: '#3f2c22',
+                            sand: '#c29e77',
+                            sandhover: '#d8b58e',
+                            cream: '#f5f1ea',
+                            creambg: '#faf8f5',
+                            muted: '#8a857f',
+                            lightborder: '#e8e4dc',
+                            glassbg: 'rgba(235, 238, 239, 0.08)',
+                            glassborder: 'rgba(255, 255, 255, 0.16)'
+                        }}
+                    }},
+                    fontFamily: {{
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif']
+                    }}
+                }}
+            }}
+        }}
+    </script>
+    
+    <style>
+        ::selection {{
+            background: #c29e77;
+            color: #ffffff;
+        }}
+        body {{
+            background-color: #faf8f5;
+            color: #141312;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }}
+        .glass-pill {{
+            background: rgba(20, 19, 18, 0.72);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+        }}
+        .glass-card-light {{
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }}
+        .glass-card-dark {{
+            background: rgba(28, 26, 24, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }}
+        .hero-metric-glass {{
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }}
+        .product-img {{
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            mix-blend-mode: multiply;
+        }}
+        .product-card:hover .product-img {{
+            transform: scale(1.06) translateY(-4px);
+        }}
+        .btn-arrow-hover:hover .arrow-circle {{
+            transform: translateX(4px);
+        }}
+        @keyframes floatBounce {{
+            0%, 100% {{ transform: translateY(0); }}
+            50% {{ transform: translateY(6px); }}
+        }}
+        .animate-float {{
+            animation: floatBounce 2.5s ease-in-out infinite;
+        }}
+        /* Drawer and Modals */
+        .drawer-overlay {{
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }}
+        .drawer-overlay.active {{
+            opacity: 1;
+            visibility: visible;
+        }}
+        .drawer-content {{
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }}
+        .drawer-overlay.active .drawer-content {{
+            transform: translateX(0);
+        }}
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Top Trial Notification Pill -->
+    <div class="fixed top-2 left-1/2 -translate-x-1/2 z-[100] pointer-events-none">
+        <div class="pointer-events-auto bg-siwa-espresso/90 backdrop-blur-md text-white text-[11px] font-medium px-4 py-1.5 rounded-full border border-siwa-sand/40 shadow-xl flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-siwa-sand animate-pulse"></span>
+            <span>Trial Redesign Preview &bull; Styled after Siwa Capital</span>
+            <a href="index.html" class="underline text-siwa-sand hover:text-white font-bold ml-1">Return to Classic Site</a>
+        </div>
+    </div>
+
+    <!-- Floating Pill Navigation (Siwa Capital Style) -->
+    <header class="fixed top-10 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
+        <nav class="pointer-events-auto glass-pill text-white px-5 md:px-7 py-3 rounded-full w-full max-w-5xl flex items-center justify-between gap-6 shadow-2xl transition-all duration-300">
+            
+            <!-- Brand Logo -->
+            <a href="#top" class="flex items-center gap-2.5 flex-shrink-0 group">
+                <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center p-1.5 border border-white/20">
+                    <img src="assets/logo.png" alt="KUNETT Hardware" class="filter invert brightness-0 object-contain w-full h-full">
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-sm tracking-wider uppercase leading-none">KUNETT</span>
+                    <span class="text-[9px] text-siwa-sand tracking-widest uppercase font-semibold">Architectural Hardware</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <div class="hidden lg:flex items-center gap-7 text-[13px] font-medium text-white/80">
+                <a href="#collections" class="hover:text-siwa-sand transition-colors">Collections</a>
+                <a href="#principles" class="hover:text-siwa-sand transition-colors">Engineering</a>
+                <a href="#process" class="hover:text-siwa-sand transition-colors">Our Craft</a>
+                <a href="#calculator" class="hover:text-siwa-sand transition-colors">Calculator</a>
+                <a href="#contact" class="hover:text-siwa-sand transition-colors">Contact</a>
+            </div>
+
+            <!-- Action Pill Buttons -->
+            <div class="flex items-center gap-3">
+                
+                <!-- Inquiry Drawer Trigger -->
+                <button onclick="openInquiryModal()" class="relative p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors" aria-label="Inquiry List">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                    <span id="nav-inquiry-badge" class="absolute -top-1 -right-1 bg-siwa-sand text-siwa-espresso text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
+                </button>
+
+                <!-- WhatsApp Quote Pill (Siwa-style pill button with circular arrow) -->
+                <a href="https://wa.me/919924637640?text=Hello%20Sanjay,%20I%20am%20inquirying%20about%20KUNETT%20Hardware%20collections." target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center gap-2.5 bg-siwa-sand hover:bg-siwa-sandhover text-siwa-espresso font-semibold text-[13px] px-5 py-2.5 rounded-full transition-all duration-300 shadow-md group btn-arrow-hover">
+                    <span>Inquire on WhatsApp</span>
+                    <span class="arrow-circle w-5 h-5 rounded-full bg-siwa-espresso text-siwa-sand flex items-center justify-center text-[10px] transition-transform duration-300">
+                        &rarr;
+                    </span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Slide Drawer -->
+    <div id="mobile-menu-backdrop" onclick="closeMobileMenu()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] transition-opacity duration-300 opacity-0 pointer-events-none lg:hidden"></div>
+    <div id="mobile-menu-drawer" class="fixed top-0 right-0 w-[85vw] max-w-sm h-full bg-siwa-espresso text-white z-[95] transition-transform duration-300 transform translate-x-full lg:hidden flex flex-col p-6 shadow-2xl">
+        <div class="flex items-center justify-between pb-6 border-b border-white/10">
+            <span class="font-serif text-xl font-bold tracking-wide">KUNETT</span>
+            <button onclick="closeMobileMenu()" class="p-2 text-white/70 hover:text-white">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="flex flex-col gap-4 py-8 text-base font-medium text-white/90">
+            <a href="#collections" onclick="closeMobileMenu()" class="py-2 hover:text-siwa-sand">Hardware Collections</a>
+            <a href="#principles" onclick="closeMobileMenu()" class="py-2 hover:text-siwa-sand">Our Principles</a>
+            <a href="#process" onclick="closeMobileMenu()" class="py-2 hover:text-siwa-sand">Manufacturing Craft</a>
+            <a href="#calculator" onclick="closeMobileMenu()" class="py-2 hover:text-siwa-sand">Project Estimator</a>
+            <a href="#contact" onclick="closeMobileMenu()" class="py-2 hover:text-siwa-sand">Contact & Showroom</a>
+            <a href="#" onclick="closeMobileMenu(); openCatalogueModal(event)" class="py-2 text-siwa-sand font-bold">Download 2026 Catalogue</a>
+        </div>
+        <div class="mt-auto pt-6 border-t border-white/10 flex flex-col gap-3">
+            <a href="https://wa.me/919924637640" target="_blank" class="w-full bg-[#25D366] text-white py-3.5 rounded-full font-bold text-sm flex items-center justify-center gap-2 shadow-lg">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg>
+                WhatsApp Sanjay Patel
+            </a>
+            <a href="index.html" class="text-center text-xs text-white/50 hover:text-white py-2">Back to standard site</a>
+        </div>
+    </div>
+
+    <!-- HERO SECTION (Siwa Capital Fullscreen Video Hero with Floating Badges) -->
+    <section id="top" class="relative w-full h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-siwa-espresso text-white">
+        
+        <!-- Background Video -->
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 scale-105 transform will-change-transform">
+            <source src="assets/Code_204_Compressed.mp4" type="video/mp4">
+        </video>
+
+        <!-- Cinematic Atmospheric Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0e0d0c] via-black/45 to-black/70"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/20 to-black/80"></div>
+
+        <!-- Main Hero Content Container -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full pt-28 pb-16 flex flex-col justify-between h-full">
+            
+            <div class="my-auto max-w-4xl">
+                
+                <!-- Pill Tag -->
+                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[11px] font-bold tracking-widest uppercase text-siwa-sand mb-6">
+                    <span class="w-1.5 h-1.5 rounded-full bg-siwa-sand"></span>
+                    <span>Premier Architectural Hardware &bull; Rajkot, Gujarat</span>
+                </div>
+
+                <!-- Siwa-style High-Impact Heading -->
+                <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-normal leading-[1.05] tracking-tight text-white mb-6">
+                    Engineering the Next Generation of Solid Aluminium Handles & Profiles
+                </h1>
+
+                <!-- Crisp Subtitle -->
+                <p class="text-white/80 text-base sm:text-lg md:text-xl font-normal leading-relaxed max-w-2xl mb-10">
+                    We craft 100% solid aerospace-grade aluminium handles, edge-mounted J-pull & G-profile systems, and luxury concealed hardware direct from our Rajkot manufacturing facility for visionary architects, interior designers, and global distributors.
+                </p>
+
+                <!-- Dual Action Buttons (Siwa Style) -->
+                <div class="flex flex-wrap items-center gap-4">
+                    <a href="#collections" class="btn-arrow-hover inline-flex items-center gap-3 bg-white text-siwa-espresso font-semibold text-sm px-7 py-4 rounded-full transition-all duration-300 shadow-xl hover:bg-siwa-cream">
+                        <span>Explore Collections</span>
+                        <span class="arrow-circle w-6 h-6 rounded-full bg-siwa-espresso text-white flex items-center justify-center text-xs transition-transform duration-300">
+                            &rarr;
+                        </span>
+                    </a>
+                    
+                    <a href="#" onclick="openCatalogueModal(event)" class="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white font-medium text-sm px-7 py-4 rounded-full border border-white/20 transition-all duration-300">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                        <span>Download 2026 Catalogue</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bottom Row: Floating Metric Glass Card & Scroll Indicator -->
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-8 border-t border-white/10">
+                
+                <!-- Scroll to Explore Link -->
+                <a href="#metrics" class="inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-widest text-white/60 hover:text-white transition-colors group">
+                    <span class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-white transition-colors animate-float">
+                        &darr;
+                    </span>
+                    <span>Scroll to Explore</span>
+                </a>
+
+                <!-- Floating Glass Metric Card (Direct Siwa Capital Pattern) -->
+                <div class="hero-metric-glass rounded-2xl p-5 text-white sm:max-w-xs shadow-2xl">
+                    <div class="flex items-baseline gap-1.5 mb-1 font-serif text-3xl font-bold text-siwa-sand">
+                        <span>10</span><span>+</span>
+                        <span class="text-xs font-sans font-medium text-white/70 tracking-normal ml-2">Years Excellence</span>
+                    </div>
+                    <div class="text-[12px] text-white/80 font-normal leading-snug">
+                        100+ Wholesale Partners &bull; 100% Solid Aerospace-Grade Virgin Aluminium
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 1: EDITORIAL METRICS & IDENTITY (Siwa Capital section_family) -->
+    <section id="metrics" class="py-24 md:py-32 bg-siwa-creambg text-siwa-espresso border-b border-siwa-lightborder">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="max-w-3xl mb-20">
+                <span class="text-xs font-bold uppercase tracking-widest text-siwa-sand block mb-3">A Legacy Built on Precision & Alignment</span>
+                <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl font-normal leading-tight mb-6">
+                    We engineer hardware grounded in uncompromising materials and industrial mastery.
+                </h2>
+                <p class="text-siwa-muted text-base md:text-lg leading-relaxed">
+                    Harikrushna Enterprise under the KUNETT brand bridges the gap between high-end architectural aesthetics and heavy-duty factory durability. We supply directly to homeowners, carpenters, interior contractors, and wholesale exporters worldwide.
+                </p>
+            </div>
+
+            <!-- 4-Column Stat Bento Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="bg-white p-8 rounded-3xl border border-siwa-lightborder shadow-sm flex flex-col justify-between hover:border-siwa-sand transition-all duration-300">
+                    <div class="text-4xl md:text-5xl font-serif text-siwa-espresso mb-4 font-normal">
+                        10<span class="text-siwa-sand">+</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm tracking-wide uppercase text-siwa-espresso mb-1">Years in Manufacturing</h4>
+                        <p class="text-xs text-siwa-muted leading-relaxed">Continuous production excellence in Rajkot, Gujarat's hardware engineering capital.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-siwa-lightborder shadow-sm flex flex-col justify-between hover:border-siwa-sand transition-all duration-300">
+                    <div class="text-4xl md:text-5xl font-serif text-siwa-espresso mb-4 font-normal">
+                        100<span class="text-siwa-sand">%</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm tracking-wide uppercase text-siwa-espresso mb-1">Solid Aerospace Alloy</h4>
+                        <p class="text-xs text-siwa-muted leading-relaxed">Extruded and VMC-milled from 6063-T6 virgin aluminium. 0% brittle hollow zinc.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-siwa-lightborder shadow-sm flex flex-col justify-between hover:border-siwa-sand transition-all duration-300">
+                    <div class="text-4xl md:text-5xl font-serif text-siwa-espresso mb-4 font-normal">
+                        103<span class="text-siwa-sand">+</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm tracking-wide uppercase text-siwa-espresso mb-1">Proprietary Models</h4>
+                        <p class="text-xs text-siwa-muted leading-relaxed">Spanning bar handles, continuous edge profiles, sliding counsils, and precision knobs.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-siwa-lightborder shadow-sm flex flex-col justify-between hover:border-siwa-sand transition-all duration-300">
+                    <div class="text-4xl md:text-5xl font-serif text-siwa-espresso mb-4 font-normal">
+                        100<span class="text-siwa-sand">+</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm tracking-wide uppercase text-siwa-espresso mb-1">Wholesale Partners</h4>
+                        <p class="text-xs text-siwa-muted leading-relaxed">Supplying luxury modular kitchens and wardrobes across India, the US, and Germany.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 2: THE HARDWARE COLLECTIONS (Siwa Capital Portfolio Showcase) -->
+    <section id="collections" class="py-24 md:py-32 bg-white text-siwa-espresso border-b border-siwa-lightborder">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-siwa-sand block mb-3">Architectural Portfolio</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-normal text-siwa-espresso">The KUNETT Hardware Series</h2>
+                </div>
+                <p class="text-siwa-muted text-sm md:text-base max-w-md leading-relaxed">
+                    Every piece is individually hand-buffed, multi-tank anodized, and inspected under high-intensity lighting for absolute perfection.
+                </p>
+            </div>
+
+            <!-- Series Overview Bento Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                
+                <!-- 200 Series Card -->
+                <div class="bg-siwa-creambg rounded-3xl p-8 border border-siwa-lightborder flex flex-col justify-between group hover:border-siwa-sand transition-all duration-300">
+                    <div>
+                        <div class="aspect-[4/3] bg-white rounded-2xl mb-6 p-6 flex items-center justify-center overflow-hidden">
+                            <img src="assets/201.png" alt="200 Series Solid Aluminium Handles" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-siwa-sand">200 Series</span>
+                        <h3 class="font-serif text-2xl font-normal text-siwa-espresso mt-1 mb-2">Aluminium Handles</h3>
+                        <p class="text-xs text-siwa-muted leading-relaxed mb-6">Solid pull handles for kitchen drawers, tall wardrobe shutters, and pantry doors. Available in sizes 6" to 48".</p>
+                    </div>
+                    <div class="pt-4 border-t border-siwa-lightborder flex items-center justify-between text-xs font-bold uppercase tracking-wider text-siwa-espresso">
+                        <span>46+ Models</span>
+                        <a href="aluminium-handles.html" class="text-siwa-sand hover:underline">Explore Dedicated Page &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- 300 Series Card -->
+                <div class="bg-siwa-creambg rounded-3xl p-8 border border-siwa-lightborder flex flex-col justify-between group hover:border-siwa-sand transition-all duration-300">
+                    <div>
+                        <div class="aspect-[4/3] bg-white rounded-2xl mb-6 p-6 flex items-center justify-center overflow-hidden">
+                            <img src="assets/301.png" alt="300 Series Aluminium Handle Profiles" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-siwa-sand">300 Series</span>
+                        <h3 class="font-serif text-2xl font-normal text-siwa-espresso mt-1 mb-2">Aluminium Handle Profile</h3>
+                        <p class="text-xs text-siwa-muted leading-relaxed mb-6">Continuous J-pull, G-profile, and edge-mount profiles for seamless, handle-less modular kitchens and wardrobe doors.</p>
+                    </div>
+                    <div class="pt-4 border-t border-siwa-lightborder flex items-center justify-between text-xs font-bold uppercase tracking-wider text-siwa-espresso">
+                        <span>24+ Profiles</span>
+                        <a href="aluminium-handle-profile.html" class="text-siwa-sand hover:underline">Explore Dedicated Page &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- 400 & 450 Series Card -->
+                <div class="bg-siwa-creambg rounded-3xl p-8 border border-siwa-lightborder flex flex-col justify-between group hover:border-siwa-sand transition-all duration-300">
+                    <div>
+                        <div class="aspect-[4/3] bg-white rounded-2xl mb-6 p-6 flex items-center justify-center overflow-hidden">
+                            <img src="assets/401.png" alt="400 Series Concealed Counsil Handles" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-siwa-sand">400 & 450 Series</span>
+                        <h3 class="font-serif text-2xl font-normal text-siwa-espresso mt-1 mb-2">Counsil & Sliding Handles</h3>
+                        <p class="text-xs text-siwa-muted leading-relaxed mb-6">Deep-recess concealed handles and zero-clearance flush pulls engineered specifically for heavy sliding wardrobes.</p>
+                    </div>
+                    <div class="pt-4 border-t border-siwa-lightborder flex items-center justify-between text-xs font-bold uppercase tracking-wider text-siwa-espresso">
+                        <span>23+ Models</span>
+                        <a href="wardrobe-counsil-handles.html" class="text-siwa-sand hover:underline">Explore Dedicated Page &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Interactive Product Filter Pills -->
+            <div class="mb-10 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                    <button onclick="filterProducts('all')" id="btn-filter-all" class="filter-btn px-4 py-2 rounded-full bg-siwa-espresso text-white transition-colors">All Series (103)</button>
+                    <button onclick="filterProducts('200')" id="btn-filter-200" class="filter-btn px-4 py-2 rounded-full bg-siwa-creambg text-siwa-espresso border border-siwa-lightborder hover:border-siwa-espresso transition-colors">Aluminium Handles</button>
+                    <button onclick="filterProducts('300')" id="btn-filter-300" class="filter-btn px-4 py-2 rounded-full bg-siwa-creambg text-siwa-espresso border border-siwa-lightborder hover:border-siwa-espresso transition-colors">Handle Profiles</button>
+                    <button onclick="filterProducts('400')" id="btn-filter-400" class="filter-btn px-4 py-2 rounded-full bg-siwa-creambg text-siwa-espresso border border-siwa-lightborder hover:border-siwa-espresso transition-colors">Counsil Handles</button>
+                    <button onclick="filterProducts('450')" id="btn-filter-450" class="filter-btn px-4 py-2 rounded-full bg-siwa-creambg text-siwa-espresso border border-siwa-lightborder hover:border-siwa-espresso transition-colors">Sliding Counsils</button>
+                    <button onclick="filterProducts('500')" id="btn-filter-500" class="filter-btn px-4 py-2 rounded-full bg-siwa-creambg text-siwa-espresso border border-siwa-lightborder hover:border-siwa-espresso transition-colors">Cabinet Knobs</button>
+                </div>
+                <div class="text-xs text-siwa-muted">Click any model for high-res specs & WhatsApp inquiry</div>
+            </div>
+
+            <!-- Featured Product Grid Container -->
+            <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
+                <!-- Rendered dynamically via JS below -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 3: KEY STRENGTHS & PRINCIPLES (Siwa Capital section_key) -->
+    <section id="principles" class="py-24 md:py-32 bg-siwa-espresso text-white border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="max-w-3xl mb-20">
+                <span class="text-xs font-bold uppercase tracking-widest text-siwa-sand block mb-3">Key Strengths & Principles</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-normal leading-tight mb-6 text-white">
+                    Built for operators. Engineered without compromise.
+                </h2>
+                <p class="text-white/70 text-base md:text-lg leading-relaxed">
+                    We control every single stage of production—from raw alloy melting to micron-level electrochemical finishing—to give designers total peace of mind.
+                </p>
+            </div>
+
+            <!-- Numbered Editorial Rows (01, 02, 03, 04) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                
+                <div class="glass-card-dark p-8 md:p-10 rounded-3xl border border-white/10 flex flex-col justify-between">
+                    <div class="font-serif text-3xl text-siwa-sand mb-6">01</div>
+                    <div>
+                        <h3 class="font-serif text-2xl text-white mb-3">Aerospace-Grade 6063-T6 Solid Alloy</h3>
+                        <p class="text-sm text-white/70 leading-relaxed">
+                            Cheap market hardware uses cast zinc or hollow plastic that cracks under tension. KUNETT hardware is extruded exclusively from virgin 6063-T6 aluminium alloy, providing substantial tensile strength, comforting hand weight, and zero risk of brittleness.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass-card-dark p-8 md:p-10 rounded-3xl border border-white/10 flex flex-col justify-between">
+                    <div class="font-serif text-3xl text-siwa-sand mb-6">02</div>
+                    <div>
+                        <h3 class="font-serif text-2xl text-white mb-3">5-Axis VMC CNC Milling Precision</h3>
+                        <p class="text-sm text-white/70 leading-relaxed">
+                            Every handle contour, finger recess, and screw mounting point is computer-carved in our Rajkot factory with microscopic accuracy. This guarantees universal fit across modular cabinetry and seamless drawer alignment.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass-card-dark p-8 md:p-10 rounded-3xl border border-white/10 flex flex-col justify-between">
+                    <div class="font-serif text-3xl text-siwa-sand mb-6">03</div>
+                    <div>
+                        <h3 class="font-serif text-2xl text-white mb-3">Electrochemical Multi-Tank Anodizing</h3>
+                        <p class="text-sm text-white/70 leading-relaxed">
+                            Unlike spray paint that chips or bubbles around steamy kitchens, our colors—Matte Black, Rose Gold, Champagne, Antique Brass, and SS Matt—are bonded into the molecular surface of the aluminium. Scratch-resistant, fingerprint-proof, and tarnish-free.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass-card-dark p-8 md:p-10 rounded-3xl border border-white/10 flex flex-col justify-between">
+                    <div class="font-serif text-3xl text-siwa-sand mb-6">04</div>
+                    <div>
+                        <h3 class="font-serif text-2xl text-white mb-3">Direct Factory Supply & Global Export</h3>
+                        <p class="text-sm text-white/70 leading-relaxed">
+                            We eliminate distributor markups and middleman commissions. Homeowners, carpenters, architects, and international dealers receive genuine factory-direct quotations with safe, bubble-wrapped carton delivery across India and worldwide.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 4: OUR 4-STAGE CRAFT & PROCESS (Siwa Capital section_team showcase) -->
+    <section id="process" class="py-24 md:py-32 bg-siwa-creambg text-siwa-espresso border-b border-siwa-lightborder">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="max-w-3xl mb-20">
+                <span class="text-xs font-bold uppercase tracking-widest text-siwa-sand block mb-3">Manufacturing Mastery</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-normal leading-tight mb-4">Inside the Rajkot Manufacturing Plant</h2>
+                <p class="text-siwa-muted text-base leading-relaxed">
+                    Witness the transformation from virgin aluminium billets to finished architectural masterpieces.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14">
+                
+                <!-- Step 1 -->
+                <div class="bg-white rounded-3xl p-6 md:p-8 border border-siwa-lightborder shadow-sm flex flex-col">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-siwa-creambg">
+                        <img src="assets/process_aluminium.jpg" alt="Extrusion and Die Engineering" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-siwa-sand mb-2">Stage 01</span>
+                    <h3 class="font-serif text-2xl font-normal text-siwa-espresso mb-3">Extrusion & Custom Die Engineering</h3>
+                    <p class="text-sm text-siwa-muted leading-relaxed">
+                        Virgin 6063 billets are heated and forced through custom-engineered architectural dies, producing uninterrupted, solid aluminium profiles with flawless tensile integrity.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white rounded-3xl p-6 md:p-8 border border-siwa-lightborder shadow-sm flex flex-col">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-siwa-creambg">
+                        <img src="assets/process_vmc.jpg" alt="VMC Machining" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-siwa-sand mb-2">Stage 02</span>
+                    <h3 class="font-serif text-2xl font-normal text-siwa-espresso mb-3">Blade Cutting & 5-Axis VMC Machining</h3>
+                    <p class="text-sm text-siwa-muted leading-relaxed">
+                        High-speed automated blades slice profiles into exact lengths (6" to 48"), followed by robotic VMC centers carving mounting channels and silky chamfered edges.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white rounded-3xl p-6 md:p-8 border border-siwa-lightborder shadow-sm flex flex-col">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-siwa-creambg">
+                        <img src="assets/process_anodizing.jpg" alt="Anodizing Process" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-siwa-sand mb-2">Stage 03</span>
+                    <h3 class="font-serif text-2xl font-normal text-siwa-espresso mb-3">Hand Buffing & Electrochemical Anodizing</h3>
+                    <p class="text-sm text-siwa-muted leading-relaxed">
+                        Handles are buffed by artisan polishers to remove micro-scratches, then submerged into multi-tank electrochemical baths to lock in our scratch-proof signature colors.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-white rounded-3xl p-6 md:p-8 border border-siwa-lightborder shadow-sm flex flex-col">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-siwa-creambg">
+                        <img src="assets/process_packaging.jpg" alt="Export Packaging" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-siwa-sand mb-2">Stage 04</span>
+                    <h3 class="font-serif text-2xl font-normal text-siwa-espresso mb-3">Inspection & Global Doorstep Dispatch</h3>
+                    <p class="text-sm text-siwa-muted leading-relaxed">
+                        Every single handle undergoes strict color and defect verification, followed by bubble-wrap and wholesale export carton packaging for damage-free transit.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 5: INTERACTIVE PROJECT ESTIMATOR (Hardware Calculator) -->
+    <section id="calculator" class="py-24 md:py-32 bg-white text-siwa-espresso border-b border-siwa-lightborder">
+        <div class="max-w-4xl mx-auto px-6">
+            
+            <div class="text-center mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-siwa-sand block mb-2">Project Estimator</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-normal mb-4">Hardware Quantity Calculator</h2>
+                <p class="text-siwa-muted text-sm md:text-base max-w-xl mx-auto">
+                    Planning a new apartment, villa, or modular interior? Input your unit counts for an instant hardware estimate.
+                </p>
+            </div>
+
+            <div class="bg-siwa-creambg p-8 md:p-12 rounded-3xl border border-siwa-lightborder shadow-sm">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-siwa-espresso mb-2">Modular Kitchens</label>
+                        <input type="number" id="calc-kitchens" min="0" value="1" oninput="calculateHardware()" class="w-full bg-white border border-siwa-lightborder p-4 rounded-2xl text-center text-lg font-bold focus:outline-none focus:border-siwa-sand">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-siwa-espresso mb-2">Full-Height Wardrobes</label>
+                        <input type="number" id="calc-wardrobes" min="0" value="3" oninput="calculateHardware()" class="w-full bg-white border border-siwa-lightborder p-4 rounded-2xl text-center text-lg font-bold focus:outline-none focus:border-siwa-sand">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-siwa-espresso mb-2">Bedrooms & Vanities</label>
+                        <input type="number" id="calc-rooms" min="0" value="3" oninput="calculateHardware()" class="w-full bg-white border border-siwa-lightborder p-4 rounded-2xl text-center text-lg font-bold focus:outline-none focus:border-siwa-sand">
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 md:p-8 rounded-2xl border border-siwa-lightborder mb-8">
+                    <h4 class="font-serif text-lg font-bold mb-4 text-siwa-espresso border-b border-siwa-lightborder pb-3">Estimated Hardware Requirement</h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                        <div class="p-3 bg-siwa-creambg rounded-xl">
+                            <span id="est-handles" class="font-serif text-2xl font-bold text-siwa-sand block">36</span>
+                            <span class="text-[11px] text-siwa-muted uppercase font-semibold">Pull Handles</span>
+                        </div>
+                        <div class="p-3 bg-siwa-creambg rounded-xl">
+                            <span id="est-profiles" class="font-serif text-2xl font-bold text-siwa-sand block">30m</span>
+                            <span class="text-[11px] text-siwa-muted uppercase font-semibold">Edge Profiles</span>
+                        </div>
+                        <div class="p-3 bg-siwa-creambg rounded-xl">
+                            <span id="est-counsils" class="font-serif text-2xl font-bold text-siwa-sand block">16</span>
+                            <span class="text-[11px] text-siwa-muted uppercase font-semibold">Counsil Handles</span>
+                        </div>
+                        <div class="p-3 bg-siwa-creambg rounded-xl">
+                            <span id="est-knobs" class="font-serif text-2xl font-bold text-siwa-sand block">18</span>
+                            <span class="text-[11px] text-siwa-muted uppercase font-semibold">Vanity Knobs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="shareCalculatorEstimate()" class="w-full bg-siwa-espresso hover:bg-black text-white py-4 rounded-full font-bold text-sm tracking-wide shadow-lg transition-all flex items-center justify-center gap-2">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg>
+                    Send Estimate to Sanjay on WhatsApp for Instant Quotation
+                </button>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 6: LET'S CONNECT (Siwa Capital section_cta) -->
+    <section id="contact" class="py-24 md:py-32 bg-siwa-espresso text-white relative overflow-hidden">
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-siwa-sand block mb-3">Direct Inquiries</span>
+                    <h2 class="font-serif text-4xl sm:text-6xl font-normal leading-tight mb-6">
+                        Let's build lasting partnerships.
+                    </h2>
+                    <p class="text-white/70 text-base md:text-lg leading-relaxed mb-10">
+                        Whether you need technical CAD drawings, custom profile extrusion lengths, or wholesale box pricing for a residential project, our team in Rajkot is ready to assist.
+                    </p>
+
+                    <div class="space-y-4 text-sm text-white/80 mb-10">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-siwa-sand font-bold text-xs">P</span>
+                            <span>Direct Line / WhatsApp: <strong class="text-white">+91 99246 37640</strong> (Sanjay Patel)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-siwa-sand font-bold text-xs">@</span>
+                            <span>support@kunetthardware.com</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-siwa-sand font-bold text-xs">M</span>
+                            <span>Rajkot, Gujarat, India (Hardware Manufacturing Hub)</span>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/919924637640?text=Hello%20Sanjay,%20I%20would%20like%20to%20discuss%20a%20hardware%20requirement." target="_blank" class="inline-flex items-center gap-3 bg-siwa-sand hover:bg-siwa-sandhover text-siwa-espresso font-semibold text-sm px-8 py-4 rounded-full transition-all duration-300 shadow-xl">
+                        <span>Message Sanjay on WhatsApp</span>
+                        <span class="w-6 h-6 rounded-full bg-siwa-espresso text-siwa-sand flex items-center justify-center text-xs">&rarr;</span>
+                    </a>
+                </div>
+
+                <!-- Contact Form Card -->
+                <div class="glass-card-dark p-8 md:p-12 rounded-3xl border border-white/15">
+                    <h3 class="font-serif text-2xl font-bold mb-6 text-white">Send Direct Message</h3>
+                    
+                    <form id="contactForm" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[11px] font-bold uppercase tracking-wider text-white/70 mb-1.5">Full Name *</label>
+                                <input type="text" name="Name" required class="w-full bg-white/10 border border-white/20 p-3.5 rounded-xl text-white text-sm focus:outline-none focus:border-siwa-sand" placeholder="Ramesh Patel">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold uppercase tracking-wider text-white/70 mb-1.5">Phone Number *</label>
+                                <input type="tel" name="Phone" required class="w-full bg-white/10 border border-white/20 p-3.5 rounded-xl text-white text-sm focus:outline-none focus:border-siwa-sand" placeholder="+91 99246 37640">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-white/70 mb-1.5">Inquiry Type</label>
+                            <select name="Subject" class="w-full bg-siwa-espresso border border-white/20 p-3.5 rounded-xl text-white text-sm focus:outline-none focus:border-siwa-sand">
+                                <option>Aluminium Handle Profiles (300 Series)</option>
+                                <option>Solid Aluminium Pull Handles (200 Series)</option>
+                                <option>Counsil & Sliding Handles (400/450 Series)</option>
+                                <option>Cabinet Knobs (500 Series)</option>
+                                <option>Bulk Wholesale / Export Order</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-white/70 mb-1.5">Your Message *</label>
+                            <textarea name="Message" rows="4" required class="w-full bg-white/10 border border-white/20 p-3.5 rounded-xl text-white text-sm focus:outline-none focus:border-siwa-sand" placeholder="Describe the models, sizes, or quantities needed..."></textarea>
+                        </div>
+                        <button type="submit" id="contactSubmitBtn" class="w-full bg-white hover:bg-siwa-cream text-siwa-espresso font-bold text-sm py-4 rounded-full transition-all shadow-lg mt-2">
+                            Send via WhatsApp Instantly
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 7: MINIMALIST LUXURY FOOTER (Siwa Capital Footer) -->
+    <footer class="bg-[#0e0d0c] text-white py-16 border-t border-white/10 text-xs">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+            
+            <div>
+                <span class="font-serif text-lg tracking-wider font-bold block mb-1">KUNETT HARDWARE</span>
+                <p class="text-white/50 text-[11px]">By Harikrushna Enterprise &bull; Rajkot, Gujarat &bull; Exporting Globally</p>
+            </div>
+
+            <div class="flex flex-wrap gap-6 text-white/70">
+                <a href="#collections" class="hover:text-white transition-colors">Collections</a>
+                <a href="#principles" class="hover:text-white transition-colors">Principles</a>
+                <a href="#process" class="hover:text-white transition-colors">Our Craft</a>
+                <a href="#calculator" class="hover:text-white transition-colors">Estimator</a>
+                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+                <a href="index.html" class="hover:text-siwa-sand text-siwa-sand font-bold">Standard Website</a>
+            </div>
+
+            <div class="text-white/40">
+                &copy; 2026 Harikrushna Enterprise. All rights reserved.
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- PRODUCT DETAIL SPEC MODAL -->
+    <div id="product-modal" class="drawer-overlay fixed inset-0 z-[999] bg-black/75 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white text-siwa-espresso w-full max-w-2xl rounded-3xl p-6 md:p-10 relative max-h-[90vh] overflow-y-auto shadow-2xl">
+            <button onclick="closeProductModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-siwa-creambg text-siwa-espresso flex items-center justify-center hover:bg-siwa-lightborder transition-colors">
+                ✕
+            </button>
+            <div id="modal-product-body"></div>
+        </div>
+    </div>
+
+    <!-- INQUIRY LIST SLIDE-OUT DRAWER -->
+    <div id="inquiry-modal" class="drawer-overlay fixed inset-0 z-[999] bg-black/70 backdrop-blur-sm flex justify-end">
+        <div class="drawer-content bg-white text-siwa-espresso w-full max-w-md h-full shadow-2xl flex flex-col p-6 overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-siwa-lightborder mb-6">
+                <h3 class="font-serif text-2xl font-bold">Your Inquiry List</h3>
+                <button onclick="closeInquiryModal()" class="w-8 h-8 rounded-full bg-siwa-creambg flex items-center justify-center text-siwa-muted hover:text-black">
+                    ✕
+                </button>
+            </div>
+            <div id="inquiry-list-items" class="flex-grow space-y-4"></div>
+            <div class="pt-6 border-t border-siwa-lightborder mt-auto">
+                <button onclick="sendInquiryViaWhatsapp()" class="w-full bg-[#25D366] hover:bg-[#1ebe57] text-white py-4 rounded-full font-bold text-sm shadow-xl flex items-center justify-center gap-2">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg>
+                    Send Inquiries to Sanjay via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CATALOGUE DOWNLOAD MODAL -->
+    <div id="catalogue-modal" class="drawer-overlay fixed inset-0 z-[999] bg-black/75 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white text-siwa-espresso w-full max-w-md rounded-3xl p-8 relative shadow-2xl">
+            <button onclick="closeCatalogueModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-siwa-creambg text-siwa-muted hover:text-black flex items-center justify-center">
+                ✕
+            </button>
+            <div class="text-center mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest text-siwa-sand">2026 Edition</span>
+                <h3 class="font-serif text-2xl font-bold mt-1 mb-2">Get the Digital Catalogue</h3>
+                <p class="text-xs text-siwa-muted">Enter your details to receive our 2026 architectural hardware catalog PDF.</p>
+            </div>
+            <form id="catalogueForm" class="space-y-4">
+                <input type="text" name="Name" required class="w-full bg-siwa-creambg border border-siwa-lightborder p-3.5 rounded-xl text-sm focus:outline-none focus:border-siwa-sand" placeholder="Full Name *">
+                <input type="tel" name="Phone" required class="w-full bg-siwa-creambg border border-siwa-lightborder p-3.5 rounded-xl text-sm focus:outline-none focus:border-siwa-sand" placeholder="WhatsApp Phone *">
+                <input type="email" name="Email" required class="w-full bg-siwa-creambg border border-siwa-lightborder p-3.5 rounded-xl text-sm focus:outline-none focus:border-siwa-sand" placeholder="Email Address *">
+                <button type="submit" id="catBtn" class="w-full bg-siwa-espresso hover:bg-black text-white font-bold text-sm py-4 rounded-full transition-all shadow-lg">
+                    Instant WhatsApp Download
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Action -->
+    <a href="https://wa.me/919924637640?text=Hello%20KUNETT%20Hardware,%20I%20have%20an%20inquiry%20about%20your%20products." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 left-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center" aria-label="Chat on WhatsApp">
+        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.88-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+    </a>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const WHATSAPP_NUMBER = "919924637640";
+        const products = {all_products_json};
+        let inquiryList = [];
+        try {{
+            const saved = localStorage.getItem('kunett_inquiry_list');
+            if (saved) inquiryList = JSON.parse(saved);
+        }} catch(e) {{}}
+
+        let currentActiveSeries = 'all';
+        let currentModalProduct = null;
+        let selectedFinishes = [];
+        let selectedSizes = [];
+
+        function getColorStyle(color) {{
+            const map = {{
+                'Black': 'background-color: #1a1a1a;',
+                'R Gold': 'background: linear-gradient(135deg, #b76e79 0%, #e0bfb8 100%);',
+                'Gold': 'background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%);',
+                'SS Matt': 'background: linear-gradient(135deg, #E0E0E0 0%, #9E9E9E 100%);',
+                'Antique': 'background: linear-gradient(135deg, #8B7355 0%, #D2B48C 100%);',
+                'Grey': 'background-color: #757575;',
+                'CP': 'background: linear-gradient(135deg, #FFFFFF 0%, #E0E0E0 100%);'
+            }};
+            return map[color] || 'background-color: #ccc;';
+        }}
+
+        function renderGrid(seriesFilter = 'all') {{
+            const grid = document.getElementById('product-grid');
+            let filtered = (seriesFilter === 'all') ? products.slice(0, 24) : products.filter(p => p.series === seriesFilter);
+            
+            grid.innerHTML = filtered.map(p => `
+                <div onclick="openProductModal('${{p.code}}')" class="product-card group cursor-pointer bg-siwa-creambg hover:bg-white rounded-3xl p-5 border border-siwa-lightborder hover:border-siwa-sand transition-all duration-300 flex flex-col justify-between shadow-sm">
+                    <div class="aspect-square bg-white rounded-2xl p-4 flex items-center justify-center overflow-hidden mb-4 relative">
+                        <img src="${{p.image}}" alt="Model ${{p.code}}" class="product-img w-full h-full object-contain">
+                        <span class="absolute top-2.5 right-2.5 text-[9px] font-bold uppercase tracking-wider bg-siwa-creambg text-siwa-espresso px-2 py-0.5 rounded-full border border-siwa-lightborder">
+                            ${{p.series}}
+                        </span>
+                    </div>
+                    <div class="flex-grow flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-serif text-lg font-bold text-siwa-espresso">Model ${{p.code}}</h4>
+                                <span class="text-[10px] text-siwa-muted uppercase tracking-wider">${{p.category}}</span>
+                            </div>
+                            <p class="text-xs text-siwa-muted line-clamp-2 mb-3 leading-relaxed">${{p.description}}</p>
+                        </div>
+                        <div class="pt-3 border-t border-siwa-lightborder flex items-center justify-between">
+                            <div class="flex gap-1">
+                                ${{p.finishes.map(f => `<div class="w-3 h-3 rounded-full border border-black/10" style="${{getColorStyle(f)}}" title="${{f}}"></div>`).join('')}}
+                            </div>
+                            <span class="text-[11px] font-bold text-siwa-sand group-hover:underline">Spec &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }}
+
+        function filterProducts(series) {{
+            currentActiveSeries = series;
+            document.querySelectorAll('.filter-btn').forEach(b => {{
+                b.classList.remove('bg-siwa-espresso', 'text-white');
+                b.classList.add('bg-siwa-creambg', 'text-siwa-espresso');
+            }});
+            const activeBtn = document.getElementById('btn-filter-' + series);
+            if (activeBtn) {{
+                activeBtn.classList.add('bg-siwa-espresso', 'text-white');
+                activeBtn.classList.remove('bg-siwa-creambg', 'text-siwa-espresso');
+            }}
+            renderGrid(series);
+        }}
+
+        // Product Modal Logic
+        function openProductModal(code) {{
+            const p = products.find(x => x.code === String(code));
+            if (!p) return;
+            currentModalProduct = p;
+            selectedFinishes = [];
+            selectedSizes = [];
+
+            const body = document.getElementById('modal-product-body');
+            body.innerHTML = `
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="w-full md:w-1/2 aspect-square bg-siwa-creambg rounded-3xl p-6 flex items-center justify-center border border-siwa-lightborder">
+                        <img src="${{p.image}}" class="max-w-full max-h-full object-contain mix-blend-multiply">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="text-xs font-bold uppercase tracking-widest text-siwa-sand">${{p.series}} Series &bull; ${{p.category}}</span>
+                        <h3 class="font-serif text-3xl md:text-4xl font-bold mt-1 mb-3 text-siwa-espresso">Model ${{p.code}}</h3>
+                        <p class="text-sm text-siwa-muted leading-relaxed mb-6">${{p.description}}</p>
+                        
+                        <div class="mb-4">
+                            <h5 class="text-xs font-bold uppercase tracking-widest text-siwa-espresso mb-2">Select Finishes:</h5>
+                            <div class="flex flex-wrap gap-2" id="modal-finishes">
+                                ${{p.finishes.map(f => `<button type="button" onclick="toggleFinish('${{f}}')" id="fin-${{f.replace(/\s+/g, '_')}}" class="text-xs px-3 py-1.5 rounded-full border border-siwa-lightborder hover:border-black font-medium">${{f}}</button>`).join('')}}
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <h5 class="text-xs font-bold uppercase tracking-widest text-siwa-espresso mb-2">Select Sizes:</h5>
+                            <div class="flex flex-wrap gap-2" id="modal-sizes">
+                                ${{p.sizes.map(s => `<button type="button" onclick="toggleSize('${{s}}')" id="sz-${{s.replace(/[^a-zA-Z0-9]/g, '_')}}" class="text-xs px-3 py-1.5 rounded-full border border-siwa-lightborder hover:border-black font-medium">${{s}}</button>`).join('')}}
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button type="button" onclick="addCurrentToInquiry()" id="modal-inq-btn" class="flex-1 bg-siwa-espresso hover:bg-black text-white py-3.5 rounded-full font-bold text-xs tracking-wider uppercase transition-all shadow-md">
+                                Add to Inquiry List
+                            </button>
+                            <a href="https://wa.me/${{WHATSAPP_NUMBER}}?text=Hello%20Sanjay,%20I%20am%20inquirying%20about%20Model%20${{p.code}}%20(${{p.category}})." target="_blank" class="bg-[#25D366] hover:bg-[#1ebe57] text-white px-6 py-3.5 rounded-full font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-1.5 shadow-md">
+                                WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('product-modal').classList.add('active');
+        }}
+
+        function closeProductModal() {{
+            document.getElementById('product-modal').classList.remove('active');
+        }}
+
+        function toggleFinish(f) {{
+            const idx = selectedFinishes.indexOf(f);
+            if (idx > -1) selectedFinishes.splice(idx, 1);
+            else selectedFinishes.push(f);
+            const btn = document.getElementById('fin-' + f.replace(/\s+/g, '_'));
+            if (btn) {{
+                if (selectedFinishes.includes(f)) btn.classList.add('bg-siwa-espresso', 'text-white');
+                else btn.classList.remove('bg-siwa-espresso', 'text-white');
+            }}
+        }}
+
+        function toggleSize(s) {{
+            const idx = selectedSizes.indexOf(s);
+            if (idx > -1) selectedSizes.splice(idx, 1);
+            else selectedSizes.push(s);
+            const btn = document.getElementById('sz-' + s.replace(/[^a-zA-Z0-9]/g, '_'));
+            if (btn) {{
+                if (selectedSizes.includes(s)) btn.classList.add('bg-siwa-espresso', 'text-white');
+                else btn.classList.remove('bg-siwa-espresso', 'text-white');
+            }}
+        }}
+
+        function addCurrentToInquiry() {{
+            if (!currentModalProduct) return;
+            const btn = document.getElementById('modal-inq-btn');
+            if (selectedFinishes.length === 0 || selectedSizes.length === 0) {{
+                btn.textContent = "Please pick Finish & Size";
+                btn.classList.add('bg-red-500');
+                setTimeout(() => {{
+                    btn.textContent = "Add to Inquiry List";
+                    btn.classList.remove('bg-red-500');
+                }}, 1800);
+                return;
+            }}
+            inquiryList.push({{
+                product: currentModalProduct,
+                finishes: [...selectedFinishes],
+                sizes: [...selectedSizes]
+            }});
+            updateBadges();
+            btn.textContent = "Added to Inquiry List ✓";
+            btn.classList.add('bg-[#25D366]');
+            setTimeout(() => {{
+                btn.textContent = "Add to Inquiry List";
+                btn.classList.remove('bg-[#25D366]');
+                closeProductModal();
+            }}, 1200);
+        }}
+
+        function updateBadges() {{
+            const b = document.getElementById('nav-inquiry-badge');
+            if (b) {{
+                if (inquiryList.length > 0) {{
+                    b.textContent = inquiryList.length;
+                    b.classList.remove('hidden');
+                }} else {{
+                    b.classList.add('hidden');
+                }}
+            }}
+            try {{ localStorage.setItem('kunett_inquiry_list', JSON.stringify(inquiryList)); }} catch(e) {{}}
+        }}
+
+        function openInquiryModal() {{
+            const m = document.getElementById('inquiry-modal');
+            const c = document.getElementById('inquiry-list-items');
+            if (inquiryList.length === 0) {{
+                c.innerHTML = `<div class="text-center py-16 text-siwa-muted text-sm">Your inquiry list is empty.<br>Browse the collection and add models you like!</div>`;
+            }} else {{
+                c.innerHTML = inquiryList.map((item, idx) => `
+                    <div class="flex gap-4 p-4 bg-siwa-creambg rounded-2xl relative border border-siwa-lightborder">
+                        <img src="${{item.product.image}}" class="w-16 h-16 object-contain mix-blend-multiply bg-white rounded-xl p-1">
+                        <div class="flex-grow">
+                            <h5 class="font-serif font-bold text-base text-siwa-espresso">Model ${{item.product.code}}</h5>
+                            <p class="text-[11px] text-siwa-muted uppercase tracking-wider">${{item.product.category}}</p>
+                            <p class="text-xs text-siwa-espresso mt-1"><strong>Finishes:</strong> ${{item.finishes.join(', ') || 'Any'}}</p>
+                            <p class="text-xs text-siwa-espresso"><strong>Sizes:</strong> ${{item.sizes.join(', ') || 'Any'}}</p>
+                        </div>
+                        <button onclick="removeInquiryItem(${{idx}})" class="text-siwa-muted hover:text-red-500 text-sm p-1">✕</button>
+                    </div>
+                `).join('');
+            }}
+            m.classList.add('active');
+        }}
+
+        function closeInquiryModal() {{
+            document.getElementById('inquiry-modal').classList.remove('active');
+        }}
+
+        function removeInquiryItem(idx) {{
+            inquiryList.splice(idx, 1);
+            updateBadges();
+            openInquiryModal();
+        }}
+
+        function sendInquiryViaWhatsapp() {{
+            if (inquiryList.length === 0) {{
+                alert("Please add at least one model to your inquiry list.");
+                return;
+            }}
+            let text = "Hello Sanjay, I would like to inquire about the following KUNETT hardware models:\\n\\n";
+            inquiryList.forEach((item, i) => {{
+                text += `${{i+1}}. Model ${{item.product.code}} (${{item.product.category}})\\n`;
+                if (item.finishes.length) text += `   - Finishes: ${{item.finishes.join(', ')}}\\n`;
+                if (item.sizes.length) text += `   - Sizes: ${{item.sizes.join(', ')}}\\n`;
+                text += "\\n";
+            }});
+            text += "Please share availability, delivery timeframe, and pricing.";
+            window.open(`https://wa.me/${{WHATSAPP_NUMBER}}?text=${{encodeURIComponent(text)}}`, '_blank');
+        }}
+
+        // Catalogue Modal
+        function openCatalogueModal(e) {{
+            if (e) e.preventDefault();
+            document.getElementById('catalogue-modal').classList.add('active');
+        }}
+        function closeCatalogueModal() {{
+            document.getElementById('catalogue-modal').classList.remove('active');
+        }}
+
+        // Mobile Menu
+        function toggleMobileMenu() {{
+            const d = document.getElementById('mobile-menu-drawer');
+            const b = document.getElementById('mobile-menu-backdrop');
+            d.classList.remove('translate-x-full');
+            b.classList.remove('opacity-0', 'pointer-events-none');
+        }}
+        function closeMobileMenu() {{
+            const d = document.getElementById('mobile-menu-drawer');
+            const b = document.getElementById('mobile-menu-backdrop');
+            if (d) d.classList.add('translate-x-full');
+            if (b) b.classList.add('opacity-0', 'pointer-events-none');
+        }}
+
+        // Calculator
+        function calculateHardware() {{
+            const k = Math.max(0, parseInt(document.getElementById('calc-kitchens')?.value || 0));
+            const w = Math.max(0, parseInt(document.getElementById('calc-wardrobes')?.value || 0));
+            const r = Math.max(0, parseInt(document.getElementById('calc-rooms')?.value || 0));
+            
+            document.getElementById('est-handles').innerText = (k * 12) + (w * 4) + (r * 4);
+            document.getElementById('est-profiles').innerText = (k * 15) + (w * 5) + 'm';
+            document.getElementById('est-counsils').innerText = (k * 4) + (w * 4);
+            document.getElementById('est-knobs').innerText = (r * 6);
+        }}
+
+        function shareCalculatorEstimate() {{
+            const k = document.getElementById('calc-kitchens')?.value || 0;
+            const w = document.getElementById('calc-wardrobes')?.value || 0;
+            const r = document.getElementById('calc-rooms')?.value || 0;
+            const h = document.getElementById('est-handles')?.innerText;
+            const p = document.getElementById('est-profiles')?.innerText;
+            const c = document.getElementById('est-counsils')?.innerText;
+            const kn = document.getElementById('est-knobs')?.innerText;
+
+            const text = `*New Project Hardware Estimate*\\n- Kitchens: ${{k}}\\n- Wardrobes: ${{w}}\\n- Rooms: ${{r}}\\n\\n*Estimated Requirement:*\\n- Pull Handles: ${{h}}\\n- Edge Profiles: ${{p}}\\n- Counsil Handles: ${{c}}\\n- Vanity Knobs: ${{kn}}\\n\\nPlease provide a quotation for these quantities.`;
+            window.open(`https://wa.me/${{WHATSAPP_NUMBER}}?text=${{encodeURIComponent(text)}}`, '_blank');
+        }}
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {{
+            updateBadges();
+            renderGrid('all');
+            calculateHardware();
+
+            // Contact Form
+            const form = document.getElementById('contactForm');
+            if (form) {{
+                form.addEventListener('submit', (e) => {{
+                    e.preventDefault();
+                    const name = form.querySelector('[name="Name"]')?.value || '';
+                    const phone = form.querySelector('[name="Phone"]')?.value || '';
+                    const subject = form.querySelector('[name="Subject"]')?.value || '';
+                    const msg = form.querySelector('[name="Message"]')?.value || '';
+                    const text = `*New Website Inquiry*\\n*Name:* ${{name}}\\n*Phone:* ${{phone}}\\n*Subject:* ${{subject}}\\n*Message:*\\n${{msg}}`;
+                    window.open(`https://wa.me/${{WHATSAPP_NUMBER}}?text=${{encodeURIComponent(text)}}`, '_blank');
+                }});
+            }}
+
+            // Catalogue Form
+            const catForm = document.getElementById('catalogueForm');
+            if (catForm) {{
+                catForm.addEventListener('submit', (e) => {{
+                    e.preventDefault();
+                    const name = catForm.querySelector('[name="Name"]')?.value || '';
+                    const phone = catForm.querySelector('[name="Phone"]')?.value || '';
+                    const email = catForm.querySelector('[name="Email"]')?.value || '';
+                    const text = `*Catalogue Download Request*\\n*Name:* ${{name}}\\n*Phone:* ${{phone}}\\n*Email:* ${{email}}\\nPlease send me the KUNETT 2026 Architectural Hardware PDF Catalogue.`;
+                    window.open(`https://wa.me/${{WHATSAPP_NUMBER}}?text=${{encodeURIComponent(text)}}`, '_blank');
+                    closeCatalogueModal();
+                }});
+            }}
+        }});
+    </script>
+</body>
+</html>
+"""
+    return html
+
+# Generate preview-siwa.html
+with open('preview-siwa.html', 'w', encoding='utf-8') as f:
+    f.write(generate_html())
+
+print("Successfully generated preview-siwa.html!")
