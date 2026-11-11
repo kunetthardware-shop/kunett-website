@@ -2,6 +2,24 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
+    <script>
+        // Local file:// safety: route root links to index.html when opened locally without web server
+        if (window.location.protocol === 'file:') {
+            document.addEventListener('click', function(e) {
+                var a = e.target.closest && e.target.closest('a');
+                if (a && a.getAttribute('href') === '/') {
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                }
+            }, true);
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('a[href="/"]').forEach(function(a) {
+                    a.setAttribute('href', 'index.html');
+                });
+            });
+        }
+    </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact KUNETT Hardware | Factory in Rajkot, Gujarat | Harikrushna Enterprise</title>
     <meta name="description" content="Contact KUNETT Hardware (Harikrushna Enterprise) in Rajkot for direct factory inquiries, custom handle profile orders, and dealership opportunities. WhatsApp: +91 99246 37640.">

@@ -2,6 +2,24 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
+    <script>
+        // Local file:// safety: route root links to index.html when opened locally without web server
+        if (window.location.protocol === 'file:') {
+            document.addEventListener('click', function(e) {
+                var a = e.target.closest && e.target.closest('a');
+                if (a && a.getAttribute('href') === '/') {
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                }
+            }, true);
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('a[href="/"]').forEach(function(a) {
+                    a.setAttribute('href', 'index.html');
+                });
+            });
+        }
+    </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aluminium Handles &amp; Aluminium Handle Profile | KUNETT Hardware</title>
     <meta name="description" content="Harikrushna Enterprise (KUNETT) is India's leading manufacturer of solid aluminium handles and aluminium handle profile systems for kitchens &amp; wardrobes. Direct factory supply for homeowners, carpenters, architects &amp; wholesalers.">
@@ -2297,14 +2315,19 @@
             }
 
             if (!isPopState) {
-                if (page === 'home') {
-                    // Update URL to clean root path without piling up duplicate #home hash history
-                    const cleanUrl = window.location.pathname || '/';
-                    window.history.pushState({ page: 'home', productId: null }, "", cleanUrl);
-                } else {
-                    let url = `#${page}`;
-                    if (productId) url += `?id=${productId}`;
-                    window.history.pushState({ page, productId }, "", url);
+                try {
+                    if (window.location.protocol !== 'file:') {
+                        if (page === 'home') {
+                            const cleanUrl = window.location.pathname || '/';
+                            window.history.pushState({ page: 'home', productId: null }, "", cleanUrl);
+                        } else {
+                            let url = `#${page}`;
+                            if (productId) url += `?id=${productId}`;
+                            window.history.pushState({ page, productId }, "", url);
+                        }
+                    }
+                } catch (err) {
+                    // Ignore DOMException on local file:// origin
                 }
             }
 

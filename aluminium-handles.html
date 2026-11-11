@@ -2,6 +2,24 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
+    <script>
+        // Local file:// safety: route root links to index.html when opened locally without web server
+        if (window.location.protocol === 'file:') {
+            document.addEventListener('click', function(e) {
+                var a = e.target.closest && e.target.closest('a');
+                if (a && a.getAttribute('href') === '/') {
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                }
+            }, true);
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('a[href="/"]').forEach(function(a) {
+                    a.setAttribute('href', 'index.html');
+                });
+            });
+        }
+    </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solid Aluminium Handles Manufacturer in Rajkot | KUNETT Hardware</title>
     <meta name="description" content="Leading manufacturer of solid aluminium handles & cabinet pull handles in Rajkot, India. 100% aerospace-grade virgin alloy for luxury kitchens and wardrobes. Factory direct prices.">
