@@ -1,13 +1,21 @@
-# KUNETT Hardware - Hostinger LiteSpeed / Apache Performance & SEO Rules
+# KUNETT Hardware - Hostinger LiteSpeed / Apache Performance, SEO & AI Agent Rules
+AddType text/markdown;charset=utf-8 .md .markdown
+AddType application/json;charset=utf-8 .json
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # Allow RFC 5785 .well-known directory (for MCP server card, SSL, etc.)
+  # Expose RFC 5785 .well-known directory (for MCP server card, SSL, etc.)
   RewriteRule ^\.well-known/ - [L]
 
-  # Serve Markdown representation when an agent requests Accept: text/markdown
+  # Clean URL rewrites for About, Terms, and Contact
+  RewriteRule ^about/?$ about.html [L]
+  RewriteRule ^terms/?$ terms.html [L]
+  RewriteRule ^contact/?$ contact.html [L]
+
+  # Goal 4: Serve Markdown representation when an agent requests Accept: text/markdown
   RewriteCond %{HTTP:Accept} text/markdown [NC]
-  RewriteRule ^(index\.html)?$ llms.txt [L]
+  RewriteRule ^(index\.html)?$ index.md [L]
 
   # Force HTTPS
   RewriteCond %{HTTPS} off
@@ -17,29 +25,31 @@
   RewriteCond %{HTTP_HOST} ^www\.kunetthardware\.com [NC]
   RewriteRule ^(.*)$ https://kunetthardware.com/$1 [L,R=301]
 
-  # 301 Redirect /index.html to canonical root / (only for normal browser requests, not markdown)
+  # 301 Redirect /index.html to canonical root / (only for browser HTML requests)
   RewriteCond %{HTTP:Accept} !text/markdown [NC]
   RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
   RewriteRule ^index\.html$ https://kunetthardware.com/ [R=301,L]
 </IfModule>
 
-# MIME Types for Agent Readiness
-<Files "llms.txt">
+# Goal 4: Enforce text/markdown MIME type for Markdown representations
+<FilesMatch "(index|llms)\.(md|txt)$">
   ForceType "text/markdown; charset=utf-8"
-</Files>
-<Files "llms-full.txt">
-  ForceType "text/markdown; charset=utf-8"
-</Files>
+  Header set Content-Type "text/markdown; charset=utf-8"
+</FilesMatch>
+
 <Files "server-card.json">
   ForceType "application/json; charset=utf-8"
+  Header set Content-Type "application/json; charset=utf-8"
 </Files>
 <Files "mcp.json">
   ForceType "application/json; charset=utf-8"
+  Header set Content-Type "application/json; charset=utf-8"
 </Files>
 
-# RFC 8288 Link Headers & Content Negotiation Signals for AI Agents
+# Goal 5: Emit RFC 8288 Link Headers & Content Negotiation Signals for AI Agents
 <IfModule mod_headers.c>
-  Header always set Link '<https://kunetthardware.com/llms.txt>; rel="alternate"; type="text/markdown", <https://kunetthardware.com/.well-known/mcp/server-card.json>; rel="service-desc"'
+  Header always set Link '</llms.txt>; rel="alternate"; type="text/markdown", </llms.txt>; rel="describedby", <https://kunetthardware.com/llms.txt>; rel="alternate"; type="text/markdown", </.well-known/mcp/server-card.json>; rel="service-desc"'
+  Header set Link '</llms.txt>; rel="alternate"; type="text/markdown", </llms.txt>; rel="describedby", <https://kunetthardware.com/llms.txt>; rel="alternate"; type="text/markdown", </.well-known/mcp/server-card.json>; rel="service-desc"'
   Header append Vary "Accept"
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"

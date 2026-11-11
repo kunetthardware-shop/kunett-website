@@ -2,22 +2,20 @@
 
 > KUNETT Hardware (Harikrushna Enterprise) is an Indian manufacturer of solid aerospace-grade 6063-T5 virgin aluminium architectural handles, continuous handle profiles (J-pull & G-profile), concealed wardrobe counsil handles, and cabinet knobs, located in Rajkot, Gujarat.
 
-KUNETT manufactures premium architectural fittings engineered for residential villas, modern modular kitchens, and commercial towers. All products undergo precision 5-axis CNC VMC machining and 15-micron deep electrochemical anodizing.
-
 ## Core Products
-- [Solid Aluminium Handles (200 Series)](https://kunetthardware.com/aluminium-handles.html): Solid extruded virgin aluminium cabinet and wardrobe pull handles, CNC VMC machined, sizes 96mm to 1200mm.
-- [Aluminium Handle Profiles (300 Series)](https://kunetthardware.com/aluminium-handle-profile.html): Continuous edge-mounted J-pull profiles and Gola G-profiles, blade-cut lengths up to 3 meters (10 feet).
-- [Concealed Wardrobe Counsil Handles (400 Series)](https://kunetthardware.com/wardrobe-counsil-handles.html): Deep-recess flush concealed handles for full-height 7ft to 9ft wardrobe panels.
-- [Sliding Wardrobe Handles (450 Series)](https://kunetthardware.com/sliding-wardrobe-handles.html): Zero-clearance flush sliding door handles preventing shutter collisions.
-- [Solid Aluminium Cabinet Knobs (500 Series)](https://kunetthardware.com/cabinet-knobs.html): Minimalist solid geometric knobs for vanities, bedside tables, and dressers.
+- [Solid Aluminium Handles](https://kunetthardware.com/aluminium-handles.html): Solid extruded virgin aluminium cabinet and wardrobe pull handles, CNC VMC machined, sizes 96mm to 1200mm.
+- [Aluminium Handle Profiles](https://kunetthardware.com/aluminium-handle-profile.html): Continuous edge-mounted J-pull profiles and Gola G-profiles, blade-cut lengths up to 3 meters (10 feet).
+- [Concealed Wardrobe Counsil Handles](https://kunetthardware.com/wardrobe-counsil-handles.html): Deep-recess flush concealed handles for full-height 7ft to 9ft wardrobe panels.
+- [Sliding Wardrobe Handles](https://kunetthardware.com/sliding-wardrobe-handles.html): Zero-clearance flush sliding door handles preventing shutter collisions.
+- [Solid Aluminium Cabinet Knobs](https://kunetthardware.com/cabinet-knobs.html): Minimalist solid geometric knobs for vanities, bedside tables, and dressers.
 
-## Company & Facilities
+## Company
 - [About Us](https://kunetthardware.com/about.html): Company history of Harikrushna Enterprise, founder Sanjay Patel, and 10+ years of hardware engineering in Rajkot, Gujarat.
 - [Manufacturing Process](https://kunetthardware.com/our-process.html): Tour our 5-axis CNC VMC milling, extrusion, and 15-micron electrochemical anodizing facility.
-- [Contact & Factory Location](https://kunetthardware.com/contact.html): Factory address at Plot No. 15/17, Street No. 3, Atika Industrial Area, Dhebar Road (South), Rajkot, with direct phone and WhatsApp inquiry.
-- [Terms of Service & Wholesale Policies](https://kunetthardware.com/terms.html): B2B wholesale ordering terms, minimum order quantities, pan-India logistics, and 15-micron anodizing warranty.
+- [Contact Factory](https://kunetthardware.com/contact.html): Factory address at Plot No. 15/17, Street No. 3, Atika Industrial Area, Dhebar Road (South), Rajkot, with direct phone and WhatsApp inquiry.
+- [Terms of Service](https://kunetthardware.com/terms.html): B2B wholesale ordering terms, minimum order quantities, pan-India logistics, and 15-micron anodizing warranty.
 
-## Guides & Deep Context
-- [Full AI Knowledge Context](https://kunetthardware.com/llms-full.txt): Complete technical specifications, metallurgy, alloy tolerances, and FAQ database.
+## Optional
+- [Full Knowledge Context](https://kunetthardware.com/llms-full.txt): Complete technical specifications, metallurgy, alloy tolerances, and FAQ database.
 - [Top 10 Aluminium Handle Manufacturers in Rajkot](https://kunetthardware.com/#blog-post?id=top-10-aluminium-handle-manufacturers-in-rajkot): 2026 wholesale buyer guide and Rajkot hardware industrial cluster overview.
 - [MCP Server Card](https://kunetthardware.com/.well-known/mcp/server-card.json): Model Context Protocol server capabilities, metadata, and tool discovery card.

@@ -42,8 +42,102 @@
     <meta name="google-site-verification" content="QRnYqolZjasBui8Eh4pJYiUIb8mCODUFxSQsaiOg0UQ" />
     <link rel="canonical" href="https://kunetthardware.com/" />
     <!-- Agent Discovery & Model Context Protocol -->
-    <link rel="alternate" type="text/markdown" title="LLM Context Summary" href="https://kunetthardware.com/llms.txt">
-    <link rel="service-desc" type="application/json" title="MCP Server Card" href="https://kunetthardware.com/.well-known/mcp/server-card.json">
+    <link rel="alternate" type="text/markdown" title="Markdown Alternate" href="/index.md">
+    <link rel="alternate" type="text/markdown" title="LLM Context Summary" href="/llms.txt">
+    <link rel="describedby" type="text/markdown" title="LLM Site Summary" href="/llms.txt">
+    <link rel="service-desc" type="application/json" title="MCP Server Card" href="/.well-known/mcp/server-card.json">
+
+    <!-- WebMCP In-Browser Agent Integration (Early Head Execution) -->
+    <script>
+        (function registerWebMCP() {
+            try {
+                const toolsRegistry = new Map();
+                const mcInterface = {
+                    tools: toolsRegistry,
+                    registerTool: function(tool) {
+                        if (tool && tool.name) {
+                            toolsRegistry.set(tool.name, tool);
+                        }
+                        return Promise.resolve(true);
+                    },
+                    getTools: function() {
+                        return Array.from(toolsRegistry.values());
+                    }
+                };
+
+                if (!navigator.modelContext) navigator.modelContext = mcInterface;
+                if (!window.modelContext) window.modelContext = mcInterface;
+                if (!document.modelContext) document.modelContext = mcInterface;
+
+                const catalogTool = {
+                    name: "search_hardware_catalog",
+                    description: "Search KUNETT architectural aluminium handles, profiles, counsil handles, and cabinet knobs by series or finish.",
+                    inputSchema: {
+                        type: "object",
+                        properties: {
+                            category: {
+                                type: "string",
+                                enum: ["handles", "profiles", "counsil", "sliding", "knobs", "all"],
+                                description: "Product category"
+                            },
+                            finish: {
+                                type: "string",
+                                description: "Finish option: Matte Black, Rose Gold, Champagne, Antique Brass, SS Matt, Grey"
+                            }
+                        },
+                        additionalProperties: false
+                    },
+                    execute: async function(params) {
+                        return JSON.stringify({
+                            status: "success",
+                            brand: "KUNETT Hardware",
+                            manufacturer: "Harikrushna Enterprise",
+                            city: "Rajkot, Gujarat",
+                            collections: [
+                                { name: "Aluminium Handles (200 Series)", url: "https://kunetthardware.com/aluminium-handles.html" },
+                                { name: "Aluminium Handle Profile (300 Series)", url: "https://kunetthardware.com/aluminium-handle-profile.html" },
+                                { name: "Wardrobe Counsil Handles (400 Series)", url: "https://kunetthardware.com/wardrobe-counsil-handles.html" },
+                                { name: "Sliding Wardrobe Handles (450 Series)", url: "https://kunetthardware.com/sliding-wardrobe-handles.html" },
+                                { name: "Solid Cabinet Knobs (500 Series)", url: "https://kunetthardware.com/cabinet-knobs.html" }
+                            ]
+                        });
+                    }
+                };
+
+                const quoteTool = {
+                    name: "request_wholesale_quote",
+                    description: "Request factory-direct wholesale pricing, container export quotations, or custom profile extrusions directly from Sanjay Patel in Rajkot, Gujarat.",
+                    inputSchema: {
+                        type: "object",
+                        properties: {
+                            series: { type: "string", description: "Product series name or code" },
+                            quantity: { type: "number", description: "Quantity in pieces or continuous meters" }
+                        },
+                        required: ["series", "quantity"],
+                        additionalProperties: false
+                    },
+                    execute: async function(params) {
+                        return JSON.stringify({
+                            status: "success",
+                            contact: "Sanjay Patel",
+                            whatsapp: "+919924637640",
+                            location: "Rajkot, Gujarat, India",
+                            dispatchTime: "24-48 hours"
+                        });
+                    }
+                };
+
+                navigator.modelContext.registerTool(catalogTool);
+                navigator.modelContext.registerTool(quoteTool);
+                if (document.modelContext && document.modelContext !== navigator.modelContext) {
+                    document.modelContext.registerTool(catalogTool);
+                    document.modelContext.registerTool(quoteTool);
+                }
+            } catch (err) {
+                console.warn("WebMCP initialization notice:", err);
+            }
+        })();
+    </script>
     <!-- Favicon & Site Icons for Google Search, Mobile & Desktop Browsers -->
     <link rel="shortcut icon" href="https://kunetthardware.com/favicon.ico">
     <link rel="icon" type="image/x-icon" href="https://kunetthardware.com/favicon.ico">
@@ -422,10 +516,11 @@
             <!-- Desktop: Navigation Links (Hidden on Mobile) -->
             <div class="hidden md:flex gap-6 items-center flex-nowrap whitespace-nowrap justify-end w-full pl-6">
                 <a href="/" onclick="navigate('home'); return false;" id="nav-home" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">Home</a>
-                <a href="about.html" id="nav-about" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">About Us</a>
-                <a href="our-process.html" id="nav-process" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">Our Process</a>
+                <a href="/about.html" id="nav-about" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">About Us</a>
+                <a href="/our-process.html" id="nav-process" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">Our Process</a>
+                <a href="/terms.html" id="nav-terms" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">Terms</a>
                 <a href="#blog" onclick="navigate('blog'); return false;" id="nav-blog" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">Blog</a>
-                <a href="contact.html" id="nav-contact" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">Contact</a>
+                <a href="/contact.html" id="nav-contact" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">Contact</a>
                 
                 <div class="w-px h-5 bg-brand-lightgray mx-1"></div>
 
@@ -1149,11 +1244,11 @@
             <div>
                 <h4 class="font-bold text-brand-black mb-4">Company &amp; Legal</h4>
                 <ul class="space-y-3 text-sm text-brand-gray">
-                    <li><a href="about.html" class="hover:text-brand-black font-semibold text-brand-black transition-colors">About Us</a></li>
-                    <li><a href="terms.html" class="hover:text-brand-black transition-colors">Terms of Service</a></li>
-                    <li><a href="terms.html#privacy" class="hover:text-brand-black transition-colors">Privacy Policy</a></li>
-                    <li><a href="contact.html" class="hover:text-brand-black transition-colors">Contact Us</a></li>
-                    <li><a href="llms.txt" class="hover:text-brand-black transition-colors">LLM Knowledge Feed (llms.txt)</a></li>
+                    <li><a href="/about.html" class="hover:text-brand-black font-semibold text-brand-black transition-colors">About Us</a></li>
+                    <li><a href="/terms.html" class="hover:text-brand-black transition-colors">Terms of Service</a></li>
+                    <li><a href="/terms.html#privacy" class="hover:text-brand-black transition-colors">Privacy Policy</a></li>
+                    <li><a href="/contact.html" class="hover:text-brand-black transition-colors">Contact Us</a></li>
+                    <li><a href="/llms.txt" class="hover:text-brand-black transition-colors">LLM Knowledge Feed (llms.txt)</a></li>
                     <li><a href="#" onclick="openCatalogueModal(event)" class="hover:text-brand-black transition-colors">Digital Catalogue</a></li>
                 </ul>
             </div>
@@ -1161,10 +1256,10 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-brand-gray">
             <p>© 2026 KUNETT Hardware by Harikrushna Enterprise. All rights reserved.</p>
             <div class="flex gap-4 mt-4 md:mt-0">
-                <a href="about.html" class="hover:text-brand-black transition-colors">About Us</a>
-                <a href="terms.html" class="hover:text-brand-black transition-colors">Terms of Service</a>
-                <a href="terms.html#privacy" class="hover:text-brand-black transition-colors">Privacy Policy</a>
-                <a href="contact.html" class="hover:text-brand-black transition-colors">Contact</a>
+                <a href="/about.html" class="hover:text-brand-black transition-colors">About Us</a>
+                <a href="/terms.html" class="hover:text-brand-black transition-colors">Terms of Service</a>
+                <a href="/terms.html#privacy" class="hover:text-brand-black transition-colors">Privacy Policy</a>
+                <a href="/contact.html" class="hover:text-brand-black transition-colors">Contact</a>
             </div>
         </div>
     </footer>
@@ -1205,86 +1300,6 @@
 
     <!-- Application Logic -->
     <script>
-        // WebMCP In-Browser Agent Integration (SEP-1649 / W3C Model Context API)
-        (function initWebMCP() {
-            try {
-                if (!window.navigator.modelContext) {
-                    window.navigator.modelContext = {
-                        _tools: new Map(),
-                        registerTool: function(tool) {
-                            if (tool && tool.name) {
-                                this._tools.set(tool.name, tool);
-                            }
-                            return true;
-                        },
-                        getTools: function() {
-                            return Array.from(this._tools.values());
-                        }
-                    };
-                }
-
-                // Tool 1: Catalog Search Tool
-                window.navigator.modelContext.registerTool({
-                    name: "search_hardware_catalog",
-                    description: "Search KUNETT architectural aluminium handles, profiles, counsil handles, and cabinet knobs by series or finish.",
-                    inputSchema: {
-                        type: "object",
-                        properties: {
-                            category: {
-                                type: "string",
-                                enum: ["handles", "profiles", "counsil", "sliding", "knobs", "all"],
-                                description: "Product category"
-                            },
-                            finish: {
-                                type: "string",
-                                description: "Finish option: Matte Black, Rose Gold, Champagne, Antique Brass, SS Matt, Grey"
-                            }
-                        }
-                    },
-                    execute: async function(params) {
-                        return {
-                            status: "success",
-                            brand: "KUNETT Hardware",
-                            manufacturer: "Harikrushna Enterprise",
-                            city: "Rajkot, Gujarat",
-                            collections: [
-                                { name: "Aluminium Handles (200 Series)", url: "https://kunetthardware.com/aluminium-handles.html" },
-                                { name: "Aluminium Handle Profile (300 Series)", url: "https://kunetthardware.com/aluminium-handle-profile.html" },
-                                { name: "Wardrobe Counsil Handles (400 Series)", url: "https://kunetthardware.com/wardrobe-counsil-handles.html" },
-                                { name: "Sliding Wardrobe Handles (450 Series)", url: "https://kunetthardware.com/sliding-wardrobe-handles.html" },
-                                { name: "Solid Cabinet Knobs (500 Series)", url: "https://kunetthardware.com/cabinet-knobs.html" }
-                            ]
-                        };
-                    }
-                });
-
-                // Tool 2: Wholesale Quotation & Sourcing Tool
-                window.navigator.modelContext.registerTool({
-                    name: "request_wholesale_quote",
-                    description: "Connect directly with Sanjay Patel at KUNETT factory in Rajkot for wholesale B2B pricing, export freight, and custom profile extrusions.",
-                    inputSchema: {
-                        type: "object",
-                        properties: {
-                            series: { type: "string", description: "Product series name or code" },
-                            quantity: { type: "number", description: "Units or meters needed" }
-                        },
-                        required: ["series", "quantity"]
-                    },
-                    execute: async function(params) {
-                        return {
-                            status: "success",
-                            contact: "Sanjay Patel",
-                            whatsapp: "+919924637640",
-                            location: "Rajkot, Gujarat, India",
-                            dispatchTime: "24-48 hours"
-                        };
-                    }
-                });
-            } catch (err) {
-                console.warn("WebMCP registration note:", err);
-            }
-        })();
-
         // Set actual Whatsapp Number Here! (e.g. 919876543210)
         const WHATSAPP_NUMBER = "919924637640"; 
         
