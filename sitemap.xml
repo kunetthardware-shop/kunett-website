@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://kunetthardware.com/</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -34,7 +34,7 @@
   </url>
   <url>
     <loc>https://kunetthardware.com/aluminium-handle-profile.html</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <image:image>
@@ -45,7 +45,7 @@
   </url>
   <url>
     <loc>https://kunetthardware.com/aluminium-handles.html</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <image:image>
@@ -56,7 +56,7 @@
   </url>
   <url>
     <loc>https://kunetthardware.com/wardrobe-counsil-handles.html</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
     <image:image>
@@ -67,7 +67,7 @@
   </url>
   <url>
     <loc>https://kunetthardware.com/sliding-wardrobe-handles.html</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
     <image:image>
@@ -78,7 +78,7 @@
   </url>
   <url>
     <loc>https://kunetthardware.com/cabinet-knobs.html</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -89,7 +89,7 @@
   </url>
   <url>
     <loc>https://kunetthardware.com/our-process.html</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -105,8 +105,14 @@
   </url>
   <url>
     <loc>https://kunetthardware.com/contact.html</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://kunetthardware.com/llms.txt</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
   </url>
 </urlset>
