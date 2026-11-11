@@ -1440,6 +1440,7 @@
         }
         document.addEventListener('DOMContentLoaded', () => setTimeout(hidePreloader, 600));
         setTimeout(hidePreloader, 1800);
+        window.addEventListener('pageshow', hidePreloader);
 
         // Robot
         let mouseX = -100, mouseY = -100, robotX = -100, robotY = -100;
