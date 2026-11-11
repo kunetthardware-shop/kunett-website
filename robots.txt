@@ -1,6 +1,9 @@
 User-agent: *
 Allow: /
 
+# Content Signals (Content-Signal Directive)
+Content-Signal: search=yes, ai-train=no
+
 # Allow AI Search Engines, Answer Engines & Crawlers
 User-agent: GPTBot
 Allow: /
@@ -33,5 +36,8 @@ Allow: /
 # See https://llmstxt.org
 # Primary LLM summary: https://kunetthardware.com/llms.txt
 # Comprehensive LLM database: https://kunetthardware.com/llms-full.txt
+
+# MCP Server Card (SEP-1649 / SEP-2127)
+# Server Card: https://kunetthardware.com/.well-known/mcp/server-card.json
 
 Sitemap: https://kunetthardware.com/sitemap.xml

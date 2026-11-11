@@ -41,6 +41,9 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="google-site-verification" content="QRnYqolZjasBui8Eh4pJYiUIb8mCODUFxSQsaiOg0UQ" />
     <link rel="canonical" href="https://kunetthardware.com/" />
+    <!-- Agent Discovery & Model Context Protocol -->
+    <link rel="alternate" type="text/markdown" title="LLM Context Summary" href="https://kunetthardware.com/llms.txt">
+    <link rel="service-desc" type="application/json" title="MCP Server Card" href="https://kunetthardware.com/.well-known/mcp/server-card.json">
     <!-- Favicon & Site Icons for Google Search, Mobile & Desktop Browsers -->
     <link rel="shortcut icon" href="https://kunetthardware.com/favicon.ico">
     <link rel="icon" type="image/x-icon" href="https://kunetthardware.com/favicon.ico">
@@ -419,6 +422,7 @@
             <!-- Desktop: Navigation Links (Hidden on Mobile) -->
             <div class="hidden md:flex gap-6 items-center flex-nowrap whitespace-nowrap justify-end w-full pl-6">
                 <a href="/" onclick="navigate('home'); return false;" id="nav-home" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">Home</a>
+                <a href="about.html" id="nav-about" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">About Us</a>
                 <a href="our-process.html" id="nav-process" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">Our Process</a>
                 <a href="#blog" onclick="navigate('blog'); return false;" id="nav-blog" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">Blog</a>
                 <a href="contact.html" id="nav-contact" class="nav-link text-sm font-medium hover:text-brand-gray transition-colors">Contact</a>
@@ -465,6 +469,7 @@
 
         <div class="flex flex-col p-6 gap-2 text-base font-bold text-brand-black overflow-y-auto flex-grow pb-24">
             <a href="/" onclick="closeMobileMenu(); navigate('home'); return false;" class="text-left py-3 border-b border-brand-lightgray/50 hover:text-brand-gray">Home</a>
+            <a href="about.html" class="text-left py-3 border-b border-brand-lightgray/50 hover:text-brand-gray">About Us</a>
             <a href="our-process.html" class="text-left py-3 border-b border-brand-lightgray/50 hover:text-brand-gray">Our Process</a>
             <a href="#blog" onclick="closeMobileMenu(); navigate('blog'); return false;" class="text-left py-3 border-b border-brand-lightgray/50 hover:text-brand-gray">Blog</a>
             <a href="#calculator" onclick="closeMobileMenu(); navigate('calculator'); return false;" class="text-left py-3 border-b border-brand-lightgray/50 text-brand-black flex items-center justify-between font-bold">
@@ -477,6 +482,7 @@
             <a href="sliding-wardrobe-handles.html" class="text-left py-3 border-b border-brand-lightgray/50 hover:text-brand-gray">Sliding Counsils</a>
             <a href="cabinet-knobs.html" class="text-left py-3 border-b border-brand-lightgray/50 hover:text-brand-gray">Cabinet Knobs</a>
             <a href="contact.html" class="text-left py-3 border-b border-brand-lightgray/50 text-brand-black font-bold">Contact Us</a>
+            <a href="terms.html" class="text-left py-3 border-b border-brand-lightgray/50 hover:text-brand-gray">Terms of Service</a>
             <a href="#inquiry" onclick="closeMobileMenu(); navigate('inquiry'); return false;" class="text-left py-3 border-b border-brand-lightgray/50">My Inquiry List</a>
             <a href="#" onclick="closeMobileMenu(); openCatalogueModal(event)" class="mt-8 text-center text-sm bg-brand-black text-white px-5 py-4 rounded-full shadow-lg">Download Catalogue</a>
         </div>
@@ -1112,14 +1118,25 @@
 
     <!-- Enhanced Footer -->
     <footer class="border-t border-brand-lightgray pt-16 pb-8 px-6 bg-brand-offwhite">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12 border-b border-brand-lightgray pb-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 mb-12 border-b border-brand-lightgray pb-12">
             <div>
                 <!-- Replace text with actual Logo image in footer -->
-                <img src="assets/logo.png" alt="KUNETT Logo" class="h-32 md:h-40 w-auto object-contain mb-6">
-                <p class="text-sm text-brand-gray max-w-xs leading-relaxed"><strong class="text-brand-black block mb-1">Your new home decorator.</strong>Premium aluminium hardware engineered for modern spaces. Exporting globally to the US, Europe, and worldwide.</p>
+                <img src="assets/logo.png" alt="KUNETT Logo" class="h-28 md:h-36 w-auto object-contain mb-4">
+                <p class="text-sm text-brand-gray max-w-xs leading-relaxed"><strong class="text-brand-black block mb-1">Your new home decorator.</strong>Premier solid aluminium hardware and handle profiles engineered in Rajkot, Gujarat. Direct supply for homeowners, carpenters, and global export.</p>
             </div>
             <div>
-                <h4 class="font-bold text-brand-black mb-4">Connect</h4>
+                <h4 class="font-bold text-brand-black mb-4">Hardware Collections</h4>
+                <ul class="space-y-2.5 text-sm text-brand-gray">
+                    <li><a href="aluminium-handles.html" class="hover:text-brand-black transition-colors">Aluminium Handles (200 Series)</a></li>
+                    <li><a href="aluminium-handle-profile.html" class="hover:text-brand-black transition-colors">Aluminium Handle Profile (300)</a></li>
+                    <li><a href="wardrobe-counsil-handles.html" class="hover:text-brand-black transition-colors">Counsil Handles (400 Series)</a></li>
+                    <li><a href="sliding-wardrobe-handles.html" class="hover:text-brand-black transition-colors">Sliding Counsils (450 Series)</a></li>
+                    <li><a href="cabinet-knobs.html" class="hover:text-brand-black transition-colors">Cabinet Knobs (500 Series)</a></li>
+                    <li><a href="our-process.html" class="hover:text-brand-black transition-colors">Factory Manufacturing Process</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-brand-black mb-4">Connect Directly</h4>
                 <ul class="space-y-3 text-sm text-brand-gray">
                     <!-- WhatsApp Link -->
                     <li><a href="https://wa.me/919924637640" target="_blank" class="hover:text-[#25D366] transition-colors flex items-center gap-2"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg> WhatsApp Sanjay</a></li>
@@ -1130,19 +1147,24 @@
                 </ul>
             </div>
             <div>
-                <h4 class="font-bold text-brand-black mb-4">Resources</h4>
+                <h4 class="font-bold text-brand-black mb-4">Company &amp; Legal</h4>
                 <ul class="space-y-3 text-sm text-brand-gray">
-                    <li><a href="#" onclick="navigate('blog')" class="hover:text-brand-black transition-colors flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Architecture Blog</a></li>
-                    <li><a href="#" onclick="openCatalogueModal(event)" class="hover:text-brand-black transition-colors flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Digital Catalogue</a></li>
-                    <li><a href="#" onclick="navigate('legal')" class="hover:text-brand-gray font-medium transition-colors flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg> Wholesale Terms</a></li>
+                    <li><a href="about.html" class="hover:text-brand-black font-semibold text-brand-black transition-colors">About Us</a></li>
+                    <li><a href="terms.html" class="hover:text-brand-black transition-colors">Terms of Service</a></li>
+                    <li><a href="terms.html#privacy" class="hover:text-brand-black transition-colors">Privacy Policy</a></li>
+                    <li><a href="contact.html" class="hover:text-brand-black transition-colors">Contact Us</a></li>
+                    <li><a href="llms.txt" class="hover:text-brand-black transition-colors">LLM Knowledge Feed (llms.txt)</a></li>
+                    <li><a href="#" onclick="openCatalogueModal(event)" class="hover:text-brand-black transition-colors">Digital Catalogue</a></li>
                 </ul>
             </div>
         </div>
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-brand-gray">
             <p>© 2026 KUNETT Hardware by Harikrushna Enterprise. All rights reserved.</p>
             <div class="flex gap-4 mt-4 md:mt-0">
-                <a href="#" onclick="navigate('legal')" class="hover:text-brand-black transition-colors">Wholesale Terms</a>
-                <a href="#" onclick="navigate('legal')" class="hover:text-brand-black transition-colors">Privacy Policy</a>
+                <a href="about.html" class="hover:text-brand-black transition-colors">About Us</a>
+                <a href="terms.html" class="hover:text-brand-black transition-colors">Terms of Service</a>
+                <a href="terms.html#privacy" class="hover:text-brand-black transition-colors">Privacy Policy</a>
+                <a href="contact.html" class="hover:text-brand-black transition-colors">Contact</a>
             </div>
         </div>
     </footer>
@@ -1159,7 +1181,7 @@
                 <h3 id="cat-modal-title" class="font-serif text-2xl md:text-3xl text-brand-black mb-2">Get the Catalogue</h3>
                 <p id="cat-modal-sub" class="text-sm text-brand-gray">Please enter your details to instantly download our full architectural catalogue.</p>
             </div>
-            <form id="catalogueForm" class="space-y-4">
+            <form id="catalogueForm" class="space-y-4" toolname="request_catalogue" tooldescription="Request KUNETT architectural aluminium hardware digital PDF catalogue via WhatsApp">
                 <!-- Hidden fields for Google Sheets routing -->
                 <input type="hidden" name="Subject" value="Catalogue Download Lead">
                 <input type="hidden" name="Message" value="This user requested to download the digital catalogue.">
@@ -1183,6 +1205,86 @@
 
     <!-- Application Logic -->
     <script>
+        // WebMCP In-Browser Agent Integration (SEP-1649 / W3C Model Context API)
+        (function initWebMCP() {
+            try {
+                if (!window.navigator.modelContext) {
+                    window.navigator.modelContext = {
+                        _tools: new Map(),
+                        registerTool: function(tool) {
+                            if (tool && tool.name) {
+                                this._tools.set(tool.name, tool);
+                            }
+                            return true;
+                        },
+                        getTools: function() {
+                            return Array.from(this._tools.values());
+                        }
+                    };
+                }
+
+                // Tool 1: Catalog Search Tool
+                window.navigator.modelContext.registerTool({
+                    name: "search_hardware_catalog",
+                    description: "Search KUNETT architectural aluminium handles, profiles, counsil handles, and cabinet knobs by series or finish.",
+                    inputSchema: {
+                        type: "object",
+                        properties: {
+                            category: {
+                                type: "string",
+                                enum: ["handles", "profiles", "counsil", "sliding", "knobs", "all"],
+                                description: "Product category"
+                            },
+                            finish: {
+                                type: "string",
+                                description: "Finish option: Matte Black, Rose Gold, Champagne, Antique Brass, SS Matt, Grey"
+                            }
+                        }
+                    },
+                    execute: async function(params) {
+                        return {
+                            status: "success",
+                            brand: "KUNETT Hardware",
+                            manufacturer: "Harikrushna Enterprise",
+                            city: "Rajkot, Gujarat",
+                            collections: [
+                                { name: "Aluminium Handles (200 Series)", url: "https://kunetthardware.com/aluminium-handles.html" },
+                                { name: "Aluminium Handle Profile (300 Series)", url: "https://kunetthardware.com/aluminium-handle-profile.html" },
+                                { name: "Wardrobe Counsil Handles (400 Series)", url: "https://kunetthardware.com/wardrobe-counsil-handles.html" },
+                                { name: "Sliding Wardrobe Handles (450 Series)", url: "https://kunetthardware.com/sliding-wardrobe-handles.html" },
+                                { name: "Solid Cabinet Knobs (500 Series)", url: "https://kunetthardware.com/cabinet-knobs.html" }
+                            ]
+                        };
+                    }
+                });
+
+                // Tool 2: Wholesale Quotation & Sourcing Tool
+                window.navigator.modelContext.registerTool({
+                    name: "request_wholesale_quote",
+                    description: "Connect directly with Sanjay Patel at KUNETT factory in Rajkot for wholesale B2B pricing, export freight, and custom profile extrusions.",
+                    inputSchema: {
+                        type: "object",
+                        properties: {
+                            series: { type: "string", description: "Product series name or code" },
+                            quantity: { type: "number", description: "Units or meters needed" }
+                        },
+                        required: ["series", "quantity"]
+                    },
+                    execute: async function(params) {
+                        return {
+                            status: "success",
+                            contact: "Sanjay Patel",
+                            whatsapp: "+919924637640",
+                            location: "Rajkot, Gujarat, India",
+                            dispatchTime: "24-48 hours"
+                        };
+                    }
+                });
+            } catch (err) {
+                console.warn("WebMCP registration note:", err);
+            }
+        })();
+
         // Set actual Whatsapp Number Here! (e.g. 919876543210)
         const WHATSAPP_NUMBER = "919924637640"; 
         
@@ -3326,7 +3428,7 @@
                             <!-- Left: Form -->
                             <div>
                                 <h3 class="font-serif text-2xl md:text-3xl text-brand-black mb-6">Send an Inquiry</h3>
-                                <form id="contactForm" class="space-y-6">
+                                <form id="contactForm" class="space-y-6" toolname="submit_wholesale_inquiry" tooldescription="Submit wholesale trade inquiry for KUNETT aluminium handles and profiles to Rajkot factory">
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
                                             <label class="block text-xs font-bold text-brand-black uppercase tracking-widest mb-2">Full Name *</label>

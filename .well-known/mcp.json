@@ -1,0 +1,73 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
+  "name": "kunetthardware/catalog-server",
+  "version": "1.0.0",
+  "description": "KUNETT Architectural Aluminium Hardware Model Context Protocol Server for product discovery, dimensional specifications, weight calculation, and direct factory sourcing from Rajkot, Gujarat.",
+  "homepage": "https://kunetthardware.com",
+  "documentation": "https://kunetthardware.com/llms.txt",
+  "endpoint": "https://kunetthardware.com/api/mcp",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://kunetthardware.com/api/mcp"
+    }
+  ],
+  "capabilities": {
+    "tools": {
+      "listChanged": false
+    },
+    "resources": {
+      "subscribe": false,
+      "listChanged": false
+    },
+    "prompts": {
+      "listChanged": false
+    }
+  },
+  "tools": [
+    {
+      "name": "search_hardware_catalog",
+      "description": "Search KUNETT architectural aluminium handles, J-pull & G-profiles, concealed wardrobe counsils, and knobs by series, finish, or dimension.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": ["handles", "profiles", "counsil", "sliding", "knobs", "all"],
+            "description": "Hardware category"
+          },
+          "finish": {
+            "type": "string",
+            "description": "Finish: Matte Black, Rose Gold, Champagne, Antique Brass, SS Matt, Grey"
+          },
+          "size": {
+            "type": "string",
+            "description": "Handle size or hole-to-hole center in mm (e.g. 96mm, 160mm, 3000mm)"
+          }
+        }
+      }
+    },
+    {
+      "name": "request_wholesale_quote",
+      "description": "Request factory-direct wholesale pricing, container export quotations, or custom profile extrusions directly from Sanjay Patel in Rajkot, Gujarat.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string",
+            "description": "Product series: 200 Series, 300 Profile, 400 Counsil, 450 Sliding, 500 Knobs"
+          },
+          "quantity": {
+            "type": "number",
+            "description": "Quantity in pieces or continuous meters"
+          },
+          "city": {
+            "type": "string",
+            "description": "Destination city for road transport or port for FOB export"
+          }
+        },
+        "required": ["series", "quantity"]
+      }
+    }
+  ]
+}
