@@ -13,9 +13,9 @@ AddType application/json;charset=utf-8 .json
   RewriteRule ^terms/?$ terms.html [L]
   RewriteRule ^contact/?$ contact.html [L]
 
-  # Goal 4: Serve Markdown representation when an agent requests Accept: text/markdown
+  # Serve Markdown representation when an agent requests Accept: text/markdown
   RewriteCond %{HTTP:Accept} text/markdown [NC]
-  RewriteRule ^(index\.html)?$ index.md [L]
+  RewriteRule ^(index\.html)?$ markdown.php [L]
 
   # Force HTTPS
   RewriteCond %{HTTPS} off
