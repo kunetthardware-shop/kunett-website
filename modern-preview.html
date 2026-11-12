@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUNETT Hardware • Modern Luxury Architectural Aluminium Hardware</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400&display=swap');
+
+        :root {
+            --obsidian: #0C0D0E;
+            --graphite: #18191B;
+            --titanium: #E8E5E0;
+            --champagne: #D4AF37;
+            --accent-gold: #C5A059;
+            --surface-bg: #F8F8F7;
+            --border-light: rgba(0, 0, 0, 0.08);
+            --border-dark: rgba(255, 255, 255, 0.12);
+            --text-dark: #0C0D0E;
+            --text-muted: #64748B;
+            --whatsapp-green: #25D366;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-display: 'Cinzel', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--surface-bg);
+            color: var(--text-dark);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Top Bar */
+        .announcement-bar {
+            background-color: var(--obsidian);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border-dark);
+        }
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: #34D399;
+            box-shadow: 0 0 8px #34D399;
+        }
+        .announcement-link {
+            color: var(--accent-gold);
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: sticky;
+            top: 16px;
+            z-index: 100;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .navbar {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-light);
+            border-radius: 9999px;
+            padding: 12px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+        .nav-logo-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-logo-img {
+            height: 42px;
+            width: auto;
+            object-contain: fit;
+        }
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .brand-title {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            color: var(--obsidian);
+        }
+        .brand-sub {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #8E8E93;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #4B5563;
+        }
+        .nav-links a:hover {
+            color: var(--obsidian);
+        }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .btn-wa {
+            background-color: var(--whatsapp-green);
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .btn-wa:hover {
+            transform: scale(1.04);
+            background-color: #20ba59;
+        }
+        .btn-catalog {
+            background-color: var(--obsidian);
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 10px 22px;
+            border-radius: 9999px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .btn-catalog:hover {
+            transform: scale(1.04);
+            background-color: #232528;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 60px 20px 80px 20px;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            background: #FFFFFF;
+            border: 1px solid var(--border-light);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #64748B;
+            margin-bottom: 24px;
+        }
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent-gold);
+        }
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: 58px;
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+            color: var(--obsidian);
+            margin-bottom: 20px;
+        }
+        .hero-title em {
+            font-style: italic;
+            font-weight: 400;
+            color: #8E8E93;
+        }
+        .hero-description {
+            font-size: 17px;
+            color: #4B5563;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            max-width: 540px;
+        }
+
+        /* Finish Selector */
+        .finish-selector-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 18px 22px;
+            margin-bottom: 36px;
+            max-width: 520px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+        .finish-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .finish-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #8E8E93;
+        }
+        .finish-active-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--obsidian);
+        }
+        .swatch-group {
+            display: flex;
+            gap: 12px;
+        }
+        .swatch-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #FFFFFF;
+            cursor: pointer;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .swatch-btn:hover {
+            transform: scale(1.12);
+        }
+        .swatch-btn.active {
+            box-shadow: 0 0 0 2px var(--obsidian), 0 0 0 4px #FFFFFF;
+            transform: scale(1.12);
+        }
+        .swatch-black { background-color: #1A1A1A; }
+        .swatch-gold { background-color: #D4AF37; }
+        .swatch-rose { background-color: #B76E79; }
+        .swatch-ss { background-color: #A8A9AD; }
+        .swatch-brass { background-color: #8B7355; }
+
+        .hero-ctas {
+            display: flex;
+            gap: 14px;
+        }
+        .btn-primary-hero {
+            background-color: var(--obsidian);
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 16px 36px;
+            border-radius: 9999px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s;
+        }
+        .btn-primary-hero:hover {
+            transform: scale(1.03);
+        }
+        .btn-secondary-hero {
+            background-color: #FFFFFF;
+            color: var(--obsidian);
+            border: 1px solid #D1D5DB;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 16px 32px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s;
+        }
+        .btn-secondary-hero:hover {
+            transform: scale(1.03);
+        }
+
+        /* Hero Product Card */
+        .hero-display-card {
+            background: linear-gradient(180deg, #FFFFFF 0%, #F5F5F4 100%);
+            border: 1px solid var(--border-light);
+            border-radius: 32px;
+            padding: 32px;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.08);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 520px;
+            overflow: hidden;
+        }
+        .hero-card-tag {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2;
+        }
+        .pill-model {
+            background: var(--obsidian);
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            padding: 6px 14px;
+            border-radius: 9999px;
+        }
+        .pill-alloy {
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748B;
+        }
+        .hero-img-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 0;
+            flex: 1;
+        }
+        .hero-img {
+            max-width: 90%;
+            max-height: 280px;
+            object-contain: fit;
+            filter: drop-shadow(0 20px 25px rgba(0,0,0,0.18));
+            transition: transform 0.4s ease, opacity 0.3s ease;
+        }
+        .hero-img:hover {
+            transform: scale(1.05);
+        }
+        .hero-card-specs {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 18px;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+            z-index: 2;
+        }
+        .spec-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #8E8E93;
+            display: block;
+        }
+        .spec-value {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--obsidian);
+        }
+        .spec-value-emerald {
+            font-size: 13px;
+            font-weight: 700;
+            color: #059669;
+        }
+
+        /* Bento Grid Section */
+        .section-wrap {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 48px;
+        }
+        .section-sub {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #8E8E93;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            color: var(--obsidian);
+            letter-spacing: -0.01em;
+        }
+        .section-desc {
+            font-size: 15px;
+            color: #64748B;
+            max-width: 420px;
+            line-height: 1.6;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .bento-card {
+            border-radius: 28px;
+            padding: 32px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.07);
+        }
+        .card-200 {
+            grid-column: span 7;
+            background: #FFFFFF;
+        }
+        .card-300 {
+            grid-column: span 5;
+            background: var(--obsidian);
+            color: #FFFFFF;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .card-400 {
+            grid-column: span 4;
+            background: #FFFFFF;
+        }
+        .card-450 {
+            grid-column: span 4;
+            background: #FFFFFF;
+        }
+        .card-500 {
+            grid-column: span 4;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F5F3EF 100%);
+        }
+
+        .card-header-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .card-series-tag {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #8E8E93;
+        }
+        .card-badge-gold {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            background: rgba(197, 160, 89, 0.12);
+            padding: 4px 10px;
+            border-radius: 9999px;
+        }
+        .card-badge-green {
+            font-size: 11px;
+            font-weight: 700;
+            color: #059669;
+            background: #ECFDF5;
+            padding: 4px 10px;
+            border-radius: 9999px;
+        }
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+        .card-desc {
+            font-size: 14px;
+            color: #64748B;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        .card-desc-dark {
+            color: #94A3B8;
+        }
+        .card-img-box {
+            background: var(--surface-bg);
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 160px;
+        }
+        .card-img-box-dark {
+            background: #18191B;
+        }
+        .card-img {
+            max-height: 140px;
+            max-width: 90%;
+            object-contain: fit;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.12));
+            transition: transform 0.3s;
+        }
+        .card-img:hover {
+            transform: scale(1.06);
+        }
+
+        /* Finishes Section */
+        .finishes-section {
+            background: var(--obsidian);
+            color: #FFFFFF;
+            padding: 80px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .finishes-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .finishes-sub {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+            display: block;
+        }
+        .finishes-title {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            margin-bottom: 16px;
+        }
+        .finishes-desc {
+            font-size: 16px;
+            color: #94A3B8;
+            max-width: 600px;
+            margin: 0 auto 50px auto;
+            line-height: 1.6;
+        }
+        .finishes-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 16px;
+        }
+        .finish-card {
+            background: #18191B;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .finish-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .finish-swatch-large {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 14px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        .finish-card-name {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .finish-card-tag {
+            font-size: 10px;
+            color: #8E8E93;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        /* B2B Sourcing Banner */
+        .b2b-section {
+            max-width: 1240px;
+            margin: 60px auto 80px auto;
+            padding: 0 20px;
+        }
+        .b2b-card {
+            background: linear-gradient(135deg, #18191B 0%, var(--obsidian) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 32px;
+            padding: 48px;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+        .b2b-content {
+            max-width: 640px;
+        }
+        .b2b-badge {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--accent-gold);
+            display: block;
+            margin-bottom: 12px;
+        }
+        .b2b-title {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            line-height: 1.18;
+            margin-bottom: 16px;
+        }
+        .b2b-desc {
+            font-size: 15px;
+            color: #94A3B8;
+            line-height: 1.6;
+        }
+        .btn-wa-large {
+            background-color: var(--whatsapp-green);
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 18px 36px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            white-space: nowrap;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .btn-wa-large:hover {
+            transform: scale(1.04);
+            background-color: #20ba59;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--border-light);
+            background: #FFFFFF;
+            padding: 40px 20px;
+        }
+        .footer-inner {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #8E8E93;
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .footer-brand img {
+            height: 28px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #4B5563;
+        }
+        .footer-links a:hover {
+            color: var(--obsidian);
+        }
+
+        @media (max-width: 900px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+            }
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            .card-200, .card-300, .card-400, .card-450, .card-500 {
+                grid-column: span 1;
+            }
+            .finishes-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .b2b-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <span class="pulse-dot"></span>
+        <span>Factory-Direct Architectural Hardware • 100% Solid 6063-T5 Virgin Aluminium • Rajkot, Gujarat</span>
+        <a href="https://wa.me/919924637640" target="_blank" class="announcement-link">WhatsApp Direct Inquiry →</a>
+    </div>
+
+    <!-- Floating Glass Navbar -->
+    <div class="nav-container">
+        <nav class="navbar">
+            <div class="nav-logo-group">
+                <img src="assets/logo.png" alt="KUNETT Hardware" class="nav-logo-img">
+                <div class="brand-text">
+                    <span class="brand-title">KUNETT</span>
+                    <span class="brand-sub">Architectural Hardware</span>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="#collections">Collections</a>
+                <a href="#profiles">J-Pull Profiles</a>
+                <a href="#finishes">Finishes</a>
+                <a href="#b2b">Wholesale MOQs</a>
+            </div>
+
+            <div class="nav-actions">
+                <a href="https://wa.me/919924637640" target="_blank" class="btn-wa">
+                    <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg>
+                    <span>WhatsApp Spec</span>
+                </a>
+                <a href="#collections" class="btn-catalog">View Catalog</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-left">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                <span>2026 Architectural Hardware Collection</span>
+            </div>
+
+            <h1 class="hero-title">
+                Precision In Every Millimeter.<br>
+                <em>Luxury In Every Touch.</em>
+            </h1>
+
+            <p class="hero-description">
+                Engineered from 100% solid aerospace-grade 6063-T5 virgin aluminium. KUNETT manufactures flawless cabinet pull handles, continuous J-pull profiles, and concealed wardrobe counsils for high-end luxury residences worldwide.
+            </p>
+
+            <!-- Finish Selector -->
+            <div class="finish-selector-card">
+                <div class="finish-header">
+                    <span class="finish-title">Preview Anodized Finishes:</span>
+                    <span id="active-finish-name" class="finish-active-label">Matte Black • 15µ Anodized</span>
+                </div>
+                <div class="swatch-group">
+                    <button onclick="changeFinish('Matte Black', 'assets/201.png')" class="swatch-btn swatch-black active" title="Matte Black"></button>
+                    <button onclick="changeFinish('Champagne Gold', 'assets/201.png')" class="swatch-btn swatch-gold" title="Champagne Gold"></button>
+                    <button onclick="changeFinish('Rose Gold', 'assets/201.png')" class="swatch-btn swatch-rose" title="Rose Gold"></button>
+                    <button onclick="changeFinish('Stainless Steel Matt', 'assets/201.png')" class="swatch-btn swatch-ss" title="SS Matt"></button>
+                    <button onclick="changeFinish('Antique Brass', 'assets/201.png')" class="swatch-btn swatch-brass" title="Antique Brass"></button>
+                </div>
+            </div>
+
+            <div class="hero-ctas">
+                <a href="#collections" class="btn-primary-hero">Explore 5 Signature Series</a>
+                <a href="https://wa.me/919924637640?text=Hello%20Sanjay,%20I%20am%20inquiring%20about%20KUNETT%20handles." target="_blank" class="btn-secondary-hero">
+                    <svg width="18" height="18" fill="#25D366" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg>
+                    <span>Request B2B Quote</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Hero Right Display -->
+        <div class="hero-right">
+            <div class="hero-display-card">
+                <div class="hero-card-tag">
+                    <span class="pill-model">Model 201</span>
+                    <span class="pill-alloy">6063-T5 Solid Billet</span>
+                </div>
+
+                <div class="hero-img-container">
+                    <img id="hero-img" src="assets/201.png" alt="KUNETT Model 201 Luxury Handle" class="hero-img">
+                </div>
+
+                <div class="hero-card-specs">
+                    <div>
+                        <span class="spec-label">Hole Centers</span>
+                        <span class="spec-value">96mm • 160mm • 320mm • 1200mm</span>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="spec-label">CNC Precision</span>
+                        <span class="spec-value-emerald">±0.05 mm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bento Grid Section -->
+    <section id="collections" class="section-wrap">
+        <div class="section-header">
+            <div>
+                <span class="section-sub">Engineered Series</span>
+                <h2 class="section-title">The Hardware Architecture</h2>
+            </div>
+            <p class="section-desc">
+                Five dedicated product families engineered with micrometer CNC tolerances, virgin metallurgy, and seamless ergonomics.
+            </p>
+        </div>
+
+        <div class="bento-grid">
+            <!-- 200 Series -->
+            <div class="bento-card card-200">
+                <div>
+                    <div class="card-header-line">
+                        <span class="card-series-tag">200 Series</span>
+                        <span class="card-badge-green">Top Architectural Seller</span>
+                    </div>
+                    <h3 class="card-title">Solid Aluminium Pull Handles</h3>
+                    <p class="card-desc">
+                        Milled from solid aerospace-grade virgin billets. No hollow zinc, no plastic fillers. Sized from 96mm to 1200mm for luxury kitchens and wardrobe shutters.
+                    </p>
+                </div>
+                <div class="card-img-box">
+                    <img src="assets/201.png" alt="200 Series Handle" class="card-img">
+                </div>
+            </div>
+
+            <!-- 300 Series -->
+            <div id="profiles" class="bento-card card-300">
+                <div>
+                    <div class="card-header-line">
+                        <span class="card-series-tag" style="color: #94A3B8;">300 Series</span>
+                        <span class="card-badge-gold">Up to 3-Meter Continuous</span>
+                    </div>
+                    <h3 class="card-title">J-Pull &amp; Gola Profiles</h3>
+                    <p class="card-desc card-desc-dark">
+                        Seamless edge-mounted continuous profiles for handle-less architectural kitchens. Blade-cut to custom lengths with deburred ergonomic hand grips.
+                    </p>
+                </div>
+                <div class="card-img-box card-img-box-dark">
+                    <img src="assets/301.png" alt="300 Series Profile" class="card-img" style="filter: invert(1) opacity(0.9);">
+                </div>
+            </div>
+
+            <!-- 400 Series -->
+            <div class="bento-card card-400">
+                <div>
+                    <div class="card-header-line">
+                        <span class="card-series-tag">400 Series</span>
+                    </div>
+                    <h3 class="card-title" style="font-size: 22px;">Concealed Counsils</h3>
+                    <p class="card-desc" style="font-size: 13px;">
+                        Flush deep-recess handles for full-height 7ft to 9ft wardrobe panels. Seamlessly embedded into woodwork.
+                    </p>
+                </div>
+                <div class="card-img-box">
+                    <img src="assets/401.png" alt="400 Series Counsil" class="card-img">
+                </div>
+            </div>
+
+            <!-- 450 Series -->
+            <div class="bento-card card-450">
+                <div>
+                    <div class="card-header-line">
+                        <span class="card-series-tag">450 Series</span>
+                    </div>
+                    <h3 class="card-title" style="font-size: 22px;">Sliding Counsils</h3>
+                    <p class="card-desc" style="font-size: 13px;">
+                        Zero-clearance flush design engineered to glide past overlapping sliding wardrobe shutters without collision.
+                    </p>
+                </div>
+                <div class="card-img-box">
+                    <img src="assets/451.png" alt="450 Series Sliding" class="card-img">
+                </div>
+            </div>
+
+            <!-- 500 Series -->
+            <div class="bento-card card-500">
+                <div>
+                    <div class="card-header-line">
+                        <span class="card-series-tag">500 Series</span>
+                        <span class="card-badge-gold">Solid Geometric</span>
+                    </div>
+                    <h3 class="card-title" style="font-size: 22px;">Architectural Knobs</h3>
+                    <p class="card-desc" style="font-size: 13px;">
+                        Jewelry-grade solid knobs for luxury vanities, dressers, and custom millwork. Fluted, cylindrical, and knurled.
+                    </p>
+                </div>
+                <div class="card-img-box" style="background: transparent;">
+                    <img src="assets/501.png" alt="500 Series Knob" class="card-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 15-Micron Electrochemical Finishes -->
+    <section id="finishes" class="finishes-section">
+        <div class="finishes-container">
+            <span class="finishes-sub">Surface Engineering</span>
+            <h2 class="finishes-title">15-Micron Electrochemical Anodizing</h2>
+            <p class="finishes-desc">
+                Our proprietary electrochemical multi-tank anodizing penetrates deep into the aluminium crystal matrix. Scratch-proof, oil-vapor resistant, and impervious to coastal humidity.
+            </p>
+
+            <div class="finishes-grid">
+                <div class="finish-card">
+                    <div class="finish-swatch-large" style="background-color: #1A1A1A;"></div>
+                    <span class="finish-card-name">Matte Black</span>
+                    <span class="finish-card-tag">Deep Satin</span>
+                </div>
+                <div class="finish-card">
+                    <div class="finish-swatch-large" style="background-color: #D4AF37;"></div>
+                    <span class="finish-card-name">Champagne</span>
+                    <span class="finish-card-tag">Warm Luxury</span>
+                </div>
+                <div class="finish-card">
+                    <div class="finish-swatch-large" style="background-color: #B76E79;"></div>
+                    <span class="finish-card-name">Rose Gold</span>
+                    <span class="finish-card-tag">Blush Elegance</span>
+                </div>
+                <div class="finish-card">
+                    <div class="finish-swatch-large" style="background-color: #A8A9AD;"></div>
+                    <span class="finish-card-name">SS Matt</span>
+                    <span class="finish-card-tag">Brushed Steel</span>
+                </div>
+                <div class="finish-card">
+                    <div class="finish-swatch-large" style="background-color: #8B7355;"></div>
+                    <span class="finish-card-name">Antique Brass</span>
+                    <span class="finish-card-tag">Heritage Patina</span>
+                </div>
+                <div class="finish-card">
+                    <div class="finish-swatch-large" style="background-color: #3E424B;"></div>
+                    <span class="finish-card-name">Graphite</span>
+                    <span class="finish-card-tag">Architectural</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- B2B Direct Sourcing Card -->
+    <section id="b2b" class="b2b-section">
+        <div class="b2b-card">
+            <div class="b2b-content">
+                <span class="b2b-badge">Direct From Rajkot Factory</span>
+                <h2 class="b2b-title">Source Directly From The Manufacturer. Zero Middlemen.</h2>
+                <p class="b2b-desc">
+                    Whether you are an architect specifying a residential tower, an interior contractor sourcing for modular kitchens, or a wholesale distributor seeking master container pricing, connect directly with Sanjay Patel on WhatsApp.
+                </p>
+            </div>
+            <a href="https://wa.me/919924637640?text=Hello%20Sanjay,%20I%20would%20like%20to%20request%20the%20KUNETT%202026%20catalogue%20and%20wholesale%20price%20list." target="_blank" class="btn-wa-large">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg>
+                <span>WhatsApp: +91 99246 37640</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="KUNETT Hardware">
+                <span>© 2026 KUNETT Hardware • Harikrushna Enterprise. All rights reserved.</span>
+            </div>
+            <div class="footer-links">
+                <a href="https://kunetthardware.com/about.html">About</a>
+                <a href="https://kunetthardware.com/our-process.html">Manufacturing</a>
+                <a href="https://kunetthardware.com/terms.html">Terms</a>
+                <a href="https://kunetthardware.com/contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function changeFinish(name, imgSrc) {
+            document.getElementById('active-finish-name').textContent = name + ' • 15µ Anodized';
+            const img = document.getElementById('hero-img');
+            img.style.opacity = '0.3';
+            setTimeout(() => {
+                img.style.opacity = '1';
+            }, 180);
+            
+            document.querySelectorAll('.swatch-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
