@@ -94,7 +94,13 @@
         box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
     }
     .nav-logo-group { display: flex; align-items: center; gap: 12px; }
-    .nav-logo-img { height: 42px; width: auto; object-fit: contain; }
+    .nav-logo-img {
+        height: 46px;
+        width: auto;
+        object-fit: contain;
+        display: block;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
+    }
     .brand-text { display: flex; flex-direction: column; }
     .brand-title {
         font-family: var(--font-display);
@@ -449,6 +455,159 @@
         flex-shrink: 0;
         white-space: nowrap;
     }
+
+    /* Collections Dropdown */
+    .nav-dropdown-group {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+    }
+    .nav-dropdown-trigger {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        padding: 6px 0;
+    }
+    .dropdown-chevron {
+        transition: transform 0.25s ease;
+    }
+    .nav-dropdown-group:hover .dropdown-chevron,
+    .nav-dropdown-group.active .dropdown-chevron {
+        transform: rotate(180deg);
+    }
+    .nav-dropdown-menu {
+        position: absolute;
+        top: calc(100% + 14px);
+        left: 50%;
+        transform: translateX(-50%) translateY(8px);
+        width: 330px;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border: 1px solid var(--border-light);
+        border-radius: 24px;
+        padding: 12px;
+        box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.12), 0 0 1px rgba(0, 0, 0, 0.08);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 1000;
+    }
+    .nav-dropdown-group:hover .nav-dropdown-menu,
+    .nav-dropdown-group.active .nav-dropdown-menu {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+    }
+    .nav-dropdown-menu::before {
+        content: '';
+        position: absolute;
+        top: -16px;
+        left: 0;
+        width: 100%;
+        height: 16px;
+    }
+    .dropdown-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px 10px 12px;
+        border-bottom: 1px solid #F3F4F6;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #8E8E93;
+    }
+    .dropdown-count-badge {
+        background: #F3F4F6;
+        color: var(--obsidian);
+        padding: 2px 7px;
+        border-radius: 9999px;
+        font-size: 9.5px;
+    }
+    .dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 14px;
+        text-decoration: none;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+    .dropdown-item:hover {
+        background: #F8F9FA;
+        transform: translateX(3px);
+    }
+    .dropdown-item-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+        background: #F3F4F6;
+        color: var(--obsidian);
+        font-size: 11px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: background-color 0.2s, color 0.2s;
+    }
+    .dropdown-item:hover .dropdown-item-icon {
+        background: var(--obsidian);
+        color: #FFFFFF;
+    }
+    .dropdown-item-text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+    }
+    .dropdown-item-title {
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--obsidian);
+        letter-spacing: 0;
+        text-transform: none;
+    }
+    .dropdown-item-sub {
+        font-size: 10px;
+        color: #8E8E93;
+        font-weight: 500;
+        text-transform: none;
+        letter-spacing: 0;
+    }
+    .dropdown-arrow {
+        font-size: 13px;
+        color: #D1D5DB;
+        transition: color 0.2s, transform 0.2s;
+    }
+    .dropdown-item:hover .dropdown-arrow {
+        color: var(--obsidian);
+        transform: translateX(2px);
+    }
+    .dropdown-footer {
+        padding: 8px 10px 4px 10px;
+        margin-top: 6px;
+        border-top: 1px solid #F3F4F6;
+    }
+    .dropdown-pdf-link {
+        font-size: 10.5px;
+        font-weight: 700;
+        color: #4B5563;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+        transition: color 0.2s;
+        text-transform: none;
+        letter-spacing: 0;
+    }
+    .dropdown-pdf-link:hover {
+        color: var(--obsidian);
+    }
+
 </style>
 </head>
 <body>
@@ -471,13 +630,75 @@
                 </div>
             </a>
 
+            
             <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="index.html#process">Process</a>
-                <a href="index.html#finishes">Finishes</a>
-                <a href="index.html#founder">Founder</a>
-                <a href="index.html#calculator">Calculator</a>
+                <a href="index.html" class="nav-link ">HOME</a>
+                
+                <div class="nav-dropdown-group">
+                    <a href="index.html#collection" class="nav-link nav-dropdown-trigger active">
+                        <span>COLLECTIONS</span>
+                        <svg class="dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </a>
+                    <div class="nav-dropdown-menu">
+                        <div class="dropdown-header">
+                            <span>Architectural Hardware</span>
+                            <span class="dropdown-count-badge">101 Models</span>
+                        </div>
+                        <a href="aluminium-handles.html" class="dropdown-item">
+                            <div class="dropdown-item-icon">200</div>
+                            <div class="dropdown-item-text">
+                                <span class="dropdown-item-title">Pull Handles (200 Series)</span>
+                                <span class="dropdown-item-sub">46 Models &bull; Lengths 4" to 48"</span>
+                            </div>
+                            <span class="dropdown-arrow">&rarr;</span>
+                        </a>
+                        <a href="aluminium-handle-profile.html" class="dropdown-item">
+                            <div class="dropdown-item-icon">300</div>
+                            <div class="dropdown-item-text">
+                                <span class="dropdown-item-title">Profile Handles (300 Series)</span>
+                                <span class="dropdown-item-sub">24 Models &bull; Up to 10ft Continuous</span>
+                            </div>
+                            <span class="dropdown-arrow">&rarr;</span>
+                        </a>
+                        <a href="wardrobe-counsil-handles.html" class="dropdown-item">
+                            <div class="dropdown-item-icon">400</div>
+                            <div class="dropdown-item-text">
+                                <span class="dropdown-item-title">Concealed Counsils (400 Series)</span>
+                                <span class="dropdown-item-sub">18 Models &bull; Flush Deep Recessed 4" to 12"</span>
+                            </div>
+                            <span class="dropdown-arrow">&rarr;</span>
+                        </a>
+                        <a href="sliding-wardrobe-handles.html" class="dropdown-item">
+                            <div class="dropdown-item-icon">450</div>
+                            <div class="dropdown-item-text">
+                                <span class="dropdown-item-title">Sliding Counsils (450 Series)</span>
+                                <span class="dropdown-item-sub">5 Models &bull; Zero-Clearance Anti-Collision</span>
+                            </div>
+                            <span class="dropdown-arrow">&rarr;</span>
+                        </a>
+                        <a href="cabinet-knobs.html" class="dropdown-item">
+                            <div class="dropdown-item-icon">500</div>
+                            <div class="dropdown-item-text">
+                                <span class="dropdown-item-title">Cabinet Knobs (500 Series)</span>
+                                <span class="dropdown-item-sub">8 Models &bull; CNC Turned 1" to 1.5"</span>
+                            </div>
+                            <span class="dropdown-arrow">&rarr;</span>
+                        </a>
+                        <div class="dropdown-footer">
+                            <a href="assets/KUNETT_Catalogue.pdf" target="_blank" class="dropdown-pdf-link">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"/></svg>
+                                <span>Download 2026 PDF Catalogue (15MB)</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="index.html#process" class="nav-link">PROCESS</a>
+                <a href="index.html#finishes" class="nav-link">FINISHES</a>
+                <a href="index.html#founder" class="nav-link">FOUNDER</a>
+                <a href="index.html#calculator" class="nav-link">CALCULATOR</a>
             </div>
+
 
             <div class="nav-actions">
                 <a href="https://wa.me/919924637640?text=Hello%20Sanjay,%20I%20would%20like%20to%20request%20pricing%20for%20Solid Aluminium Pull Handles." target="_blank" class="btn-wa">
