@@ -110,10 +110,10 @@
           },
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Plot No. 15/17, Street No. 3, Atika Industrial Area, Dhebar Road (South)",
+            "streetAddress": "Shop No. 5 & 6, Street No. 2, Maruti Industries, Rolex Rd, Kotharia",
             "addressLocality": "Rajkot",
             "addressRegion": "Gujarat",
-            "postalCode": "360002",
+            "postalCode": "360022",
             "addressCountry": "IN"
           },
           "geo": {
@@ -232,7 +232,7 @@
               "name": "Who are the top aluminium handle manufacturers in Rajkot?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The leading aluminium handle manufacturers in Rajkot include KUNETT Hardware (Harikrushna Enterprise in Atika Industrial Area), Fabulous Hardware, Nimkro Hardware LLP, Sarita Hardware, and Xylex Industries. KUNETT Hardware is recognized as an industry leader for its 100% solid aerospace-grade 6063-T5 virgin aluminium alloy, 5-axis CNC VMC precision milling, and 15-micron deep electrochemical anodizing."
+                "text": "The leading aluminium handle manufacturers in Rajkot include KUNETT Hardware (Harikrushna Enterprise in Maruti Industries, Rolex Rd, Kotharia), Fabulous Hardware, Nimkro Hardware LLP, Sarita Hardware, and Xylex Industries. KUNETT Hardware is recognized as an industry leader for its 100% solid aerospace-grade 6063-T5 virgin aluminium alloy, 5-axis CNC VMC precision milling, and 15-micron deep electrochemical anodizing."
               }
             },
             {
@@ -3638,7 +3638,7 @@
 
             <div>
                 <h4 class="footer-col-title">Factory &amp; Sourcing</h4>
-                <p style="line-height: 1.6; margin-bottom: 12px;">Plot No. 22, Survey No. 47,<br>Vavdi Industrial Area, Rajkot &bull; 360004, Gujarat, India</p>
+                <p style="line-height: 1.6; margin-bottom: 12px;">Shop No. 5 & 6, Street No. 2,<br>Maruti Industries, Rolex Rd, Kotharia,<br>Rajkot &bull; 360022, Gujarat, India</p>
                 <p style="margin-bottom: 6px;"><strong>Phone / WhatsApp:</strong> +91 99246 37640</p>
                 <p style="margin-bottom: 12px;"><strong>Email:</strong> info@kunetthardware.com</p>
                 <div style="display: flex; gap: 12px;">
@@ -3874,17 +3874,52 @@
         if (e.target.id === 'catModal') closeCatalogueModal();
     }
 
+    const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyvUFgtLDK0WuTfcrIjQxU82dEAUTCKXEdTArcK1TVjrES9sDJSxkVrtfIMtUis8fa9/exec";
+
     function handleCatalogueDownload(e) {
         e.preventDefault();
         const name = document.getElementById('cat-name').value;
         const phone = document.getElementById('cat-phone').value;
         const city = document.getElementById('cat-city').value;
 
-        window.open('assets/KUNETT_Catalogue.pdf', '_blank');
+        // 1. Log lead directly into Google Sheets (Excel)
+        try {
+            const formData = new FormData();
+            formData.append('Timestamp', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }));
+            formData.append('Type', 'Catalogue Download');
+            formData.append('Name', name);
+            formData.append('Phone', phone);
+            formData.append('City', city);
+            formData.append('Email', '');
+            formData.append('Subject', 'Catalogue PDF Download');
+            formData.append('Message', 'Downloaded KUNETT 2026 Architectural Hardware Catalogue PDF from ' + city);
+
+            fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            }).catch(function(err) {
+                console.warn('Google Sheets log fallback:', err);
+            });
+        } catch(err) {
+            console.warn('Google Sheets submit error:', err);
+        }
+
+        // 2. Immediate direct PDF download
+        const downloadLink = document.createElement('a');
+        downloadLink.href = 'assets/KUNETT_Catalogue.pdf';
+        downloadLink.download = 'KUNETT_Catalogue_2026.pdf';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+
         closeCatalogueModal();
 
-        const waText = encodeURIComponent('Hello Sanjay, ' + name + ' from ' + city + ' (' + phone + ') has downloaded the KUNETT Hardware Catalogue PDF.');
-        window.open('https://wa.me/919924637640?text=' + waText, '_blank');
+        // 3. Real-time WhatsApp alert to Sanjay Patel
+        const waText = encodeURIComponent('Hello Sanjay, ' + name + ' from ' + city + ' (' + phone + ') has requested & downloaded the KUNETT Hardware Catalogue PDF.');
+        setTimeout(function() {
+            window.open('https://wa.me/919924637640?text=' + waText, '_blank');
+        }, 500);
     }
 
     // WebMCP Browser Agent Tools

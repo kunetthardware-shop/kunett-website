@@ -5,7 +5,7 @@
 ## Quick Facts
 - **Manufacturer:** Harikrushna Enterprise
 - **Founder:** Sanjay Patel
-- **Factory Location:** Plot No. 15/17, Street No. 3, Atika Industrial Area, Dhebar Road (South), Rajkot - 360002, Gujarat, India
+- **Factory Location:** Shop No. 5 & 6, Street No. 2, Maruti Industries, Rolex Rd, Kotharia, Rajkot - 360022, Gujarat, India
 - **Direct Factory WhatsApp:** +91 99246 37640
 - **Email:** support@kunetthardware.com
 - **Material:** 100% Virgin 6063-T5 Solid Aluminium Alloy (Zero recycled scrap)
