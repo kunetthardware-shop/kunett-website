@@ -13,6 +13,19 @@ AddType application/json;charset=utf-8 .json
   RewriteRule ^terms/?$ terms.html [L]
   RewriteRule ^contact/?$ contact.html [L]
 
+  # Clean URL rewrites for Blog & Architectural Articles
+  RewriteRule ^blog/?$ blog.html [L]
+  RewriteRule ^top-10-aluminium-handle-manufacturers-in-rajkot/?$ top-10-aluminium-handle-manufacturers-in-rajkot.html [L]
+  RewriteRule ^aluminium-profile-handles-modern-modular-furniture/?$ aluminium-profile-handles-modern-modular-furniture.html [L]
+  RewriteRule ^aluminium-vs-steel-handles-for-new-home/?$ aluminium-vs-steel-handles-for-new-home.html [L]
+  RewriteRule ^how-to-choose-aluminium-handle-for-wardrobe/?$ how-to-choose-aluminium-handle-for-wardrobe.html [L]
+
+  # Subpath alias rewrites for /blog/<slug>
+  RewriteRule ^blog/top-10-aluminium-handle-manufacturers-in-rajkot/?$ top-10-aluminium-handle-manufacturers-in-rajkot.html [L]
+  RewriteRule ^blog/aluminium-profile-handles-modern-modular-furniture/?$ aluminium-profile-handles-modern-modular-furniture.html [L]
+  RewriteRule ^blog/aluminium-vs-steel-handles-for-new-home/?$ aluminium-vs-steel-handles-for-new-home.html [L]
+  RewriteRule ^blog/how-to-choose-aluminium-handle-for-wardrobe/?$ how-to-choose-aluminium-handle-for-wardrobe.html [L]
+
   # Serve Markdown representation when an agent requests Accept: text/markdown
   RewriteCond %{HTTP:Accept} text/markdown [NC]
   RewriteRule ^(index\.html)?$ markdown.php [L]

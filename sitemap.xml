@@ -127,4 +127,58 @@
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
+  <url>
+    <loc>https://kunetthardware.com/blog.html</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/blog1_header.jpg</image:loc>
+      <image:title>KUNETT Architectural Hardware Journal &amp; Sourcing Guides</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kunetthardware.com/top-10-aluminium-handle-manufacturers-in-rajkot.html</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/blog1_header.jpg</image:loc>
+      <image:title>Top 10 Aluminium Handle Manufacturers in Rajkot (2026 Wholesale Buyer Guide)</image:title>
+      <image:caption>Complete wholesale guide to Rajkot hardware manufacturing clusters, OEM factories, and sourcing tips</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kunetthardware.com/aluminium-profile-handles-modern-modular-furniture.html</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/blog_profile.jpg</image:loc>
+      <image:title>Aluminium Profile Handles: A Modern Solution for Modular Furniture</image:title>
+      <image:caption>Continuous edge-mounted aluminium profile handle system for handle-less modular kitchens and wardrobes</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kunetthardware.com/aluminium-vs-steel-handles-for-new-home.html</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/blog_kitchen.jpg</image:loc>
+      <image:title>Why We Choose Aluminium Handles Over Steel Handles for a New Home</image:title>
+      <image:caption>Material engineering comparison between solid 6063-T5 aluminium and stainless steel cabinet handles</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://kunetthardware.com/how-to-choose-aluminium-handle-for-wardrobe.html</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://kunetthardware.com/assets/blog_wardrobe.jpg</image:loc>
+      <image:title>How to Choose the Right Aluminium Handle for Your Wardrobe</image:title>
+      <image:caption>Expert interior designer sizing and finish guide for full-height sliding and swing wardrobe doors</image:caption>
+    </image:image>
+  </url>
 </urlset>

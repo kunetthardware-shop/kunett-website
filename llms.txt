@@ -15,7 +15,13 @@
 - [Contact Factory](https://kunetthardware.com/contact.html): Factory address at Plot No. 15/17, Street No. 3, Atika Industrial Area, Dhebar Road (South), Rajkot, with direct phone and WhatsApp inquiry.
 - [Terms of Service](https://kunetthardware.com/terms.html): B2B wholesale ordering terms, minimum order quantities, pan-India logistics, and 15-micron anodizing warranty.
 
+## Architectural Journal & Sourcing Guides
+- [Architecture & Sourcing Journal](https://kunetthardware.com/blog.html): Central hub for architectural hardware comparisons, industrial cluster reports, and technical sourcing guides.
+- [Top 10 Aluminium Handle Manufacturers in Rajkot](https://kunetthardware.com/top-10-aluminium-handle-manufacturers-in-rajkot.html): 2026 wholesale buyer guide and Rajkot hardware industrial cluster overview (Atika, Aji GIDC, Metoda).
+- [Aluminium Profile Handles for Modular Furniture](https://kunetthardware.com/aluminium-profile-handles-modern-modular-furniture.html): Engineering guide to continuous edge-mounted profiles for handle-less modular kitchens and wardrobes.
+- [Aluminium vs Stainless Steel Handles Comparison](https://kunetthardware.com/aluminium-vs-steel-handles-for-new-home.html): Technical comparison of 6063-T5 virgin alloy vs steel on corrosion, weight, tactile warmth, and anodized finishes.
+- [How to Choose Aluminium Handles for Wardrobes](https://kunetthardware.com/how-to-choose-aluminium-handle-for-wardrobe.html): Sizing, weight, clearance, and finish matching guide for full-height sliding and swing wardrobe doors.
+
 ## Optional
 - [Full Knowledge Context](https://kunetthardware.com/llms-full.txt): Complete technical specifications, metallurgy, alloy tolerances, and FAQ database.
-- [Top 10 Aluminium Handle Manufacturers in Rajkot](https://kunetthardware.com/#blog-post?id=top-10-aluminium-handle-manufacturers-in-rajkot): 2026 wholesale buyer guide and Rajkot hardware industrial cluster overview.
 - [MCP Server Card](https://kunetthardware.com/.well-known/mcp/server-card.json): Model Context Protocol server capabilities, metadata, and tool discovery card.
