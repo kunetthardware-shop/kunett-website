@@ -364,19 +364,29 @@
     }
     @media (max-width: 768px) { .modal-grid { grid-template-columns: 1fr; } }
     .modal-img-box {
-        background: #F8F8F7;
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        min-height: 380px;
         border-radius: 24px;
-        padding: 40px 20px;
+        overflow: hidden;
+        position: relative;
+        background: #F0F0EE;
+        padding: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        min-height: 280px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
     }
     .modal-img {
-        max-height: 240px;
-        max-width: 90%;
-        object-fit: contain;
-        filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.15));
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-img-box:hover .modal-img {
+        transform: scale(1.05);
     }
     .modal-specs-table {
         width: 100%;
@@ -773,7 +783,7 @@
     </div>
 
     <script>
-        const products = [{'code': '501', 'image': 'assets/501.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 501 is a geometric cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with micro-knurled and satin-brushed cylindrical bodies, it provides a firm, balanced tactile pinch grip. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['25mm', '32mm', '38mm']}, {'code': '502', 'image': 'assets/502.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 502 is a tactile cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with micro-knurled and satin-brushed cylindrical bodies, it provides a firm, balanced tactile pinch grip. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['25mm', '32mm', '38mm']}, {'code': '503', 'image': 'assets/503.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 503 is a solid-billet cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with solid single-piece CNC turning, it provides a jewel-like focal point on vanity drawers and credenzas. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['25mm', '32mm', '38mm']}, {'code': '504', 'image': 'assets/504.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 504 is a minimalist cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with solid single-piece CNC turning, it provides a jewel-like focal point on vanity drawers and credenzas. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['25mm', '32mm', '38mm']}, {'code': '505', 'image': 'assets/505.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 505 is a jewelry-grade cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with anti-spin indexing pins, it provides a jewel-like focal point on vanity drawers and credenzas. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['25mm', '32mm', '38mm']}, {'code': '506', 'image': 'assets/506.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 506 is a geometric cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with anti-spin indexing pins, it provides a jewel-like focal point on vanity drawers and credenzas. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['25mm', '32mm', '38mm']}, {'code': '507', 'image': 'assets/507.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 507 is a tactile cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with micro-knurled and satin-brushed cylindrical bodies, it provides a firm, balanced tactile pinch grip. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['25mm', '32mm', '38mm']}, {'code': '508', 'image': 'assets/508.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 508 is a solid-billet cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with micro-knurled and satin-brushed cylindrical bodies, it provides a firm, balanced tactile pinch grip. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['25mm', '32mm', '38mm']}];
+        const products = [{'code': '501', 'image': 'assets/501.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 501 is a geometric cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with micro-knurled and satin-brushed cylindrical bodies, it provides a firm, balanced tactile pinch grip. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['1"', '1.25"', '1.5"']}, {'code': '502', 'image': 'assets/502.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 502 is a tactile cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with micro-knurled and satin-brushed cylindrical bodies, it provides a firm, balanced tactile pinch grip. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['1"', '1.25"', '1.5"']}, {'code': '503', 'image': 'assets/503.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 503 is a solid-billet cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with solid single-piece CNC turning, it provides a jewel-like focal point on vanity drawers and credenzas. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['1"', '1.25"', '1.5"']}, {'code': '504', 'image': 'assets/504.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 504 is a minimalist cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with solid single-piece CNC turning, it provides a jewel-like focal point on vanity drawers and credenzas. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['1"', '1.25"', '1.5"']}, {'code': '505', 'image': 'assets/505.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 505 is a jewelry-grade cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with anti-spin indexing pins, it provides a jewel-like focal point on vanity drawers and credenzas. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['1"', '1.25"', '1.5"']}, {'code': '506', 'image': 'assets/506.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 506 is a geometric cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with anti-spin indexing pins, it provides a jewel-like focal point on vanity drawers and credenzas. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['1"', '1.25"', '1.5"']}, {'code': '507', 'image': 'assets/507.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 507 is a tactile cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with micro-knurled and satin-brushed cylindrical bodies, it provides a firm, balanced tactile pinch grip. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['1"', '1.25"', '1.5"']}, {'code': '508', 'image': 'assets/508.png', 'series': '500', 'category': 'Cabinet Knob', 'desc': 'Model 508 is a solid-billet cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with micro-knurled and satin-brushed cylindrical bodies, it provides a firm, balanced tactile pinch grip. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.', 'sizes': ['1"', '1.25"', '1.5"']}];
 
         function filterSeriesCards(q) {
             const query = q.trim().toLowerCase();

@@ -364,19 +364,29 @@
     }
     @media (max-width: 768px) { .modal-grid { grid-template-columns: 1fr; } }
     .modal-img-box {
-        background: #F8F8F7;
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        min-height: 380px;
         border-radius: 24px;
-        padding: 40px 20px;
+        overflow: hidden;
+        position: relative;
+        background: #F0F0EE;
+        padding: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        min-height: 280px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
     }
     .modal-img {
-        max-height: 240px;
-        max-width: 90%;
-        object-fit: contain;
-        filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.15));
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-img-box:hover .modal-img {
+        transform: scale(1.05);
     }
     .modal-specs-table {
         width: 100%;
@@ -695,7 +705,7 @@
     </div>
 
     <script>
-        const products = [{'code': '451', 'image': 'assets/451.png', 'series': '450', 'category': 'Sliding Counsil', 'desc': 'Model 451 is a zero-clearance sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with chiseled recess channel, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors.', 'sizes': ['128mm', '160mm', '224mm', '320mm']}, {'code': '452', 'image': 'assets/452.png', 'series': '450', 'category': 'Sliding Counsil', 'desc': 'Model 452 is a flush-profile sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with chiseled recess channel, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors.', 'sizes': ['128mm', '160mm', '224mm', '320mm']}, {'code': '453', 'image': 'assets/453.png', 'series': '450', 'category': 'Sliding Counsil', 'desc': 'Model 453 is a ultra-slim sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with a sub-2mm faceplate profile, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors.', 'sizes': ['128mm', '160mm', '224mm', '320mm']}, {'code': '454', 'image': 'assets/454.png', 'series': '450', 'category': 'Sliding Counsil', 'desc': 'Model 454 is a smooth-gliding sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with a sub-2mm faceplate profile, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors.', 'sizes': ['128mm', '160mm', '224mm', '320mm']}, {'code': '455', 'image': 'assets/455.png', 'series': '450', 'category': 'Sliding Counsil', 'desc': 'Model 455 is a zero-clearance sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with deep contoured finger grip, it provides smooth fingertip lateral push/pull control. The industry benchmark for sliding wardrobe systems and pocket doors.', 'sizes': ['128mm', '160mm', '224mm', '320mm']}];
+        const products = [{'code': '451', 'image': 'assets/451.png', 'series': '450', 'category': 'Sliding Counsil', 'desc': 'Model 451 is a zero-clearance sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with chiseled recess channel, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors.', 'sizes': ['5"', '6"', '8"', '12"']}, {'code': '452', 'image': 'assets/452.png', 'series': '450', 'category': 'Sliding Counsil', 'desc': 'Model 452 is a flush-profile sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with chiseled recess channel, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors.', 'sizes': ['5"', '6"', '8"', '12"']}, {'code': '453', 'image': 'assets/453.png', 'series': '450', 'category': 'Sliding Counsil', 'desc': 'Model 453 is a ultra-slim sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with a sub-2mm faceplate profile, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors.', 'sizes': ['5"', '6"', '8"', '12"']}, {'code': '454', 'image': 'assets/454.png', 'series': '450', 'category': 'Sliding Counsil', 'desc': 'Model 454 is a smooth-gliding sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with a sub-2mm faceplate profile, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors.', 'sizes': ['5"', '6"', '8"', '12"']}, {'code': '455', 'image': 'assets/455.png', 'series': '450', 'category': 'Sliding Counsil', 'desc': 'Model 455 is a zero-clearance sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with deep contoured finger grip, it provides smooth fingertip lateral push/pull control. The industry benchmark for sliding wardrobe systems and pocket doors.', 'sizes': ['5"', '6"', '8"', '12"']}];
 
         function filterSeriesCards(q) {
             const query = q.trim().toLowerCase();
