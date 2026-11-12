@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1971,9 +1971,18 @@
         100% { opacity: 1; transform: translateY(0); }
     }
 
+
+    /* Global Smooth Scrolling & Section Offset */
+    html {
+        scroll-behavior: smooth;
+    }
+    #top, #collection, #process, #finishes, #founder, #calculator, #faqs, #guides, section[id] {
+        scroll-margin-top: 105px;
+    }
+
 </style>
 </head>
-<body>
+<body id="top">
 
     <!-- Luxury Architectural Preloader -->
     <div id="kunett-preloader" class="preloader-overlay" aria-hidden="true">
@@ -2009,7 +2018,7 @@
     <!-- Floating Pill Navbar (Matching Screenshot) -->
     <div class="nav-container">
         <nav class="navbar">
-            <a href="index.html" class="nav-logo-group">
+            <a href="#top" class="nav-logo-group">
                 <img src="assets/logo.png" alt="KUNETT Architectural Hardware" class="nav-logo-img">
                 <div class="brand-text">
                     <span class="brand-title">K U N E T T</span>
@@ -2019,10 +2028,10 @@
 
             
             <div class="nav-links">
-                <a href="index.html" class="nav-link active">HOME</a>
+                <a href="#top" class="nav-link active" data-section="home">HOME</a>
                 
                 <div class="nav-dropdown-group">
-                    <a href="index.html#collection" class="nav-link nav-dropdown-trigger ">
+                    <a href="#collection" class="nav-link nav-dropdown-trigger " data-section="collection">
                         <span>COLLECTIONS</span>
                         <svg class="dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                     </a>
@@ -2080,10 +2089,11 @@
                     </div>
                 </div>
 
-                <a href="#process" class="nav-link">PROCESS</a>
-                <a href="#finishes" class="nav-link">FINISHES</a>
-                <a href="#founder" class="nav-link">FOUNDER</a>
-                <a href="#calculator" class="nav-link">CALCULATOR</a>
+                <a href="#process" class="nav-link" data-section="process">PROCESS</a>
+                <a href="#finishes" class="nav-link" data-section="finishes">FINISHES</a>
+                <a href="#guides" class="nav-link" data-section="guides">BLOG</a>
+                <a href="#founder" class="nav-link" data-section="founder">FOUNDER</a>
+                <a href="#calculator" class="nav-link" data-section="calculator">CALCULATOR</a>
             </div>
 
 
@@ -2160,7 +2170,7 @@
                 </div>
                 <div class="intent-item">
                     <h4>Custom-Cut Lengths</h4>
-                    <p>Standard 96mm to 1200mm, or continuous profiles up to 3 meters cut to fit your cabinetry shutters perfectly.</p>
+                    <p>Standard 4" to 48", or continuous profiles up to 10 feet cut to fit your cabinetry shutters perfectly.</p>
                 </div>
                 <div class="intent-item">
                     <h4>8 Luxury Finishes</h4>
@@ -3677,7 +3687,7 @@
                         </tr>
                         <tr>
                             <td>Available Sizes</td>
-                            <td id="modalSizes">96mm, 128mm, 160mm, 320mm</td>
+                            <td id="modalSizes">4", 6", 8", 12", 16", 18", 48"</td>
                         </tr>
                         <tr>
                             <td>Finishes</td>
@@ -3959,6 +3969,131 @@
 
         // Hard failsafe: never block longer than 1.9s under any network condition
         setTimeout(dismissPreloader, 1900);
+    })();
+
+</script>
+<script>
+
+    // Smooth Scroll & Scrollspy Controller
+    (function() {
+        // 1. Smooth click handler for all anchor links pointing to on-page sections
+        document.querySelectorAll('a[href^="#"], a[href^="index.html#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                const rawHref = this.getAttribute('href');
+                const targetId = rawHref.replace(/^index\.html/, '');
+                
+                // If clicking to top / home
+                if (targetId === '#' || targetId === '#top' || targetId === '') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    history.pushState(null, null, 'index.html');
+                    updateActiveNav('home');
+                    return;
+                }
+
+                // If anchor points to a valid ID on this page
+                if (targetId.startsWith('#')) {
+                    const targetEl = document.querySelector(targetId);
+                    if (targetEl) {
+                        e.preventDefault();
+                        
+                        // Calculate offset position accounting for floating navbar (height ~56px + top 20px)
+                        const navbarOffset = 95;
+                        const elementPosition = targetEl.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - navbarOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+
+                        // Update URL hash cleanly
+                        history.pushState(null, null, targetId);
+                        
+                        // Update active state in navbar
+                        updateActiveNav(targetId.substring(1));
+                    }
+                }
+            });
+        });
+
+        // 2. Active nav link helper
+        function updateActiveNav(activeId) {
+            document.querySelectorAll('.nav-links .nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            if (activeId === 'home' || activeId === 'top') {
+                const homeLink = document.querySelector('.nav-links a[data-section="home"]');
+                if (homeLink) homeLink.classList.add('active');
+                return;
+            }
+
+            const activeLink = document.querySelector(`.nav-links a[data-section="${activeId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            } else if (activeId === 'collection') {
+                const colTrigger = document.querySelector('.nav-dropdown-trigger');
+                if (colTrigger) colTrigger.classList.add('active');
+            }
+        }
+
+        // 3. Scrollspy using IntersectionObserver: auto-highlight menu button as user scrolls
+        const sections = [
+            { id: 'top', el: document.body },
+            { id: 'collection', el: document.getElementById('collection') },
+            { id: 'process', el: document.getElementById('process') },
+            { id: 'finishes', el: document.getElementById('finishes') },
+            { id: 'guides', el: document.getElementById('guides') },
+            { id: 'founder', el: document.getElementById('founder') },
+            { id: 'calculator', el: document.getElementById('calculator') }
+        ].filter(s => s.el !== null);
+
+        let isThrottled = false;
+        window.addEventListener('scroll', function() {
+            if (isThrottled) return;
+            isThrottled = true;
+            
+            setTimeout(function() {
+                isThrottled = false;
+                const scrollPos = window.pageYOffset + 140;
+
+                // If near top
+                if (window.pageYOffset < 300) {
+                    updateActiveNav('home');
+                    return;
+                }
+
+                // Check sections in reverse order
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    const sec = sections[i];
+                    if (sec.id === 'top') continue;
+                    if (sec.el && sec.el.offsetTop <= scrollPos) {
+                        updateActiveNav(sec.id);
+                        break;
+                    }
+                }
+            }, 60);
+        }, { passive: true });
+
+        // 4. Handle smooth glide if page loads with a hash (e.g. index.html#process)
+        window.addEventListener('load', function() {
+            if (window.location.hash) {
+                const target = document.querySelector(window.location.hash);
+                if (target) {
+                    setTimeout(function() {
+                        const navbarOffset = 95;
+                        const elementPosition = target.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - navbarOffset;
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                        updateActiveNav(window.location.hash.substring(1));
+                    }, 400); // Wait for preloader to begin dissolve
+                }
+            }
+        });
     })();
 
 </script>
