@@ -144,34 +144,35 @@
         padding-top: 100px;
     }
 
-    /* Floating Pill Navbar */
-    .navbar-wrapper {
-        position: fixed;
-        top: 20px;
-        left: 0;
-        right: 0;
+    /* ===================================================
+       STANDARDIZED LUXURY FLOATING PILL NAVBAR & DRAWER
+       =================================================== */
+    :root {
+        --obsidian: #0C0D0E;
+        --border-light: rgba(12, 13, 14, 0.08);
+        --whatsapp-green: #25D366;
+        --font-display: 'Playfair Display', Georgia, serif;
+    }
+
+    .nav-container {
+        position: sticky;
+        top: 16px;
         z-index: 999;
-        display: flex;
-        justify-content: center;
-        padding: 0 16px;
-        pointer-events: none;
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 20px;
     }
     .navbar {
-        pointer-events: auto;
-        background: rgba(255, 255, 255, 0.88);
+        background: rgba(255, 255, 255, 0.94);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        border: 1px solid var(--border-light);
+        border: 1px solid var(--border-light, rgba(0, 0, 0, 0.08));
         border-radius: 9999px;
-        padding: 8px 16px;
+        padding: 10px 24px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 20px;
-        box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.08);
-        max-width: 1180px;
-        width: 100%;
-        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
     }
     .nav-logo-group {
         display: flex;
@@ -181,49 +182,50 @@
         flex-shrink: 0;
     }
     .nav-logo-img {
-        height: 46px;
+        height: 50px;
         width: auto;
         object-fit: contain;
         display: block;
-        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
+        filter: drop-shadow(0 2px 5px rgba(0,0,0,0.06));
     }
     .brand-text {
         display: flex;
         flex-direction: column;
     }
     .brand-title {
-        font-family: var(--font-display);
-        font-size: 15px;
+        font-family: var(--font-display, serif);
+        font-size: 13.5px;
         font-weight: 700;
         letter-spacing: 0.16em;
-        color: var(--obsidian);
-        line-height: 1.1;
+        white-space: nowrap;
+        color: var(--obsidian, #0C0D0E);
     }
     .brand-sub {
-        font-size: 8px;
+        font-size: 8.5px;
         font-weight: 600;
-        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
         color: #8E8E93;
-        margin-top: 2px;
     }
     .nav-links {
         display: flex;
         align-items: center;
-        gap: 16px;
-    }
-    .nav-link {
-        color: var(--charcoal-mute);
-        text-decoration: none;
+        gap: 14px;
         font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 0.06em;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        color: #4B5563;
+        white-space: nowrap;
+    }
+    .nav-links a {
+        color: #4B5563;
+        text-decoration: none;
         transition: color 0.2s ease;
     }
-    .nav-link:hover, .nav-link.active {
-        color: var(--obsidian);
+    .nav-links a:hover, .nav-links a.active {
+        color: var(--obsidian, #0C0D0E);
     }
-
-    /* Collections Dropdown */
     .nav-dropdown-group {
         position: relative;
         display: inline-flex;
@@ -252,7 +254,7 @@
         background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(25px);
         -webkit-backdrop-filter: blur(25px);
-        border: 1px solid var(--border-light);
+        border: 1px solid var(--border-light, rgba(0,0,0,0.08));
         border-radius: 24px;
         padding: 12px;
         box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.12), 0 0 1px rgba(0, 0, 0, 0.08);
@@ -289,11 +291,10 @@
     }
     .dropdown-count-badge {
         background: #F3F4F6;
-        color: var(--obsidian);
+        color: var(--obsidian, #0C0D0E);
         padding: 2px 7px;
         border-radius: 9999px;
-        font-size: 9px;
-        font-weight: 700;
+        font-size: 9.5px;
     }
     .dropdown-item {
         display: flex;
@@ -302,107 +303,399 @@
         padding: 10px 12px;
         border-radius: 14px;
         text-decoration: none;
-        color: var(--obsidian);
-        transition: background 0.15s ease;
+        transition: background-color 0.2s ease, transform 0.2s ease;
     }
     .dropdown-item:hover {
-        background: #F8F8F7;
+        background: #F8F9FA;
+        transform: translateX(3px);
     }
     .dropdown-item-icon {
         width: 32px;
         height: 32px;
         border-radius: 10px;
-        background: #0C0D0E;
-        color: #FFFFFF;
+        background: #F3F4F6;
+        color: var(--obsidian, #0C0D0E);
+        font-size: 11px;
+        font-weight: 800;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 11px;
-        font-weight: 700;
         flex-shrink: 0;
+        transition: background-color 0.2s, color 0.2s;
+    }
+    .dropdown-item:hover .dropdown-item-icon {
+        background: var(--obsidian, #0C0D0E);
+        color: #FFFFFF;
     }
     .dropdown-item-text {
-        flex-grow: 1;
+        flex: 1;
         display: flex;
         flex-direction: column;
+        text-align: left;
     }
     .dropdown-item-title {
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--obsidian);
-        line-height: 1.2;
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--obsidian, #0C0D0E);
+        letter-spacing: 0;
+        text-transform: none;
     }
     .dropdown-item-sub {
         font-size: 10px;
         color: #8E8E93;
-        margin-top: 2px;
+        font-weight: 500;
+        text-transform: none;
+        letter-spacing: 0;
     }
     .dropdown-arrow {
-        color: #C7C7CC;
-        font-size: 12px;
-        transition: transform 0.2s ease, color 0.2s ease;
+        font-size: 13px;
+        color: #D1D5DB;
+        transition: color 0.2s, transform 0.2s;
     }
     .dropdown-item:hover .dropdown-arrow {
-        color: var(--obsidian);
-        transform: translateX(3px);
+        color: var(--obsidian, #0C0D0E);
+        transform: translateX(2px);
     }
     .dropdown-footer {
-        padding-top: 8px;
+        padding: 8px 10px 4px 10px;
         margin-top: 6px;
         border-top: 1px solid #F3F4F6;
     }
     .dropdown-pdf-link {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 12px;
-        border-radius: 12px;
-        font-size: 11px;
-        font-weight: 600;
-        color: var(--obsidian);
-        background: #F3F4F6;
-        text-decoration: none;
-        transition: background 0.2s ease;
-    }
-    .dropdown-pdf-link:hover {
-        background: #E5E7EB;
-    }
-
-    .nav-actions {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        flex-shrink: 0;
-    }
-    .btn-wa {
-        background: var(--brand-green);
-        color: #FFFFFF;
-        padding: 8px 16px;
-        border-radius: 9999px;
-        text-decoration: none;
-        font-size: 11px;
+        font-size: 10.5px;
         font-weight: 700;
+        color: #4B5563;
         display: flex;
         align-items: center;
         gap: 6px;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .btn-wa:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
-    }
-    .btn-catalog {
-        background: var(--obsidian);
-        color: #FFFFFF;
-        padding: 8px 16px;
-        border-radius: 9999px;
         text-decoration: none;
-        font-size: 11px;
-        font-weight: 700;
-        transition: opacity 0.2s ease;
+        transition: color 0.2s;
+        text-transform: none;
+        letter-spacing: 0;
     }
-    .btn-catalog:hover {
-        opacity: 0.9;
+    .dropdown-pdf-link:hover {
+        color: var(--obsidian, #0C0D0E);
+    }
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+    }
+    .btn-wa {
+        background-color: var(--whatsapp-green, #25D366);
+        color: #FFFFFF;
+        font-size: 11.5px;
+        font-weight: 700;
+        padding: 9px 18px;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: transform 0.2s, background-color 0.2s;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+    .btn-wa:hover { transform: scale(1.03); background-color: #20ba59; }
+    .btn-catalog {
+        background-color: var(--obsidian, #0C0D0E);
+        color: #FFFFFF;
+        font-size: 11.5px;
+        font-weight: 700;
+        padding: 9px 20px;
+        border-radius: 9999px;
+        cursor: pointer;
+        transition: transform 0.2s, background-color 0.2s;
+        border: none;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+    }
+    .btn-catalog:hover { transform: scale(1.03); background-color: #232528; }
+
+    /* Mobile Quick WA + Hamburger Bar */
+    .mobile-nav-toggle-group {
+        display: none;
+        align-items: center;
+        gap: 10px;
+    }
+    .mobile-quick-wa {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background-color: var(--whatsapp-green, #25D366);
+        color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-shadow: 0 4px 10px rgba(37, 211, 102, 0.28);
+        transition: transform 0.2s;
+    }
+    .mobile-quick-wa:hover { transform: scale(1.06); }
+    .mobile-hamburger-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background-color: var(--obsidian, #111827);
+        border: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4.5px;
+        cursor: pointer;
+        padding: 0;
+        transition: transform 0.2s, background-color 0.2s;
+    }
+    .mobile-hamburger-btn:hover { background-color: #232528; }
+    .hamburger-bar {
+        width: 17px;
+        height: 2px;
+        background-color: #FFFFFF;
+        border-radius: 2px;
+    }
+
+    @media (max-width: 1024px) {
+        .nav-container { top: 10px; padding: 0 10px; }
+        .navbar { padding: 7px 14px; }
+        .nav-links { display: none !important; }
+        .nav-actions { display: none !important; }
+        .mobile-nav-toggle-group { display: flex; }
+        .nav-logo-img { height: 38px; }
+        .brand-title { font-size: 12.5px; letter-spacing: 0.12em; }
+        .brand-sub { display: none; }
+        .mobile-quick-wa { width: 34px; height: 34px; }
+        .mobile-hamburger-btn { width: 34px; height: 34px; }
+    }
+
+    /* Mobile Navigation Drawer & Backdrop */
+    .mobile-nav-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index: 99998;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-nav-backdrop.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .mobile-nav-drawer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 340px;
+        max-width: 88vw;
+        background: #FFFFFF;
+        z-index: 99999;
+        box-shadow: -12px 0 40px rgba(0, 0, 0, 0.22);
+        display: flex;
+        flex-direction: column;
+        transform: translateX(100%);
+        visibility: hidden;
+        transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.32s;
+        will-change: transform;
+    }
+    .mobile-nav-drawer.open {
+        transform: translateX(0);
+        visibility: visible;
+    }
+    .mobile-nav-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 20px;
+        border-bottom: 1px solid #E2E8F0;
+        background: #FFFFFF;
+    }
+    .mobile-nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: inherit;
+    }
+    .mobile-nav-logo {
+        height: 44px;
+        width: auto;
+        object-fit: contain;
+    }
+    .mobile-nav-title {
+        display: block;
+        font-family: var(--font-display, serif);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        color: #0F172A;
+    }
+    .mobile-nav-sub {
+        display: block;
+        font-size: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #94A3B8;
+    }
+    .mobile-nav-close {
+        background: #F1F5F9;
+        border: none;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #334155;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    .mobile-nav-close:hover {
+        background: #E2E8F0;
+    }
+    .mobile-nav-body {
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 12px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+    .mobile-nav-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 11px 14px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #1E293B;
+        text-decoration: none;
+        transition: background-color 0.15s, color 0.15s;
+    }
+    .mobile-nav-link:hover, .mobile-nav-link:active {
+        background-color: #F8FAFC;
+        color: #000000;
+    }
+    .mobile-nav-arrow {
+        color: #94A3B8;
+        font-size: 13px;
+    }
+    .mobile-accordion {
+        border-radius: 12px;
+        background: #F8FAFC;
+        margin: 3px 0;
+        overflow: hidden;
+        border: 1px solid #F1F5F9;
+    }
+    .mobile-accordion-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 11px 14px;
+        border: none;
+        background: none;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #0F172A;
+        cursor: pointer;
+    }
+    .mobile-accordion-icon {
+        transition: transform 0.25s ease;
+        color: #64748B;
+    }
+    .mobile-accordion.open .mobile-accordion-icon {
+        transform: rotate(180deg);
+    }
+    .mobile-accordion-content {
+        display: none;
+        padding: 4px 10px 12px;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .mobile-accordion.open .mobile-accordion-content {
+        display: flex;
+    }
+    .mobile-sublink {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 11px;
+        border-radius: 8px;
+        text-decoration: none;
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        transition: background-color 0.15s;
+    }
+    .mobile-sublink:active {
+        background-color: #F1F5F9;
+    }
+    .sublink-badge {
+        background: #0F172A;
+        color: #FFFFFF;
+        font-size: 10px;
+        font-weight: 800;
+        padding: 3px 7px;
+        border-radius: 6px;
+        flex-shrink: 0;
+    }
+    .sublink-title {
+        font-size: 12px;
+        font-weight: 700;
+        color: #0F172A;
+        line-height: 1.2;
+    }
+    .sublink-desc {
+        font-size: 10px;
+        color: #64748B;
+        margin-top: 2px;
+    }
+    .mobile-nav-footer {
+        padding: 14px 16px 20px;
+        border-top: 1px solid #E2E8F0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        background: #FAFAFA;
+    }
+    .mobile-btn-wa {
+        background-color: #25D366;
+        color: #FFFFFF;
+        font-size: 12.5px;
+        font-weight: 700;
+        padding: 11px;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(37,211,102,0.25);
+    }
+    .mobile-btn-catalog {
+        background-color: #0F172A;
+        color: #FFFFFF;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 10px;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none;
     }
 
     /* Article Layout */
@@ -1077,21 +1370,22 @@
 
     
     <!-- Floating Pill Navigation Bar -->
-    <header class="navbar-wrapper">
+    <!-- Standard Floating Pill Navbar -->
+    <div class="nav-container">
         <nav class="navbar">
             <a href="index.html" class="nav-logo-group">
-                <img src="assets/logo.png" alt="KUNETT Hardware" class="nav-logo-img">
+                <img src="assets/logo.png" alt="KUNETT Architectural Hardware" class="nav-logo-img">
                 <div class="brand-text">
-                    <span class="brand-title">KUNETT</span>
-                    <span class="brand-sub">Architectural Hardware</span>
+                    <span class="brand-title">K U N E T T</span>
+                    <span class="brand-sub">ARCHITECTURAL HARDWARE</span>
                 </div>
             </a>
 
             <div class="nav-links">
-                <a href="index.html" class="nav-link">HOME</a>
+                <a href="index.html" class="nav-link ">HOME</a>
                 
-                <div class="nav-dropdown-group">
-                    <a href="index.html#collection" class="nav-link nav-dropdown-trigger">
+                <div class="nav-dropdown-group ">
+                    <a href="index.html#collection" class="nav-link nav-dropdown-trigger ">
                         <span>COLLECTIONS</span>
                         <svg class="dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                     </a>
@@ -1112,7 +1406,7 @@
                             <div class="dropdown-item-icon">300</div>
                             <div class="dropdown-item-text">
                                 <span class="dropdown-item-title">Profile Handles (300 Series)</span>
-                                <span class="dropdown-item-sub">24 Models &bull; Up to 10ft Continuous</span>
+                                <span class="dropdown-item-sub">24 Models &bull; 6"-36" &amp; 20ft continuous</span>
                             </div>
                             <span class="dropdown-arrow">&rarr;</span>
                         </a>
@@ -1120,7 +1414,7 @@
                             <div class="dropdown-item-icon">400</div>
                             <div class="dropdown-item-text">
                                 <span class="dropdown-item-title">Concealed Counsils (400 Series)</span>
-                                <span class="dropdown-item-sub">18 Models &bull; Flush Deep Recessed 4" to 12"</span>
+                                <span class="dropdown-item-sub">18 Models &bull; Recessed 4" to 12"</span>
                             </div>
                             <span class="dropdown-arrow">&rarr;</span>
                         </a>
@@ -1136,7 +1430,7 @@
                             <div class="dropdown-item-icon">500</div>
                             <div class="dropdown-item-text">
                                 <span class="dropdown-item-title">Cabinet Knobs (500 Series)</span>
-                                <span class="dropdown-item-sub">8 Models &bull; CNC Turned 1" to 1.5"</span>
+                                <span class="dropdown-item-sub">8 Models &bull; 2" Solid CNC Turned</span>
                             </div>
                             <span class="dropdown-arrow">&rarr;</span>
                         </a>
@@ -1149,12 +1443,12 @@
                     </div>
                 </div>
 
-                <a href="index.html#process" class="nav-link">PROCESS</a>
-                <a href="index.html#finishes" class="nav-link">FINISHES</a>
+                <a href="index.html#process" class="nav-link ">PROCESS</a>
+                <a href="index.html#finishes" class="nav-link ">FINISHES</a>
                 <a href="blog.html" class="nav-link active">BLOG</a>
-                <a href="index.html#founder" class="nav-link">FOUNDER</a>
-                <a href="index.html#calculator" class="nav-link">CALCULATOR</a>
-                <a href="contact.html" class="nav-link">CONTACT</a>
+                <a href="index.html#founder" class="nav-link ">FOUNDER</a>
+                <a href="index.html#calculator" class="nav-link ">CALCULATOR</a>
+                <a href="contact.html" class="nav-link ">CONTACT</a>
             </div>
 
             <div class="nav-actions">
@@ -1164,8 +1458,129 @@
                 </a>
                 <a href="assets/KUNETT_Catalogue.pdf" target="_blank" class="btn-catalog">Catalogue PDF</a>
             </div>
+
+            <!-- Mobile Quick Action & Hamburger Toggle -->
+            <div class="mobile-nav-toggle-group">
+                <a href="https://wa.me/919924637640?text=Hello%20Sanjay,%20I%20would%20like%20to%20request%20pricing%20for%20KUNETT%20Architectural%20Hardware." target="_blank" class="mobile-quick-wa" aria-label="WhatsApp Inquiry">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg>
+                </a>
+                <button type="button" class="mobile-hamburger-btn" onclick="toggleMobileNav(true)" aria-label="Open Navigation Menu">
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                </button>
+            </div>
         </nav>
-    </header>
+    </div>
+
+    <!-- Mobile Navigation Drawer & Backdrop -->
+    <div id="mobileNavBackdrop" class="mobile-nav-backdrop" onclick="toggleMobileNav(false)"></div>
+    <div id="mobileNavDrawer" class="mobile-nav-drawer" aria-label="Mobile Navigation">
+        <div class="mobile-nav-header">
+            <a href="index.html" class="mobile-nav-brand" onclick="toggleMobileNav(false)">
+                <img src="assets/logo.png" alt="KUNETT Hardware" class="mobile-nav-logo">
+                <div>
+                    <span class="mobile-nav-title">K U N E T T</span>
+                    <span class="mobile-nav-sub">ARCHITECTURAL HARDWARE</span>
+                </div>
+            </a>
+            <button type="button" class="mobile-nav-close" onclick="toggleMobileNav(false)" aria-label="Close menu">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+
+        <div class="mobile-nav-body">
+            <a href="index.html" class="mobile-nav-link" onclick="handleMobileScroll(event, 'index.html#top')">
+                <span>HOME</span>
+                <span class="mobile-nav-arrow">&rarr;</span>
+            </a>
+
+            <!-- Mobile Expandable Accordion for Collections -->
+            <div class="mobile-accordion">
+                <button type="button" class="mobile-accordion-btn" onclick="toggleMobileAccordion(this)">
+                    <span>COLLECTIONS (101 MODELS)</span>
+                    <svg class="mobile-accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div class="mobile-accordion-content">
+                    <a href="aluminium-handles.html" class="mobile-sublink" onclick="toggleMobileNav(false)">
+                        <span class="sublink-badge">200</span>
+                        <div>
+                            <div class="sublink-title">Pull Handles (200 Series)</div>
+                            <div class="sublink-desc">46 Models &bull; Lengths 4" to 48"</div>
+                        </div>
+                    </a>
+                    <a href="aluminium-handle-profile.html" class="mobile-sublink" onclick="toggleMobileNav(false)">
+                        <span class="sublink-badge">300</span>
+                        <div>
+                            <div class="sublink-title">Profile Handles (300 Series)</div>
+                            <div class="sublink-desc">24 Models &bull; 6"-36" &amp; 20ft continuous</div>
+                        </div>
+                    </a>
+                    <a href="wardrobe-counsil-handles.html" class="mobile-sublink" onclick="toggleMobileNav(false)">
+                        <span class="sublink-badge">400</span>
+                        <div>
+                            <div class="sublink-title">Concealed Counsils (400 Series)</div>
+                            <div class="sublink-desc">18 Models &bull; Recessed 4" to 12"</div>
+                        </div>
+                    </a>
+                    <a href="sliding-wardrobe-handles.html" class="mobile-sublink" onclick="toggleMobileNav(false)">
+                        <span class="sublink-badge">450</span>
+                        <div>
+                            <div class="sublink-title">Sliding Counsils (450 Series)</div>
+                            <div class="sublink-desc">5 Models &bull; Zero-Clearance Design</div>
+                        </div>
+                    </a>
+                    <a href="cabinet-knobs.html" class="mobile-sublink" onclick="toggleMobileNav(false)">
+                        <span class="sublink-badge">500</span>
+                        <div>
+                            <div class="sublink-title">Cabinet Knobs (500 Series)</div>
+                            <div class="sublink-desc">8 Models &bull; 2" Solid CNC Turned</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <a href="index.html#process" class="mobile-nav-link" onclick="handleMobileScroll(event, 'index.html#process')">
+                <span>MANUFACTURING PROCESS</span>
+                <span class="mobile-nav-arrow">&rarr;</span>
+            </a>
+            <a href="index.html#finishes" class="mobile-nav-link" onclick="handleMobileScroll(event, 'index.html#finishes')">
+                <span>FINISHES &amp; ANODIZING</span>
+                <span class="mobile-nav-arrow">&rarr;</span>
+            </a>
+            <a href="blog.html" class="mobile-nav-link" onclick="toggleMobileNav(false)">
+                <span>ARCHITECTURE BLOG</span>
+                <span class="mobile-nav-arrow">&rarr;</span>
+            </a>
+            <a href="index.html#founder" class="mobile-nav-link" onclick="handleMobileScroll(event, 'index.html#founder')">
+                <span>FOUNDER STORY</span>
+                <span class="mobile-nav-arrow">&rarr;</span>
+            </a>
+            <a href="index.html#calculator" class="mobile-nav-link" onclick="handleMobileScroll(event, 'index.html#calculator')">
+                <span>WEIGHT CALCULATOR</span>
+                <span class="mobile-nav-arrow">&rarr;</span>
+            </a>
+            <a href="about.html" class="mobile-nav-link" onclick="toggleMobileNav(false)">
+                <span>ABOUT US</span>
+                <span class="mobile-nav-arrow">&rarr;</span>
+            </a>
+            <a href="contact.html" class="mobile-nav-link" onclick="toggleMobileNav(false)">
+                <span>CONTACT FACTORY</span>
+                <span class="mobile-nav-arrow">&rarr;</span>
+            </a>
+        </div>
+
+        <div class="mobile-nav-footer">
+            <a href="https://wa.me/919924637640?text=Hello%20Sanjay,%20I%20would%20like%20to%20request%20pricing%20for%20KUNETT%20Architectural%20Hardware." target="_blank" class="mobile-btn-wa">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg>
+                <span>WhatsApp Quote (+91 99246 37640)</span>
+            </a>
+            <a href="assets/KUNETT_Catalogue.pdf" target="_blank" class="mobile-btn-catalog">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"/></svg>
+                <span>Download 2026 PDF Catalogue</span>
+            </a>
+        </div>
+    </div>
 
 
     <!-- Article Container -->
@@ -1618,5 +2033,87 @@
     })();
 
 </script>
+
+<script>
+    // Global Mobile Nav Drawer Controller
+    function toggleMobileNav(open) {
+        const drawer = document.getElementById('mobileNavDrawer');
+        const backdrop = document.getElementById('mobileNavBackdrop');
+        if (!drawer || !backdrop) return;
+        if (open) {
+            drawer.classList.add('open');
+            backdrop.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        } else {
+            drawer.classList.remove('open');
+            backdrop.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    }
+
+    function toggleMobileAccordion(btn) {
+        const acc = btn.closest('.mobile-accordion');
+        if (acc) acc.classList.toggle('open');
+    }
+
+    function handleMobileScroll(e, targetHref) {
+        toggleMobileNav(false);
+        const isCurrentPage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || window.location.pathname === '';
+        if (isCurrentPage) {
+            const parts = targetHref.split('#');
+            const hash = parts[1] ? '#' + parts[1] : '';
+            if (hash) {
+                if (hash === '#top' || hash === '#') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    history.pushState(null, null, 'index.html');
+                    return;
+                }
+                const targetEl = document.querySelector(hash);
+                if (targetEl) {
+                    e.preventDefault();
+                    const navbarOffset = 95;
+                    const elementPosition = targetEl.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - navbarOffset;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    history.pushState(null, null, hash);
+                }
+            }
+        } else {
+            window.location.href = targetHref;
+        }
+    }
+
+    // Smooth scroll for hash links on same page
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (!targetId || targetId === '#' || targetId === '#top') {
+                    if (targetId === '#top') {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                    return;
+                }
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    const navbarOffset = 95;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - navbarOffset;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 </html>
