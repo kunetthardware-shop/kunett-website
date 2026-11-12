@@ -1350,7 +1350,7 @@
     <section class="max-w-7xl mx-auto px-4 md:px-8 py-8">
         <div id="series-grid" class="products-grid">
             
-        <div class="product-card-modern" data-code="451">
+        <div class="product-card-modern" id="card-451" data-code="451">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 451</span>
@@ -1376,7 +1376,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="452">
+        <div class="product-card-modern" id="card-452" data-code="452">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 452</span>
@@ -1402,7 +1402,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="453">
+        <div class="product-card-modern" id="card-453" data-code="453">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 453</span>
@@ -1428,7 +1428,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="454">
+        <div class="product-card-modern" id="card-454" data-code="454">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 454</span>
@@ -1454,7 +1454,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="455">
+        <div class="product-card-modern" id="card-455" data-code="455">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 455</span>
@@ -1656,6 +1656,35 @@
             window.location.href = targetHref;
         }
     }
+</script>
+
+
+<script>
+    // URL Hash Auto-Scroll & Highlight for specific model cards
+    function checkModelCardHash() {
+        const hash = window.location.hash;
+        if (!hash) return;
+        const code = hash.replace(/[^0-9]/g, '');
+        if (!code) return;
+        const card = document.getElementById('card-' + code) || document.querySelector('[data-code="' + code + '"]');
+        if (card) {
+            setTimeout(function() {
+                var navOffset = 100;
+                var elementPosition = card.getBoundingClientRect().top;
+                var offsetPosition = elementPosition + window.pageYOffset - navOffset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                card.style.transition = 'box-shadow 0.4s ease, border-color 0.4s ease';
+                card.style.boxShadow = '0 0 0 3px #D4AF37, 0 16px 36px rgba(0,0,0,0.14)';
+                card.style.borderColor = '#D4AF37';
+                setTimeout(function() {
+                    card.style.boxShadow = '';
+                    card.style.borderColor = '';
+                }, 4000);
+            }, 350);
+        }
+    }
+    window.addEventListener('DOMContentLoaded', checkModelCardHash);
+    window.addEventListener('hashchange', checkModelCardHash);
 </script>
 
 </body>

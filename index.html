@@ -1196,9 +1196,59 @@
     }
     .card-actions-row {
         display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 8px;
+        grid-template-columns: 1fr auto auto;
+        gap: 6px;
         align-items: center;
+    }
+    .btn-card-page-link {
+        background: #FFFFFF;
+        color: var(--obsidian);
+        font-size: 11px;
+        font-weight: 700;
+        padding: 8px 10px;
+        border-radius: 9999px;
+        border: 1px solid #E4E4E7;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+    .btn-card-page-link:hover {
+        background: var(--obsidian);
+        color: #FFFFFF;
+        border-color: var(--obsidian);
+        transform: translateY(-1px);
+    }
+    .product-title-link {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+    .product-title-link:hover {
+        color: #D4AF37;
+    }
+    .btn-modal-page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 12px 18px;
+        background: #FFFFFF;
+        color: var(--obsidian);
+        border: 1.5px solid var(--obsidian);
+        border-radius: 9999px;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+    .btn-modal-page:hover {
+        background: var(--obsidian);
+        color: #FFFFFF;
     }
     .btn-card-wa {
         background-color: #25D366;
@@ -1234,7 +1284,7 @@
         background: rgba(12, 13, 14, 0.7);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
-        z-index: 1000;
+        z-index: 99999;
         display: none;
         align-items: center;
         justify-content: center;
@@ -1781,7 +1831,7 @@
         inset: 0;
         background: rgba(12, 13, 14, 0.7);
         backdrop-filter: blur(8px);
-        z-index: 1000;
+        z-index: 99999;
         display: none;
         align-items: center;
         justify-content: center;
@@ -1886,33 +1936,52 @@
         transform: translateY(-1px);
     }
 
-    /* Continuous Sliding Track */
+    /* Continuous Sliding Track & Manual Drag/Arrow Navigation */
+    .slider-wrapper-relative {
+        position: relative;
+        width: 100%;
+        max-width: 100vw;
+    }
     .marquee-outer-container {
         width: 100%;
-        overflow: hidden;
+        overflow-x: auto;
+        overflow-y: hidden;
         position: relative;
-        padding: 28px 0 32px 0;
-        mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+        padding: 24px 0 28px 0;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        cursor: grab;
+        user-select: none;
+        -webkit-user-select: none;
+        mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+    }
+    .marquee-outer-container::-webkit-scrollbar {
+        display: none;
+    }
+    .marquee-outer-container.is-dragging {
+        cursor: grabbing;
+        scroll-behavior: auto !important;
     }
     .marquee-track {
         display: flex;
         gap: 24px;
         width: max-content;
-        animation: continuousSlide 45s linear infinite;
-        will-change: transform;
-    }
-    .marquee-outer-container:hover .marquee-track {
-        animation-play-state: paused;
-    }
-    @keyframes continuousSlide {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+        padding: 0 40px;
+        will-change: scroll-position;
     }
     .marquee-track .product-card-modern {
         width: 295px;
         flex-shrink: 0;
         margin: 0;
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .marquee-track .product-card-modern:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+        border-color: #D4AF37;
     }
     .series-label-link {
         font-size: 11px;
@@ -1920,10 +1989,115 @@
         text-transform: uppercase;
         letter-spacing: 0.08em;
         color: #8E8E93;
-        transition: color 0.2s;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
     }
     .series-label-link:hover {
-        color: var(--obsidian);
+        color: #D4AF37;
+        transform: translateX(2px);
+    }
+
+    /* Floating Navigation Arrows */
+    .slider-nav-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        color: #111827;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 30;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .slider-nav-arrow:hover {
+        background: #111827;
+        color: #FFFFFF;
+        transform: translateY(-50%) scale(1.08);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
+    }
+    .slider-nav-arrow:active {
+        transform: translateY(-50%) scale(0.95);
+    }
+    .slider-nav-prev {
+        left: 20px;
+    }
+    .slider-nav-next {
+        right: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .slider-nav-arrow {
+            width: 38px;
+            height: 38px;
+        }
+        .slider-nav-prev {
+            left: 8px;
+        }
+        .slider-nav-next {
+            right: 8px;
+        }
+    }
+
+    /* Controls Bar Below Slider */
+    .slider-controls-bar {
+        max-width: 1240px;
+        margin: -4px auto 36px auto;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+    .slider-hint-text {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: #71717A;
+        font-weight: 500;
+    }
+    .slider-controls-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .btn-slider-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #FFFFFF;
+        border: 1px solid #E4E4E7;
+        border-radius: 9999px;
+        padding: 6px 14px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #18181B;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .btn-slider-pill:hover {
+        background: #F4F4F5;
+        border-color: #D4D4D8;
+        transform: translateY(-1px);
+    }
+    .btn-slider-playpause.paused {
+        background: #FEF3C7;
+        border-color: #F59E0B;
+        color: #92400E;
     }
 
     /* Dedicated Series Jump Bar */
@@ -2631,21 +2805,28 @@
             </div>
         </div>
 
-        <!-- Continuous Sliding Animation Track (Seamless Infinite Marquee) -->
-        <div class="marquee-outer-container">
+        <!-- Continuous Sliding Animation & Manual Controls Wrapper -->
+        <div class="slider-wrapper-relative">
+            <button id="slider-arrow-prev" class="slider-nav-arrow slider-nav-prev" aria-label="Slide Left / Previous Products" title="Previous Products">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button id="slider-arrow-next" class="slider-nav-arrow slider-nav-next" aria-label="Slide Right / Next Products" title="Next Products">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+            </button>
+            <div class="marquee-outer-container" id="marquee-scroll-container">
             <div class="marquee-track" id="continuous-slider-track">
                 
-        <div class="product-card-modern" data-code="201" data-series="200" >
+                <div class="product-card-modern" data-code="201" data-series="200">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 201</span>
-                    <span class="series-label">200 Series</span>
+                    <a href="aluminium-handles.html#card-201" class="series-label series-label-link" title="Open 200 Series Page">200 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('201')">
                     <img src="assets/201.png" alt="KUNETT Model 201 Solid Aluminium Cabinet Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 201 Cabinet Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handles.html#card-201" class="product-title-link" title="Open Model 201 in 200 Series Catalogue">Model 201 Cabinet Handle</a></h3>
                     <p class="product-card-desc">Model 201 is a durable cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a substantial hand-feel with zero flex, it provides an effortless grip for daily use. Ideal for full-height wardrobes, master kitchens, and bespoke joinery.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span><span class="size-chip">+3 more</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #8B7355;" title="Antique"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -2657,21 +2838,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('201')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handles.html#card-201" class="btn-card-page-link" title="Open Model 201 on 200 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="202" data-series="200" >
+                <div class="product-card-modern" data-code="202" data-series="200">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 202</span>
-                    <span class="series-label">200 Series</span>
+                    <a href="aluminium-handles.html#card-202" class="series-label series-label-link" title="Open 200 Series Page">200 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('202')">
                     <img src="assets/202.png" alt="KUNETT Model 202 Solid Aluminium Cabinet Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 202 Cabinet Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handles.html#card-202" class="product-title-link" title="Open Model 202 in 200 Series Catalogue">Model 202 Cabinet Handle</a></h3>
                     <p class="product-card-desc">Model 202 is a timeless cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with micro-tolerance CNC milling, it provides a high-end tactile feel to every cabinet. Ideal for full-height wardrobes, master kitchens, and bespoke joinery.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span><span class="size-chip">+3 more</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #8B7355;" title="Antique"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -2683,21 +2865,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('202')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handles.html#card-202" class="btn-card-page-link" title="Open Model 202 on 200 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="203" data-series="200" >
+                <div class="product-card-modern" data-code="203" data-series="200">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 203</span>
-                    <span class="series-label">200 Series</span>
+                    <a href="aluminium-handles.html#card-203" class="series-label series-label-link" title="Open 200 Series Page">200 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('203')">
                     <img src="assets/203.png" alt="KUNETT Model 203 Solid Aluminium Cabinet Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 203 Cabinet Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handles.html#card-203" class="product-title-link" title="Open Model 203 in 200 Series Catalogue">Model 203 Cabinet Handle</a></h3>
                     <p class="product-card-desc">Model 203 is a striking cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with micro-tolerance CNC milling, it provides a high-end tactile feel to every cabinet. Ideal for full-height wardrobes, master kitchens, and bespoke joinery.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span><span class="size-chip">+3 more</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #8B7355;" title="Antique"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -2709,21 +2892,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('203')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handles.html#card-203" class="btn-card-page-link" title="Open Model 203 on 200 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="204" data-series="200" >
+                <div class="product-card-modern" data-code="204" data-series="200">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 204</span>
-                    <span class="series-label">200 Series</span>
+                    <a href="aluminium-handles.html#card-204" class="series-label series-label-link" title="Open 200 Series Page">200 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('204')">
                     <img src="assets/204.png" alt="KUNETT Model 204 Solid Aluminium Cabinet Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 204 Cabinet Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handles.html#card-204" class="product-title-link" title="Open Model 204 in 200 Series Catalogue">Model 204 Cabinet Handle</a></h3>
                     <p class="product-card-desc">Model 204 is a sleek cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with clean lines and solid aluminium construction, it provides a high-end tactile feel to every cabinet. Ideal for full-height wardrobes, master kitchens, and bespoke joinery.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span><span class="size-chip">+3 more</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #8B7355;" title="Antique"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -2735,21 +2919,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('204')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handles.html#card-204" class="btn-card-page-link" title="Open Model 204 on 200 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="206" data-series="200" >
+                <div class="product-card-modern" data-code="206" data-series="200">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 206</span>
-                    <span class="series-label">200 Series</span>
+                    <a href="aluminium-handles.html#card-206" class="series-label series-label-link" title="Open 200 Series Page">200 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('206')">
                     <img src="assets/206.png" alt="KUNETT Model 206 Solid Aluminium Cabinet Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 206 Cabinet Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handles.html#card-206" class="product-title-link" title="Open Model 206 in 200 Series Catalogue">Model 206 Cabinet Handle</a></h3>
                     <p class="product-card-desc">Model 206 is a refined cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a precision-extruded profile, it provides a commanding presence across large wardrobe shutters. Engineered for luxury residential and commercial interiors.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span><span class="size-chip">+3 more</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #8B7355;" title="Antique"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -2761,21 +2946,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('206')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handles.html#card-206" class="btn-card-page-link" title="Open Model 206 on 200 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="210" data-series="200" >
+                <div class="product-card-modern" data-code="210" data-series="200">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 210</span>
-                    <span class="series-label">200 Series</span>
+                    <a href="aluminium-handles.html#card-210" class="series-label series-label-link" title="Open 200 Series Page">200 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('210')">
                     <img src="assets/210.jpg" alt="KUNETT Model 210 Solid Aluminium Cabinet Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 210 Cabinet Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handles.html#card-210" class="product-title-link" title="Open Model 210 in 200 Series Catalogue">Model 210 Cabinet Handle</a></h3>
                     <p class="product-card-desc">Model 210 is a durable cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a substantial hand-feel with zero flex, it provides an effortless grip for daily use. Engineered for luxury residential and commercial interiors.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span><span class="size-chip">+3 more</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #8B7355;" title="Antique"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -2787,21 +2973,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('210')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handles.html#card-210" class="btn-card-page-link" title="Open Model 210 on 200 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="301" data-series="300" >
+                <div class="product-card-modern" data-code="301" data-series="300">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 301</span>
-                    <span class="series-label">300 Series</span>
+                    <a href="aluminium-handle-profile.html#card-301" class="series-label series-label-link" title="Open 300 Series Page">300 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('301')">
                     <img src="assets/301.png" alt="KUNETT Model 301 Solid Aluminium Profile Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 301 Profile Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handle-profile.html#card-301" class="product-title-link" title="Open Model 301 in 300 Series Catalogue">Model 301 Profile Handle</a></h3>
                     <p class="product-card-desc">Model 301 is a seamless profile handle engineered from solid 6063-T5 virgin aluminium. Designed with hidden screw-fixing channels, it provides smooth top-edge fingertip operation. Designed for handle-less modular kitchens and minimalist credenzas.</p>
                     <div class="product-sizes-chips"><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">10"</span><span class="size-chip">12"</span><span class="size-chip">16"</span><span class="size-chip">18"</span><span class="size-chip">20"</span><span class="size-chip">22"</span><span class="size-chip">24"</span><span class="size-chip">26"</span><span class="size-chip">28"</span><span class="size-chip">30"</span><span class="size-chip">32"</span><span class="size-chip">36"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #E5E7EB;" title="CP"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -2813,21 +3000,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('301')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handle-profile.html#card-301" class="btn-card-page-link" title="Open Model 301 on 300 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="302" data-series="300" >
+                <div class="product-card-modern" data-code="302" data-series="300">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 302</span>
-                    <span class="series-label">300 Series</span>
+                    <a href="aluminium-handle-profile.html#card-302" class="series-label series-label-link" title="Open 300 Series Page">300 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('302')">
                     <img src="assets/302.png" alt="KUNETT Model 302 Solid Aluminium Profile Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 302 Profile Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handle-profile.html#card-302" class="product-title-link" title="Open Model 302 in 300 Series Catalogue">Model 302 Profile Handle</a></h3>
                     <p class="product-card-desc">Model 302 is a flush-mounted profile handle engineered from solid 6063-T5 virgin aluminium. Designed with hidden screw-fixing channels, it provides smooth top-edge fingertip operation. Designed for handle-less modular kitchens and minimalist credenzas.</p>
                     <div class="product-sizes-chips"><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">10"</span><span class="size-chip">12"</span><span class="size-chip">16"</span><span class="size-chip">18"</span><span class="size-chip">20"</span><span class="size-chip">22"</span><span class="size-chip">24"</span><span class="size-chip">26"</span><span class="size-chip">28"</span><span class="size-chip">30"</span><span class="size-chip">32"</span><span class="size-chip">36"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #E5E7EB;" title="CP"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -2839,21 +3027,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('302')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handle-profile.html#card-302" class="btn-card-page-link" title="Open Model 302 on 300 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="304" data-series="300" >
+                <div class="product-card-modern" data-code="304" data-series="300">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 304</span>
-                    <span class="series-label">300 Series</span>
+                    <a href="aluminium-handle-profile.html#card-304" class="series-label series-label-link" title="Open 300 Series Page">300 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('304')">
                     <img src="assets/304.png" alt="KUNETT Model 304 Solid Aluminium Profile Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 304 Profile Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handle-profile.html#card-304" class="product-title-link" title="Open Model 304 in 300 Series Catalogue">Model 304 Profile Handle</a></h3>
                     <p class="product-card-desc">Model 304 is a architectural profile handle engineered from solid 6063-T5 virgin aluminium. Designed with end-cut precision with deburred bevels, it provides smooth top-edge fingertip operation. Designed for handle-less modular kitchens and minimalist credenzas.</p>
                     <div class="product-sizes-chips"><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">10"</span><span class="size-chip">12"</span><span class="size-chip">16"</span><span class="size-chip">18"</span><span class="size-chip">20"</span><span class="size-chip">22"</span><span class="size-chip">24"</span><span class="size-chip">26"</span><span class="size-chip">28"</span><span class="size-chip">30"</span><span class="size-chip">32"</span><span class="size-chip">36"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #E5E7EB;" title="CP"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -2865,21 +3054,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('304')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handle-profile.html#card-304" class="btn-card-page-link" title="Open Model 304 on 300 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="311" data-series="300" >
+                <div class="product-card-modern" data-code="311" data-series="300">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 311</span>
-                    <span class="series-label">300 Series</span>
+                    <a href="aluminium-handle-profile.html#card-311" class="series-label series-label-link" title="Open 300 Series Page">300 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('311')">
                     <img src="assets/311.png" alt="KUNETT Model 311 Solid Aluminium Profile Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 311 Profile Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handle-profile.html#card-311" class="product-title-link" title="Open Model 311 in 300 Series Catalogue">Model 311 Profile Handle</a></h3>
                     <p class="product-card-desc">Model 311 is a architectural profile handle engineered from solid 6063-T5 virgin aluminium. Designed with an ergonomic J-channel extrusion, it provides a unified linear rhythm across long runs of cabinetry. Designed for handle-less modular kitchens and minimalist credenzas.</p>
                     <div class="product-sizes-chips"><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">10"</span><span class="size-chip">12"</span><span class="size-chip">16"</span><span class="size-chip">18"</span><span class="size-chip">20"</span><span class="size-chip">22"</span><span class="size-chip">24"</span><span class="size-chip">26"</span><span class="size-chip">28"</span><span class="size-chip">30"</span><span class="size-chip">32"</span><span class="size-chip">36"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #E5E7EB;" title="CP"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -2891,21 +3081,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('311')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handle-profile.html#card-311" class="btn-card-page-link" title="Open Model 311 on 300 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="401" data-series="400" >
+                <div class="product-card-modern" data-code="401" data-series="400">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 401</span>
-                    <span class="series-label">400 Series</span>
+                    <a href="wardrobe-counsil-handles.html#card-401" class="series-label series-label-link" title="Open 400 Series Page">400 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('401')">
                     <img src="assets/401.png" alt="KUNETT Model 401 Solid Aluminium Counsil Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 401 Counsil Handle</h3>
+                    <h3 class="product-card-title"><a href="wardrobe-counsil-handles.html#card-401" class="product-title-link" title="Open Model 401 in 400 Series Catalogue">Model 401 Counsil Handle</a></h3>
                     <p class="product-card-desc">Model 401 is a architectural counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with solid CNC billet pockets, it provides clean planar shutter surfaces without protruding hardware. Engineered for full-height wardrobe panels and sliding partition doors.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #E5E7EB;" title="CP"></span><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span></div>
@@ -2917,21 +3108,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('401')" class="btn-card-inspect">Specs</button>
+                <a href="wardrobe-counsil-handles.html#card-401" class="btn-card-page-link" title="Open Model 401 on 400 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="404" data-series="400" >
+                <div class="product-card-modern" data-code="404" data-series="400">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 404</span>
-                    <span class="series-label">400 Series</span>
+                    <a href="wardrobe-counsil-handles.html#card-404" class="series-label series-label-link" title="Open 400 Series Page">400 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('404')">
                     <img src="assets/404.png" alt="KUNETT Model 404 Solid Aluminium Counsil Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 404 Counsil Handle</h3>
+                    <h3 class="product-card-title"><a href="wardrobe-counsil-handles.html#card-404" class="product-title-link" title="Open Model 404 in 400 Series Catalogue">Model 404 Counsil Handle</a></h3>
                     <p class="product-card-desc">Model 404 is a concealed counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with a low-profile flush faceplate, it provides unobstructed passage in narrow hallways and walk-in closets. Engineered for full-height wardrobe panels and sliding partition doors.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #E5E7EB;" title="CP"></span><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span></div>
@@ -2943,21 +3135,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('404')" class="btn-card-inspect">Specs</button>
+                <a href="wardrobe-counsil-handles.html#card-404" class="btn-card-page-link" title="Open Model 404 on 400 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="411" data-series="400" >
+                <div class="product-card-modern" data-code="411" data-series="400">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 411</span>
-                    <span class="series-label">400 Series</span>
+                    <a href="wardrobe-counsil-handles.html#card-411" class="series-label series-label-link" title="Open 400 Series Page">400 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('411')">
                     <img src="assets/411.png" alt="KUNETT Model 411 Solid Aluminium Counsil Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 411 Counsil Handle</h3>
+                    <h3 class="product-card-title"><a href="wardrobe-counsil-handles.html#card-411" class="product-title-link" title="Open Model 411 in 400 Series Catalogue">Model 411 Counsil Handle</a></h3>
                     <p class="product-card-desc">Model 411 is a recessed counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with deep-pocket finger recesses, it provides clean planar shutter surfaces without protruding hardware. Engineered for full-height wardrobe panels and sliding partition doors.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #E5E7EB;" title="CP"></span><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span></div>
@@ -2969,21 +3162,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('411')" class="btn-card-inspect">Specs</button>
+                <a href="wardrobe-counsil-handles.html#card-411" class="btn-card-page-link" title="Open Model 411 on 400 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="451" data-series="450" >
+                <div class="product-card-modern" data-code="451" data-series="450">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 451</span>
-                    <span class="series-label">450 Series</span>
+                    <a href="sliding-wardrobe-handles.html#card-451" class="series-label series-label-link" title="Open 450 Series Page">450 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('451')">
                     <img src="assets/451.png" alt="KUNETT Model 451 Solid Aluminium Sliding Counsil" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 451 Sliding Counsil</h3>
+                    <h3 class="product-card-title"><a href="sliding-wardrobe-handles.html#card-451" class="product-title-link" title="Open Model 451 in 450 Series Catalogue">Model 451 Sliding Counsil</a></h3>
                     <p class="product-card-desc">Model 451 is a zero-clearance sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with chiseled recess channel, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors.</p>
                     <div class="product-sizes-chips"><span class="size-chip">5"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -2995,21 +3189,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('451')" class="btn-card-inspect">Specs</button>
+                <a href="sliding-wardrobe-handles.html#card-451" class="btn-card-page-link" title="Open Model 451 on 450 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="453" data-series="450" >
+                <div class="product-card-modern" data-code="453" data-series="450">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 453</span>
-                    <span class="series-label">450 Series</span>
+                    <a href="sliding-wardrobe-handles.html#card-453" class="series-label series-label-link" title="Open 450 Series Page">450 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('453')">
                     <img src="assets/453.png" alt="KUNETT Model 453 Solid Aluminium Sliding Counsil" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 453 Sliding Counsil</h3>
+                    <h3 class="product-card-title"><a href="sliding-wardrobe-handles.html#card-453" class="product-title-link" title="Open Model 453 in 450 Series Catalogue">Model 453 Sliding Counsil</a></h3>
                     <p class="product-card-desc">Model 453 is a ultra-slim sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with a sub-2mm faceplate profile, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors.</p>
                     <div class="product-sizes-chips"><span class="size-chip">5"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3021,21 +3216,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('453')" class="btn-card-inspect">Specs</button>
+                <a href="sliding-wardrobe-handles.html#card-453" class="btn-card-page-link" title="Open Model 453 on 450 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="501" data-series="500" >
+                <div class="product-card-modern" data-code="501" data-series="500">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 501</span>
-                    <span class="series-label">500 Series</span>
+                    <a href="cabinet-knobs.html#card-501" class="series-label series-label-link" title="Open 500 Series Page">500 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('501')">
                     <img src="assets/501.png" alt="KUNETT Model 501 Solid Aluminium Cabinet Knob" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 501 Cabinet Knob</h3>
+                    <h3 class="product-card-title"><a href="cabinet-knobs.html#card-501" class="product-title-link" title="Open Model 501 in 500 Series Catalogue">Model 501 Cabinet Knob</a></h3>
                     <p class="product-card-desc">Model 501 is a geometric cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with micro-knurled and satin-brushed cylindrical bodies, it provides a firm, balanced tactile pinch grip. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.</p>
                     <div class="product-sizes-chips"><span class="size-chip">2"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3047,21 +3243,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('501')" class="btn-card-inspect">Specs</button>
+                <a href="cabinet-knobs.html#card-501" class="btn-card-page-link" title="Open Model 501 on 500 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="504" data-series="500" >
+                <div class="product-card-modern" data-code="504" data-series="500">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 504</span>
-                    <span class="series-label">500 Series</span>
+                    <a href="cabinet-knobs.html#card-504" class="series-label series-label-link" title="Open 500 Series Page">500 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('504')">
                     <img src="assets/504.png" alt="KUNETT Model 504 Solid Aluminium Cabinet Knob" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 504 Cabinet Knob</h3>
+                    <h3 class="product-card-title"><a href="cabinet-knobs.html#card-504" class="product-title-link" title="Open Model 504 in 500 Series Catalogue">Model 504 Cabinet Knob</a></h3>
                     <p class="product-card-desc">Model 504 is a minimalist cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with solid single-piece CNC turning, it provides a jewel-like focal point on vanity drawers and credenzas. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.</p>
                     <div class="product-sizes-chips"><span class="size-chip">2"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3073,21 +3270,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('504')" class="btn-card-inspect">Specs</button>
+                <a href="cabinet-knobs.html#card-504" class="btn-card-page-link" title="Open Model 504 on 500 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="201" data-series="200" >
+                <div class="product-card-modern" data-code="201" data-series="200">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 201</span>
-                    <span class="series-label">200 Series</span>
+                    <a href="aluminium-handles.html#card-201" class="series-label series-label-link" title="Open 200 Series Page">200 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('201')">
                     <img src="assets/201.png" alt="KUNETT Model 201 Solid Aluminium Cabinet Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 201 Cabinet Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handles.html#card-201" class="product-title-link" title="Open Model 201 in 200 Series Catalogue">Model 201 Cabinet Handle</a></h3>
                     <p class="product-card-desc">Model 201 is a durable cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a substantial hand-feel with zero flex, it provides an effortless grip for daily use. Ideal for full-height wardrobes, master kitchens, and bespoke joinery.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span><span class="size-chip">+3 more</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #8B7355;" title="Antique"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3099,21 +3297,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('201')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handles.html#card-201" class="btn-card-page-link" title="Open Model 201 on 200 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="202" data-series="200" >
+                <div class="product-card-modern" data-code="202" data-series="200">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 202</span>
-                    <span class="series-label">200 Series</span>
+                    <a href="aluminium-handles.html#card-202" class="series-label series-label-link" title="Open 200 Series Page">200 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('202')">
                     <img src="assets/202.png" alt="KUNETT Model 202 Solid Aluminium Cabinet Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 202 Cabinet Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handles.html#card-202" class="product-title-link" title="Open Model 202 in 200 Series Catalogue">Model 202 Cabinet Handle</a></h3>
                     <p class="product-card-desc">Model 202 is a timeless cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with micro-tolerance CNC milling, it provides a high-end tactile feel to every cabinet. Ideal for full-height wardrobes, master kitchens, and bespoke joinery.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span><span class="size-chip">+3 more</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #8B7355;" title="Antique"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3125,21 +3324,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('202')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handles.html#card-202" class="btn-card-page-link" title="Open Model 202 on 200 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="203" data-series="200" >
+                <div class="product-card-modern" data-code="203" data-series="200">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 203</span>
-                    <span class="series-label">200 Series</span>
+                    <a href="aluminium-handles.html#card-203" class="series-label series-label-link" title="Open 200 Series Page">200 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('203')">
                     <img src="assets/203.png" alt="KUNETT Model 203 Solid Aluminium Cabinet Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 203 Cabinet Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handles.html#card-203" class="product-title-link" title="Open Model 203 in 200 Series Catalogue">Model 203 Cabinet Handle</a></h3>
                     <p class="product-card-desc">Model 203 is a striking cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with micro-tolerance CNC milling, it provides a high-end tactile feel to every cabinet. Ideal for full-height wardrobes, master kitchens, and bespoke joinery.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span><span class="size-chip">+3 more</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #8B7355;" title="Antique"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3151,21 +3351,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('203')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handles.html#card-203" class="btn-card-page-link" title="Open Model 203 on 200 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="204" data-series="200" >
+                <div class="product-card-modern" data-code="204" data-series="200">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 204</span>
-                    <span class="series-label">200 Series</span>
+                    <a href="aluminium-handles.html#card-204" class="series-label series-label-link" title="Open 200 Series Page">200 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('204')">
                     <img src="assets/204.png" alt="KUNETT Model 204 Solid Aluminium Cabinet Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 204 Cabinet Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handles.html#card-204" class="product-title-link" title="Open Model 204 in 200 Series Catalogue">Model 204 Cabinet Handle</a></h3>
                     <p class="product-card-desc">Model 204 is a sleek cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with clean lines and solid aluminium construction, it provides a high-end tactile feel to every cabinet. Ideal for full-height wardrobes, master kitchens, and bespoke joinery.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span><span class="size-chip">+3 more</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #8B7355;" title="Antique"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3177,21 +3378,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('204')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handles.html#card-204" class="btn-card-page-link" title="Open Model 204 on 200 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="206" data-series="200" >
+                <div class="product-card-modern" data-code="206" data-series="200">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 206</span>
-                    <span class="series-label">200 Series</span>
+                    <a href="aluminium-handles.html#card-206" class="series-label series-label-link" title="Open 200 Series Page">200 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('206')">
                     <img src="assets/206.png" alt="KUNETT Model 206 Solid Aluminium Cabinet Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 206 Cabinet Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handles.html#card-206" class="product-title-link" title="Open Model 206 in 200 Series Catalogue">Model 206 Cabinet Handle</a></h3>
                     <p class="product-card-desc">Model 206 is a refined cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a precision-extruded profile, it provides a commanding presence across large wardrobe shutters. Engineered for luxury residential and commercial interiors.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span><span class="size-chip">+3 more</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #8B7355;" title="Antique"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3203,21 +3405,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('206')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handles.html#card-206" class="btn-card-page-link" title="Open Model 206 on 200 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="210" data-series="200" >
+                <div class="product-card-modern" data-code="210" data-series="200">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 210</span>
-                    <span class="series-label">200 Series</span>
+                    <a href="aluminium-handles.html#card-210" class="series-label series-label-link" title="Open 200 Series Page">200 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('210')">
                     <img src="assets/210.jpg" alt="KUNETT Model 210 Solid Aluminium Cabinet Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 210 Cabinet Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handles.html#card-210" class="product-title-link" title="Open Model 210 in 200 Series Catalogue">Model 210 Cabinet Handle</a></h3>
                     <p class="product-card-desc">Model 210 is a durable cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a substantial hand-feel with zero flex, it provides an effortless grip for daily use. Engineered for luxury residential and commercial interiors.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span><span class="size-chip">+3 more</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #8B7355;" title="Antique"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3229,21 +3432,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('210')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handles.html#card-210" class="btn-card-page-link" title="Open Model 210 on 200 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="301" data-series="300" >
+                <div class="product-card-modern" data-code="301" data-series="300">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 301</span>
-                    <span class="series-label">300 Series</span>
+                    <a href="aluminium-handle-profile.html#card-301" class="series-label series-label-link" title="Open 300 Series Page">300 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('301')">
                     <img src="assets/301.png" alt="KUNETT Model 301 Solid Aluminium Profile Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 301 Profile Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handle-profile.html#card-301" class="product-title-link" title="Open Model 301 in 300 Series Catalogue">Model 301 Profile Handle</a></h3>
                     <p class="product-card-desc">Model 301 is a seamless profile handle engineered from solid 6063-T5 virgin aluminium. Designed with hidden screw-fixing channels, it provides smooth top-edge fingertip operation. Designed for handle-less modular kitchens and minimalist credenzas.</p>
                     <div class="product-sizes-chips"><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">10"</span><span class="size-chip">12"</span><span class="size-chip">16"</span><span class="size-chip">18"</span><span class="size-chip">20"</span><span class="size-chip">22"</span><span class="size-chip">24"</span><span class="size-chip">26"</span><span class="size-chip">28"</span><span class="size-chip">30"</span><span class="size-chip">32"</span><span class="size-chip">36"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #E5E7EB;" title="CP"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3255,21 +3459,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('301')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handle-profile.html#card-301" class="btn-card-page-link" title="Open Model 301 on 300 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="302" data-series="300" >
+                <div class="product-card-modern" data-code="302" data-series="300">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 302</span>
-                    <span class="series-label">300 Series</span>
+                    <a href="aluminium-handle-profile.html#card-302" class="series-label series-label-link" title="Open 300 Series Page">300 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('302')">
                     <img src="assets/302.png" alt="KUNETT Model 302 Solid Aluminium Profile Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 302 Profile Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handle-profile.html#card-302" class="product-title-link" title="Open Model 302 in 300 Series Catalogue">Model 302 Profile Handle</a></h3>
                     <p class="product-card-desc">Model 302 is a flush-mounted profile handle engineered from solid 6063-T5 virgin aluminium. Designed with hidden screw-fixing channels, it provides smooth top-edge fingertip operation. Designed for handle-less modular kitchens and minimalist credenzas.</p>
                     <div class="product-sizes-chips"><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">10"</span><span class="size-chip">12"</span><span class="size-chip">16"</span><span class="size-chip">18"</span><span class="size-chip">20"</span><span class="size-chip">22"</span><span class="size-chip">24"</span><span class="size-chip">26"</span><span class="size-chip">28"</span><span class="size-chip">30"</span><span class="size-chip">32"</span><span class="size-chip">36"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #E5E7EB;" title="CP"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3281,21 +3486,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('302')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handle-profile.html#card-302" class="btn-card-page-link" title="Open Model 302 on 300 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="304" data-series="300" >
+                <div class="product-card-modern" data-code="304" data-series="300">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 304</span>
-                    <span class="series-label">300 Series</span>
+                    <a href="aluminium-handle-profile.html#card-304" class="series-label series-label-link" title="Open 300 Series Page">300 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('304')">
                     <img src="assets/304.png" alt="KUNETT Model 304 Solid Aluminium Profile Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 304 Profile Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handle-profile.html#card-304" class="product-title-link" title="Open Model 304 in 300 Series Catalogue">Model 304 Profile Handle</a></h3>
                     <p class="product-card-desc">Model 304 is a architectural profile handle engineered from solid 6063-T5 virgin aluminium. Designed with end-cut precision with deburred bevels, it provides smooth top-edge fingertip operation. Designed for handle-less modular kitchens and minimalist credenzas.</p>
                     <div class="product-sizes-chips"><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">10"</span><span class="size-chip">12"</span><span class="size-chip">16"</span><span class="size-chip">18"</span><span class="size-chip">20"</span><span class="size-chip">22"</span><span class="size-chip">24"</span><span class="size-chip">26"</span><span class="size-chip">28"</span><span class="size-chip">30"</span><span class="size-chip">32"</span><span class="size-chip">36"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #E5E7EB;" title="CP"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3307,21 +3513,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('304')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handle-profile.html#card-304" class="btn-card-page-link" title="Open Model 304 on 300 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="311" data-series="300" >
+                <div class="product-card-modern" data-code="311" data-series="300">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 311</span>
-                    <span class="series-label">300 Series</span>
+                    <a href="aluminium-handle-profile.html#card-311" class="series-label series-label-link" title="Open 300 Series Page">300 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('311')">
                     <img src="assets/311.png" alt="KUNETT Model 311 Solid Aluminium Profile Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 311 Profile Handle</h3>
+                    <h3 class="product-card-title"><a href="aluminium-handle-profile.html#card-311" class="product-title-link" title="Open Model 311 in 300 Series Catalogue">Model 311 Profile Handle</a></h3>
                     <p class="product-card-desc">Model 311 is a architectural profile handle engineered from solid 6063-T5 virgin aluminium. Designed with an ergonomic J-channel extrusion, it provides a unified linear rhythm across long runs of cabinetry. Designed for handle-less modular kitchens and minimalist credenzas.</p>
                     <div class="product-sizes-chips"><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">10"</span><span class="size-chip">12"</span><span class="size-chip">16"</span><span class="size-chip">18"</span><span class="size-chip">20"</span><span class="size-chip">22"</span><span class="size-chip">24"</span><span class="size-chip">26"</span><span class="size-chip">28"</span><span class="size-chip">30"</span><span class="size-chip">32"</span><span class="size-chip">36"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #E5E7EB;" title="CP"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3333,21 +3540,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('311')" class="btn-card-inspect">Specs</button>
+                <a href="aluminium-handle-profile.html#card-311" class="btn-card-page-link" title="Open Model 311 on 300 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="401" data-series="400" >
+                <div class="product-card-modern" data-code="401" data-series="400">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 401</span>
-                    <span class="series-label">400 Series</span>
+                    <a href="wardrobe-counsil-handles.html#card-401" class="series-label series-label-link" title="Open 400 Series Page">400 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('401')">
                     <img src="assets/401.png" alt="KUNETT Model 401 Solid Aluminium Counsil Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 401 Counsil Handle</h3>
+                    <h3 class="product-card-title"><a href="wardrobe-counsil-handles.html#card-401" class="product-title-link" title="Open Model 401 in 400 Series Catalogue">Model 401 Counsil Handle</a></h3>
                     <p class="product-card-desc">Model 401 is a architectural counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with solid CNC billet pockets, it provides clean planar shutter surfaces without protruding hardware. Engineered for full-height wardrobe panels and sliding partition doors.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #E5E7EB;" title="CP"></span><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span></div>
@@ -3359,21 +3567,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('401')" class="btn-card-inspect">Specs</button>
+                <a href="wardrobe-counsil-handles.html#card-401" class="btn-card-page-link" title="Open Model 401 on 400 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="404" data-series="400" >
+                <div class="product-card-modern" data-code="404" data-series="400">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 404</span>
-                    <span class="series-label">400 Series</span>
+                    <a href="wardrobe-counsil-handles.html#card-404" class="series-label series-label-link" title="Open 400 Series Page">400 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('404')">
                     <img src="assets/404.png" alt="KUNETT Model 404 Solid Aluminium Counsil Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 404 Counsil Handle</h3>
+                    <h3 class="product-card-title"><a href="wardrobe-counsil-handles.html#card-404" class="product-title-link" title="Open Model 404 in 400 Series Catalogue">Model 404 Counsil Handle</a></h3>
                     <p class="product-card-desc">Model 404 is a concealed counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with a low-profile flush faceplate, it provides unobstructed passage in narrow hallways and walk-in closets. Engineered for full-height wardrobe panels and sliding partition doors.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #E5E7EB;" title="CP"></span><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span></div>
@@ -3385,21 +3594,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('404')" class="btn-card-inspect">Specs</button>
+                <a href="wardrobe-counsil-handles.html#card-404" class="btn-card-page-link" title="Open Model 404 on 400 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="411" data-series="400" >
+                <div class="product-card-modern" data-code="411" data-series="400">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 411</span>
-                    <span class="series-label">400 Series</span>
+                    <a href="wardrobe-counsil-handles.html#card-411" class="series-label series-label-link" title="Open 400 Series Page">400 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('411')">
                     <img src="assets/411.png" alt="KUNETT Model 411 Solid Aluminium Counsil Handle" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 411 Counsil Handle</h3>
+                    <h3 class="product-card-title"><a href="wardrobe-counsil-handles.html#card-411" class="product-title-link" title="Open Model 411 in 400 Series Catalogue">Model 411 Counsil Handle</a></h3>
                     <p class="product-card-desc">Model 411 is a recessed counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with deep-pocket finger recesses, it provides clean planar shutter surfaces without protruding hardware. Engineered for full-height wardrobe panels and sliding partition doors.</p>
                     <div class="product-sizes-chips"><span class="size-chip">4"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #E5E7EB;" title="CP"></span><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span></div>
@@ -3411,21 +3621,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('411')" class="btn-card-inspect">Specs</button>
+                <a href="wardrobe-counsil-handles.html#card-411" class="btn-card-page-link" title="Open Model 411 on 400 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="451" data-series="450" >
+                <div class="product-card-modern" data-code="451" data-series="450">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 451</span>
-                    <span class="series-label">450 Series</span>
+                    <a href="sliding-wardrobe-handles.html#card-451" class="series-label series-label-link" title="Open 450 Series Page">450 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('451')">
                     <img src="assets/451.png" alt="KUNETT Model 451 Solid Aluminium Sliding Counsil" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 451 Sliding Counsil</h3>
+                    <h3 class="product-card-title"><a href="sliding-wardrobe-handles.html#card-451" class="product-title-link" title="Open Model 451 in 450 Series Catalogue">Model 451 Sliding Counsil</a></h3>
                     <p class="product-card-desc">Model 451 is a zero-clearance sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with chiseled recess channel, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors.</p>
                     <div class="product-sizes-chips"><span class="size-chip">5"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3437,21 +3648,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('451')" class="btn-card-inspect">Specs</button>
+                <a href="sliding-wardrobe-handles.html#card-451" class="btn-card-page-link" title="Open Model 451 on 450 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="453" data-series="450" >
+                <div class="product-card-modern" data-code="453" data-series="450">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 453</span>
-                    <span class="series-label">450 Series</span>
+                    <a href="sliding-wardrobe-handles.html#card-453" class="series-label series-label-link" title="Open 450 Series Page">450 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('453')">
                     <img src="assets/453.png" alt="KUNETT Model 453 Solid Aluminium Sliding Counsil" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 453 Sliding Counsil</h3>
+                    <h3 class="product-card-title"><a href="sliding-wardrobe-handles.html#card-453" class="product-title-link" title="Open Model 453 in 450 Series Catalogue">Model 453 Sliding Counsil</a></h3>
                     <p class="product-card-desc">Model 453 is a ultra-slim sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with a sub-2mm faceplate profile, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors.</p>
                     <div class="product-sizes-chips"><span class="size-chip">5"</span><span class="size-chip">6"</span><span class="size-chip">8"</span><span class="size-chip">12"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3463,21 +3675,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('453')" class="btn-card-inspect">Specs</button>
+                <a href="sliding-wardrobe-handles.html#card-453" class="btn-card-page-link" title="Open Model 453 on 450 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="501" data-series="500" >
+                <div class="product-card-modern" data-code="501" data-series="500">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 501</span>
-                    <span class="series-label">500 Series</span>
+                    <a href="cabinet-knobs.html#card-501" class="series-label series-label-link" title="Open 500 Series Page">500 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('501')">
                     <img src="assets/501.png" alt="KUNETT Model 501 Solid Aluminium Cabinet Knob" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 501 Cabinet Knob</h3>
+                    <h3 class="product-card-title"><a href="cabinet-knobs.html#card-501" class="product-title-link" title="Open Model 501 in 500 Series Catalogue">Model 501 Cabinet Knob</a></h3>
                     <p class="product-card-desc">Model 501 is a geometric cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with micro-knurled and satin-brushed cylindrical bodies, it provides a firm, balanced tactile pinch grip. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.</p>
                     <div class="product-sizes-chips"><span class="size-chip">2"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3489,21 +3702,22 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('501')" class="btn-card-inspect">Specs</button>
+                <a href="cabinet-knobs.html#card-501" class="btn-card-page-link" title="Open Model 501 on 500 Series Page">Page &nearr;</a>
             </div>
         </div>
     
 
-        <div class="product-card-modern" data-code="504" data-series="500" >
+                <div class="product-card-modern" data-code="504" data-series="500">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 504</span>
-                    <span class="series-label">500 Series</span>
+                    <a href="cabinet-knobs.html#card-504" class="series-label series-label-link" title="Open 500 Series Page">500 Series &nearr;</a>
                 </div>
                 <div class="product-img-frame" onclick="openProductModal('504')">
                     <img src="assets/504.png" alt="KUNETT Model 504 Solid Aluminium Cabinet Knob" loading="lazy" class="product-card-img">
                 </div>
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Model 504 Cabinet Knob</h3>
+                    <h3 class="product-card-title"><a href="cabinet-knobs.html#card-504" class="product-title-link" title="Open Model 504 in 500 Series Catalogue">Model 504 Cabinet Knob</a></h3>
                     <p class="product-card-desc">Model 504 is a minimalist cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with solid single-piece CNC turning, it provides a jewel-like focal point on vanity drawers and credenzas. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands.</p>
                     <div class="product-sizes-chips"><span class="size-chip">2"</span></div>
                     <div class="product-finishes-dots"><span class="mini-swatch" style="background-color: #1A1A1A;" title="Black"></span><span class="mini-swatch" style="background-color: #B76E79;" title="R Gold"></span><span class="mini-swatch" style="background-color: #D4AF37;" title="Gold"></span><span class="mini-swatch" style="background-color: #A8A9AD;" title="SS Matt"></span><span class="mini-swatch" style="background-color: #4A4D53;" title="Grey"></span></div>
@@ -3515,9 +3729,31 @@
                     <span>WhatsApp Quote</span>
                 </a>
                 <button onclick="openProductModal('504')" class="btn-card-inspect">Specs</button>
+                <a href="cabinet-knobs.html#card-504" class="btn-card-page-link" title="Open Model 504 on 500 Series Page">Page &nearr;</a>
             </div>
         </div>
     
+            </div>
+            </div>
+        </div>
+
+        <!-- Slider Status & Quick Manual Controls Bar -->
+        <div class="slider-controls-bar">
+            <div class="slider-hint-text">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg>
+                <span>Swipe or drag horizontally &bull; Click arrow buttons or any product to explore</span>
+            </div>
+            <div class="slider-controls-group">
+                <button id="slider-btn-prev-bar" class="btn-slider-pill" title="Slide Left">
+                    &larr; Prev
+                </button>
+                <button id="slider-toggle-play" class="btn-slider-pill btn-slider-playpause" title="Pause / Resume Auto-Sliding">
+                    <span id="playpause-icon">&#10074;&#10074;</span>
+                    <span id="playpause-label">Auto-Glide: On</span>
+                </button>
+                <button id="slider-btn-next-bar" class="btn-slider-pill" title="Slide Right">
+                    Next &rarr;
+                </button>
             </div>
         </div>
 
@@ -4115,7 +4351,10 @@
                         </tr>
                     </table>
 
-                    <div style="margin-top: 20px;">
+                    <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
+                        <a id="modalPageBtn" href="#" class="btn-modal-page">
+                            <span>View Model on Dedicated Series Page &rarr;</span>
+                        </a>
                         <a id="modalWaBtn" href="#" target="_blank" class="btn-wa" style="width: 100%; justify-content: center; padding: 12px;">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg>
                             <span>Request Instant WhatsApp Quote</span>
@@ -4147,7 +4386,7 @@
 
     <!-- Client Scripts -->
     <script>
-    const seriesMeta = {"200": {"title": "Solid Aluminium Pull Handles", "sub": "200 Series &bull; 46 Models &bull; Lengths 4\" to 48\"", "desc": "Precision-milled from 100% solid aerospace-grade 6063-T5 virgin aluminium billets. Engineered with zero hollow fillers for luxury kitchens, wardrobes, and main entrance doors.", "file": "aluminium-handles.html", "count": 46, "name": "PULL HANDLES (200)"}, "300": {"title": "Aluminium Profile Handles", "sub": "300 Series &bull; 24 Models &bull; Standard 6" to 36" &bull; 20ft Continuous Runs", "desc": "Seamless continuous edge-mounted profiles for handle-less modular kitchens and minimalist credenzas. Custom blade-cut to length with deburred ergonomic hand grips.", "file": "aluminium-handle-profile.html", "count": 24, "name": "PROFILE HANDLES (300)"}, "400": {"title": "Concealed Inset Wardrobe Counsils", "sub": "400 Series &bull; 18 Models &bull; Flush Recessed 4\" to 12\"", "desc": "Flush deep-recess handles designed for full-height 7ft to 9ft wardrobe panels. Seamlessly embedded into woodwork for clean planar surfaces and zero obstruction.", "file": "wardrobe-counsil-handles.html", "count": 18, "name": "CONCEALED COUNSILS (400)"}, "450": {"title": "Sliding Wardrobe Counsils", "sub": "450 Series &bull; 5 Models &bull; Zero-Clearance 5\" to 12\"", "desc": "Zero-clearance flush design engineered to glide past overlapping sliding wardrobe shutters without collision. Low-profile sub-2mm faceplates.", "file": "sliding-wardrobe-handles.html", "count": 5, "name": "SLIDING COUNSILS (450)"}, "500": {"title": "Solid Architectural Knobs", "sub": "500 Series &bull; 8 Models &bull; Solid CNC Turned 2" Standard Size" to 1.5\"", "desc": "Jewelry-grade solid knobs for luxury vanities, dressers, and custom millwork. Fluted, cylindrical, knurled, and minimalist geometric shapes.", "file": "cabinet-knobs.html", "count": 8, "name": "CABINET KNOBS (500)"}};
+    const seriesMeta = {"200": {"title": "Solid Aluminium Pull Handles", "sub": "200 Series &bull; 46 Models &bull; Lengths 4\" to 48\"", "desc": "Precision-milled from 100% solid aerospace-grade 6063-T5 virgin aluminium billets. Engineered with zero hollow fillers for luxury kitchens, wardrobes, and main entrance doors.", "file": "aluminium-handles.html", "count": 46, "name": "PULL HANDLES (200)"}, "300": {"title": "Aluminium Profile Handles", "sub": "300 Series &bull; 24 Models &bull; Standard 6\" to 36\" &bull; 20ft Continuous Runs", "desc": "Seamless continuous edge-mounted profiles for handle-less modular kitchens and minimalist credenzas. Custom blade-cut to length with deburred ergonomic hand grips.", "file": "aluminium-handle-profile.html", "count": 24, "name": "PROFILE HANDLES (300)"}, "400": {"title": "Concealed Inset Wardrobe Counsils", "sub": "400 Series &bull; 18 Models &bull; Flush Recessed 4\" to 12\"", "desc": "Flush deep-recess handles designed for full-height 7ft to 9ft wardrobe panels. Seamlessly embedded into woodwork for clean planar surfaces and zero obstruction.", "file": "wardrobe-counsil-handles.html", "count": 18, "name": "CONCEALED COUNSILS (400)"}, "450": {"title": "Sliding Wardrobe Counsils", "sub": "450 Series &bull; 5 Models &bull; Zero-Clearance 5\" to 12\"", "desc": "Zero-clearance flush design engineered to glide past overlapping sliding wardrobe shutters without collision. Low-profile sub-2mm faceplates.", "file": "sliding-wardrobe-handles.html", "count": 5, "name": "SLIDING COUNSILS (450)"}, "500": {"title": "Solid Architectural Knobs", "sub": "500 Series &bull; 8 Models &bull; Solid CNC Turned 2\" Standard Size", "desc": "Jewelry-grade solid knobs for luxury vanities, dressers, and custom millwork. Fluted, cylindrical, knurled, and minimalist geometric shapes.", "file": "cabinet-knobs.html", "count": 8, "name": "CABINET KNOBS (500)"}};
     const productsData = {"201": {"code": "201", "image": "assets/201.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 201 is a durable cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a substantial hand-feel with zero flex, it provides an effortless grip for daily use. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "202": {"code": "202", "image": "assets/202.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 202 is a timeless cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with micro-tolerance CNC milling, it provides a high-end tactile feel to every cabinet. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "203": {"code": "203", "image": "assets/203.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 203 is a striking cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with micro-tolerance CNC milling, it provides a high-end tactile feel to every cabinet. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "204": {"code": "204", "image": "assets/204.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 204 is a sleek cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with clean lines and solid aluminium construction, it provides a high-end tactile feel to every cabinet. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "205": {"code": "205", "image": "assets/205.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 205 is a bold cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with clean lines and solid aluminium construction, it provides a high-end tactile feel to every cabinet. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "206": {"code": "206", "image": "assets/206.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 206 is a refined cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a precision-extruded profile, it provides a commanding presence across large wardrobe shutters. Engineered for luxury residential and commercial interiors."}, "207": {"code": "207", "image": "assets/207.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 207 is a sculpted cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a precision-extruded profile, it provides a commanding presence across large wardrobe shutters. Engineered for luxury residential and commercial interiors."}, "208": {"code": "208", "image": "assets/208.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 208 is a minimalist cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with seamless edges and smooth radiused corners, it provides a commanding presence across large wardrobe shutters. Engineered for luxury residential and commercial interiors."}, "209": {"code": "209", "image": "assets/209.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 209 is a architectural cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with seamless edges and smooth radiused corners, it provides a commanding presence across large wardrobe shutters. Engineered for luxury residential and commercial interiors."}, "210": {"code": "210", "image": "assets/210.jpg", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 210 is a durable cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a substantial hand-feel with zero flex, it provides an effortless grip for daily use. Engineered for luxury residential and commercial interiors."}, "211": {"code": "211", "image": "assets/211.jpg", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 211 is a timeless cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with micro-tolerance CNC milling, it provides an effortless grip for daily use. Engineered for luxury residential and commercial interiors."}, "212": {"code": "212", "image": "assets/212.jpg", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 212 is a striking cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with micro-tolerance CNC milling, it provides an effortless grip for daily use. Engineered for luxury residential and commercial interiors."}, "213": {"code": "213", "image": "assets/213.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 213 is a sleek cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with clean lines and solid aluminium construction, it provides a high-end tactile feel to every cabinet. Engineered for luxury residential and commercial interiors."}, "214": {"code": "214", "image": "assets/214.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 214 is a bold cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with clean lines and solid aluminium construction, it provides a high-end tactile feel to every cabinet. Engineered for luxury residential and commercial interiors."}, "215": {"code": "215", "image": "assets/215.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 215 is a refined cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a precision-extruded profile, it provides a high-end tactile feel to every cabinet. Engineered for luxury residential and commercial interiors."}, "216": {"code": "216", "image": "assets/216.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 216 is a sculpted cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a precision-extruded profile, it provides a high-end tactile feel to every cabinet. Engineered for luxury residential and commercial interiors."}, "217": {"code": "217", "image": "assets/217.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 217 is a minimalist cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with seamless edges and smooth radiused corners, it provides a commanding presence across large wardrobe shutters. Perfect for architects and interior designers seeking understated elegance."}, "218": {"code": "218", "image": "assets/218.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 218 is a architectural cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with seamless edges and smooth radiused corners, it provides a commanding presence across large wardrobe shutters. Perfect for architects and interior designers seeking understated elegance."}, "219": {"code": "219", "image": "assets/219.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 219 is a ergonomic cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a substantial hand-feel with zero flex, it provides a commanding presence across large wardrobe shutters. Perfect for architects and interior designers seeking understated elegance."}, "220": {"code": "220", "image": "assets/220.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 220 is a timeless cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with micro-tolerance CNC milling, it provides an effortless grip for daily use. Perfect for architects and interior designers seeking understated elegance."}, "221": {"code": "221", "image": "assets/221.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 221 is a striking cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with micro-tolerance CNC milling, it provides an effortless grip for daily use. Perfect for architects and interior designers seeking understated elegance."}, "222": {"code": "222", "image": "assets/222.jpg", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 222 is a sleek cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with clean lines and solid aluminium construction, it provides an effortless grip for daily use. Perfect for architects and interior designers seeking understated elegance."}, "223": {"code": "223", "image": "assets/223.jpg", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 223 is a bold cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with clean lines and solid aluminium construction, it provides an effortless grip for daily use. Perfect for architects and interior designers seeking understated elegance."}, "224": {"code": "224", "image": "assets/224.jpg", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 224 is a refined cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a precision-extruded profile, it provides a high-end tactile feel to every cabinet. Perfect for architects and interior designers seeking understated elegance."}, "225": {"code": "225", "image": "assets/225.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 225 is a sculpted cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a precision-extruded profile, it provides a high-end tactile feel to every cabinet. Perfect for architects and interior designers seeking understated elegance."}, "226": {"code": "226", "image": "assets/226.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 226 is a minimalist cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with seamless edges and smooth radiused corners, it provides a high-end tactile feel to every cabinet. Perfect for architects and interior designers seeking understated elegance."}, "227": {"code": "227", "image": "assets/227.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 227 is a architectural cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with seamless edges and smooth radiused corners, it provides a high-end tactile feel to every cabinet. Perfect for architects and interior designers seeking understated elegance."}, "228": {"code": "228", "image": "assets/228.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 228 is a ergonomic cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a substantial hand-feel with zero flex, it provides a commanding presence across large wardrobe shutters. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "229": {"code": "229", "image": "assets/229.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 229 is a durable cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a substantial hand-feel with zero flex, it provides a commanding presence across large wardrobe shutters. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "230": {"code": "230", "image": "assets/230.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 230 is a striking cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with micro-tolerance CNC milling, it provides exceptional wear resistance against moisture and oils. Perfect for architects and interior designers seeking understated elegance."}, "231": {"code": "231", "image": "assets/231.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 231 is a sleek cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with clean lines and solid aluminium construction, it provides an effortless grip for daily use. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "232": {"code": "232", "image": "assets/232.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 232 is a bold cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with clean lines and solid aluminium construction, it provides an effortless grip for daily use. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "233": {"code": "233", "image": "assets/233.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 233 is a refined cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a precision-extruded profile, it provides an effortless grip for daily use. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "234": {"code": "234", "image": "assets/234.jpg", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 234 is a sculpted cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a precision-extruded profile, it provides an effortless grip for daily use. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "235": {"code": "235", "image": "assets/235.jpg", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 235 is a minimalist cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with seamless edges and smooth radiused corners, it provides a high-end tactile feel to every cabinet. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "236": {"code": "236", "image": "assets/236.jpg", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 236 is a architectural cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with seamless edges and smooth radiused corners, it provides a high-end tactile feel to every cabinet. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "237": {"code": "237", "image": "assets/237.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 237 is a ergonomic cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a substantial hand-feel with zero flex, it provides a high-end tactile feel to every cabinet. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "238": {"code": "238", "image": "assets/238.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 238 is a durable cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a substantial hand-feel with zero flex, it provides a high-end tactile feel to every cabinet. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "239": {"code": "239", "image": "assets/239.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 239 is a timeless cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with micro-tolerance CNC milling, it provides a commanding presence across large wardrobe shutters. Engineered for luxury residential and commercial interiors."}, "240": {"code": "240", "image": "assets/240.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 240 is a sleek cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with clean lines and solid aluminium construction, it provides exceptional wear resistance against moisture and oils. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "241": {"code": "241", "image": "assets/241.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 241 is a bold cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with clean lines and solid aluminium construction, it provides exceptional wear resistance against moisture and oils. Ideal for full-height wardrobes, master kitchens, and bespoke joinery."}, "242": {"code": "242", "image": "assets/242.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 242 is a refined cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a precision-extruded profile, it provides an effortless grip for daily use. Engineered for luxury residential and commercial interiors."}, "243": {"code": "243", "image": "assets/243.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 243 is a sculpted cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a precision-extruded profile, it provides an effortless grip for daily use. Engineered for luxury residential and commercial interiors."}, "244": {"code": "244", "image": "assets/244.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 244 is a minimalist cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with seamless edges and smooth radiused corners, it provides an effortless grip for daily use. Engineered for luxury residential and commercial interiors."}, "245": {"code": "245", "image": "assets/245.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 245 is a architectural cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with seamless edges and smooth radiused corners, it provides an effortless grip for daily use. Engineered for luxury residential and commercial interiors."}, "246": {"code": "246", "image": "assets/246.png", "series": "200", "category": "Cabinet Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Antique", "Grey"], "sizes": ["4\"", "6\"", "8\"", "12\"", "16\"", "18\"", "48\""], "desc": "Model 246 is a ergonomic cabinet handle engineered from solid 6063-T5 virgin aluminium. Designed with a substantial hand-feel with zero flex, it provides a high-end tactile feel to every cabinet. Engineered for luxury residential and commercial interiors."}, "301": {"code": "301", "image": "assets/301.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 301 is a seamless profile handle engineered from solid 6063-T5 virgin aluminium. Designed with hidden screw-fixing channels, it provides smooth top-edge fingertip operation. Designed for handle-less modular kitchens and minimalist credenzas."}, "302": {"code": "302", "image": "assets/302.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 302 is a flush-mounted profile handle engineered from solid 6063-T5 virgin aluminium. Designed with hidden screw-fixing channels, it provides smooth top-edge fingertip operation. Designed for handle-less modular kitchens and minimalist credenzas."}, "303": {"code": "303", "image": "assets/303.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 303 is a modern profile handle engineered from solid 6063-T5 virgin aluminium. Designed with end-cut precision with deburred bevels, it provides smooth top-edge fingertip operation. Designed for handle-less modular kitchens and minimalist credenzas."}, "304": {"code": "304", "image": "assets/304.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 304 is a architectural profile handle engineered from solid 6063-T5 virgin aluminium. Designed with end-cut precision with deburred bevels, it provides smooth top-edge fingertip operation. Designed for handle-less modular kitchens and minimalist credenzas."}, "305": {"code": "305", "image": "assets/305.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 305 is a streamlined profile handle engineered from solid 6063-T5 virgin aluminium. Designed with an ultra-slim continuous grip section, it provides a unified linear rhythm across long runs of cabinetry. Supplied in standard cabinet sizes and 3-meter continuous runs."}, "306": {"code": "306", "image": "assets/306.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 306 is a concealed profile handle engineered from solid 6063-T5 virgin aluminium. Designed with an ultra-slim continuous grip section, it provides a unified linear rhythm across long runs of cabinetry. Supplied in standard cabinet sizes and 3-meter continuous runs."}, "307": {"code": "307", "image": "assets/307.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 307 is a continuous profile handle engineered from solid 6063-T5 virgin aluminium. Designed with an ergonomic J-channel extrusion, it provides a unified linear rhythm across long runs of cabinetry. Supplied in standard cabinet sizes and 3-meter continuous runs."}, "308": {"code": "308", "image": "assets/308.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 308 is a seamless profile handle engineered from solid 6063-T5 virgin aluminium. Designed with an ergonomic J-channel extrusion, it provides a unified linear rhythm across long runs of cabinetry. Supplied in standard cabinet sizes and 3-meter continuous runs."}, "309": {"code": "309", "image": "assets/309.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 309 is a flush-mounted profile handle engineered from solid 6063-T5 virgin aluminium. Designed with hidden screw-fixing channels, it provides a completely handle-less aesthetic across entire cabinet banks. Supplied in standard cabinet sizes and 3-meter continuous runs."}, "310": {"code": "310", "image": "assets/310.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 310 is a modern profile handle engineered from solid 6063-T5 virgin aluminium. Designed with an ergonomic J-channel extrusion, it provides a unified linear rhythm across long runs of cabinetry. Designed for handle-less modular kitchens and minimalist credenzas."}, "311": {"code": "311", "image": "assets/311.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 311 is a architectural profile handle engineered from solid 6063-T5 virgin aluminium. Designed with an ergonomic J-channel extrusion, it provides a unified linear rhythm across long runs of cabinetry. Designed for handle-less modular kitchens and minimalist credenzas."}, "312": {"code": "312", "image": "assets/312.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 312 is a streamlined profile handle engineered from solid 6063-T5 virgin aluminium. Designed with hidden screw-fixing channels, it provides a completely handle-less aesthetic across entire cabinet banks. Designed for handle-less modular kitchens and minimalist credenzas."}, "313": {"code": "313", "image": "assets/313.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 313 is a concealed profile handle engineered from solid 6063-T5 virgin aluminium. Designed with hidden screw-fixing channels, it provides a completely handle-less aesthetic across entire cabinet banks. Designed for handle-less modular kitchens and minimalist credenzas."}, "314": {"code": "314", "image": "assets/314.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 314 is a continuous profile handle engineered from solid 6063-T5 virgin aluminium. Designed with end-cut precision with deburred bevels, it provides a completely handle-less aesthetic across entire cabinet banks. Designed for handle-less modular kitchens and minimalist credenzas."}, "315": {"code": "315", "image": "assets/315.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 315 is a seamless profile handle engineered from solid 6063-T5 virgin aluminium. Designed with end-cut precision with deburred bevels, it provides a completely handle-less aesthetic across entire cabinet banks. Designed for handle-less modular kitchens and minimalist credenzas."}, "316": {"code": "316", "image": "assets/316.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["6\"", "8\"", "10\"", "12\"", "16\"", "18\"", "20\"", "22\"", "24\"", "26\"", "28\"", "30\"", "32\"", "36\""], "desc": "Model 316 is a flush-mounted profile handle engineered from solid 6063-T5 virgin aluminium. Designed with an ultra-slim continuous grip section, it provides smooth top-edge fingertip operation. Supplied in standard cabinet sizes and 3-meter continuous runs."}, "317": {"code": "317", "image": "assets/317.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["20ft Long (Continuous Profile)", "Custom Cut to Length"], "desc": "Model 317 is a modern profile handle engineered from solid 6063-T5 virgin aluminium. Designed with an ultra-slim continuous grip section, it provides smooth top-edge fingertip operation. Supplied in standard cabinet sizes and 3-meter continuous runs."}, "318": {"code": "318", "image": "assets/318.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["20ft Long (Continuous Profile)", "Custom Cut to Length"], "desc": "Model 318 is a architectural profile handle engineered from solid 6063-T5 virgin aluminium. Designed with an ergonomic J-channel extrusion, it provides smooth top-edge fingertip operation. Supplied in standard cabinet sizes and 3-meter continuous runs."}, "319": {"code": "319", "image": "assets/319.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["20ft Long (Continuous Profile)", "Custom Cut to Length"], "desc": "Model 319 is a streamlined profile handle engineered from solid 6063-T5 virgin aluminium. Designed with an ergonomic J-channel extrusion, it provides smooth top-edge fingertip operation. Supplied in standard cabinet sizes and 3-meter continuous runs."}, "320": {"code": "320", "image": "assets/320.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["20ft Long (Continuous Profile)", "Custom Cut to Length"], "desc": "Model 320 is a concealed profile handle engineered from solid 6063-T5 virgin aluminium. Designed with an ultra-slim continuous grip section, it provides smooth top-edge fingertip operation. Designed for handle-less modular kitchens and minimalist credenzas."}, "321": {"code": "321", "image": "assets/321.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["20ft Long (Continuous Profile)", "Custom Cut to Length"], "desc": "Model 321 is a continuous profile handle engineered from solid 6063-T5 virgin aluminium. Designed with an ergonomic J-channel extrusion, it provides smooth top-edge fingertip operation. Designed for handle-less modular kitchens and minimalist credenzas."}, "322": {"code": "322", "image": "assets/322.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["20ft Long (Continuous Profile)", "Custom Cut to Length"], "desc": "Model 322 is a seamless profile handle engineered from solid 6063-T5 virgin aluminium. Designed with an ergonomic J-channel extrusion, it provides smooth top-edge fingertip operation. Designed for handle-less modular kitchens and minimalist credenzas."}, "323": {"code": "323", "image": "assets/323.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["20ft Long (Continuous Profile)", "Custom Cut to Length"], "desc": "Model 323 is a flush-mounted profile handle engineered from solid 6063-T5 virgin aluminium. Designed with hidden screw-fixing channels, it provides a unified linear rhythm across long runs of cabinetry. Designed for handle-less modular kitchens and minimalist credenzas."}, "324": {"code": "324", "image": "assets/324.png", "series": "300", "category": "Profile Handle", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "CP", "Grey"], "sizes": ["20ft Long (Continuous Profile)", "Custom Cut to Length"], "desc": "Model 324 is a modern profile handle engineered from solid 6063-T5 virgin aluminium. Designed with hidden screw-fixing channels, it provides a unified linear rhythm across long runs of cabinetry. Designed for handle-less modular kitchens and minimalist credenzas."}, "401": {"code": "401", "image": "assets/401.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 401 is a architectural counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with solid CNC billet pockets, it provides clean planar shutter surfaces without protruding hardware. Engineered for full-height wardrobe panels and sliding partition doors."}, "402": {"code": "402", "image": "assets/402.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 402 is a recessed counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with deep-pocket finger recesses, it provides clean planar shutter surfaces without protruding hardware. Engineered for full-height wardrobe panels and sliding partition doors."}, "403": {"code": "403", "image": "assets/403.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 403 is a flush-fitting counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with deep-pocket finger recesses, it provides clean planar shutter surfaces without protruding hardware. Engineered for full-height wardrobe panels and sliding partition doors."}, "404": {"code": "404", "image": "assets/404.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 404 is a concealed counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with a low-profile flush faceplate, it provides unobstructed passage in narrow hallways and walk-in closets. Engineered for full-height wardrobe panels and sliding partition doors."}, "405": {"code": "405", "image": "assets/405.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 405 is a sleek counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with a low-profile flush faceplate, it provides unobstructed passage in narrow hallways and walk-in closets. Engineered for full-height wardrobe panels and sliding partition doors."}, "406": {"code": "406", "image": "assets/406.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 406 is a architectural counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with solid CNC billet pockets, it provides unobstructed passage in narrow hallways and walk-in closets. Engineered for full-height wardrobe panels and sliding partition doors."}, "407": {"code": "407", "image": "assets/407.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 407 is a recessed counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with solid CNC billet pockets, it provides unobstructed passage in narrow hallways and walk-in closets. Engineered for full-height wardrobe panels and sliding partition doors."}, "408": {"code": "408", "image": "assets/408.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 408 is a flush-fitting counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with deep-pocket finger recesses, it provides clean planar shutter surfaces without protruding hardware. Engineered for full-height wardrobe panels and sliding partition doors."}, "409": {"code": "409", "image": "assets/409.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 409 is a concealed counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with deep-pocket finger recesses, it provides clean planar shutter surfaces without protruding hardware. Engineered for full-height wardrobe panels and sliding partition doors."}, "410": {"code": "410", "image": "assets/410.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 410 is a architectural counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with solid CNC billet pockets, it provides unobstructed passage in narrow hallways and walk-in closets. Engineered for full-height wardrobe panels and sliding partition doors."}, "411": {"code": "411", "image": "assets/411.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 411 is a recessed counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with deep-pocket finger recesses, it provides clean planar shutter surfaces without protruding hardware. Engineered for full-height wardrobe panels and sliding partition doors."}, "412": {"code": "412", "image": "assets/412.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 412 is a flush-fitting counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with deep-pocket finger recesses, it provides clean planar shutter surfaces without protruding hardware. Engineered for full-height wardrobe panels and sliding partition doors."}, "413": {"code": "413", "image": "assets/413.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 413 is a concealed counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with a low-profile flush faceplate, it provides clean planar shutter surfaces without protruding hardware. Engineered for full-height wardrobe panels and sliding partition doors."}, "414": {"code": "414", "image": "assets/414.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 414 is a sleek counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with a low-profile flush faceplate, it provides clean planar shutter surfaces without protruding hardware. Engineered for full-height wardrobe panels and sliding partition doors."}, "415": {"code": "415", "image": "assets/415.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 415 is a architectural counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with solid CNC billet pockets, it provides unobstructed passage in narrow hallways and walk-in closets. Engineered for full-height wardrobe panels and sliding partition doors."}, "416": {"code": "416", "image": "assets/416.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 416 is a recessed counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with solid CNC billet pockets, it provides unobstructed passage in narrow hallways and walk-in closets. Engineered for full-height wardrobe panels and sliding partition doors."}, "417": {"code": "417", "image": "assets/417.png", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 417 is a flush-fitting counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with deep-pocket finger recesses, it provides unobstructed passage in narrow hallways and walk-in closets. Engineered for full-height wardrobe panels and sliding partition doors."}, "418": {"code": "418", "image": "assets/418.jpg", "series": "400", "category": "Counsil Handle", "finishes": ["CP", "Black", "R Gold", "Gold", "SS Matt"], "sizes": ["4\"", "6\"", "8\"", "12\""], "desc": "Model 418 is a concealed counsil handle engineered from solid 6063-T5 virgin aluminium. Designed with deep-pocket finger recesses, it provides unobstructed passage in narrow hallways and walk-in closets. Engineered for full-height wardrobe panels and sliding partition doors."}, "451": {"code": "451", "image": "assets/451.png", "series": "450", "category": "Sliding Counsil", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Grey"], "sizes": ["5\"", "6\"", "8\"", "12\""], "desc": "Model 451 is a zero-clearance sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with chiseled recess channel, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors."}, "452": {"code": "452", "image": "assets/452.png", "series": "450", "category": "Sliding Counsil", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Grey"], "sizes": ["5\"", "6\"", "8\"", "12\""], "desc": "Model 452 is a flush-profile sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with chiseled recess channel, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors."}, "453": {"code": "453", "image": "assets/453.png", "series": "450", "category": "Sliding Counsil", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Grey"], "sizes": ["5\"", "6\"", "8\"", "12\""], "desc": "Model 453 is a ultra-slim sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with a sub-2mm faceplate profile, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors."}, "454": {"code": "454", "image": "assets/454.png", "series": "450", "category": "Sliding Counsil", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Grey"], "sizes": ["5\"", "6\"", "8\"", "12\""], "desc": "Model 454 is a smooth-gliding sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with a sub-2mm faceplate profile, it provides zero collision between overlapping sliding shutters. The industry benchmark for sliding wardrobe systems and pocket doors."}, "455": {"code": "455", "image": "assets/455.png", "series": "450", "category": "Sliding Counsil", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Grey"], "sizes": ["5\"", "6\"", "8\"", "12\""], "desc": "Model 455 is a zero-clearance sliding counsil engineered from solid 6063-T5 virgin aluminium. Designed with deep contoured finger grip, it provides smooth fingertip lateral push/pull control. The industry benchmark for sliding wardrobe systems and pocket doors."}, "501": {"code": "501", "image": "assets/501.png", "series": "500", "category": "Cabinet Knob", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Grey"], "sizes": ["2\""], "desc": "Model 501 is a geometric cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with micro-knurled and satin-brushed cylindrical bodies, it provides a firm, balanced tactile pinch grip. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands."}, "502": {"code": "502", "image": "assets/502.png", "series": "500", "category": "Cabinet Knob", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Grey"], "sizes": ["2\""], "desc": "Model 502 is a tactile cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with micro-knurled and satin-brushed cylindrical bodies, it provides a firm, balanced tactile pinch grip. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands."}, "503": {"code": "503", "image": "assets/503.png", "series": "500", "category": "Cabinet Knob", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Grey"], "sizes": ["2\""], "desc": "Model 503 is a solid-billet cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with solid single-piece CNC turning, it provides a jewel-like focal point on vanity drawers and credenzas. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands."}, "504": {"code": "504", "image": "assets/504.png", "series": "500", "category": "Cabinet Knob", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Grey"], "sizes": ["2\""], "desc": "Model 504 is a minimalist cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with solid single-piece CNC turning, it provides a jewel-like focal point on vanity drawers and credenzas. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands."}, "505": {"code": "505", "image": "assets/505.png", "series": "500", "category": "Cabinet Knob", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Grey"], "sizes": ["2\""], "desc": "Model 505 is a jewelry-grade cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with anti-spin indexing pins, it provides a jewel-like focal point on vanity drawers and credenzas. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands."}, "506": {"code": "506", "image": "assets/506.png", "series": "500", "category": "Cabinet Knob", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Grey"], "sizes": ["2\""], "desc": "Model 506 is a geometric cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with anti-spin indexing pins, it provides a jewel-like focal point on vanity drawers and credenzas. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands."}, "507": {"code": "507", "image": "assets/507.png", "series": "500", "category": "Cabinet Knob", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Grey"], "sizes": ["2\""], "desc": "Model 507 is a tactile cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with micro-knurled and satin-brushed cylindrical bodies, it provides a firm, balanced tactile pinch grip. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands."}, "508": {"code": "508", "image": "assets/508.png", "series": "500", "category": "Cabinet Knob", "finishes": ["Black", "R Gold", "Gold", "SS Matt", "Grey"], "sizes": ["2\""], "desc": "Model 508 is a solid-billet cabinet knob engineered from solid 6063-T5 virgin aluminium. Designed with micro-knurled and satin-brushed cylindrical bodies, it provides a firm, balanced tactile pinch grip. Adds artisanal refinement to vanity furniture, bar cabinets, and nightstands."}};
 
     let activeSeriesId = '200';
@@ -4227,6 +4466,20 @@
         document.getElementById('modalDesc').innerText = p.desc;
         document.getElementById('modalSizes').innerText = p.sizes.join(', ');
         document.getElementById('modalFinishes').innerText = p.finishes.join(', ');
+
+        const seriesPageMap = {
+            '200': 'aluminium-handles.html',
+            '300': 'aluminium-handle-profile.html',
+            '400': 'wardrobe-counsil-handles.html',
+            '450': 'sliding-wardrobe-handles.html',
+            '500': 'cabinet-knobs.html'
+        };
+        const pageUrl = (seriesPageMap[p.series] || 'aluminium-handles.html') + '#card-' + p.code;
+        const pageBtn = document.getElementById('modalPageBtn');
+        if (pageBtn) {
+            pageBtn.href = pageUrl;
+            pageBtn.innerHTML = '<span>View Model ' + p.code + ' on ' + p.series + ' Series Page &rarr;</span>';
+        }
 
         const waMsg = encodeURIComponent('Hello Sanjay, I am requesting quotation and CAD specs for KUNETT Model ' + p.code + ' (' + p.series + ' Series ' + p.category + ').');
         document.getElementById('modalWaBtn').href = 'https://wa.me/919924637640?text=' + waMsg;
@@ -4598,5 +4851,171 @@
     })();
 
 </script>
+
+<script>
+    // Modern Showcase Slider: Auto-Glide + Manual Drag + Touch Swipe + Arrow Controls
+    (function initShowcaseSlider() {
+        const container = document.getElementById('marquee-scroll-container');
+        const track = document.getElementById('continuous-slider-track');
+        const prevArrow = document.getElementById('slider-arrow-prev');
+        const nextArrow = document.getElementById('slider-arrow-next');
+        const prevBarBtn = document.getElementById('slider-btn-prev-bar');
+        const nextBarBtn = document.getElementById('slider-btn-next-bar');
+        const togglePlayBtn = document.getElementById('slider-toggle-play');
+        const playpauseIcon = document.getElementById('playpause-icon');
+        const playpauseLabel = document.getElementById('playpause-label');
+
+        if (!container || !track) return;
+
+        let isPaused = false;
+        let isUserPaused = false;
+        let isDown = false;
+        let startX = 0;
+        let scrollStart = 0;
+        let hasDragged = false;
+        let resumeTimeout = null;
+        let rafId = null;
+        const glideSpeed = 0.7; // pixels per animation frame (smooth luxury glide)
+
+        function getCardStep() {
+            const firstCard = track.querySelector('.product-card-modern');
+            if (firstCard) {
+                return firstCard.offsetWidth + 24; // card width + gap
+            }
+            return 320;
+        }
+
+        function scrollByStep(direction) {
+            pauseGlideTemporarily(3500);
+            const step = getCardStep() * 1.5;
+            container.scrollBy({ left: direction * step, behavior: 'smooth' });
+        }
+
+        if (prevArrow) prevArrow.addEventListener('click', () => scrollByStep(-1));
+        if (nextArrow) nextArrow.addEventListener('click', () => scrollByStep(1));
+        if (prevBarBtn) prevBarBtn.addEventListener('click', () => scrollByStep(-1));
+        if (nextBarBtn) nextBarBtn.addEventListener('click', () => scrollByStep(1));
+
+        function setPlayState(paused) {
+            isUserPaused = paused;
+            isPaused = paused;
+            if (togglePlayBtn) {
+                if (paused) {
+                    togglePlayBtn.classList.add('paused');
+                    if (playpauseIcon) playpauseIcon.innerHTML = '&#9658;';
+                    if (playpauseLabel) playpauseLabel.textContent = 'Auto-Glide: Paused';
+                } else {
+                    togglePlayBtn.classList.remove('paused');
+                    if (playpauseIcon) playpauseIcon.innerHTML = '&#10074;&#10074;';
+                    if (playpauseLabel) playpauseLabel.textContent = 'Auto-Glide: On';
+                }
+            }
+        }
+
+        if (togglePlayBtn) {
+            togglePlayBtn.addEventListener('click', () => {
+                setPlayState(!isUserPaused);
+            });
+        }
+
+        function pauseGlideTemporarily(ms) {
+            isPaused = true;
+            clearTimeout(resumeTimeout);
+            if (!isUserPaused) {
+                resumeTimeout = setTimeout(() => {
+                    isPaused = false;
+                }, ms || 3000);
+            }
+        }
+
+        // Hover pause
+        container.addEventListener('mouseenter', () => {
+            isPaused = true;
+        });
+        container.addEventListener('mouseleave', () => {
+            if (!isUserPaused && !isDown) {
+                isPaused = false;
+            }
+        });
+
+        // Touch events for mobile phones & tablets
+        container.addEventListener('touchstart', () => {
+            isPaused = true;
+            clearTimeout(resumeTimeout);
+        }, { passive: true });
+
+        container.addEventListener('touchend', () => {
+            if (!isUserPaused) {
+                resumeTimeout = setTimeout(() => {
+                    isPaused = false;
+                }, 3000);
+            }
+        }, { passive: true });
+
+        // Desktop Mouse Drag Scrolling
+        container.addEventListener('mousedown', (e) => {
+            if (e.target.closest('a') || e.target.closest('button')) {
+                return;
+            }
+            isDown = true;
+            hasDragged = false;
+            container.classList.add('is-dragging');
+            startX = e.pageX - container.offsetLeft;
+            scrollStart = container.scrollLeft;
+            isPaused = true;
+            clearTimeout(resumeTimeout);
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (isDown) {
+                isDown = false;
+                container.classList.remove('is-dragging');
+                setTimeout(() => { hasDragged = false; }, 80);
+                if (!isUserPaused) {
+                    resumeTimeout = setTimeout(() => {
+                        isPaused = false;
+                    }, 2500);
+                }
+            }
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - container.offsetLeft;
+            const walk = (x - startX) * 1.3;
+            if (Math.abs(x - startX) > 5) {
+                hasDragged = true;
+            }
+            container.scrollLeft = scrollStart - walk;
+        });
+
+        // Prevent accidental card click trigger during drag release
+        container.addEventListener('click', (e) => {
+            if (hasDragged) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, true);
+
+        // Continuous smooth auto-glide animation loop
+        function glideLoop() {
+            if (!isPaused && !isDown && !isUserPaused) {
+                const halfWidth = track.scrollWidth / 2;
+                if (halfWidth > 0) {
+                    container.scrollLeft += glideSpeed;
+                    if (container.scrollLeft >= halfWidth) {
+                        container.scrollLeft -= halfWidth;
+                    } else if (container.scrollLeft <= 0) {
+                        container.scrollLeft += halfWidth;
+                    }
+                }
+            }
+            rafId = requestAnimationFrame(glideLoop);
+        }
+        rafId = requestAnimationFrame(glideLoop);
+    })();
+</script>
+
 </body>
 </html>

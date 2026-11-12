@@ -1350,7 +1350,7 @@
     <section class="max-w-7xl mx-auto px-4 md:px-8 py-8">
         <div id="series-grid" class="products-grid">
             
-        <div class="product-card-modern" data-code="501">
+        <div class="product-card-modern" id="card-501" data-code="501">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 501</span>
@@ -1376,7 +1376,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="502">
+        <div class="product-card-modern" id="card-502" data-code="502">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 502</span>
@@ -1402,7 +1402,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="503">
+        <div class="product-card-modern" id="card-503" data-code="503">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 503</span>
@@ -1428,7 +1428,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="504">
+        <div class="product-card-modern" id="card-504" data-code="504">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 504</span>
@@ -1454,7 +1454,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="505">
+        <div class="product-card-modern" id="card-505" data-code="505">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 505</span>
@@ -1480,7 +1480,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="506">
+        <div class="product-card-modern" id="card-506" data-code="506">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 506</span>
@@ -1506,7 +1506,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="507">
+        <div class="product-card-modern" id="card-507" data-code="507">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 507</span>
@@ -1532,7 +1532,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="508">
+        <div class="product-card-modern" id="card-508" data-code="508">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 508</span>
@@ -1734,6 +1734,35 @@
             window.location.href = targetHref;
         }
     }
+</script>
+
+
+<script>
+    // URL Hash Auto-Scroll & Highlight for specific model cards
+    function checkModelCardHash() {
+        const hash = window.location.hash;
+        if (!hash) return;
+        const code = hash.replace(/[^0-9]/g, '');
+        if (!code) return;
+        const card = document.getElementById('card-' + code) || document.querySelector('[data-code="' + code + '"]');
+        if (card) {
+            setTimeout(function() {
+                var navOffset = 100;
+                var elementPosition = card.getBoundingClientRect().top;
+                var offsetPosition = elementPosition + window.pageYOffset - navOffset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                card.style.transition = 'box-shadow 0.4s ease, border-color 0.4s ease';
+                card.style.boxShadow = '0 0 0 3px #D4AF37, 0 16px 36px rgba(0,0,0,0.14)';
+                card.style.borderColor = '#D4AF37';
+                setTimeout(function() {
+                    card.style.boxShadow = '';
+                    card.style.borderColor = '';
+                }, 4000);
+            }, 350);
+        }
+    }
+    window.addEventListener('DOMContentLoaded', checkModelCardHash);
+    window.addEventListener('hashchange', checkModelCardHash);
 </script>
 
 </body>

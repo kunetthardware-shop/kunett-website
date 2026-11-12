@@ -1350,7 +1350,7 @@
     <section class="max-w-7xl mx-auto px-4 md:px-8 py-8">
         <div id="series-grid" class="products-grid">
             
-        <div class="product-card-modern" data-code="401">
+        <div class="product-card-modern" id="card-401" data-code="401">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 401</span>
@@ -1376,7 +1376,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="402">
+        <div class="product-card-modern" id="card-402" data-code="402">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 402</span>
@@ -1402,7 +1402,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="403">
+        <div class="product-card-modern" id="card-403" data-code="403">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 403</span>
@@ -1428,7 +1428,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="404">
+        <div class="product-card-modern" id="card-404" data-code="404">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 404</span>
@@ -1454,7 +1454,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="405">
+        <div class="product-card-modern" id="card-405" data-code="405">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 405</span>
@@ -1480,7 +1480,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="406">
+        <div class="product-card-modern" id="card-406" data-code="406">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 406</span>
@@ -1506,7 +1506,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="407">
+        <div class="product-card-modern" id="card-407" data-code="407">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 407</span>
@@ -1532,7 +1532,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="408">
+        <div class="product-card-modern" id="card-408" data-code="408">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 408</span>
@@ -1558,7 +1558,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="409">
+        <div class="product-card-modern" id="card-409" data-code="409">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 409</span>
@@ -1584,7 +1584,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="410">
+        <div class="product-card-modern" id="card-410" data-code="410">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 410</span>
@@ -1610,7 +1610,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="411">
+        <div class="product-card-modern" id="card-411" data-code="411">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 411</span>
@@ -1636,7 +1636,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="412">
+        <div class="product-card-modern" id="card-412" data-code="412">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 412</span>
@@ -1662,7 +1662,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="413">
+        <div class="product-card-modern" id="card-413" data-code="413">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 413</span>
@@ -1688,7 +1688,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="414">
+        <div class="product-card-modern" id="card-414" data-code="414">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 414</span>
@@ -1714,7 +1714,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="415">
+        <div class="product-card-modern" id="card-415" data-code="415">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 415</span>
@@ -1740,7 +1740,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="416">
+        <div class="product-card-modern" id="card-416" data-code="416">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 416</span>
@@ -1766,7 +1766,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="417">
+        <div class="product-card-modern" id="card-417" data-code="417">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 417</span>
@@ -1792,7 +1792,7 @@
         </div>
     
 
-        <div class="product-card-modern" data-code="418">
+        <div class="product-card-modern" id="card-418" data-code="418">
             <div>
                 <div class="card-top-badges">
                     <span class="model-badge">Model 418</span>
@@ -1994,6 +1994,35 @@
             window.location.href = targetHref;
         }
     }
+</script>
+
+
+<script>
+    // URL Hash Auto-Scroll & Highlight for specific model cards
+    function checkModelCardHash() {
+        const hash = window.location.hash;
+        if (!hash) return;
+        const code = hash.replace(/[^0-9]/g, '');
+        if (!code) return;
+        const card = document.getElementById('card-' + code) || document.querySelector('[data-code="' + code + '"]');
+        if (card) {
+            setTimeout(function() {
+                var navOffset = 100;
+                var elementPosition = card.getBoundingClientRect().top;
+                var offsetPosition = elementPosition + window.pageYOffset - navOffset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                card.style.transition = 'box-shadow 0.4s ease, border-color 0.4s ease';
+                card.style.boxShadow = '0 0 0 3px #D4AF37, 0 16px 36px rgba(0,0,0,0.14)';
+                card.style.borderColor = '#D4AF37';
+                setTimeout(function() {
+                    card.style.boxShadow = '';
+                    card.style.borderColor = '';
+                }, 4000);
+            }, 350);
+        }
+    }
+    window.addEventListener('DOMContentLoaded', checkModelCardHash);
+    window.addEventListener('hashchange', checkModelCardHash);
 </script>
 
 </body>
