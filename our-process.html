@@ -82,9 +82,10 @@
     }
 
     .nav-container {
+        position: -webkit-sticky;
         position: sticky;
         top: 16px;
-        z-index: 999;
+        z-index: 1000;
         max-width: 1240px;
         margin: 0 auto;
         padding: 0 20px;
@@ -631,6 +632,7 @@
             50% { width: 100%; transform: translateX(0); }
             100% { width: 0%; transform: translateX(200%); }
         }
+        html, body { overflow-x: clip; }
         body { background-color: #ffffff; color: #1a1a1a; -webkit-font-smoothing: antialiased; }
         .product-card { transition: transform 0.3s ease; }
         @media (min-width: 768px) { .product-card:hover .product-img { transform: translateY(-5px); } }
@@ -850,7 +852,7 @@
 }
     </script>
 </head>
-<body class="bg-brand-offwhite text-brand-black font-sans antialiased overflow-x-hidden selection:bg-brand-black selection:text-white">
+<body class="bg-brand-offwhite text-brand-black font-sans antialiased selection:bg-brand-black selection:text-white">
 
     <!-- Luxury Architectural Preloader -->
     <div id="kunett-preloader" class="preloader-overlay" aria-hidden="true">

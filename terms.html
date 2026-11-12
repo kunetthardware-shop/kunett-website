@@ -71,9 +71,10 @@
     }
 
     .nav-container {
+        position: -webkit-sticky;
         position: sticky;
         top: 16px;
-        z-index: 999;
+        z-index: 1000;
         max-width: 1240px;
         margin: 0 auto;
         padding: 0 20px;
@@ -615,6 +616,7 @@
     }
 
 
+        html, body { overflow-x: clip; }
         body { background-color: #ffffff; color: #1a1a1a; -webkit-font-smoothing: antialiased; }
         .nav-link { border-bottom: 2px solid transparent; }
         .nav-link.active { color: #1a1a1a; border-bottom: 2px solid #1a1a1a; }

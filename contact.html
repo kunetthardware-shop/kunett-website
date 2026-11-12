@@ -91,7 +91,7 @@
         background: var(--cream-bg);
         color: var(--obsidian);
         -webkit-font-smoothing: antialiased;
-        overflow-x: hidden;
+        overflow-x: clip;
         padding-top: 20px;
     }
 
@@ -106,9 +106,10 @@
     }
 
     .nav-container {
+        position: -webkit-sticky;
         position: sticky;
         top: 16px;
-        z-index: 999;
+        z-index: 1000;
         max-width: 1240px;
         margin: 0 auto;
         padding: 0 20px;

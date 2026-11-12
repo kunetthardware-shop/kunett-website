@@ -343,7 +343,7 @@
     html {
         width: 100%;
         max-width: 100%;
-        overflow-x: hidden;
+        overflow-x: clip;
     }
     body {
         font-family: var(--font-sans);
@@ -351,7 +351,7 @@
         color: var(--text-dark);
         line-height: 1.5;
         -webkit-font-smoothing: antialiased;
-        overflow-x: hidden;
+        overflow-x: clip;
         width: 100%;
         max-width: 100%;
     }
@@ -395,9 +395,10 @@
 
     /* Floating Pill Navbar matching screenshot */
     .nav-container {
+        position: -webkit-sticky;
         position: sticky;
         top: 16px;
-        z-index: 100;
+        z-index: 1000;
         max-width: 1240px;
         margin: 0 auto;
         padding: 0 20px;
