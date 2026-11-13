@@ -923,21 +923,24 @@
     /* Direct for Homeowners Section */
     .homeowner-section {
         max-width: 1240px;
-        margin: 60px auto 0 auto;
+        margin: 32px auto 0 auto;
         padding: 0 20px;
     }
     .homeowner-card {
         background: linear-gradient(135deg, #FFFFFF 0%, #F9F9F8 100%);
         border: 1px solid var(--border-light);
         border-radius: 32px;
-        padding: 48px;
+        padding: 36px 40px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    }
+    @media (max-width: 768px) {
+        .homeowner-card { padding: 28px 20px; border-radius: 24px; }
     }
     .intent-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 20px;
-        margin-top: 36px;
+        margin-top: 28px;
     }
     @media (max-width: 960px) { .intent-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 500px) { .intent-grid { grid-template-columns: 1fr; } }
@@ -2752,9 +2755,9 @@
     <!-- Direct for Homeowners & Renovators Intent Section -->
     <section class="homeowner-section">
         <div class="homeowner-card">
-            <span class="section-tag">Direct For Homeowners, Carpenters &amp; Architects</span>
-            <h2 class="section-heading" style="text-align: left; max-width: 800px;">Designing Your Dream Kitchen or Wardrobe? Get Luxury Hardware Direct From the Factory.</h2>
-            <p class="section-subtext" style="text-align: left; margin: 0; max-width: 840px;">Why pay massive showroom markups? KUNETT manufactures luxury, 100% solid aluminium handles and profiles in Rajkot, Gujarat. Order any quantity—from a single modular kitchen set to a complete luxury villa—with custom sizes, color matching, and safe doorstep delivery.</p>
+            <div style="text-align: center;"><span class="section-tag">Direct For Homeowners, Carpenters &amp; Architects</span></div>
+            <h2 class="section-heading" style="text-align: center; max-width: 920px; margin: 0 auto 16px auto;">Designing Your Dream Kitchen or Wardrobe? Get Luxury Hardware Direct From the Factory.</h2>
+            <p class="section-subtext" style="text-align: center; margin: 0 auto; max-width: 860px; line-height: 1.65;">Why pay massive showroom markups? KUNETT manufactures luxury, 100% solid aluminium handles and profiles in Rajkot, Gujarat. Order any quantity—from a single modular kitchen set to a complete luxury villa—with custom sizes, color matching, and safe doorstep delivery.</p>
 
             <div class="intent-grid">
                 <div class="intent-item">
