@@ -965,7 +965,7 @@
                             <span class="dropdown-arrow">&rarr;</span>
                         </a>
                         <div class="dropdown-footer">
-                            <a href="assets/KUNETT_Catalogue.pdf" target="_blank" class="dropdown-pdf-link">
+                            <a href="javascript:void(0)" onclick="openCatalogueModal(event)" class="dropdown-pdf-link">
                                 <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"/></svg>
                                 <span>Download 2026 PDF Catalogue (15MB)</span>
                             </a>
@@ -986,7 +986,7 @@
                     <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg>
                     <span>WhatsApp Quote</span>
                 </a>
-                <a href="assets/KUNETT_Catalogue.pdf" target="_blank" class="btn-catalog">Catalogue PDF</a>
+                <a href="javascript:void(0)" onclick="openCatalogueModal(event)" class="btn-catalog">Catalogue PDF</a>
             </div>
 
             <!-- Mobile Quick Action & Hamburger Toggle -->
@@ -1105,7 +1105,7 @@
                 <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.192 1.604 6.015L.302 24l6.108-1.6c1.764.957 3.754 1.464 5.62 1.464 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.203c-.161.455-.93 .853-1.312.894-.383.042-.87.126-2.505-.55-1.974-.816-3.238-2.825-3.338-2.961-.101-.136-.798-1.061-.798-2.023 0-.962.5-1.436.682-1.638.181-.202.392-.253.523-.253.131 0 .262 0 .373.01.111.011.262-.042.413.323.151.364.514 1.253.554 1.344.041.091.071.192.01.293-.061.101-.091.162-.181.263-.091.101-.192.222-.272.303-.091.091-.192.192-.081.384.111.192.494.818 1.059 1.323.731.653 1.343.853 1.534.944.192.091.303.081.413-.041.111-.121.484-.565.615-.757.131-.192.262-.162.434-.091.171.071 1.089.515 1.27.606.181.091.303.136.343.212.041.071.041.424-.12.879z"/></svg>
                 <span>WhatsApp Quote (+91 99246 37640)</span>
             </a>
-            <a href="assets/KUNETT_Catalogue.pdf" target="_blank" class="mobile-btn-catalog">
+            <a href="javascript:void(0)" onclick="if(typeof toggleMobileNav==='function')toggleMobileNav(false);openCatalogueModal(event);" class="mobile-btn-catalog">
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"/></svg>
                 <span>Download 2026 PDF Catalogue</span>
             </a>
@@ -1583,8 +1583,15 @@
                     const phone = form.querySelector('[name="Phone"]')?.value || '';
                     const email = form.querySelector('[name="Email"]')?.value || '';
                     const waText = `*Catalogue Download Request*\n*Name:* ${name}\n*Phone:* ${phone}\n*Email:* ${email}\nPlease send me the KUNETT hardware digital catalogue.`;
+                    const dlLink = document.createElement('a');
+                    dlLink.href = 'assets/KUNETT_Catalogue.pdf';
+                    dlLink.download = 'KUNETT_Catalogue_2026.pdf';
+                    document.body.appendChild(dlLink);
+                    dlLink.click();
+                    document.body.removeChild(dlLink);
+
                     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`, '_blank');
-                    status.textContent = "✅ Redirecting to WhatsApp catalogue download...";
+                    status.textContent = "✅ Download started! Opening WhatsApp...";
                     status.classList.remove('hidden', 'text-red-600');
                     status.classList.add('text-[#25D366]');
                     form.reset();
