@@ -1,9 +1,10 @@
 <?php
 /**
  * KUNETT Hardware Auto-Deployer
- * Extracts kunett_final_hostinger.zip or kunett_update_11nov.zip directly into public_html
+ * Extracts kunett_final_hostinger.zip, kunett_update_14nov.zip, or kunett_update_11nov.zip directly into public_html
  */
 $candidates = [
+    __DIR__ . '/kunett_update_14nov.zip',
     __DIR__ . '/kunett_final_hostinger.zip',
     __DIR__ . '/kunett_update_11nov.zip'
 ];
@@ -17,7 +18,7 @@ foreach ($candidates as $cand) {
 }
 
 if (!$zipFile) {
-    die("<h2 style='color:#e11d48; font-family:sans-serif;'>❌ Error: No zip file found in " . htmlspecialchars(__DIR__) . "</h2><p style='font-family:sans-serif;'>Please upload <strong>kunett_final_hostinger.zip</strong> to <code>public_html/</code> and refresh this page.</p>");
+    die("<h2 style='color:#e11d48; font-family:sans-serif;'>❌ Error: No zip file found in " . htmlspecialchars(__DIR__) . "</h2><p style='font-family:sans-serif;'>Please upload <strong>kunett_update_14nov.zip</strong> or <strong>kunett_final_hostinger.zip</strong> to <code>public_html/</code> and refresh this page.</p>");
 }
 
 $zip = new ZipArchive;
@@ -31,10 +32,10 @@ if ($res === TRUE) {
     echo "<h2 style='color:#15803d; margin-top:0;'>✅ Website Updated Successfully!</h2>";
     echo "<p style='color:#166534; font-size:15px; line-height:1.6;'>Extracted: <strong>" . basename($zipFile) . "</strong> (" . round(filesize($zipFile) / (1024*1024), 2) . " MB)</p>";
     echo "<ul style='color:#166534; line-height:1.8;'>";
-    echo "<li><strong>Aluminium Handles (200 Series):</strong> Modern luxury header & floating glass pill nav</li>";
+    echo "<li><strong>Lead-Gated Catalogue Download:</strong> Name, Phone & City capture modal before PDF download across all pages</li>";
+    echo "<li><strong>Collection Lead Inquiry Forms:</strong> Integrated wholesale lead forms on all 5 collection pages + homepage collection section</li>";
+    echo "<li><strong>Blog Authors Updated:</strong> 3 blogs by Rishabh Virani, 1 by Ronak Patel, author avatars removed</li>";
     echo "<li><strong>Interactive Slider:</strong> Smooth touch/drag scrolling + prev/next buttons + direct card navigation</li>";
-    echo "<li><strong>Collection Pages:</strong> Direct <code>#card-XXX</code> hash jumping with highlight animation</li>";
-    echo "<li><strong>Mobile Responsive:</strong> Fixed sticky navigation & scroll locking across all views</li>";
     echo "<li><strong>Cache Headers:</strong> Real-time fresh HTML delivery (no stale cache)</li>";
     echo "</ul>";
     echo "<div style='margin-top:20px; padding:12px 16px; background:#dcfce7; border-radius:8px;'>";
