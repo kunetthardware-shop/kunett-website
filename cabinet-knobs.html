@@ -1290,6 +1290,164 @@
         }
     }
 
+
+    /* =========================================================
+       LUXURY ARCHITECTURAL SPECIFICATIONS CARD COMPONENT
+       ========================================================= */
+    .modal-specs-luxury {
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        border-radius: 18px;
+        padding: 6px;
+        margin: 18px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .spec-card-row {
+        background: #FFFFFF;
+        border: 1px solid rgba(226, 232, 240, 0.85);
+        border-radius: 12px;
+        padding: 11px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        transition: all 0.2s ease;
+    }
+    .spec-card-row:hover {
+        border-color: #CBD5E1;
+        box-shadow: 0 4px 14px -3px rgba(0, 0, 0, 0.05);
+        background: #FFFFFF;
+    }
+    .spec-card-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #64748B;
+        flex-shrink: 0;
+        min-width: 140px;
+    }
+    .spec-icon {
+        width: 15px;
+        height: 15px;
+        color: #D4AF37;
+        flex-shrink: 0;
+    }
+    .spec-card-val {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        flex-wrap: wrap;
+        text-align: right;
+    }
+    .spec-val-primary {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #0C0D0E;
+        font-family: var(--font-sans, sans-serif);
+    }
+    .spec-val-mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 13px;
+        font-weight: 700;
+        color: #0C0D0E;
+        background: #F1F5F9;
+        padding: 2.5px 8px;
+        border-radius: 6px;
+        border: 1px solid #E2E8F0;
+    }
+    .spec-val-sub {
+        font-size: 13px;
+        font-weight: 600;
+        color: #334155;
+    }
+    .spec-badge-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 3px 9px;
+        border-radius: 9999px;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+    }
+    .spec-badge-pill.gold {
+        background: #FEF3C7;
+        color: #92400E;
+        border: 1px solid #FDE68A;
+    }
+    .spec-badge-pill.green {
+        background: #DCFCE7;
+        color: #166534;
+        border: 1px solid #BBF7D0;
+    }
+    .spec-badge-pill.slate {
+        background: #F1F5F9;
+        color: #334155;
+        border: 1px solid #E2E8F0;
+    }
+    .modal-sizes-chips-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+    .modal-size-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3px 9px;
+        background: #F8FAFC;
+        border: 1px solid #CBD5E1;
+        border-radius: 8px;
+        font-size: 11.5px;
+        font-weight: 700;
+        color: #0F172A;
+        font-family: var(--font-sans, sans-serif);
+        transition: all 0.15s ease;
+    }
+    .modal-size-pill:hover {
+        background: #0C0D0E;
+        color: #FFFFFF;
+        border-color: #0C0D0E;
+        transform: translateY(-1px);
+    }
+    .modal-size-pill.finish-pill {
+        background: #FFFFFF;
+        border-color: #E2E8F0;
+        color: #334155;
+        font-weight: 600;
+        font-size: 11px;
+    }
+
+    @media (max-width: 640px) {
+        .spec-card-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+            padding: 10px 12px;
+        }
+        .spec-card-label {
+            min-width: unset;
+        }
+        .spec-card-val {
+            justify-content: flex-start;
+            text-align: left;
+            width: 100%;
+        }
+        .modal-sizes-chips-wrap {
+            justify-content: flex-start;
+        }
+    }
+
 </style>
 
     <!-- Schema.org Structured Data -->
@@ -1984,13 +2142,62 @@
                     <h2 id="modal-product-title" class="font-serif text-3xl font-bold text-obsidian mb-2"></h2>
                     <p id="modal-product-desc" class="text-sm text-neutral-600 leading-relaxed mb-4"></p>
 
-                    <table class="modal-specs-table">
-                        <tr><td>Material</td><td>100% Solid 6063-T5 Virgin Aluminium</td></tr>
-                        <tr><td>CNC Tolerance</td><td>&plusmn;0.05 mm Precision Machining</td></tr>
-                        <tr><td>Sizes Available</td><td id="modal-sizes-val"></td></tr>
-                        <tr><td>Surface Treatment</td><td>15&micro; Multi-Tank Electrochemical Anodizing</td></tr>
-                        <tr><td>Origin</td><td>KUNETT Factory &bull; Rajkot, Gujarat</td></tr>
-                    </table>
+                    <!-- Luxury Architectural Specification Card -->
+                    <div class="modal-specs-luxury">
+                        <div class="spec-card-row">
+                            <div class="spec-card-label">
+                                <svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                                <span>Material</span>
+                            </div>
+                            <div class="spec-card-val">
+                                <span class="spec-val-primary">100% Solid 6063-T5 Virgin Aluminium</span>
+                                <span class="spec-badge-pill gold">Aerospace Billet</span>
+                            </div>
+                        </div>
+
+                        <div class="spec-card-row">
+                            <div class="spec-card-label">
+                                <svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="22" y1="12" x2="18" y2="12"></line><line x1="6" y1="12" x2="2" y2="12"></line><line x1="12" y1="6" x2="12" y2="2"></line><line x1="12" y1="22" x2="12" y2="18"></line></svg>
+                                <span>CNC Tolerance</span>
+                            </div>
+                            <div class="spec-card-val">
+                                <span class="spec-val-mono">&plusmn;0.05 mm</span>
+                                <span class="spec-val-sub">Precision Machining</span>
+                            </div>
+                        </div>
+
+                        <div class="spec-card-row">
+                            <div class="spec-card-label">
+                                <svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+                                <span>Sizes Available</span>
+                            </div>
+                            <div class="spec-card-val">
+                                <div id="modal-sizes-val" class="modal-sizes-chips-wrap"></div>
+                            </div>
+                        </div>
+
+                        <div class="spec-card-row">
+                            <div class="spec-card-label">
+                                <svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                                <span>Surface Treatment</span>
+                            </div>
+                            <div class="spec-card-val">
+                                <span class="spec-val-primary">15&micro; Multi-Tank Electrochemical Anodizing</span>
+                                <span class="spec-badge-pill green">Salt-Spray Certified</span>
+                            </div>
+                        </div>
+
+                        <div class="spec-card-row">
+                            <div class="spec-card-label">
+                                <svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                <span>Origin</span>
+                            </div>
+                            <div class="spec-card-val">
+                                <span class="spec-val-primary">KUNETT Factory &bull; Rajkot, Gujarat</span>
+                                <span class="spec-badge-pill slate">Direct Supply</span>
+                            </div>
+                        </div>
+                    </div>
 
                     <a id="modal-wa-btn" href="#" target="_blank" class="btn-wa w-full justify-center py-3.5 text-sm mt-4">
                         <span>Request Factory Price on WhatsApp</span>
@@ -2019,7 +2226,10 @@
             document.getElementById('modal-series-label').textContent = `500 Series`;
             document.getElementById('modal-product-title').textContent = `Model ${p.code} ${p.category}`;
             document.getElementById('modal-product-desc').textContent = p.desc;
-            document.getElementById('modal-sizes-val').textContent = p.sizes.join(', ');
+            const sizesContainer = document.getElementById('modal-sizes-val');
+            if (sizesContainer && p.sizes) {
+                sizesContainer.innerHTML = p.sizes.map(s => `<span class="modal-size-pill">${s}</span>`).join('');
+            }
 
             const waText = encodeURIComponent(`Hello Sanjay, I am inquiring about KUNETT Model ${p.code} (500 Series ${p.category}). Please share wholesale pricing.`);
             document.getElementById('modal-wa-btn').href = `https://wa.me/919924637640?text=${waText}`;
