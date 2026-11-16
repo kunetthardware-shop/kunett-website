@@ -55,10 +55,18 @@
         })();
     </script>
 
-    <!-- Google Fonts -->
+    <!-- Resource Preloads for 95+ Mobile Speed -->
+    <link rel="preload" as="image" href="assets/logo.png" type="image/png">
+    <link rel="preload" as="image" href="assets/hero_poster.webp" type="image/webp">
+
+    <!-- Google Fonts (Non-Blocking High-Performance Delivery) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+    </noscript>
 
     <!-- Schema JSON-LD -->
     <script type="application/ld+json">
@@ -2661,6 +2669,219 @@
         color: #18181B;
     }
 
+
+    /* =========================================================
+       ULTIMATE MOBILE EXPERIENCE & PERFORMANCE ENHANCEMENTS
+       Responsive Typography, Touch Targets & Layout (< 768px)
+       ========================================================= */
+    @media (max-width: 768px) {
+        /* 1. Prevent Preloader from Delaying Mobile Paint */
+        .preloader-overlay {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+        body {
+            overflow-x: hidden !important;
+        }
+
+        /* 2. Hero Section Typography & Sizing */
+        .hero-video-section {
+            height: auto !important;
+            min-height: 440px !important;
+            max-height: none !important;
+            padding: 44px 16px 36px 16px !important;
+        }
+        .hero-tag-pill {
+            font-size: 10px !important;
+            padding: 5px 14px !important;
+            letter-spacing: 0.1em !important;
+            margin-bottom: 16px !important;
+        }
+        .hero-main-h1 {
+            font-size: 26px !important;
+            line-height: 1.22 !important;
+            letter-spacing: -0.01em !important;
+            margin-bottom: 12px !important;
+        }
+        .hero-main-h1 span {
+            font-size: 12.5px !important;
+            line-height: 1.45 !important;
+            letter-spacing: 0.03em !important;
+            margin-top: 8px !important;
+            opacity: 0.9 !important;
+        }
+        .hero-desc-lead {
+            font-size: 13.5px !important;
+            line-height: 1.55 !important;
+            margin-bottom: 22px !important;
+            padding: 0 4px !important;
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+        .hero-buttons-row {
+            flex-direction: column !important;
+            gap: 12px !important;
+            width: 100% !important;
+        }
+        .btn-hero-explore, .btn-hero-wa {
+            width: 100% !important;
+            box-sizing: border-box !important;
+            justify-content: center !important;
+            padding: 13px 20px !important;
+            font-size: 13px !important;
+            border-radius: 14px !important;
+        }
+
+        /* 3. Metrics Strip */
+        .metrics-bar {
+            padding: 24px 14px !important;
+        }
+        .metrics-inner {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px 12px !important;
+        }
+        .metric-num {
+            font-size: 28px !important;
+            line-height: 1.1 !important;
+        }
+        .metric-label {
+            font-size: 11px !important;
+            letter-spacing: 0.05em !important;
+        }
+
+        /* 4. Section Headings Across Entire Page */
+        .section-wrap {
+            padding: 40px 16px !important;
+        }
+        .section-heading {
+            font-size: 23px !important;
+            line-height: 1.25 !important;
+            margin-bottom: 8px !important;
+            letter-spacing: -0.01em !important;
+        }
+        .section-subtext {
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+            padding: 0 4px !important;
+        }
+
+        /* 5. Showcase Header & Product Cards */
+        .showcase-header-card {
+            padding: 20px 16px !important;
+            border-radius: 20px !important;
+            margin-bottom: 20px !important;
+        }
+        .showcase-meta-badge {
+            font-size: 10px !important;
+            letter-spacing: 0.06em !important;
+        }
+        .showcase-title {
+            font-size: 21px !important;
+            line-height: 1.25 !important;
+            margin-top: 4px !important;
+            margin-bottom: 6px !important;
+        }
+        .showcase-desc {
+            font-size: 12.5px !important;
+            line-height: 1.5 !important;
+        }
+        .showcase-header-ctas {
+            flex-direction: column !important;
+            gap: 10px !important;
+            width: 100% !important;
+            margin-top: 14px !important;
+        }
+        .btn-catalog-sm, .btn-all-series {
+            width: 100% !important;
+            justify-content: center !important;
+            text-align: center !important;
+            box-sizing: border-box !important;
+            padding: 12px 18px !important;
+            font-size: 12.5px !important;
+        }
+
+        /* Product Cards in Slider and Grid */
+        .product-card-modern {
+            border-radius: 20px !important;
+            padding: 16px !important;
+        }
+        .product-card-title, .product-card-title a {
+            font-size: 15px !important;
+            line-height: 1.3 !important;
+        }
+        .product-card-desc {
+            font-size: 12px !important;
+            line-height: 1.45 !important;
+            margin-bottom: 12px !important;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .size-chip {
+            font-size: 10px !important;
+            padding: 3px 8px !important;
+        }
+        .btn-card-wa, .btn-card-inspect {
+            padding: 11px 14px !important;
+            font-size: 11.5px !important;
+        }
+
+        /* 6. Wholesale Inquiry Form on Mobile */
+        .collection-inquiry-wrap {
+            padding: 0 14px !important;
+            margin: 32px auto !important;
+        }
+        .form-card {
+            padding: 22px 16px !important;
+            border-radius: 20px !important;
+        }
+        .form-card-title {
+            font-size: 20px !important;
+            line-height: 1.25 !important;
+        }
+        .form-card-sub {
+            font-size: 12.5px !important;
+            margin-bottom: 18px !important;
+        }
+        .form-input, .form-select, .form-textarea {
+            font-size: 16px !important; /* Prevents auto-zoom on iOS Safari */
+            padding: 12px 14px !important;
+            border-radius: 12px !important;
+        }
+        .btn-submit-main {
+            padding: 14px 20px !important;
+            font-size: 13px !important;
+            border-radius: 12px !important;
+        }
+
+        /* 7. Process Cards, Trust Cards, and Reviews */
+        .process-card, .trust-card, .review-card {
+            border-radius: 18px !important;
+            padding: 18px !important;
+        }
+        .founder-card {
+            padding: 22px 16px !important;
+            border-radius: 20px !important;
+        }
+
+        /* 8. Bottom CTA Banner */
+        .cta-banner {
+            padding: 36px 18px !important;
+            border-radius: 22px !important;
+        }
+        .cta-title {
+            font-size: 22px !important;
+            line-height: 1.25 !important;
+        }
+        .cta-sub {
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+            margin-bottom: 20px !important;
+        }
+    }
+
 </style>
 </head>
 <body id="top">
@@ -2912,7 +3133,7 @@
 
     <!-- 1. Hero Video Section (Describes Video First) -->
     <header class="hero-video-section">
-        <video autoplay loop muted playsinline class="hero-video-bg">
+        <video autoplay loop muted playsinline preload="metadata" poster="assets/hero_poster.webp" class="hero-video-bg">
             <source src="assets/Code_204_Compressed.mp4" type="video/mp4">
         </video>
         <div class="hero-video-overlay"></div>
@@ -4981,17 +5202,26 @@
         // Lock scroll while preloader runs
         document.body.style.overflow = 'hidden';
 
-        // Check if visitor has already seen it in this session
-        const hasSeenPreloader = sessionStorage.getItem('kunett_preloader_seen');
-        const delay = hasSeenPreloader ? 400 : 1200;
+        // On mobile devices (< 768px), dismiss immediately to ensure green 95+ PageSpeed score
+        if (window.innerWidth <= 768) {
+            preloader.style.display = 'none';
+            if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
+            document.body.style.overflow = '';
+            return;
+        }
 
-        window.addEventListener('load', function() {
-            setTimeout(dismissPreloader, delay);
-            sessionStorage.setItem('kunett_preloader_seen', 'true');
-        });
+        // On desktop, dismiss smoothly as soon as DOM is interactive
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(dismissPreloader, 100);
+        } else {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(dismissPreloader, 150);
+            });
+            window.addEventListener('load', dismissPreloader);
+        }
 
-        // Hard failsafe: never block longer than 1.9s under any network condition
-        setTimeout(dismissPreloader, 1900);
+        // Hard failsafe: never block longer than 500ms
+        setTimeout(dismissPreloader, 500);
     })();
 
 </script>
