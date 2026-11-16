@@ -2386,7 +2386,9 @@
         var city = cityEl ? cityEl.value.trim() : "";
 
         if (!name || !phone) {
-            if (statusBox) statusBox.innerHTML = "<span style="color: #dc2626; font-size: 12px;">Please enter your name and phone number.</span>";
+            if (statusBox) {
+                statusBox.innerHTML = '<span style="color: #dc2626; font-size: 12px; font-weight: 600;">Please enter your name and phone number.</span>';
+            }
             return;
         }
 
@@ -2417,26 +2419,45 @@
             console.warn("Sheets submit error:", err);
         }
 
-        // 2. Trigger instant PDF download
+        // 2. Trigger instant PDF download with fallback link
         var downloadLink = document.createElement("a");
         downloadLink.href = "assets/KUNETT_Catalogue.pdf";
         downloadLink.download = "KUNETT_Catalogue_2026.pdf";
+        downloadLink.target = "_blank";
         document.body.appendChild(downloadLink);
         downloadLink.click();
-        document.body.removeChild(downloadLink);
-
-        // 3. Close modal
-        closeCatalogueModal();
-
-        // 4. Alert WhatsApp to Sanjay Patel
-        var waText = encodeURIComponent("Hello Sanjay, " + name + " from " + city + " (" + phone + ") has requested & downloaded the KUNETT Hardware Catalogue PDF.");
         setTimeout(function() {
-            window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + waText, "_blank");
+            if (downloadLink && downloadLink.parentNode) {
+                downloadLink.parentNode.removeChild(downloadLink);
+            }
+        }, 500);
+
+        // 3. Show clear confirmation and direct fallback link inside modal
+        var waText = encodeURIComponent("Hello Sanjay, " + name + " from " + city + " (" + phone + ") has requested & downloaded the KUNETT Hardware Catalogue PDF.");
+        if (statusBox) {
+            statusBox.innerHTML = '<div style="margin-top: 12px; padding: 12px 14px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; color: #15803d; text-align: center;">' +
+                '<p style="font-weight: 700; margin: 0 0 6px 0; font-size: 13px;">✅ Catalogue Downloading!</p>' +
+                '<p style="margin: 0; font-size: 12px; color: #166534;">If your download did not start automatically:</p>' +
+                '<a href="assets/KUNETT_Catalogue.pdf" download="KUNETT_Catalogue_2026.pdf" target="_blank" style="display: inline-block; margin-top: 6px; font-size: 12px; color: #15803d; font-weight: 700; text-decoration: underline;">👉 Click here to download PDF directly</a>' +
+                '<div style="margin-top: 10px;"><a href="https://wa.me/' + WHATSAPP_NUMBER + '?text=' + waText + '" target="_blank" style="display: inline-block; padding: 7px 14px; background: #25D366; color: #ffffff; border-radius: 8px; font-size: 12px; font-weight: 700; text-decoration: none;">💬 Connect with Sanjay Patel on WhatsApp</a></div>' +
+            '</div>';
+        }
+
+        if (btn) {
+            btn.innerHTML = "<span>✅ Download Started</span>";
+        }
+
+        // Close modal smoothly after 4.5 seconds
+        setTimeout(function() {
+            closeCatalogueModal();
             if (btn) {
                 btn.disabled = false;
                 btn.innerHTML = "<span>Download Catalogue PDF (Instant) &rarr;</span>";
             }
-        }, 600);
+            if (statusBox) {
+                statusBox.innerHTML = "";
+            }
+        }, 4500);
     }
 </script>
 
