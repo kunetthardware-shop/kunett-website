@@ -21,6 +21,7 @@ AddType application/json;charset=utf-8 .json
   RewriteRule ^aluminium-wardrobe-profiles/?$ sliding-wardrobe-handles.html [L]
   RewriteRule ^aluminium-cabinet-profiles/?$ aluminium-handle-profile.html [L]
   RewriteRule ^aluminium-profiles/?$ aluminium-handle-profile.html [L]
+  RewriteRule ^aluminium-profile-exporter-india/?$ aluminium-profile-exporter-india.html [L]
 
   # Aliases & common singular/typo redirects to canonical collection pages
   RewriteRule ^aluminium-handle(\.html)?$ aluminium-handles.html [R=301,NC,L]
