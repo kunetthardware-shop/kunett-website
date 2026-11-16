@@ -16,6 +16,12 @@ AddType application/json;charset=utf-8 .json
   RewriteRule ^cabinet-knobs/?$ cabinet-knobs.html [L]
   RewriteRule ^our-process/?$ our-process.html [L]
 
+  # Target SEO Keywords Clean URL Rewrites (per SEO Strategy)
+  RewriteRule ^aluminium-concealed-handles/?$ wardrobe-counsil-handles.html [L]
+  RewriteRule ^aluminium-wardrobe-profiles/?$ sliding-wardrobe-handles.html [L]
+  RewriteRule ^aluminium-cabinet-profiles/?$ aluminium-handle-profile.html [L]
+  RewriteRule ^aluminium-profiles/?$ aluminium-handle-profile.html [L]
+
   # Aliases & common singular/typo redirects to canonical collection pages
   RewriteRule ^aluminium-handle(\.html)?$ aluminium-handles.html [R=301,NC,L]
   RewriteRule ^counsil-handles?(\.html)?$ wardrobe-counsil-handles.html [R=301,NC,L]
