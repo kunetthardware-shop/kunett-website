@@ -53,10 +53,8 @@ AddType application/json;charset=utf-8 .json
   RewriteCond %{HTTP_HOST} ^www\.kunetthardware\.com [NC]
   RewriteRule ^(.*)$ https://kunetthardware.com/$1 [L,R=301]
 
-  # 301 Redirect /index.html to canonical root / (only for browser HTML requests)
-  RewriteCond %{HTTP:Accept} !text/markdown [NC]
-  RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
-  RewriteRule ^index\.html$ https://kunetthardware.com/ [R=301,L]
+  # Canonical index.html handling: Serve directly with 200 OK + rel=canonical (prevents GSC "Page with redirect" validation failure)
+  # RewriteRule ^index\.html$ https://kunetthardware.com/ [R=301,L]
 </IfModule>
 
 # Goal 4: Enforce text/markdown MIME type for Markdown representations

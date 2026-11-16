@@ -1317,7 +1317,7 @@
     <!-- Floating Glass Navbar -->
     <div class="nav-container">
         <nav class="navbar">
-            <a href="index.html" class="nav-logo-group">
+            <a href="/" class="nav-logo-group">
                 <img src="assets/logo.png" alt="KUNETT Architectural Hardware" class="nav-logo-img">
                 <div class="brand-text">
                     <span class="brand-title">K U N E T T</span>
@@ -1326,10 +1326,10 @@
             </a>
 
             <div class="nav-links">
-                <a href="index.html" class="nav-link">HOME</a>
+                <a href="/" class="nav-link">HOME</a>
                 
                 <div class="nav-dropdown-group">
-                    <a href="index.html#collection" class="nav-link nav-dropdown-trigger active">
+                    <a href="/#collection" class="nav-link nav-dropdown-trigger active">
                         <span>COLLECTIONS</span>
                         <svg class="dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                     </a>
@@ -1387,11 +1387,11 @@
                     </div>
                 </div>
 
-                <a href="index.html#process" class="nav-link">PROCESS</a>
-                <a href="index.html#finishes" class="nav-link">FINISHES</a>
+                <a href="/#process" class="nav-link">PROCESS</a>
+                <a href="/#finishes" class="nav-link">FINISHES</a>
                 <a href="blog.html" class="nav-link">BLOG</a>
-                <a href="index.html#founder" class="nav-link">FOUNDER</a>
-                <a href="index.html#calculator" class="nav-link">CALCULATOR</a>
+                <a href="/#founder" class="nav-link">FOUNDER</a>
+                <a href="/#calculator" class="nav-link">CALCULATOR</a>
                 <a href="contact.html" class="nav-link">CONTACT</a>
             </div>
 
@@ -1421,7 +1421,7 @@
     <div id="mobileNavBackdrop" class="mobile-nav-backdrop" onclick="toggleMobileNav(false)"></div>
     <div id="mobileNavDrawer" class="mobile-nav-drawer" aria-label="Mobile Navigation">
         <div class="mobile-nav-header">
-            <a href="index.html" class="mobile-nav-brand" onclick="toggleMobileNav(false)">
+            <a href="/" class="mobile-nav-brand" onclick="toggleMobileNav(false)">
                 <img src="assets/logo.png" alt="KUNETT Hardware" class="mobile-nav-logo">
                 <div>
                     <span class="mobile-nav-title">K U N E T T</span>
@@ -1434,7 +1434,7 @@
         </div>
 
         <div class="mobile-nav-body">
-            <a href="index.html" class="mobile-nav-link" onclick="handleMobileScroll(event, 'index.html#top')">
+            <a href="/" class="mobile-nav-link" onclick="handleMobileScroll(event, '/#top')">
                 <span>HOME</span>
                 <span class="mobile-nav-arrow">&rarr;</span>
             </a>
@@ -1484,11 +1484,11 @@
                 </div>
             </div>
 
-            <a href="index.html#process" class="mobile-nav-link" onclick="handleMobileScroll(event, 'index.html#process')">
+            <a href="/#process" class="mobile-nav-link" onclick="handleMobileScroll(event, '/#process')">
                 <span>MANUFACTURING PROCESS</span>
                 <span class="mobile-nav-arrow">&rarr;</span>
             </a>
-            <a href="index.html#finishes" class="mobile-nav-link" onclick="handleMobileScroll(event, 'index.html#finishes')">
+            <a href="/#finishes" class="mobile-nav-link" onclick="handleMobileScroll(event, '/#finishes')">
                 <span>FINISHES &amp; ANODIZING</span>
                 <span class="mobile-nav-arrow">&rarr;</span>
             </a>
@@ -1496,11 +1496,11 @@
                 <span>ARCHITECTURE BLOG</span>
                 <span class="mobile-nav-arrow">&rarr;</span>
             </a>
-            <a href="index.html#founder" class="mobile-nav-link" onclick="handleMobileScroll(event, 'index.html#founder')">
+            <a href="/#founder" class="mobile-nav-link" onclick="handleMobileScroll(event, '/#founder')">
                 <span>FOUNDER STORY</span>
                 <span class="mobile-nav-arrow">&rarr;</span>
             </a>
-            <a href="index.html#calculator" class="mobile-nav-link" onclick="handleMobileScroll(event, 'index.html#calculator')">
+            <a href="/#calculator" class="mobile-nav-link" onclick="handleMobileScroll(event, '/#calculator')">
                 <span>WEIGHT CALCULATOR</span>
                 <span class="mobile-nav-arrow">&rarr;</span>
             </a>
@@ -1789,7 +1789,7 @@
                 <span>&copy; 2026 KUNETT Hardware &bull; Harikrushna Enterprise. All rights reserved.</span>
             </div>
             <div class="footer-links">
-                <a href="index.html">Home</a>
+                <a href="/">Home</a>
                 <a href="aluminium-handles.html?v=2026">200 Series</a>
                 <a href="aluminium-handle-profile.html?v=2026">300 Series</a>
                 <a href="wardrobe-counsil-handles.html?v=2026">400 Series</a>
@@ -1939,7 +1939,7 @@
                 if (hash === '#top' || hash === '#') {
                     e.preventDefault();
                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                    history.pushState(null, null, 'index.html');
+                    history.pushState(null, null, '/');
                     return;
                 }
                 const targetEl = document.querySelector(hash);

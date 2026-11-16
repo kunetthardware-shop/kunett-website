@@ -2805,7 +2805,7 @@
     <div id="mobileNavBackdrop" class="mobile-nav-backdrop" onclick="toggleMobileNav(false)"></div>
     <div id="mobileNavDrawer" class="mobile-nav-drawer" aria-label="Mobile Navigation">
         <div class="mobile-nav-header">
-            <a href="index.html#top" class="mobile-nav-brand" onclick="handleMobileScroll(event, 'index.html#top')">
+            <a href="/" class="mobile-nav-brand" onclick="handleMobileScroll(event, '/#top')">
                 <img src="assets/logo.png" alt="KUNETT Hardware" class="mobile-nav-logo">
                 <div>
                     <span class="mobile-nav-title">K U N E T T</span>
@@ -2818,7 +2818,7 @@
         </div>
 
         <div class="mobile-nav-body">
-            <a href="index.html#top" class="mobile-nav-link" data-section="home" onclick="handleMobileScroll(event, 'index.html#top')">
+            <a href="/" class="mobile-nav-link" data-section="home" onclick="handleMobileScroll(event, '/#top')">
                 <span>HOME</span>
                 <span class="mobile-nav-arrow">&rarr;</span>
             </a>
@@ -2868,11 +2868,11 @@
                 </div>
             </div>
 
-            <a href="index.html#process" class="mobile-nav-link" data-section="process" onclick="handleMobileScroll(event, 'index.html#process')">
+            <a href="/#process" class="mobile-nav-link" data-section="process" onclick="handleMobileScroll(event, '/#process')">
                 <span>MANUFACTURING PROCESS</span>
                 <span class="mobile-nav-arrow">&rarr;</span>
             </a>
-            <a href="index.html#finishes" class="mobile-nav-link" data-section="finishes" onclick="handleMobileScroll(event, 'index.html#finishes')">
+            <a href="/#finishes" class="mobile-nav-link" data-section="finishes" onclick="handleMobileScroll(event, '/#finishes')">
                 <span>FINISHES &amp; ANODIZING</span>
                 <span class="mobile-nav-arrow">&rarr;</span>
             </a>
@@ -2880,11 +2880,11 @@
                 <span>ARCHITECTURE BLOG</span>
                 <span class="mobile-nav-arrow">&rarr;</span>
             </a>
-            <a href="index.html#founder" class="mobile-nav-link" data-section="founder" onclick="handleMobileScroll(event, 'index.html#founder')">
+            <a href="/#founder" class="mobile-nav-link" data-section="founder" onclick="handleMobileScroll(event, '/#founder')">
                 <span>FOUNDER STORY</span>
                 <span class="mobile-nav-arrow">&rarr;</span>
             </a>
-            <a href="index.html#calculator" class="mobile-nav-link" data-section="calculator" onclick="handleMobileScroll(event, 'index.html#calculator')">
+            <a href="/#calculator" class="mobile-nav-link" data-section="calculator" onclick="handleMobileScroll(event, '/#calculator')">
                 <span>WEIGHT CALCULATOR</span>
                 <span class="mobile-nav-arrow">&rarr;</span>
             </a>
@@ -4569,7 +4569,7 @@
             <div>
                 <h4 class="footer-col-title">Navigation</h4>
                 <div class="footer-link-list">
-                    <a href="index.html">Home</a>
+                    <a href="/">Home</a>
                     <a href="#collection">Collection</a>
                     <a href="#process">Process</a>
                     <a href="#finishes">Finishes</a>
@@ -5025,7 +5025,7 @@
             if (hash === '#top' || hash === '#') {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                history.pushState(null, null, 'index.html');
+                history.pushState(null, null, '/');
                 return;
             }
             const targetEl = document.querySelector(hash);
@@ -5046,16 +5046,16 @@
     // Smooth Scroll & Scrollspy Controller
     (function() {
         // 1. Smooth click handler for all anchor links pointing to on-page sections
-        document.querySelectorAll('a[href^="#"], a[href^="index.html#"]').forEach(function(anchor) {
+        document.querySelectorAll('a[href^="#"], a[href^="/#"], a[href^="index.html#"]').forEach(function(anchor) {
             anchor.addEventListener('click', function(e) {
                 const rawHref = this.getAttribute('href');
-                const targetId = rawHref.replace(/^index\.html/, '');
+                const targetId = rawHref.replace(/^\/?index\.html/, '').replace(/^\//, '');
                 
                 // If clicking to top / home
                 if (targetId === '#' || targetId === '#top' || targetId === '') {
                     e.preventDefault();
                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                    history.pushState(null, null, 'index.html');
+                    history.pushState(null, null, '/');
                     updateActiveNav('home');
                     return;
                 }
