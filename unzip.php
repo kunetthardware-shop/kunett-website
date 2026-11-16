@@ -4,9 +4,10 @@
  * Extracts kunett_final_hostinger.zip, kunett_update_14nov.zip, or kunett_update_11nov.zip directly into public_html
  */
 $candidates = [
+    __DIR__ . '/kunett_website_complete_restore.zip',
+    __DIR__ . '/kunett_final_hostinger.zip',
     __DIR__ . '/kunett_update_16nov.zip',
     __DIR__ . '/kunett_update_14nov.zip',
-    __DIR__ . '/kunett_final_hostinger.zip',
     __DIR__ . '/kunett_update_11nov.zip'
 ];
 
