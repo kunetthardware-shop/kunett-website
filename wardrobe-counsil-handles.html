@@ -2432,5 +2432,105 @@
         </div>
     </div>
 
+
+<!-- Catalogue Modal JavaScript Handlers -->
+<script>
+    if (typeof GOOGLE_SHEETS_WEB_APP_URL === "undefined") {
+        var GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyvUFgtLDK0WuTfcrIjQxU82dEAUTCKXEdTArcK1TVjrES9sDJSxkVrtfIMtUis8fa9/exec";
+    }
+    if (typeof WHATSAPP_NUMBER === "undefined") {
+        var WHATSAPP_NUMBER = "919924637640";
+    }
+
+    function openCatalogueModal(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        var m = document.getElementById("catModal");
+        if (m) {
+            m.classList.add("active");
+            document.body.style.overflow = "hidden";
+        }
+    }
+
+    function closeCatalogueModal() {
+        var m = document.getElementById("catModal");
+        if (m) {
+            m.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+    }
+
+    function closeCatModalOnOverlay(e) {
+        if (e && e.target && e.target.id === "catModal") {
+            closeCatalogueModal();
+        }
+    }
+
+    function handleCatalogueDownload(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        var btn = document.getElementById("catSubmitBtn");
+        var statusBox = document.getElementById("catStatusBox");
+        var nameEl = document.getElementById("cat-name");
+        var phoneEl = document.getElementById("cat-phone");
+        var cityEl = document.getElementById("cat-city");
+
+        var name = nameEl ? nameEl.value.trim() : "";
+        var phone = phoneEl ? phoneEl.value.trim() : "";
+        var city = cityEl ? cityEl.value.trim() : "";
+
+        if (!name || !phone) {
+            if (statusBox) statusBox.innerHTML = "<span style="color: #dc2626; font-size: 12px;">Please enter your name and phone number.</span>";
+            return;
+        }
+
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = "<span>Preparing Download...</span>";
+        }
+
+        // 1. Submit lead to Google Sheets
+        try {
+            var formData = new FormData();
+            formData.append("FormType", "Catalogue Download");
+            formData.append("Name", name);
+            formData.append("Phone", phone);
+            formData.append("City", city);
+            formData.append("Email", "catalogue-lead@kunetthardware.com");
+            formData.append("Subject", "Catalogue Lead");
+            formData.append("Message", "Downloaded KUNETT 2026 Architectural Catalogue PDF from " + city);
+
+            fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+                method: "POST",
+                mode: "no-cors",
+                body: formData
+            }).catch(function(err) {
+                console.warn("Sheets fallback notice:", err);
+            });
+        } catch(err) {
+            console.warn("Sheets submit error:", err);
+        }
+
+        // 2. Trigger instant PDF download
+        var downloadLink = document.createElement("a");
+        downloadLink.href = "assets/KUNETT_Catalogue.pdf";
+        downloadLink.download = "KUNETT_Catalogue_2026.pdf";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+
+        // 3. Close modal
+        closeCatalogueModal();
+
+        // 4. Alert WhatsApp to Sanjay Patel
+        var waText = encodeURIComponent("Hello Sanjay, " + name + " from " + city + " (" + phone + ") has requested & downloaded the KUNETT Hardware Catalogue PDF.");
+        setTimeout(function() {
+            window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + waText, "_blank");
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = "<span>Download Catalogue PDF (Instant) &rarr;</span>";
+            }
+        }, 600);
+    }
+</script>
+
 </body>
 </html>
